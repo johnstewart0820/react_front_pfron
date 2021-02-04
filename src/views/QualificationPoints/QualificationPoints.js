@@ -1,13 +1,14 @@
 import React, { useState, useEffect }  from 'react';
 import useStyles from './style';
 import {
-  Button, Card
+  Button, Card, CircularProgress
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import qualification from '../../apis/qualification';
+import { useToasts } from 'react-toast-notifications'
 
 const QualificationPoints = props => {
   const { children } = props;
@@ -28,6 +29,8 @@ const QualificationPoints = props => {
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
   const breadcrumbs = [{active: false, label: 'Punkty kwalifikacyjne'}];
+  const [progressStatus, setProgressStatus] = useState(false);
+  const { addToast } = useToasts()
   useEffect(() => {
     qualification.getInfo()
       .then(response => {
@@ -87,7 +90,22 @@ const QualificationPoints = props => {
   }
 
   const handleDelete = () => {
-    
+    setProgressStatus(true);
+    qualification
+      .delete(selectedItem)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+            addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+          }
+          setProgressStatus(false);
+          handleSearch();
+          setPage(1);
+        }
+      })
+      
   }
 
   return (

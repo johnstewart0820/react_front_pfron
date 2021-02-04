@@ -21,7 +21,7 @@ class Qualification {
     }
     create = (name, type, ambassador) => {
         return axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/qualification/create`, {
+        .post(`${process.env.REACT_APP_BACKEND_URL}/qualification/`, {
             name: name,
             type: type,
             ambassador: ambassador
@@ -85,36 +85,13 @@ class Qualification {
             return error;
         })
     }
-    
-    getAnalyzeByOption = (sort_column, sort_order, count, page, search_key, chart_type, section, category) => {
-        return axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/analyze/get_analyze_by_option`, {
-            sort_column: sort_column,
-            sort_order: sort_order,
-            count: count,
-            page: page,
-            search_key: search_key,
-            chart_type: chart_type,
-            section: section,
-            category: category
-        }, {
-            headers: authHeader(storage.getStorage('token'))
-        })
-        .then(response => {
-            if (response.data.code === 401)
-                storage.removeStorage('token');
-            return response.data;
-        }).catch(error => {
-            return error;
-        })
-    }
 
     delete = (id) => {
         return axios
-        .delete(`${process.env.REACT_APP_BACKEND_URL}/analyze`, {
+        .delete(`${process.env.REACT_APP_BACKEND_URL}/qualification/`, {
             headers: authHeader(storage.getStorage('token')),
             params: {
-                id_analyze: id
+                id: id
             }, 
         })
         .then(response => {

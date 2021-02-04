@@ -10,6 +10,7 @@ import {
   QualificationPoints as QualificationPointsView,
   QualificationPointsUser as QualificationPointsUserView,
   QualificationPointsAdd as QualificationPointsAddView,
+  QualificationPointsEdit as QualificationPointsEditView,
   Specialists as SpecialistsView,
   Participants as ParticipantsView,
   OrkTeams as OrkTeamsView,
@@ -59,6 +60,12 @@ const Routes = (props) => {
         layout={MainLayout}
         title='Dodawanie punktu kwalifikacyjnego'
         path="/qualification_points/create"
+      />
+      <RouteWithLayout
+        component={QualificationPointsEditView}
+        layout={MainLayout}
+        title='Dodawanie punktu kwalifikacyjnego'
+        path="/qualification_points/edit/:id"
       />
       <RouteWithLayout
         component={SpecialistsView}

@@ -3,6 +3,7 @@ export { default as Candidates } from './Candidates';
 export { default as QualificationPoints } from './QualificationPoints';
 export { default as QualificationPointsUser } from './QualificationPointsUser';
 export { default as QualificationPointsAdd } from './QualificationPointsAdd';
+export { default as QualificationPointsEdit } from './QualificationPointsEdit';
 export { default as Specialists } from './Specialists';
 export { default as Participants } from './Participants';
 export { default as OrkTeams } from './OrkTeams';

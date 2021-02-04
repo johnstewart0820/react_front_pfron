@@ -108,7 +108,7 @@ const SortTable = (props) => {
               <TableCell>{typeList && typeList.length > 0 && typeList[item.type - 1].name}</TableCell>
               <TableCell>{getAmbassadorStr(item.ambassador)}</TableCell>
               <TableCell>
-                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton}>
+                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/qualification_points/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>
                 </IconButton>
                 <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>

@@ -19,6 +19,26 @@ class Qualification {
             return error;
         })
     }
+    get = (id) => {
+        return axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/qualification`, {
+            headers: authHeader(storage.getStorage('token')),
+            params: {
+                id: id
+            },
+        })
+        .then(response => {
+            if (response.data.code === 401) {
+                storage.removeStorage('token');
+                storage.removeStorage('role');
+                return response.data;
+            } else if (response.data.code === 200) {
+                return response.data;
+            }
+        }).catch(error => {
+            return error;
+        })
+    }
     create = (name, type, ambassador) => {
         return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/qualification/`, {
@@ -59,21 +79,13 @@ class Qualification {
         })
     }
 
-    updateAnalyze = (name, id_chart_type, id_section, id_category, id_province, id_occupation, id_pkd, id_chart_result, id_scenario, id_analyze, id_occupation_size, id_cluster) => {
+    update = (name, type, ambassador, id) => {
         return axios
-        .put(`${process.env.REACT_APP_BACKEND_URL}/analyze`, {
+        .put(`${process.env.REACT_APP_BACKEND_URL}/qualification`, {
             name: name,
-            id_chart_type: id_chart_type,
-            id_section: id_section,
-            id_category: id_category,
-            id_province: id_province,
-            id_occupation: id_occupation,
-            id_pkd: id_pkd,
-            id_chart_result: id_chart_result,
-            id_scenario: id_scenario,
-            id_analyze: id_analyze,
-            id_occupation_size: id_occupation_size,
-            id_cluster: id_cluster
+            type: type,
+            ambassador: ambassador,
+            id: id
         }, {
             headers: authHeader(storage.getStorage('token'))
         })
@@ -92,23 +104,6 @@ class Qualification {
             headers: authHeader(storage.getStorage('token')),
             params: {
                 id: id
-            }, 
-        })
-        .then(response => {
-            if (response.data.code === 401)
-                storage.removeStorage('token');
-            return response.data;
-        }).catch(error => {
-            return error;
-        })
-    }
-
-    get = (id) => {
-        return axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}/analyze`, {
-            headers: authHeader(storage.getStorage('token')),
-            params: {
-                id_analyze: id
             }, 
         })
         .then(response => {

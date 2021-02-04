@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #e4e6e9;
+}
+
+a {
+  text-decoration: none;
+}
+
+#root {
+  height: 100%;
+}
+
+.react-toast-notifications__container {
+  font-family: 'roboto';
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: darkgray; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4db249; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3da239; 
+}

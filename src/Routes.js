@@ -8,6 +8,8 @@ import {
   Cockpit as CockpitView,
   Candidates as CandidatesView,
   QualificationPoints as QualificationPointsView,
+  QualificationPointsUser as QualificationPointsUserView,
+  QualificationPointsAdd as QualificationPointsAddView,
   Specialists as SpecialistsView,
   Participants as ParticipantsView,
   OrkTeams as OrkTeamsView,
@@ -27,7 +29,7 @@ import {
   NotFound as NotFoundView
 } from './views';
 
-const Routes = () => {
+const Routes = (props) => {
   return (
     <Switch>
       <Redirect exact from="/" to="/login"/>
@@ -46,11 +48,17 @@ const Routes = () => {
         path="/candidates"
       />
       <RouteWithLayout
-        component={QualificationPointsView}
+        component={props.role === 1 ? QualificationPointsView : QualificationPointsUserView}
         exact
         layout={MainLayout}
         title='Punkty kwalifikacyjne'
         path="/qualification_points"
+      />
+      <RouteWithLayout
+        component={QualificationPointsAddView}
+        layout={MainLayout}
+        title='Dodawanie punktu kwalifikacyjnego'
+        path="/qualification_points/create"
       />
       <RouteWithLayout
         component={SpecialistsView}

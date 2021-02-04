@@ -6,6 +6,7 @@ const pink = '#ff6b66';
 const gray = '#44545e';
 const green= '#4db249';
 const color = '#454648';
+const btn_gray = '#727E91';
 const pink_disable = '#a02000';
 const gray_disable = '#404040';
 export default {
@@ -15,6 +16,7 @@ export default {
   gray,
   color,
   green,
+  btn_gray,
   pink_disable,
   gray_disable,
   primary: {

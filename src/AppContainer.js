@@ -7,14 +7,14 @@ import constants from './utils/constants';
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {flag: false};
+    this.state = {role: 0};
   }
 
   componentDidMount() {
     // this.setState({flag: false});
     for (let i = 0; i < constants.unauthenticated_url.length; i ++) {
       if (constants.unauthenticated_url[i] === this.props.location.pathname) {
-          this.setState({flag: true});
+          this.setState({role: 1});
           return;
       }
     }
@@ -22,19 +22,10 @@ class AppContainer extends React.Component {
     .validateToken()
     .then(response => {
       if (response.code !== 401) {
-        if (this.props.location.pathname !== '/content_management') {
-          this.setState({flag: true}) 
-        } else {
-          if (response.role === '1') {
-            this.setState({flag: true}) 
-          } else {
-            this.setState({flag: false})
-            this.props.history.push('/login');            
-          }
-        }
+        this.setState({role: response.role}) 
       }
       else {
-        this.setState({flag: false})
+        this.setState({role: 0})
         this.props.history.push('/login');
       }
     })
@@ -44,40 +35,30 @@ class AppContainer extends React.Component {
       // this.setState({flag: false});
       for (let i = 0; i < constants.unauthenticated_url.length; i ++) {
         if (constants.unauthenticated_url[i] === this.props.location.pathname) {
-            this.setState({flag: true});
+            this.setState({role: 1});
             return;
         }
       }
       for (let i = 0; i < constants.unauthenticated_url.length; i ++) {
         if (constants.unauthenticated_url[i] === prevProps.location.pathname) {
-            this.setState({flag: false});
+            this.setState({role: 0});
         }
       }
       auth
       .validateToken()
       .then(response => {
         if (response.code !== 401) {
-          if (this.props.location.pathname !== '/content_management') {
-            this.setState({flag: true}) 
-          } else {
-            if (response.role === '1') {
-              this.setState({flag: true}) 
-            } else {
-              this.setState({flag: false})
-              this.props.history.push('/login');            
-            }
-          }
+          this.setState({role: response.role}) 
         }
         else {
-          this.setState({flag: false})
+          this.setState({role: 0})
           this.props.history.push('/login');
         }
       })
 		}
 	}
 	render() {
-
-		return this.state.flag ? <>{this.props.children}</> : <></>;
+		return this.state.role !== 0 ? <>{React.cloneElement(this.props.children, {role: this.state.role})}</> : <></>;
 	}
 }
 

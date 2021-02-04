@@ -6,10 +6,10 @@ import {
 import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
-import { SortTable, SingleSelect, DeleteModal } from './components';
+import { SortTable, SingleSelect } from './components';
 import qualification from '../../apis/qualification';
 
-const QualificationPoints = props => {
+const QualificationPointsUser = props => {
   const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
@@ -24,8 +24,6 @@ const QualificationPoints = props => {
   const [typeList, setTypeList] = useState([]);
   const [searchAmbassador, setSearchAmbassador] = useState(0);
   const [ambassadorList, setAmbassadorList] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
   const breadcrumbs = [{active: false, label: 'Punkty kwalifikacyjne'}];
   useEffect(() => {
@@ -77,26 +75,9 @@ const QualificationPoints = props => {
     history.push('/qualification_points/create');
   }
 
-  const handleSelectedItem = (id) => {
-    setSelectedItem(id);
-    setOpenModal(true);
-  }
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  }
-
-  const handleDelete = () => {
-    
-  }
-
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
-          <AddIcon style={{marginRight: '20px'}}/>
-          Dodaj punkt
-        </Button>
         <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleCreate}>
           Eksport listy do XLS
         </Button>
@@ -129,7 +110,6 @@ const QualificationPoints = props => {
           searchAmbassador={searchAmbassador}
           setSearchAmbassador={setSearchAmbassador} 
           ambassadorList={ambassadorList}
-          handleDelete={handleSelectedItem}
         />
         <div className={classes.pagination}>
           <Pagination 
@@ -140,14 +120,9 @@ const QualificationPoints = props => {
             showLastButton />
         </div>
       </Card>
-      <DeleteModal
-        openModal={openModal}
-        handleClose={handleCloseModal}
-        handleDelete={handleDelete}
-        selectedIndex={selectedItem}
-      />
+
     </div>
   );
 };
 
-export default QualificationPoints;
+export default QualificationPointsUser;

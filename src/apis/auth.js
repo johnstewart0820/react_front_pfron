@@ -18,31 +18,7 @@ class Auth {
                 return error;
             })
     }
-    register = (email, password, setAdvanced, first_name, last_name) => {
-        return axios
-            .post(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
-                email: email,
-                password: password,
-                setAdvanced: setAdvanced,
-                first_name: first_name,
-                last_name: last_name
-            })
-            .then(response => {
-                return response.data;
-            }).catch(error => {
-                return error;
-            })
-    }
-    validate = (token) => {
-        return axios
-            .post(`${process.env.REACT_APP_BACKEND_URL}/auth/verify`, {
-            }, {headers: authHeader(token)})
-            .then(response => {
-                return response.data;
-            }).catch(error => {
-                return error;
-            })
-    }
+    
     forgot = (email) => {
         return axios
             .post(`${process.env.REACT_APP_BACKEND_URL}/auth/forgot`, {

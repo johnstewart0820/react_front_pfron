@@ -2,7 +2,7 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 const useStyles = makeStyles((theme) => ({
     controlBlock: {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'flex-end'
     },
     btnCreate: {
         '& .MuiButton-label': {

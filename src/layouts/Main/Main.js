@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { useMediaQuery } from '@material-ui/core';
 
-import { Sidebar, Topbar, Footer } from './components';
+import { Sidebar, Topbar } from './components';
+import Footer from 'layouts/Footer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,10 +19,6 @@ const useStyles = makeStyles(theme => ({
   shiftContent: {
     paddingLeft: 300
   },
-  content: {
-    height: '100%',
-    backgroundColor: theme.palette.background.default
-  },
   topbar_max: {
     transform: 'translateX(-300px)',
     visibility: 'visible',
@@ -31,9 +28,20 @@ const useStyles = makeStyles(theme => ({
     transform: 'translateX(0)',
     visibility: 'visible',
   },
-  mainContainer: {
-    padding: theme.spacing(8, 4, 0, 4),
+  content: {
+    position: 'relative',
+    height: 'calc(100vh - 160px)',
+    overflow: 'scroll'
   },
+  mainContainer: {
+    padding: theme.spacing(6, 4, 0, 4),
+  },
+  footer: {
+    position: 'absolute',
+    bottom: '0px',
+    width: 'calc(100% - 299px)',
+    boxShadow: '0px 2px 4px 3px rgb(0 0 0 / 15%), 0px 4px 5px 0px rgb(0 0 0 / 4%), 0px 1px 10px 0px rgb(0 0 0 / 2%)'
+  }
 }));
 
 const Main = props => {
@@ -70,9 +78,14 @@ const Main = props => {
         open={shouldOpenSidebar}
         variant={isDesktop ? 'persistent' : 'temporary'}
       />
-      <main className={classes.mainContainer}>
-        {children}
+      <main className={classes.content}>
+        <div className={classes.mainContainer}>
+          {children}
+        </div>
       </main>
+      <div className={classes.footer}>
+        <Footer/>
+      </div>
     </div>
   );
 };

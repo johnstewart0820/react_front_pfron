@@ -11,7 +11,7 @@ import { SortTable, SingleSelect, DeleteModal } from './components';
 import users from '../../apis/users';
 import { useToasts } from 'react-toast-notifications'
 
-const Users = props => {
+const UsersGeneral = props => {
   const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
@@ -118,10 +118,6 @@ const Users = props => {
     <div className={classes.public}>
       <div className={classes.controlBlock}>
         <div>
-          <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate} style={{marginRight: '20px'}}>
-            <AddIcon style={{marginRight: '20px'}}/>
-            Dodaj użytkownika
-          </Button>
           <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleProfile}>
             <PersonOutlineOutlinedIcon style={{marginRight: '20px'}}/>
             Edytuj swój profil
@@ -182,4 +178,4 @@ const Users = props => {
   );
 };
 
-export default Users;
+export default UsersGeneral;

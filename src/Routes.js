@@ -25,6 +25,10 @@ import {
   Payments as PaymentsView,
   Reports as ReportsView,
   Users as UsersView,
+  UsersGeneral as UsersGeneralView,
+  UsersAdd as UsersAddView,
+  UsersEdit as UsersEditView,
+  Profile as ProfileView,
   Permissions as PermissionsView,
   Logs as LogsView,
   SignIn as SignInView,
@@ -153,11 +157,29 @@ const Routes = (props) => {
         path="/reports"
       />
       <RouteWithLayout
-        component={UsersView}
+        component={props.role === 1 ? UsersView : UsersGeneralView}
         exact
         layout={MainLayout}
         title='Uźytkownicy systemu'
         path="/users"
+      />
+      <RouteWithLayout
+        component={UsersAddView}
+        layout={MainLayout}
+        title='Dodawanie Uźytkownika'
+        path="/users/create"
+      />
+      <RouteWithLayout
+        component={UsersEditView}
+        layout={MainLayout}
+        title='Dodawanie Uźytkownika'
+        path="/users/edit/:id"
+      />
+      <RouteWithLayout
+        component={ProfileView}
+        layout={MainLayout}
+        title='Edycja profilu'
+        path="/profile"
       />
       <RouteWithLayout
         component={PermissionsView}

@@ -8,6 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect } from './components';
 import qualification from '../../apis/qualification';
+import { ExportToCsv } from 'export-to-csv';
 
 const QualificationPointsUser = props => {
   const { children } = props;
@@ -70,15 +71,55 @@ const QualificationPointsUser = props => {
         }
       })
   }
+  const getAmbassadorStr = (str) => {
+    if (!ambassadorList || ambassadorList.length == 0)
+      return '';
+    let list = str.split(',');
+    let res_list = [];
+    list.map((item, index) => {
+      for (let i = 0; i < ambassadorList.length ; i ++) {
+        if (parseInt(item) === parseInt(ambassadorList[i].id)) {
+          res_list.push(ambassadorList[i].name);
+        }
+      }
 
-  const handleCreate = () => {
-    history.push('/qualification_points/create');
+    });
+    return res_list.join(', ');
+  }
+
+  const handleExport = () => {
+    let export_data = [];
+    for (let i = 0; i < data.length; i ++) {
+      let item = {};
+      item['ID'] = data[i].id;
+      item['Punkt kwalifikacyjny'] = data[i].name;
+      item['Typ'] = typeList[data[i].type - 1].name;
+      item['Przypisani Ambasadorzy'] = getAmbassadorStr(data[i].ambassador);
+      // item['Rola'] = roleList[data[i].id_role - 1].name;
+      // item['E-mail'] = data[i].email;
+      // item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
+      export_data.push(item);
+    }
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: false,
+      showTitle: false,
+      title: 'My Awesome CSV',
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true,
+    };
+    const csvExporter = new ExportToCsv(options);
+
+    csvExporter.generateCsv(export_data);
   }
 
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleCreate}>
+        <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
       </div>

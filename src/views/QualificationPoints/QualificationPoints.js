@@ -9,6 +9,7 @@ import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import qualification from '../../apis/qualification';
 import { useToasts } from 'react-toast-notifications'
+import { ExportToCsv } from 'export-to-csv';
 
 const QualificationPoints = props => {
   const { children } = props;
@@ -80,6 +81,51 @@ const QualificationPoints = props => {
     history.push('/qualification_points/create');
   }
 
+  const getAmbassadorStr = (str) => {
+    if (!ambassadorList || ambassadorList.length == 0)
+      return '';
+    let list = str.split(',');
+    let res_list = [];
+    list.map((item, index) => {
+      for (let i = 0; i < ambassadorList.length ; i ++) {
+        if (parseInt(item) === parseInt(ambassadorList[i].id)) {
+          res_list.push(ambassadorList[i].name);
+        }
+      }
+
+    });
+    return res_list.join(', ');
+  }
+
+  const handleExport = () => {
+    let export_data = [];
+    for (let i = 0; i < data.length; i ++) {
+      let item = {};
+      item['ID'] = data[i].id;
+      item['Punkt kwalifikacyjny'] = data[i].name;
+      item['Typ'] = typeList[data[i].type - 1].name;
+      item['Przypisani Ambasadorzy'] = getAmbassadorStr(data[i].ambassador);
+      // item['Rola'] = roleList[data[i].id_role - 1].name;
+      // item['E-mail'] = data[i].email;
+      // item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
+      export_data.push(item);
+    }
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: false,
+      showTitle: false,
+      title: 'My Awesome CSV',
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true,
+    };
+    const csvExporter = new ExportToCsv(options);
+
+    csvExporter.generateCsv(export_data);
+  }
+
   const handleSelectedItem = (id) => {
     setSelectedItem(id);
     setOpenModal(true);
@@ -115,7 +161,7 @@ const QualificationPoints = props => {
           <AddIcon style={{marginRight: '20px'}}/>
           Dodaj punkt
         </Button>
-        <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleCreate}>
+        <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
       </div>

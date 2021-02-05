@@ -9,6 +9,7 @@ import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import specialist from '../../apis/specialist';
 import { useToasts } from 'react-toast-notifications'
+import { ExportToCsv } from 'export-to-csv';
 
 const SpecialistsUser = props => {
   const { children } = props;
@@ -109,10 +110,39 @@ const SpecialistsUser = props => {
       
   }
 
+  const handleExport = () => {
+    let export_data = [];
+    for (let i = 0; i < data.length; i ++) {
+      let item = {};
+      item['ID'] = data[i].id;
+      item['Imię i nazwisko'] = data[i].name;
+      item['Punkt kwalifikacyjny'] = qualificationPointList[data[i].qualification_point - 1].name;
+      item['Specjalność'] = specialtyList[data[i].specialty - 1].name;
+      // item['Rola'] = roleList[data[i].id_role - 1].name;
+      // item['E-mail'] = data[i].email;
+      // item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
+      export_data.push(item);
+    }
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: false,
+      showTitle: false,
+      title: 'My Awesome CSV',
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true,
+    };
+    const csvExporter = new ExportToCsv(options);
+
+    csvExporter.generateCsv(export_data);
+  }
+
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleCreate}>
+        <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
       </div>

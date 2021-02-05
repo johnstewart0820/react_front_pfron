@@ -12,6 +12,9 @@ import {
   QualificationPointsAdd as QualificationPointsAddView,
   QualificationPointsEdit as QualificationPointsEditView,
   Specialists as SpecialistsView,
+  SpecialistsUser as SpecialistsUserView,
+  SpecialistsAdd as SpecialistsAddView,
+  SpecialistsEdit as SpecialistsEditView,
   Participants as ParticipantsView,
   OrkTeams as OrkTeamsView,
   IprList as IprListView,
@@ -68,11 +71,23 @@ const Routes = (props) => {
         path="/qualification_points/edit/:id"
       />
       <RouteWithLayout
-        component={SpecialistsView}
+        component={props.role === 1 ? SpecialistsView : SpecialistsUserView}
         exact
         layout={MainLayout}
         title='Specjaliści'
         path="/specialists"
+      />
+      <RouteWithLayout
+        component={SpecialistsAddView}
+        layout={MainLayout}
+        title='Dodawanie specjalisty'
+        path="/specialists/create"
+      />
+      <RouteWithLayout
+        component={SpecialistsEditView}
+        layout={MainLayout}
+        title='Dodawanie specjalisty'
+        path="/specialists/edit/:id"
       />
       <RouteWithLayout
         component={ParticipantsView}

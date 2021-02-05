@@ -10,7 +10,7 @@ import { SortTable, SingleSelect, DeleteModal } from './components';
 import specialist from '../../apis/specialist';
 import { useToasts } from 'react-toast-notifications'
 
-const Specialists = props => {
+const SpecialistsUser = props => {
   const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
@@ -112,10 +112,6 @@ const Specialists = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
-          <AddIcon style={{marginRight: '20px'}}/>
-          Dodaj specjalistę
-        </Button>
         <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleCreate}>
           Eksport listy do XLS
         </Button>
@@ -169,4 +165,4 @@ const Specialists = props => {
   );
 };
 
-export default Specialists;
+export default SpecialistsUser;

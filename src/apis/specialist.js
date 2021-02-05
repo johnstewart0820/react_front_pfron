@@ -1,10 +1,10 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 import storage from '../utils/storage';
-class Qualification {
+class Specialist {
     getInfo = () => {
         return axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}/qualification/info`, {
+        .get(`${process.env.REACT_APP_BACKEND_URL}/specialist/info`, {
             headers: authHeader(storage.getStorage('token')),
         })
         .then(response => {
@@ -21,7 +21,7 @@ class Qualification {
     }
     get = (id) => {
         return axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}/qualification`, {
+        .get(`${process.env.REACT_APP_BACKEND_URL}/specialist`, {
             headers: authHeader(storage.getStorage('token')),
             params: {
                 id: id
@@ -39,12 +39,12 @@ class Qualification {
             return error;
         })
     }
-    create = (name, type, ambassador) => {
+    create = (name, specialty, qualification) => {
         return axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/qualification`, {
+        .post(`${process.env.REACT_APP_BACKEND_URL}/specialist`, {
             name: name,
-            type: type,
-            ambassador: ambassador
+            specialty: specialty,
+            qualification: qualification
         }, {
             headers: authHeader(storage.getStorage('token'))
         }).then(response => {
@@ -56,17 +56,17 @@ class Qualification {
         })
     }
     
-    getListByOption = (sort_column, sort_order, count, page, searchId, searchName, searchType, searchAmbassador) => {
+    getListByOption = (sort_column, sort_order, count, page, searchId, searchName, searchQualificationPoint, searchSpecialty) => {
         return axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/qualification/getListByOption`, {
+        .post(`${process.env.REACT_APP_BACKEND_URL}/specialist/getListByOption`, {
             sort_column: sort_column,
             sort_order: sort_order,
             count: count,
             page: page,
             searchId: searchId,
             searchName: searchName,
-            searchType: searchType,
-            searchAmbassador: searchAmbassador
+            searchQualificationPoint: searchQualificationPoint,
+            searchSpecialty: searchSpecialty
         }, {
             headers: authHeader(storage.getStorage('token'))
         })
@@ -79,12 +79,12 @@ class Qualification {
         })
     }
 
-    update = (name, type, ambassador, id) => {
+    update = (name, specialty, qualification, id) => {
         return axios
-        .put(`${process.env.REACT_APP_BACKEND_URL}/qualification`, {
+        .put(`${process.env.REACT_APP_BACKEND_URL}/specialist`, {
             name: name,
-            type: type,
-            ambassador: ambassador,
+            specialty: specialty,
+            qualification: qualification,
             id: id
         }, {
             headers: authHeader(storage.getStorage('token'))
@@ -100,7 +100,7 @@ class Qualification {
 
     delete = (id) => {
         return axios
-        .delete(`${process.env.REACT_APP_BACKEND_URL}/qualification`, {
+        .delete(`${process.env.REACT_APP_BACKEND_URL}/specialist`, {
             headers: authHeader(storage.getStorage('token')),
             params: {
                 id: id
@@ -115,4 +115,4 @@ class Qualification {
         })
     }
 }
-export default new Qualification();
+export default new Specialist();

@@ -116,15 +116,7 @@ const Sidebar = props => {
     },
   ];
   useEffect(() => {
-    if (storage.getStorage('role') === '1') {
-      setPages([...items, {
-        title: 'Zarządzanie treścią',
-        href: '/content_management',
-        icon: <SettingsIcon />
-      }]);
-    } else {
-      setPages(items);
-    }
+    setPages(items);
   }, []);
   
 

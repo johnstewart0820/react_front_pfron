@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
   topbar_min: {
     transform: 'translateX(0)',
     visibility: 'visible',
+    
   },
   content: {
     position: 'relative',
@@ -40,6 +41,12 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     bottom: '0px',
     width: 'calc(100% - 299px)',
+    boxShadow: '0px 2px 4px 3px rgb(0 0 0 / 15%), 0px 4px 5px 0px rgb(0 0 0 / 4%), 0px 1px 10px 0px rgb(0 0 0 / 2%)'
+  },
+  footer_min: {
+    position: 'absolute',
+    bottom: '0px',
+    width: '100%',
     boxShadow: '0px 2px 4px 3px rgb(0 0 0 / 15%), 0px 4px 5px 0px rgb(0 0 0 / 4%), 0px 1px 10px 0px rgb(0 0 0 / 2%)'
   }
 }));
@@ -83,7 +90,7 @@ const Main = props => {
           {children}
         </div>
       </main>
-      <div className={classes.footer}>
+      <div className={openSidebar ? classes.footer : classes.footer_min}>
         <Footer/>
       </div>
     </div>

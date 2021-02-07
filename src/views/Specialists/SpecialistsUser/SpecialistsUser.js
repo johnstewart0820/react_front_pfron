@@ -7,11 +7,11 @@ import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
-import service_list from '../../apis/service-list';
+import specialist from '../../apis/specialist';
 import { useToasts } from 'react-toast-notifications'
 import { ExportToCsv } from 'export-to-csv';
 
-const ServiceList = props => {
+const SpecialistsUser = props => {
   const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
@@ -21,28 +21,26 @@ const ServiceList = props => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [searchId, setSearchId] = useState('');
-  const [searchNumber, setSearchNumber] = useState('');
   const [searchName, setSearchName] = useState('');
-  const [searchModule, setSearchModule] = useState(0);
-  const [moduleList, setModuleList] = useState([]);
-  const [searchUnit, setSearchUnit] = useState(0);
-  const [unitList, setUnitList] = useState([]);
-  
+  const [searchQualificationPoint, setSearchQualificationPoint] = useState(0);
+  const [qualificationPointList, setQualificationPointList] = useState([]);
+  const [searchSpecialty, setSearchSpecialty] = useState(0);
+  const [specialtyList, setSpecialtyList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: true, href: '/', label: 'Usługi'}, {active: false, label: 'Lista dostępnych usług'}];
+  const breadcrumbs = [{active: false, label: 'Specjaliści'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast } = useToasts()
   
   useEffect(() => {
-    service_list.getInfo()
+    specialist.getInfo()
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          setModuleList(response.data.modules);
-          setUnitList(response.data.units);
+          setSpecialtyList(response.data.specialty);
+          setQualificationPointList(response.data.qualification);
         }
       })
     handleSearch();
@@ -55,7 +53,7 @@ const ServiceList = props => {
   useEffect(() => {
     handleSearch();
     setPage(1);
-  }, [selectedCount, searchId, searchName, searchNumber, searchModule, searchUnit]);
+  }, [selectedCount, searchId, searchName, searchSpecialty, searchQualificationPoint]);
   
   const requestSort = (pSortBy) => {
     var sortOrder = "asc";
@@ -66,14 +64,14 @@ const ServiceList = props => {
   }
   
   const handleSearch = () => {
-    service_list
-      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchNumber, searchName, searchModule, searchUnit)
+    specialist
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchName, searchQualificationPoint, searchSpecialty)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            setData(response.data.service_list);
+            setData(response.data.specialists);
             setTotal(response.data.count);
           }
         }
@@ -81,7 +79,7 @@ const ServiceList = props => {
   }
 
   const handleCreate = () => {
-    history.push('/service_list/create');
+    history.push('/specialists/create');
   }
 
   const handleSelectedItem = (id) => {
@@ -95,7 +93,7 @@ const ServiceList = props => {
 
   const handleDelete = () => {
     setProgressStatus(true);
-    service_list
+    specialist
       .delete(selectedItem)
       .then(response => {
         if (response.code === 401) {
@@ -117,10 +115,12 @@ const ServiceList = props => {
     for (let i = 0; i < data.length; i ++) {
       let item = {};
       item['ID'] = data[i].id;
-      item['Numer'] = data[i].number;
-      item['Nazwa'] = data[i].name;
-      item['Moduł'] = moduleList[data[i].module - 1].name;
-      item['Minimalny zakres usługi'] = data[i].amount_usage + ' ' + unitList[data[i].unit - 1].name;
+      item['Imię i nazwisko'] = data[i].name;
+      item['Punkt kwalifikacyjny'] = qualificationPointList[data[i].qualification_point - 1].name;
+      item['Specjalność'] = specialtyList[data[i].specialty - 1].name;
+      // item['Rola'] = roleList[data[i].id_role - 1].name;
+      // item['E-mail'] = data[i].email;
+      // item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
       export_data.push(item);
     }
     const options = {
@@ -142,10 +142,6 @@ const ServiceList = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
-          <AddIcon style={{marginRight: '20px'}}/>
-          Dodaj Usługę
-        </Button>
         <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
@@ -170,16 +166,14 @@ const ServiceList = props => {
           selectedCount={selectedCount}
           searchId={searchId}
           setSearchId={setSearchId}
-          searchNumber={searchNumber}
-          setSearchNumber={setSearchNumber}
+          searchSpecialty={searchSpecialty}
+          setSearchSpecialty={setSearchSpecialty}
+          specialtyList={specialtyList}
           searchName={searchName}
           setSearchName={setSearchName}
-          searchModule={searchModule}
-          setSearchModule={setSearchModule}
-          moduleList={moduleList}
-          searchUnit={searchUnit}
-          setSearchUnit={setSearchUnit}
-          unitList={unitList}
+          searchQualificationPoint={searchQualificationPoint}
+          setSearchQualificationPoint={setSearchQualificationPoint} 
+          qualificationPointList={qualificationPointList}
           handleDelete={handleSelectedItem}
         />
         <div className={classes.pagination}>
@@ -201,4 +195,4 @@ const ServiceList = props => {
   );
 };
 
-export default ServiceList;
+export default SpecialistsUser;

@@ -19,6 +19,9 @@ import {
   OrkTeams as OrkTeamsView,
   IprList as IprListView,
   ServiceList as ServiceListView,
+  ServiceListUser as ServiceListUserView,
+  ServiceListAdd as ServiceListAddView,
+  ServiceListEdit as ServiceListEditView,
   WorkingShop as WorkingShopView,
   Notifications as NotificationsView,
   OrkList as OrkListView,
@@ -115,11 +118,23 @@ const Routes = (props) => {
         path="/ipr_list"
       />
       <RouteWithLayout
-        component={ServiceListView}
+        component={props.role === 1 ? ServiceListView : ServiceListUserView}
         exact
         layout={MainLayout}
-        title='Lista usług'
+        title='Lista dostępnych usług'
         path="/service_list"
+      />
+      <RouteWithLayout
+        component={ServiceListAddView}
+        layout={MainLayout}
+        title='Dodawanie usługi'
+        path="/service_list/create"
+      />
+      <RouteWithLayout
+        component={ServiceListEditView}
+        layout={MainLayout}
+        title='Dodawanie usługi'
+        path="/service_list/edit/:id"
       />
       <RouteWithLayout
         component={WorkingShopView}

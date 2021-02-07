@@ -11,7 +11,7 @@ import service_list from '../../apis/service-list';
 import { useToasts } from 'react-toast-notifications'
 import { ExportToCsv } from 'export-to-csv';
 
-const ServiceList = props => {
+const ServiceListUser = props => {
   const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
@@ -142,10 +142,6 @@ const ServiceList = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
-          <AddIcon style={{marginRight: '20px'}}/>
-          Dodaj Usługę
-        </Button>
         <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
@@ -201,4 +197,4 @@ const ServiceList = props => {
   );
 };
 
-export default ServiceList;
+export default ServiceListUser;

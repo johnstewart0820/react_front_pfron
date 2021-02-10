@@ -13,6 +13,9 @@ import validators from './common/validators';
 import Routes from './Routes';
 import { ToastProvider } from 'react-toast-notifications';
 import AppContainer from './AppContainer';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import LuxonUtils from '@date-io/luxon';
+
 const browserHistory = createBrowserHistory();
 
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
@@ -27,15 +30,17 @@ validate.validators = {
 export default class App extends Component {
   render() {
     return (
-      <ToastProvider>
-        <ThemeProvider theme={theme}>
-          <Router history={browserHistory}>
-            <AppContainer>
-              <Routes />
-            </AppContainer>
-          </Router>
-        </ThemeProvider>
-      </ToastProvider>
+      <MuiPickersUtilsProvider utils={LuxonUtils}>
+        <ToastProvider>
+          <ThemeProvider theme={theme}>
+            <Router history={browserHistory}>
+              <AppContainer>
+                <Routes />
+              </AppContainer>
+            </Router>
+          </ThemeProvider>
+        </ToastProvider>
+      </MuiPickersUtilsProvider>
     );
   }
 }

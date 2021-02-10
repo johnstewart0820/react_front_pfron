@@ -25,6 +25,7 @@ import {
   WorkingShop as WorkingShopView,
   Notifications as NotificationsView,
   OrkList as OrkListView,
+  OrkListEdit as OrkListEditView,
   Payments as PaymentsView,
   Reports as ReportsView,
   Users as UsersView,
@@ -154,8 +155,14 @@ const Routes = (props) => {
         component={OrkListView}
         exact
         layout={MainLayout}
-        title='Lista ORK'
+        title='Lista ośrodków'
         path="/ork_list"
+      />
+      <RouteWithLayout
+        component={OrkListEditView}
+        layout={MainLayout}
+        title='Edytuj ośrodek'
+        path="/ork_list/edit/:id"
       />
       <RouteWithLayout
         component={PaymentsView}

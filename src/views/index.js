@@ -18,6 +18,7 @@ export { default as ServiceListEdit } from './ServiceListEdit';
 export { default as WorkingShop } from './WorkingShop';
 export { default as Notifications } from './Notifications';
 export { default as OrkList } from './OrkList';
+export { default as OrkListEdit } from './OrkListEdit';
 export { default as Payments } from './Payments';
 export { default as Reports } from './Reports';
 export { default as Users } from './Users';

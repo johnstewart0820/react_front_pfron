@@ -31,7 +31,7 @@ class Audit {
 		.then(response => {
 			if (response.data.code === 401) {
 				storage.removeStorage('token');
-				storage.removeStorage('role');
+        storage.removeStorage('role');
 				return response.data;
 			} else if (response.data.code === 200) {
 				return response.data;

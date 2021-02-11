@@ -129,7 +129,14 @@ const SortTable = (props) => {
               <TableCell>{item.user ? item.user.name : ''}</TableCell>
               <TableCell>{item.role ? item.role.name : ''}</TableCell>
               <TableCell>{DateTime.fromISO(item.created_at).toFormat('dd.MM.yyyy hh:mm')}</TableCell>
-              <TableCell>{item.event}</TableCell>
+              <TableCell>
+                <div>{item.event}</div>
+                {item.event == 'updated' && 
+                  <div>
+                    { Object.entries(item.changes).map(change => `${change[0]} from '${change[1][0]}' to '${change[1][1]}'; `) }
+                  </div>
+                }
+              </TableCell>
               <TableCell>
                 <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                   <DeleteOutlineOutlinedIcon className={classes.icon}/>

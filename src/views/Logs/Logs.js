@@ -10,6 +10,7 @@ import { SortTable, SingleSelect, DeleteModal } from './components';
 import audit from '../../apis/audit';
 import { useToasts } from 'react-toast-notifications'
 import { ExportToCsv } from 'export-to-csv';
+import { DateTime } from 'luxon';
 
 const Logs = props => {
   const { children } = props;
@@ -78,31 +79,32 @@ const Logs = props => {
 
   const handleExport = () => {
     let export_data = [];
-    // for (let i = 0; i < data.length; i ++) {
-    //   let item = {};
-    //   item['ID'] = data[i].id;
-    //   item['Punkt kwalifikacyjny'] = data[i].name;
-    //   item['Typ'] = typeList[data[i].type - 1].name;
-    //   item['Przypisani Ambasadorzy'] = getAmbassadorStr(data[i].ambassador);
-    //   // item['Rola'] = roleList[data[i].id_role - 1].name;
-    //   // item['E-mail'] = data[i].email;
-    //   // item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
-    //   export_data.push(item);
-    // }
-    // const options = {
-    //   fieldSeparator: ',',
-    //   quoteStrings: '"',
-    //   decimalSeparator: '.',
-    //   showLabels: false,
-    //   showTitle: false,
-    //   title: 'My Awesome CSV',
-    //   useTextFile: false,
-    //   useBom: true,
-    //   useKeysAsHeaders: true,
-    // };
-    // const csvExporter = new ExportToCsv(options);
+    for (let i = 0; i < data.length; i ++) {
+      const user = data[i].user;
+      const role = data[i].role;
+      const item = {};
+      item['ID']         = data[i].id;
+      item['Uźytkownik'] = user ? user.name : '';
+      item['Rola']       = role ? role.name : '';
+      item['Data']       = DateTime.fromISO(data[i].date).toFormat('dd.MM.yyyy hh:mm');
+      item['Czynność']   = data[i].event;
+      item['IP adres']   = data[i].ip_address;
+      export_data.push(item);
+    }
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: false,
+      showTitle: false,
+      title: 'PFRON_Log_zdarzen',
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true,
+    };
+    const csvExporter = new ExportToCsv(options);
 
-    // csvExporter.generateCsv(export_data);
+    csvExporter.generateCsv(export_data);
   }
 
   const handleSelectedItem = (id) => {

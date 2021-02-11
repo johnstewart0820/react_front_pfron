@@ -105,11 +105,6 @@ const Sidebar = props => {
       icon: <HelpOutlineOutlinedIcon />
     },
     {
-      title: 'Uprawnienia',
-      href: '/permissions',
-      icon: <HelpOutlineOutlinedIcon />
-    },
-    {
       title: 'Log zdarzeń',
       href: '/logs',
       icon: <HelpOutlineOutlinedIcon />

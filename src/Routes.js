@@ -30,13 +30,15 @@ import {
   OrkList as OrkListView,
   OrkListEdit as OrkListEditView,
   Payments as PaymentsView,
+  PaymentsUser as PaymentsUserView,
+  PaymentsAdd as PaymentsAddView,
+  PaymentsEdit as PaymentsEditView,
   Reports as ReportsView,
   Users as UsersView,
   UsersGeneral as UsersGeneralView,
   UsersAdd as UsersAddView,
   UsersEdit as UsersEditView,
   Profile as ProfileView,
-  Permissions as PermissionsView,
   Logs as LogsView,
   SignIn as SignInView,
   Forgot as ForgotView,
@@ -180,11 +182,25 @@ const Routes = (props) => {
         path="/ork_list/edit/:id"
       />
       <RouteWithLayout
-        component={PaymentsView}
+        component={props.role === 1 ? PaymentsView : PaymentsUserView}
         exact
         layout={MainLayout}
         title='Zdefiniowane koszty usług'
         path="/payments"
+      />
+      <RouteWithLayout
+        component={PaymentsAddView}
+        exact
+        layout={MainLayout}
+        title='Dodaj koszt'
+        path="/payments/create"
+      />
+      <RouteWithLayout
+        component={PaymentsEditView}
+        exact
+        layout={MainLayout}
+        title='Dodaj koszt'
+        path="/payments/edit/:id"
       />
       <RouteWithLayout
         component={ReportsView}
@@ -217,13 +233,6 @@ const Routes = (props) => {
         layout={MainLayout}
         title='Edycja profilu'
         path="/profile"
-      />
-      <RouteWithLayout
-        component={PermissionsView}
-        exact
-        layout={MainLayout}
-        title='Uprawnienia'
-        path="/permissions"
       />
       <RouteWithLayout
         component={LogsView}

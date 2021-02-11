@@ -11,7 +11,7 @@ import payment from '../../apis/payment';
 import { useToasts } from 'react-toast-notifications'
 import { ExportToCsv } from 'export-to-csv';
 
-const Payments = props => {
+const PaymentsUser = props => {
   const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
@@ -140,10 +140,6 @@ const Payments = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
-          <AddIcon style={{marginRight: '20px'}}/>
-          Dodaj koszt
-        </Button>
         <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
@@ -199,4 +195,4 @@ const Payments = props => {
   );
 };
 
-export default Payments;
+export default PaymentsUser;

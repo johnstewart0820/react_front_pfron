@@ -17,6 +17,9 @@ import {
   SpecialistsEdit as SpecialistsEditView,
   Participants as ParticipantsView,
   OrkTeams as OrkTeamsView,
+  OrkTeamsUser as OrkTeamsUserView,
+  OrkTeamsAdd as OrkTeamsAddView,
+  OrkTeamsEdit as OrkTeamsEditView,
   IprList as IprListView,
   ServiceList as ServiceListView,
   ServiceListUser as ServiceListUserView,
@@ -105,11 +108,23 @@ const Routes = (props) => {
         path="/participants"
       />
       <RouteWithLayout
-        component={OrkTeamsView}
+        component={props.role === 1 ? OrkTeamsView : OrkTeamsUserView}
         exact
         layout={MainLayout}
         title='Zespół ORK'
         path="/ork_teams"
+      />
+      <RouteWithLayout
+        component={OrkTeamsAddView}
+        layout={MainLayout}
+        title='Dodawanie osoby do zespołu ORK'
+        path="/ork_teams/create"
+      />
+      <RouteWithLayout
+        component={OrkTeamsEditView}
+        layout={MainLayout}
+        title='Dodawanie osoby do zespołu ORK'
+        path="/ork_teams/edit/:id"
       />
       <RouteWithLayout
         component={IprListView}

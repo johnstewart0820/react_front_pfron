@@ -10,6 +10,10 @@ export { default as SpecialistsAdd } from './SpecialistsAdd';
 export { default as SpecialistsEdit } from './SpecialistsEdit';
 export { default as Participants } from './Participants';
 export { default as OrkTeams } from './OrkTeams';
+export { default as OrkTeamsUser } from './OrkTeamsUser';
+export { default as OrkTeamsAdd } from './OrkTeamsAdd';
+export { default as OrkTeamsEdit } from './OrkTeamsEdit';
+
 export { default as IprList } from './IprList';
 export { default as ServiceList } from './ServiceList';
 export { default as ServiceListUser } from './ServiceListUser';

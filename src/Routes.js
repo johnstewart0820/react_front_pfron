@@ -7,6 +7,9 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 import {
   Cockpit as CockpitView,
   Candidates as CandidatesView,
+  CandidatesUser as CandidatesUserView,
+  CandidatesAdd as CandidatesAddView,
+  CandidatesEdit as CandidatesEditView,
   QualificationPoints as QualificationPointsView,
   QualificationPointsUser as QualificationPointsUserView,
   QualificationPointsAdd as QualificationPointsAddView,
@@ -58,11 +61,25 @@ const Routes = (props) => {
         path="/cockpit"
       />
       <RouteWithLayout
-        component={CandidatesView}
+        component={props.role === 1 ? CandidatesView : CandidatesUserView}
         exact
         layout={MainLayout}
         title='Kandydaci'
         path="/candidates"
+      />
+      <RouteWithLayout
+        component={CandidatesAddView}
+        exact
+        layout={MainLayout}
+        title='Dodaj kandydata'
+        path="/candidates/create"
+      />
+      <RouteWithLayout
+        component={CandidatesEditView}
+        exact
+        layout={MainLayout}
+        title='Kandydaci'
+        path="/candidates/edit/:id"
       />
       <RouteWithLayout
         component={props.role === 1 ? QualificationPointsView : QualificationPointsUserView}

@@ -1,5 +1,8 @@
 export { default as Cockpit } from './Cockpit';
 export { default as Candidates } from './Candidates';
+export { default as CandidatesUser } from './CandidatesUser';
+export { default as CandidatesEdit } from './CandidatesEdit';
+export { default as CandidatesAdd } from './CandidatesAdd';
 export { default as QualificationPoints } from './QualificationPoints';
 export { default as QualificationPointsUser } from './QualificationPointsUser';
 export { default as QualificationPointsAdd } from './QualificationPointsAdd';

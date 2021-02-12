@@ -12,6 +12,16 @@ import { useToasts } from 'react-toast-notifications'
 import { ExportToCsv } from 'export-to-csv';
 import { DateTime } from 'luxon';
 
+
+const columnAsKey = (array, column) => {
+  const ret = {};
+  for(let item of array) {
+    if(ret[item[column]] !== undefined) throw 'Duplicate keys';
+    ret[item[column]] = item;
+  }
+  return ret;
+}
+
 const Logs = props => {
   const { children } = props;
   const { history } = props;
@@ -27,6 +37,10 @@ const Logs = props => {
   const [roleList, setRoleList] = useState([]);
   const [searchDate, setSearchDate] = useState(null);
   const [searchEvent, setSearchEvent] = useState('');
+  // const [typeList, setTypeList] = useState([]);
+  // const [ambassadorList, setAmbassadorList] = useState([]);
+  const [typeListByID, setTypeListByID] = useState([]);
+  const [ambassadorListByID, setAmbassadorListByID] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
@@ -40,6 +54,11 @@ const Logs = props => {
           history.push('/login');
         } else {
           setRoleList(response.data.roles);
+          // setTypeList(response.data.types);
+          // setAmbassadorList(response.data.ambassadors);
+
+          setTypeListByID(columnAsKey(response.data.types, 'id'));
+          setAmbassadorListByID(columnAsKey(response.data.ambassadors, 'id'));
         }
       })
     handleSearch();
@@ -171,6 +190,8 @@ const Logs = props => {
           setSearchDate = {setSearchDate}
           searchEvent    = {searchEvent}
           setSearchEvent = {setSearchEvent}
+          typeListByID = {typeListByID}
+          ambassadorListByID = {ambassadorListByID}
           handleDelete= {handleSelectedItem}
         />
         <div className={classes.pagination}>

@@ -11,7 +11,7 @@ import candidate from '../../apis/candidate';
 import { useToasts } from 'react-toast-notifications'
 import { ExportToCsv } from 'export-to-csv';
 
-const Candidates = props => {
+const CandidatesUser = props => {
   const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
@@ -144,10 +144,6 @@ const Candidates = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
-          <AddIcon style={{marginRight: '20px'}}/>
-          Dodaj kandydata
-        </Button>
         <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
@@ -205,4 +201,4 @@ const Candidates = props => {
   );
 };
 
-export default Candidates;
+export default CandidatesUser;

@@ -7,11 +7,11 @@ import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
-import candidate from '../../apis/candidate';
+import payment from '../../apis/payment';
 import { useToasts } from 'react-toast-notifications'
 import { ExportToCsv } from 'export-to-csv';
 
-const Candidates = props => {
+const PaymentsUser = props => {
   const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
@@ -22,26 +22,25 @@ const Candidates = props => {
   const [total, setTotal] = useState(0);
   const [searchId, setSearchId] = useState('');
   const [searchName, setSearchName] = useState('');
-  const [searchSurname, setSearchSurname] = useState('');
-  const [searchQualificationPoint, setSearchQualificationPoint] = useState(0);
-  const [qualificationPointList, setQualificationPointList] = useState([]);
-  const [searchStage, setSearchStage] = useState(0);
-  const [stageList, setStageList] = useState([]);
-  const [searchDateModified, setSearchDateModified] = useState({from: new Date('2020-01-01'), to: new Date('2050-12-31')});
+  const [searchValue, setSearchValue] = useState('');
+  const [searchRehabitationCenter, setSearchRehabitationCenter] = useState(0);
+  const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
+  const [searchService, setSearchService] = useState(0);
+  const [serviceList, setServiceList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: false, label: 'Kandydaci'}];
+  const breadcrumbs = [{active: true, href: '/', label: 'Finanse'}, {active: false, label: 'Zdefiniowane koszty usług'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast } = useToasts()
   useEffect(() => {
-    candidate.getInfo()
+    payment.getInfo()
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          setStageList(response.data.stage);
-          setQualificationPointList(response.data.qualification_point);
+          setRehabitationCenterList(response.data.rehabitation_center);
+          setServiceList(response.data.service);
         }
       })
     handleSearch();
@@ -54,7 +53,7 @@ const Candidates = props => {
   useEffect(() => {
     handleSearch();
     setPage(1);
-  }, [selectedCount, searchId, searchName, searchDateModified, searchStage, searchSurname, searchQualificationPoint]);
+  }, [selectedCount, searchId, searchName, searchValue, searchRehabitationCenter, searchService]);
   
   const requestSort = (pSortBy) => {
     var sortOrder = "asc";
@@ -65,14 +64,14 @@ const Candidates = props => {
   }
   
   const handleSearch = () => {
-    candidate
-      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchName, searchSurname, searchQualificationPoint, searchStage, searchDateModified)
+    payment
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchName, searchValue, searchRehabitationCenter, searchService)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            setData(response.data.candidates);
+            setData(response.data.payments);
             setTotal(response.data.count);
           }
         }
@@ -80,21 +79,18 @@ const Candidates = props => {
   }
 
   const handleCreate = () => {
-    history.push('/candidates/create');
+    history.push('/payments/create');
   }
 
   const handleExport = () => {
     let export_data = [];
-    console.log(data);
     for (let i = 0; i < data.length; i ++) {
       let item = {};
       item['ID'] = data[i].id;
-      item['Imie kandydata'] = data[i].name;
-      item['Nazwisko kandydata'] = data[i].surname;
-      // item['Punkt kwalifikacyjny'] = qualificationPointList[data[i].qualification_point - 1].name;
-      item['Etap rekutacji'] = stageList[data[i].stage - 1].name;
-      let date = new Date(data[i].updated_at);
-      item['Data modyfikacji'] = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+      item['Nazwa kosztu'] = data[i].name;
+      item['Wysokość'] = data[i].value;
+      item['Koszt dla ORK'] = rehabitationCenterList[data[i].rehabitation_center - 1].name;
+      item['Usluga'] = serviceList[data[i].service - 1].name;
       export_data.push(item);
     }
     const options = {
@@ -124,7 +120,7 @@ const Candidates = props => {
 
   const handleDelete = () => {
     setProgressStatus(true);
-    candidate
+    payment
       .delete(selectedItem)
       .then(response => {
         if (response.code === 401) {
@@ -144,10 +140,6 @@ const Candidates = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
-          <AddIcon style={{marginRight: '20px'}}/>
-          Dodaj kandydata
-        </Button>
         <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
@@ -172,18 +164,16 @@ const Candidates = props => {
           selectedCount={selectedCount}
           searchId={searchId}
           setSearchId={setSearchId}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
           searchName={searchName}
           setSearchName={setSearchName}
-          searchSurname={searchSurname}
-          setSearchSurname={setSearchSurname}
-          searchQualificationPoint={searchQualificationPoint}
-          setSearchQualificationPoint={setSearchQualificationPoint}
-          qualificationPointList={qualificationPointList}
-          searchStage={searchStage}
-          setSearchStage={setSearchStage}
-          stageList={stageList}
-          searchDateModified={searchDateModified}
-          setSearchDateModified={setSearchDateModified}
+          searchRehabitationCenter={searchRehabitationCenter}
+          setSearchRehabitationCenter={setSearchRehabitationCenter}
+          rehabitationCenterList={rehabitationCenterList}
+          searchService={searchService}
+          setSearchService={setSearchService} 
+          serviceList={serviceList}
           handleDelete={handleSelectedItem}
         />
         <div className={classes.pagination}>
@@ -205,4 +195,4 @@ const Candidates = props => {
   );
 };
 
-export default Candidates;
+export default PaymentsUser;

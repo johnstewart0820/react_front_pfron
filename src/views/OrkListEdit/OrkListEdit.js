@@ -372,7 +372,7 @@ const OrkListEdit = props => {
                 <Grid item xs={12}>
                   <Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
                     Zapisz
-                </Button>
+                  </Button>
                 </Grid>
               </Grid>
             </Card>

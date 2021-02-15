@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import {
-  Button, Grid, Card, TextField, CircularProgress
+  Button, Grid, Card, CircularProgress
 } from '@material-ui/core';
 import { useToasts } from 'react-toast-notifications'
-import { Autocomplete } from '@material-ui/lab';
 
-import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
+import { Breadcrumb, SingleSelect } from 'components';
 import specialist from '../../apis/specialist';
+import clsx from 'clsx';
 
 const SpecialistsAdd = props => {
-  const { children } = props;
   const { history } = props;
   const classes = useStyles();
   const { addToast } = useToasts()
@@ -21,6 +20,7 @@ const SpecialistsAdd = props => {
   const [specialty, setSpecialty] = useState(0);
   const [specialtyList, setSpecialtyList] = useState([]);
   const [progressStatus, setProgressStatus] = useState(false);
+  const [error, setError] = useState({});
 
   useEffect(() => {
     specialist.getInfo()
@@ -34,13 +34,48 @@ const SpecialistsAdd = props => {
       })
   }, []);
 
+  const handleError = () => {
+    let _error = {}
+    _error.name = (name.length === 0);
+    _error.qualification = (parseInt(qualification) === 0);
+    _error.specialty = (parseInt(specialty) === 0);
+    setError(_error);
+  };
+
+  const handleChangeName = (value) => {
+    setName(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.name = (value.length === 0);
+    setError(_error);
+  }
+
+  const handleChangeQualification = (value) => {
+    setQualification(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.qualification = (parseInt(value) === 0);
+    setError(_error);
+  }
+
+  const handleChangeSpecialty = (value) => {
+    setSpecialty(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.specialty = (parseInt(value) === 0);
+    setError(_error);
+  }
+
+  const checkError = () => {
+    return name.length === 0 || parseInt(qualification) === 0 || parseInt(specialty) === 0;
+  }
+
+
   const handleBack = () => {
     history.push('/specialists');
   }
 
   const handleSave = () => {
-    if (name.length === 0 || parseInt(specialty) === 0 || parseInt(qualification) === 0) {
+    if (checkError()) {
       addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      handleError();
     } else {
       setProgressStatus(true);
 
@@ -77,11 +112,11 @@ const SpecialistsAdd = props => {
               </Grid>
               <Grid item xs={9}>
                 <div className={classes.top_label} htmlFor="name">Tytuł, imię, i nazwisko specjalisty</div>
-                <input className={classes.input_box} type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
+                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Wybierz punkt kwalifikacyjny</div>
-                <SingleSelect value={qualification} handleChange={setQualification} list={qualificationList} />
+                <SingleSelect value={qualification} handleChange={(value) => handleChangeQualification(value)} list={qualificationList} error={error.qualification}/>
                 <div className={classes.input_box_label} htmlFor="ambassador">Specjalność</div>
-                <SingleSelect value={specialty} handleChange={setSpecialty} list={specialtyList} />
+                <SingleSelect value={specialty} handleChange={(value) => handleChangeSpecialty(value)} list={specialtyList} error={error.specialty}/>
               </Grid>
             </Grid>
           </Card>

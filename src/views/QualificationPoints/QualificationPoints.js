@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import useStyles from './style';
 import {
-  Button, Card, CircularProgress
+  Button, Card
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
@@ -12,7 +12,6 @@ import { useToasts } from 'react-toast-notifications'
 import EXCEL from 'js-export-xlsx';
 
 const QualificationPoints = props => {
-  const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
   const [countList, setCountList] = useState([25, 50, 100]);

@@ -36,9 +36,14 @@ const DeleteModal = (props) => {
             <Grid item xs={12}>
               Czy na pewno chcesz usunąć tego specjalistę?
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Button variant="contained" color="secondary" className={classes.btnSave} onClick={() => {handleDelete(selectedIndex); handleClose();}}>
-                Usuń
+                Tak
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button variant="contained" color="secondary" className={classes.btnClose} onClick={() => {handleClose();}}>
+                Nie
               </Button>
             </Grid>
           </Grid>

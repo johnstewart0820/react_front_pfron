@@ -16,12 +16,26 @@ import { SingleSelect } from 'components';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
 import {
-  DatePicker,
-  TimePicker,
-  DateTimePicker,
-  MuiPickersUtilsProvider,
+  MuiPickersUtilsProvider, KeyboardDatePicker
 } from '@material-ui/pickers';
 import { DateTime } from "luxon";
+
+
+const getNamesFromList = (strIDs, list) => {
+  if (!list || list.length === 0 || strIDs === null)
+    return '';
+    const ids = strIDs.split(',');
+    const names = ids.map(id => {
+      return list[parseInt(id)] ? list[parseInt(id)].name : '';
+    });
+    return names.join(', ');
+}
+const getNameFromList = (strID, list) => {
+  if (!list || list.length === 0 || strID === null)
+    return '';
+  return list[parseInt(strID)].name;
+}
+
 
 const SortTable = (props) => {
   const classes = useStyles();
@@ -32,6 +46,18 @@ const SortTable = (props) => {
     searchRole, setSearchRole, roleList,
     searchDate, setSearchDate,
     searchEvent, setSearchEvent,
+    typeListByID,
+    ambassadorListByID,
+    stageListByID,
+    rehabitationCenterListByID,
+    specializationListByID,
+    specialistListByID,
+    specialtyTypeListByID,
+    serviceListListByID,
+    unitListByID,
+    moduleListByID,
+    paymentListByID,
+    userListByID,
     handleDelete
   } = props;
   useEffect(() => {
@@ -48,6 +74,64 @@ const SortTable = (props) => {
       state: {item: rows[indx]
     }});
   }
+
+  const modelPropertyLabels = (type, property) => {
+    const labels = {
+      'universal': {
+        // id:         'ID',
+        updated_at: 'Data modyfikacji',
+      },
+      'App\\Models\\QualificationPoint': {
+        name:       'Punkt kwalifikacyjny',
+        type:       'Typ',
+        ambassador: 'Przypisani Ambasadorzy',
+      },
+      'App\\Models\\Candidate': {
+        name:               'Imie kandydata',
+        surname:            'Nazwisko kandydata',
+        qualificationPoint: 'Punkt kwalifikacyjny',
+        stage:              'Etap rekutacji',
+      },
+      'App\\Models\\OrkTeam': {
+        name:                'Imię i nazwisko',
+        rehabitation_center: 'ORK',
+        specialization:      'Specjallizacja',
+      },
+    }
+    return (labels[type] && labels[type][property]) || labels['universal'][property] || '';
+  }
+
+  const modelNames = (type) => {
+    const names = {
+      'App\\Models\\QualificationPoint': 'Qualification point',
+      'App\\Models\\Candidate': 'Cadidate',
+      'App\\Models\\OrkTeam': 'OrkTeam',
+    }
+    return names[type] || '';
+  }
+  
+  const modelPropertyFormatting = {
+    'App\\Models\\QualificationPoint': {
+      type:       value => getNameFromList(value, typeListByID),
+      ambassador: value => getNamesFromList(value, ambassadorListByID),
+    },
+    'App\\Models\\Candidate': {
+      stage:      value => getNameFromList(value, stageListByID),
+    },
+    'App\\Models\\OrkTeam': {
+      rehabitation_center: value => getNameFromList(value, rehabitationCenterListByID),
+      specialization:      value => getNameFromList(value, specializationListByID),
+    },
+  }
+
+  const formatChange = (type, property, from, to) => {
+    const formatter = (modelPropertyFormatting[type] && modelPropertyFormatting[type][property]) || (x => x);
+    const formattedName = modelPropertyLabels(type, property);
+    const formattedFrom = formatter(from);
+    const formattedTo = formatter(to);
+    return formattedName ? <div><b>{formattedName}</b>{from !== null ? <> from <u>{formattedFrom}</u> to</> : <>: </>} <u>{formattedTo}</u></div> : null;
+  }
+
 
   return (
     <Table>
@@ -110,7 +194,16 @@ const SortTable = (props) => {
           <TableCell><input className={classes.input_box} type="text" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
           <TableCell><input className={classes.input_box} type="text" value={searchUserName} name="searchUserName" onChange={(e) => setSearchUserName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchRole} handleChange={setSearchRole} list={roleList} /> </TableCell>
-          <TableCell><DatePicker value={searchDate} onChange={setSearchDate}
+          <TableCell><KeyboardDatePicker 
+                  disableToolbar
+                  variant="inline"
+                  format="dd.MM.yyyy"
+                  id="date-picker-inline"
+                  value={searchDate}
+                  onChange={setSearchDate}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
             format="dd.MM.yyyy" autoOk={true} 
             InputProps={{
               endAdornment: (
@@ -130,11 +223,9 @@ const SortTable = (props) => {
               <TableCell>{item.role ? item.role.name : ''}</TableCell>
               <TableCell>{DateTime.fromISO(item.created_at).toFormat('dd.MM.yyyy hh:mm')}</TableCell>
               <TableCell>
-                <div>{item.event}</div>
-                {item.event == 'updated' && 
-                  <div>
-                    { Object.entries(item.changes).map(change => `${change[0]} from '${change[1][0]}' to '${change[1][1]}'; `) }
-                  </div>
+                <div>{item.event} {modelNames(item.auditable_type)}</div>
+                {(item.event === 'updated' || item.event === 'created') && 
+                  Object.entries(item.changes).map( ([name, [from, to]]) => formatChange(item.auditable_type, name, from, to) )
                 }
               </TableCell>
               <TableCell>

@@ -12,6 +12,16 @@ import { useToasts } from 'react-toast-notifications'
 import { ExportToCsv } from 'export-to-csv';
 import { DateTime } from 'luxon';
 
+
+const columnAsKey = (array, column) => {
+  const ret = {};
+  for(let item of array) {
+    if(ret[item[column]] !== undefined) throw 'Duplicate keys';
+    ret[item[column]] = item;
+  }
+  return ret;
+}
+
 const Logs = props => {
   const { children } = props;
   const { history } = props;
@@ -27,6 +37,21 @@ const Logs = props => {
   const [roleList, setRoleList] = useState([]);
   const [searchDate, setSearchDate] = useState(null);
   const [searchEvent, setSearchEvent] = useState('');
+  // const [typeList, setTypeList] = useState([]);
+  // const [ambassadorList, setAmbassadorList] = useState([]);
+  const [typeListByID, setTypeListByID] = useState([]);
+  const [ambassadorListByID, setAmbassadorListByID] = useState([]);
+  const [stageListByID, setStageListByID] = useState([]);
+  const [orkTeamListByID, setOrkTeamListByID] = useState([]);
+  const [specializationListByID, setSpecializationListByID] = useState([]);
+  const [rehabitationCenterListByID, setRehabitationCenterListByID] = useState([]);
+  const [specialistListByID, setSpecialistListByID] = useState([]);
+  const [specialtyTypeListByID, setSpecialtyTypeListByID] = useState([]);
+  const [serviceListListByID, setServiceListListByID] = useState([]);
+  const [unitListByID, setUnitListByID] = useState([]);
+  const [moduleListByID, setModuleListByID] = useState([]);
+  const [paymentListByID, setPaymentListByID] = useState([]);
+  const [userListByID, setUserListByID] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
@@ -40,6 +65,20 @@ const Logs = props => {
           history.push('/login');
         } else {
           setRoleList(response.data.roles);
+
+          setTypeListByID(columnAsKey(response.data.types, 'id'));
+          setAmbassadorListByID(columnAsKey(response.data.ambassadors, 'id'));
+          setStageListByID(columnAsKey(response.data.stages, 'id'));
+          setOrkTeamListByID(columnAsKey(response.data.ork_teams, 'id'));
+          setSpecializationListByID(columnAsKey(response.data.specializations, 'id'));
+          setRehabitationCenterListByID(columnAsKey(response.data.rehabitation_centers, 'id'));
+          setSpecialistListByID(columnAsKey(response.data.specialists, 'id'));
+          setSpecialtyTypeListByID(columnAsKey(response.data.speciality_types, 'id'));
+          setServiceListListByID(columnAsKey(response.data.service_lists, 'id'));
+          setUnitListByID(columnAsKey(response.data.units, 'id'));
+          setModuleListByID(columnAsKey(response.data.modules, 'id'));
+          setPaymentListByID(columnAsKey(response.data.payments, 'id'));
+          setUserListByID(columnAsKey(response.data.users, 'id'));
         }
       })
     handleSearch();
@@ -171,6 +210,21 @@ const Logs = props => {
           setSearchDate = {setSearchDate}
           searchEvent    = {searchEvent}
           setSearchEvent = {setSearchEvent}
+
+          typeListByID = {typeListByID}
+          ambassadorListByID = {ambassadorListByID}
+          stageListByID = {stageListByID}
+          orkTeamListByID = {orkTeamListByID}
+          specializationListByID  = {specializationListByID}
+          rehabitationCenterListByID = {rehabitationCenterListByID}
+          specialistListByID = {specialistListByID}
+          specialtyTypeListByID = {specialtyTypeListByID}
+          serviceListListByID = {serviceListListByID}
+          unitListByID = {unitListByID}
+          moduleListByID = {moduleListByID}
+          paymentListByID = {paymentListByID}
+          userListByID = {userListByID}
+
           handleDelete= {handleSelectedItem}
         />
         <div className={classes.pagination}>

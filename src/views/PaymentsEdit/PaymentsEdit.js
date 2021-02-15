@@ -55,7 +55,7 @@ const PaymentsEdit = props => {
 
   const handleSave = () => {
     if (name.length === 0 || isNaN(value) || parseInt(rehabitationCenter) === 0 || parseInt(service) === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else {
       setProgressStatus(true);
 

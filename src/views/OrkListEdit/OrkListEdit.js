@@ -47,13 +47,13 @@ const OrkListEdit = props => {
   const handleSave = () => {
     setFirstLogin(true);
     if (rehabitationCenterError.leader_nip_number === false || rehabitationCenterError.leader_regon_number === false) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
       return;
     }
     let arr = JSON.parse(partnerErrors);
     for (let i = 0; i < arr.length; i ++) {
       if (arr[i].nip === false || arr[i].regon === false) {
-        addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+        addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
         return;
       }
     }

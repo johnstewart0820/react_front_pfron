@@ -57,7 +57,7 @@ const Profile = props => {
 
   const handleSave = () => {
     if (name.length === 0 || email.length === 0 || parseInt(role) === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else if (password.length > 0 || newPassword.length > 0 || repeatPassword.length > 0) {
       if (password.length === 0 || newPassword.length === 0 || repeatPassword.length === 0 || (newPassword !== repeatPassword)) {
         addToast('Wprowadź poprawne pola hasła.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })

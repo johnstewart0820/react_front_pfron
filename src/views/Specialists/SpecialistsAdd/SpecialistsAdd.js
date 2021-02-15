@@ -40,7 +40,7 @@ const SpecialistsAdd = props => {
 
   const handleSave = () => {
     if (name.length === 0 || parseInt(specialty) === 0 || parseInt(qualification) === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else {
       setProgressStatus(true);
 

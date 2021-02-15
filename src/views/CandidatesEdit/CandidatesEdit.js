@@ -119,7 +119,7 @@ const CandidatesEdit = props => {
     if (name.length === 0 || surname.length === 0 || person_id.length === 0 || date_of_birth.length === 0 || place_of_birth.length === 0 
     || street.length === 0 || house_number.length === 0 || apartment_number.length === 0 || post_code.length === 0 || post_office.length === 0 
     || city.length === 0 || parseInt(stage) === 0 || comment.length === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else if (!validatepesel(person_id)) {
       addToast('Proszę wpisać poprawny PESEL.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else {

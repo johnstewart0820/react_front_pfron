@@ -54,7 +54,7 @@ const UsersEdit = props => {
 
   const handleSave = () => {
     if (name.length === 0 || email.length === 0 || parseInt(role) === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else {
       setProgressStatus(true);
 

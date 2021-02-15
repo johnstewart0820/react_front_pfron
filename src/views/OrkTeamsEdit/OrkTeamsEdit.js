@@ -80,7 +80,7 @@ const OrkTeamsEdit = props => {
 
   const handleSave = () => {
     if (name.length === 0 || rehabitationCenter.length === 0 || specialization.length === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else {
       setProgressStatus(true);
       let specialization_arr = [];

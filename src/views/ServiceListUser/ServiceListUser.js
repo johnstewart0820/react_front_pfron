@@ -9,7 +9,7 @@ import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import service_list from '../../apis/service-list';
 import { useToasts } from 'react-toast-notifications'
-import { ExportToCsv } from 'export-to-csv';
+import EXCEL from 'js-export-xlsx';
 
 const ServiceListUser = props => {
   const { children } = props;
@@ -115,28 +115,18 @@ const ServiceListUser = props => {
   const handleExport = () => {
     let export_data = [];
     for (let i = 0; i < data.length; i ++) {
-      let item = {};
-      item['ID'] = data[i].id;
-      item['Numer'] = data[i].number;
-      item['Nazwa'] = data[i].name;
-      item['Moduł'] = moduleList[data[i].module - 1].name;
-      item['Minimalny zakres usługi'] = data[i].amount_usage + ' ' + unitList[data[i].unit - 1].name;
-      export_data.push(item);
+      let item = [];
+      item.push(data[i].id);
+      item.push(data[i].number);
+      item.push(data[i].name);
+      item.push(moduleList[data[i].module - 1].name);
+      item.push(data[i].amount_usage + ' ' + unitList[data[i].unit - 1].name);
     }
-    const options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: false,
-      showTitle: false,
-      title: 'My Awesome CSV',
-      useTextFile: false,
-      useBom: true,
-      useKeysAsHeaders: true,
-    };
-    const csvExporter = new ExportToCsv(options);
-
-    csvExporter.generateCsv(export_data);
+    EXCEL.outPut({
+      header: ['ID', 'Numer', 'Nazwa', 'Moduł', 'Jednostka'],
+      data: export_data,
+      name: 'download'
+    })
   }
 
   return (

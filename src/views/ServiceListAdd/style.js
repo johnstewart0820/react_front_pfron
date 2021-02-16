@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         margin: theme.spacing(2.5, 0,)
     },
+    error: {
+      border: '1px solid red'
+    },
     top_label: {
       marginBottom: theme.spacing(1),
       fontSize: '14px',      

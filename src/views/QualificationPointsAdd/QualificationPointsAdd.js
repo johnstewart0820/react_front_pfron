@@ -8,9 +8,9 @@ import { Autocomplete } from '@material-ui/lab';
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import qualification from '../../apis/qualification';
+import clsx from 'clsx';
 
 const QualificationPointsAdd = props => {
-  const { children } = props;
   const { history } = props;
   const classes = useStyles();
   const { addToast } = useToasts()
@@ -21,6 +21,7 @@ const QualificationPointsAdd = props => {
   const [ambassador, setAmbassador] = useState([]);
   const [ambassadorList, setAmbassadorList] = useState([]);
   const [progressStatus, setProgressStatus] = useState(false);
+  const [error, setError] = useState({});
 
   useEffect(() => {
     qualification.getInfo()
@@ -34,13 +35,39 @@ const QualificationPointsAdd = props => {
       })
   }, []);
 
+  const handleError = () => {
+    let _error = {}
+    _error.name = (name.length === 0);
+    _error.type = (parseInt(type) === 0);
+    setError(_error);
+  };
+
+  const handleChangeName = (value) => {
+    setName(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.name = (value.length === 0);
+    setError(_error);
+  }
+
+  const handleChangeType = (value) => {
+    setType(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.type = (parseInt(value) === 0);
+    setError(_error);
+  }
+
+  const checkError = () => {
+    return name.length === 0 || parseInt(type) === 0;
+  }
+
   const handleBack = () => {
     history.push('/qualification_points');
   }
 
   const handleSave = () => {
-    if (name.length === 0 || parseInt(type) === 0 || ambassador.length === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+    if (checkError()) {
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      handleError();
     } else {
       setProgressStatus(true);
       let ambassador_arr = [];
@@ -81,9 +108,9 @@ const QualificationPointsAdd = props => {
               </Grid>
               <Grid item xs={9}>
                 <div className={classes.top_label} htmlFor="name">Nazwa punktu</div>
-                <input className={classes.input_box} type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
+                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Typ punktu</div>
-                <SingleSelect value={type} handleChange={setType} list={typeList} />
+                <SingleSelect value={type} handleChange={(value) => handleChangeType(value)} list={typeList} error={error.type} />
                 <div className={classes.input_box_label} htmlFor="ambassador">Ambasadorzy</div>
                 <Autocomplete
                   multiple

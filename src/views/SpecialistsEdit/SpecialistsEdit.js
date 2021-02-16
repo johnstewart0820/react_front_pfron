@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import {
-  Button, Grid, Card, TextField, CircularProgress
+  Button, Grid, Card, CircularProgress
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useToasts } from 'react-toast-notifications'
-import { Autocomplete } from '@material-ui/lab';
 
-import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
+import { Breadcrumb, SingleSelect } from 'components';
+import {DeleteModal} from '../Specialists/components';
 import specialist from '../../apis/specialist';
+import clsx from 'clsx';
 
 const SpecialistsEdit = props => {
-  const { children } = props;
   const { history } = props;
   const id = props.match.params.id;
   const classes = useStyles();
@@ -23,7 +23,8 @@ const SpecialistsEdit = props => {
   const [specialty, setSpecialty] = useState(0);
   const [specialtyList, setSpecialtyList] = useState([]);
   const [progressStatus, setProgressStatus] = useState(false);
-
+  const [error, setError] = useState({});
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     specialist.getInfo()
@@ -50,13 +51,47 @@ const SpecialistsEdit = props => {
     })
   }, [qualificationList]);
 
+const handleError = () => {
+    let _error = {}
+    _error.name = (name.length === 0);
+    _error.qualification = (parseInt(qualification) === 0);
+    _error.specialty = (parseInt(specialty) === 0);
+    setError(_error);
+  };
+
+  const handleChangeName = (value) => {
+    setName(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.name = (value.length === 0);
+    setError(_error);
+  }
+
+  const handleChangeQualification = (value) => {
+    setQualification(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.qualification = (parseInt(value) === 0);
+    setError(_error);
+  }
+
+  const handleChangeSpecialty = (value) => {
+    setSpecialty(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.specialty = (parseInt(value) === 0);
+    setError(_error);
+  }
+
+  const checkError = () => {
+    return name.length === 0 || parseInt(qualification) === 0 || parseInt(specialty) === 0;
+  }
+  
   const handleBack = () => {
     history.push('/specialists');
   }
 
   const handleSave = () => {
-    if (name.length === 0 || parseInt(specialty) === 0 || parseInt(qualification) === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+    if (checkError()) {
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      handleError();
     } else {
       setProgressStatus(true);
       
@@ -90,7 +125,10 @@ const SpecialistsEdit = props => {
           setProgressStatus(false);
         }
       })
-      
+  }
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
   }
 
   return (
@@ -111,11 +149,11 @@ const SpecialistsEdit = props => {
               </Grid>
               <Grid item xs={9}>
                 <div className={classes.top_label} htmlFor="name">Tytuł, imię, i nazwisko specjalisty</div>
-                <input className={classes.input_box} type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
+                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Wybierz punkt kwalifikacyjny</div>
-                <SingleSelect value={qualification} handleChange={setQualification} list={qualificationList} />
+                <SingleSelect value={qualification} handleChange={(value) => handleChangeQualification(value)} list={qualificationList} error={error.qualification}/>
                 <div className={classes.input_box_label} htmlFor="ambassador">Specjalność</div>
-                <SingleSelect value={specialty} handleChange={setSpecialty} list={specialtyList} />
+                <SingleSelect value={specialty} handleChange={(value) => handleChangeSpecialty(value)} list={specialtyList} error={error.specialty}/>
               </Grid>
             </Grid>
           </Card>
@@ -129,7 +167,7 @@ const SpecialistsEdit = props => {
                 </Button>
               </Grid>
               <Grid item xs={6}>
-                <Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={handleDelete}>
+                <Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)}>
                   <DeleteIcon/>
                 </Button>
               </Grid>
@@ -148,6 +186,12 @@ const SpecialistsEdit = props => {
       :
       <></>
     }
+    <DeleteModal
+      openModal={openModal}
+      handleClose={handleCloseModal}
+      handleDelete={handleDelete}
+      selectedIndex={id}
+    />
     </>
   );
 };

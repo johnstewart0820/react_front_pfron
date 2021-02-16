@@ -83,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       fontSize: '14px'
     },
+    error: {
+      border: '0.5px solid red'
+    },
     name_select_box: {
       '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {
         padding: '2px 10px',

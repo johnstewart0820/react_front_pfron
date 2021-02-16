@@ -65,7 +65,7 @@ const ServiceListEdit = props => {
 
   const handleSave = () => {
     if (name.length === 0 || number.length === 0 || parseInt(module) === 0 || amount_usage.length === 0 || parseInt(unit) === 0 || amount_takes.length === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else {
       setProgressStatus(true);
 

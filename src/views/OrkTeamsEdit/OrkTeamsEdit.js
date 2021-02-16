@@ -12,6 +12,8 @@ import DateFnsUtils from '@date-io/date-fns';
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ork_team from '../../apis/ork-team';
+import clsx from 'clsx';
+import {DeleteModal} from '../OrkTeams/components';
 
 const OrkTeamsEdit = props => {
   const { history } = props;
@@ -24,9 +26,11 @@ const OrkTeamsEdit = props => {
   const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
   const [specialization, setSpecialization] = useState([]);
   const [specializationList, setSpecializationList] = useState([]);
-  const [is_accepted, setIsAccepted] = useState(false);
-  const [date_of_acceptance, setDateOfAcceptance] = useState('');
+  const [is_accepted, setIsAccepted] = useState('false');
+  const [date_of_acceptance, setDateOfAcceptance] = useState(new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + (new Date().getDate()));
   const [progressStatus, setProgressStatus] = useState(false);
+  const [error, setError] = useState({});
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     ork_team.getInfo()
@@ -47,7 +51,7 @@ const OrkTeamsEdit = props => {
         history.push('/login');
       } else {
         setName(response.data.ork_team.name);
-        setIsAccepted(response.data.ork_team.is_accepted);
+        setIsAccepted(response.data.ork_team.is_accepted === 1 ? 'true' : 'false');
         setDateOfAcceptance(response.data.ork_team.date_of_acceptance);
         let list = response.data.ork_team.rehabitation_center.split(',');
         let rehabitation_list = [];
@@ -74,13 +78,48 @@ const OrkTeamsEdit = props => {
     })
   }, [specializationList]);
 
+const handleError = () => {
+    let _error = {}
+    _error.name = (name.length === 0);
+    _error.rehabitationCenter = (rehabitationCenter.length === 0);
+    _error.specialization = (specialization.length === 0);
+    setError(_error);
+  };
+
+  const handleChangeName = (value) => {
+    setName(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.name = (value.length === 0);
+    setError(_error);
+  }
+
+  const handleChangeRehabitationCenter = (value) => {
+    console.log(value);
+    setRehabitationCenter(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.rehabitationCenter = (value.length === 0);
+    setError(_error);
+  }
+
+  const handleChangeSpecialization = (value) => {
+    setSpecialization(value);
+    let _error = JSON.parse(JSON.stringify(error));
+    _error.specialization = (value.length === 0);
+    setError(_error);
+  }
+
+  const checkError = () => {
+    return name.length === 0 || rehabitationCenter.length === 0 || specialization.length === 0;
+  }
+  
   const handleBack = () => {
     history.push('/ork_teams');
   }
 
   const handleSave = () => {
-    if (name.length === 0 || rehabitationCenter.length === 0 || specialization.length === 0) {
-      addToast('Proszę wpisać wszystkie pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+    if (checkError()) {
+      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      handleError();
     } else {
       setProgressStatus(true);
       let specialization_arr = [];
@@ -130,6 +169,10 @@ const OrkTeamsEdit = props => {
     setDateOfAcceptance(_date.getFullYear() + '-' + (_date.getMonth() + 1) + '-' + (_date.getDate()));
   }
 
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  }
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
     <div className={classes.public}>
@@ -148,26 +191,26 @@ const OrkTeamsEdit = props => {
               </Grid>
               <Grid item xs={9}>
                 <div className={classes.top_label} htmlFor="name">Tytuł, imię i nazwisko osoby w zespole</div>
-                <input className={classes.input_box} type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
+                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Wybierz ORK</div>
                 <Autocomplete
                   multiple
                   value={rehabitationCenter}
                   className={classes.name_select_box}
-                  onChange={(event, value) => setRehabitationCenter(value ? value : [])}
+                  onChange={(event, value) => handleChangeRehabitationCenter(value ? value : [])}
                   options={rehabitationCenterList}
                   getOptionLabel={(option) => rehabitationCenterList && option && option.name}
-                  renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+                  renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.rehabitationCenter}/>}
                 />
                 <div className={classes.input_box_label} htmlFor="specialization">Specjallizacja</div>
                 <Autocomplete
                   multiple
                   value={specialization}
                   className={classes.name_select_box}
-                  onChange={(event, value) => setSpecialization(value ? value : [])}
+                  onChange={(event, value) => handleChangeSpecialization(value ? value : [])}
                   options={specializationList}
-                  getOptionLabel={(option) => specializationList && option && option.name + '(' + (option.module_type ? option.module_type : '') + ')'}
-                  renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+                  getOptionLabel={(option) => specializationList && option && option.name + (option.module_type ? (' (' + option.module_type + ')') : '')}
+                  renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.specialization}/>}
                 />
                 <div className={classes.input_box_label}>Zaakceptowany</div>
                 <FormControl component="fieldset">
@@ -176,19 +219,25 @@ const OrkTeamsEdit = props => {
                     <FormControlLabel value="false" control={<Radio />} label="NIE" />
                   </RadioGroup>
                 </FormControl>
-                <div className={classes.input_box_label}>Data akceptacji</div>
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="dd.MM.yyyy"
-                  margin="normal"
-                  id="date-picker-inline"
-                  value={date_of_acceptance}
-                  onChange={(e) => handleChangeDate(e)}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
+                {is_accepted === 'true' || is_accepted === true ?
+                  <>
+                    <div className={classes.input_box_label}>Data akceptacji</div>
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant="inline"
+                      format="dd.MM.yyyy"
+                      margin="normal"
+                      id="date-picker-inline"
+                      value={date_of_acceptance}
+                      onChange={(e) => handleChangeDate(e)}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
+                  </>
+                :
+                  <></>
+                }
               </Grid>
             </Grid>
           </Card>
@@ -202,7 +251,7 @@ const OrkTeamsEdit = props => {
                 </Button>
               </Grid>
               <Grid item xs={6}>
-                <Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={handleDelete}>
+                <Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)}>
                   <DeleteIcon/>
                 </Button>
               </Grid>
@@ -221,6 +270,12 @@ const OrkTeamsEdit = props => {
       :
       <></>
     }
+    <DeleteModal
+      openModal={openModal}
+      handleClose={handleCloseModal}
+      handleDelete={handleDelete}
+      selectedIndex={id}
+    />
     </MuiPickersUtilsProvider>
   );
 };

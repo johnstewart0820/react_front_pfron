@@ -62,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(1),
       fontSize: '14px',
     },
+    error: {
+      border: '1px solid red'
+    },
     input_box: {
       padding: '10px 20px',
       width: '100%',

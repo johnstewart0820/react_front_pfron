@@ -9,7 +9,7 @@ import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import ork_team from '../../apis/ork-team';
 import { useToasts } from 'react-toast-notifications'
-import { ExportToCsv } from 'export-to-csv';
+import EXCEL from 'js-export-xlsx';
 
 const OrkTeams = props => {
   const { children } = props;
@@ -114,27 +114,18 @@ const OrkTeams = props => {
   const handleExport = () => {
     let export_data = [];
     for (let i = 0; i < data.length; i ++) {
-      let item = {};
-      item['ID'] = data[i].id;
-      item['Imie i nazwisko'] = data[i].name;
-      item['ORK'] = getRehabitationCenterStr(data[i].rehabitation_center)
-      item['Specjallizacja'] = getSpecializationStr(data[i].specialization);
+      let item = [];
+      item.push(data[i].id);
+      item.push(data[i].name);
+      item.push(getRehabitationCenterStr(data[i].rehabitation_center));
+      item.push(getSpecializationStr(data[i].specialization));
       export_data.push(item);
     }
-    const options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: false,
-      showTitle: false,
-      title: 'My Awesome CSV',
-      useTextFile: false,
-      useBom: true,
-      useKeysAsHeaders: true,
-    };
-    const csvExporter = new ExportToCsv(options);
-
-    csvExporter.generateCsv(export_data);
+    EXCEL.outPut({
+      header: ['ID', 'Imie i nazwisko', 'ORK', 'Specjallizacja'],
+      data: export_data,
+      name: 'download'
+    })
   }
 
   const handleSelectedItem = (id) => {

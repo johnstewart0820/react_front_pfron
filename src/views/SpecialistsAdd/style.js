@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     form_title: {
       fontWeight: '500'
     },
+    error: {
+      border: '0.5px solid red'
+    },
     btnSave: {
         '& .MuiButton-label': {
           textTransform: 'none',

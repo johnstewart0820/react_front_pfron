@@ -1,15 +1,14 @@
 import React, { useState, useEffect }  from 'react';
 import useStyles from './style';
 import {
-  Button, Card, CircularProgress
+  Button, Card
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
-import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import specialist from '../../apis/specialist';
 import { useToasts } from 'react-toast-notifications'
-import { ExportToCsv } from 'export-to-csv';
+import EXCEL from 'js-export-xlsx';
 
 const SpecialistsUser = props => {
   const { children } = props;
@@ -113,30 +112,22 @@ const SpecialistsUser = props => {
   const handleExport = () => {
     let export_data = [];
     for (let i = 0; i < data.length; i ++) {
-      let item = {};
-      item['ID'] = data[i].id;
-      item['Imię i nazwisko'] = data[i].name;
-      item['Punkt kwalifikacyjny'] = qualificationPointList[data[i].qualification_point - 1].name;
-      item['Specjalność'] = specialtyList[data[i].specialty - 1].name;
-      // item['Rola'] = roleList[data[i].id_role - 1].name;
-      // item['E-mail'] = data[i].email;
-      // item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
+      let item = [];
+      item.push(data[i].id);
+      item.push(data[i].name);
+      for (let j = 0; j < qualificationPointList.length; j ++) {
+        if (qualificationPointList[j].id === data[i].qualification_point) {
+          item.push(qualificationPointList[j].name);
+        }
+      }
+      item.push(specialtyList[data[i].specialty - 1].name);
       export_data.push(item);
     }
-    const options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: false,
-      showTitle: false,
-      title: 'My Awesome CSV',
-      useTextFile: false,
-      useBom: true,
-      useKeysAsHeaders: true,
-    };
-    const csvExporter = new ExportToCsv(options);
-
-    csvExporter.generateCsv(export_data);
+    EXCEL.outPut({
+      header: ['ID', 'Imię i nazwisko', 'Punkt kwalifikacyjny', 'Specjalność'],
+      data: export_data,
+      name: 'download'
+    })
   }
 
   return (

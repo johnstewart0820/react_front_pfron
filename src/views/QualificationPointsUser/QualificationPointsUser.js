@@ -4,14 +4,13 @@ import {
   Button, Card
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
-import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect } from './components';
 import qualification from '../../apis/qualification';
-import { ExportToCsv } from 'export-to-csv';
+import EXCEL from 'js-export-xlsx';
+
 
 const QualificationPointsUser = props => {
-  const { children } = props;
   const { history } = props;
   const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
   const [countList, setCountList] = useState([25, 50, 100]);
@@ -90,30 +89,19 @@ const QualificationPointsUser = props => {
   const handleExport = () => {
     let export_data = [];
     for (let i = 0; i < data.length; i ++) {
-      let item = {};
-      item['ID'] = data[i].id;
-      item['Punkt kwalifikacyjny'] = data[i].name;
-      item['Typ'] = typeList[data[i].type - 1].name;
-      item['Przypisani Ambasadorzy'] = getAmbassadorStr(data[i].ambassador);
-      // item['Rola'] = roleList[data[i].id_role - 1].name;
-      // item['E-mail'] = data[i].email;
-      // item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
+      let item = [];
+      item.push(data[i].id);
+      item.push(data[i].name);
+      item.push(typeList[data[i].type - 1].name);
+      item.push(getAmbassadorStr(data[i].ambassador));
       export_data.push(item);
     }
-    const options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: false,
-      showTitle: false,
-      title: 'My Awesome CSV',
-      useTextFile: false,
-      useBom: true,
-      useKeysAsHeaders: true,
-    };
-    const csvExporter = new ExportToCsv(options);
-
-    csvExporter.generateCsv(export_data);
+    
+    EXCEL.outPut({
+      header: ['ID', 'Punkt kwalifikacyjny', 'Typ', 'Przypisani Ambasadorzy'],
+      data: export_data,
+      name: 'download'
+    })
   }
 
   return (

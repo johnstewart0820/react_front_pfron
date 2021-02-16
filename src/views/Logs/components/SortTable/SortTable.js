@@ -46,8 +46,10 @@ const SortTable = (props) => {
     searchRole, setSearchRole, roleList,
     searchDate, setSearchDate,
     searchEvent, setSearchEvent,
+
     typeListByID,
     ambassadorListByID,
+    qualificationPointListByID,
     stageListByID,
     rehabitationCenterListByID,
     specializationListByID,
@@ -58,6 +60,8 @@ const SortTable = (props) => {
     moduleListByID,
     paymentListByID,
     userListByID,
+    roleListByID,
+
     handleDelete
   } = props;
   useEffect(() => {
@@ -66,13 +70,6 @@ const SortTable = (props) => {
   const clearDate = (e) => {
     e.stopPropagation();
     setSearchDate(null)
-  }
-
-  const handleGotoSimulation = (indx) => {
-    history.push({
-      pathname: '/forecasting_module/simulation_info',
-      state: {item: rows[indx]
-    }});
   }
 
   const modelPropertyLabels = (type, property) => {
@@ -97,6 +94,37 @@ const SortTable = (props) => {
         rehabitation_center: 'ORK',
         specialization:      'Specjallizacja',
       },
+      'App\\Models\\Payment': {
+        name:                'Nazwa kosztu',
+        value:               'Wysokość',
+        rehabitation_center: 'Koszt dla ORK',
+        service:             'Usluga',
+      },
+      'App\\Models\\ServiceList': {
+        number: 'Numer',
+        name:   'Nazwa',
+        module: 'Moduł',
+        unit:   'Minimalny zakres usługi',
+      },
+      'App\\Models\\Specialist': {
+        name:                'Imię i nazwisko',
+        qualification_point: 'Punkt kwalifikacyjny',
+        specialty:           'Specjalność',
+      },
+      'App\\Models\\User': {
+        name:            'Nazwa użytkownika (login)',
+        id_role:         'Rola',
+        email:           'E-mail',
+        activate_status: 'Aktywny',
+      },
+      // 'App\\Models\\TTTTTT': {
+      //   xxxxxx: 'yyyyyy',
+      //   xxxxxx: 'yyyyyy',
+      //   xxxxxx: 'yyyyyy',
+      //   xxxxxx: 'yyyyyy',
+      //   xxxxxx: 'yyyyyy',
+      //   xxxxxx: 'yyyyyy',
+      // },
     }
     return (labels[type] && labels[type][property]) || labels['universal'][property] || '';
   }
@@ -106,6 +134,10 @@ const SortTable = (props) => {
       'App\\Models\\QualificationPoint': 'Qualification point',
       'App\\Models\\Candidate': 'Cadidate',
       'App\\Models\\OrkTeam': 'OrkTeam',
+      'App\\Models\\Payment': 'Zdefiniowane koszta usług',
+      'App\\Models\\ServiceList': 'Usługa',
+      'App\\Models\\Specialist': 'Specjalista',
+      'App\\Models\\User': 'Użytkownik',
     }
     return names[type] || '';
   }
@@ -122,6 +154,18 @@ const SortTable = (props) => {
       rehabitation_center: value => getNameFromList(value, rehabitationCenterListByID),
       specialization:      value => getNameFromList(value, specializationListByID),
     },
+    'App\\Models\\Payment': {
+      rehabitation_center: value => getNameFromList(value, rehabitationCenterListByID),
+      service: value => getNameFromList(value, serviceListListByID),
+    },
+    'App\\Models\\Specialist': {
+      qualification_point: value => getNameFromList(value, qualificationPointListByID),
+      specialty:           value => getNameFromList(value, specialtyTypeListByID),
+    },
+    'App\\Models\\User': {
+      role: value => getNameFromList(value, roleListByID),
+    },
+
   }
 
   const formatChange = (type, property, from, to) => {

@@ -46,13 +46,13 @@ const OrkListEdit = props => {
 
   const handleSave = () => {
     setFirstLogin(true);
-    if (rehabitationCenterError.leader_nip_number === false || rehabitationCenterError.leader_regon_number === false) {
+    if (rehabitationCenterError.leader_nip_number !== true || rehabitationCenterError.leader_regon_number !== true || rehabitationCenterError.email !== true) {
       addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
       return;
     }
     let arr = JSON.parse(partnerErrors);
     for (let i = 0; i < arr.length; i ++) {
-      if (arr[i].nip === false || arr[i].regon === false) {
+      if (arr[i].nip !== true || arr[i].regon !== true) {
         addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
         return;
       }
@@ -142,7 +142,6 @@ const OrkListEdit = props => {
     } else if (event.target.name === 'email') {
       var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
       arr_err[event.target.name] = pattern.test(event.target.value);
-
     }
     setRehabitationCenter(arr);
     setRehabitationCenterError(arr_err);
@@ -171,7 +170,6 @@ const OrkListEdit = props => {
         arr_err_res.push({'regon' : false, 'nip' : false});
       }
     }
-    console.log(arr_err_res);
     setPartnerErrors(JSON.stringify(arr_err_res));
     setPartners(JSON.stringify(arr_res));
   }
@@ -185,7 +183,6 @@ const OrkListEdit = props => {
     } else if (type == 'nip') {
       error_arr[index][type] = validatenip(value);
     }
-    console.log(error_arr);
     setPartnerErrors(JSON.stringify(error_arr));
     setPartners(JSON.stringify(arr)); 
   }

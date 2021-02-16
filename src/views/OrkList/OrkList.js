@@ -9,7 +9,7 @@ import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import rehabitation_center from '../../apis/rehabitation-center';
 import { useToasts } from 'react-toast-notifications'
-import { ExportToCsv } from 'export-to-csv';
+import EXCEL from 'js-export-xlsx';
 
 const OrkList = props => {
   const { children } = props;
@@ -65,32 +65,18 @@ const OrkList = props => {
   }
 
   const handleExport = () => {
-    // let export_data = [];
-    // for (let i = 0; i < data.length; i ++) {
-    //   let item = {};
-    //   item['ID'] = data[i].id;
-    //   item['Punkt kwalifikacyjny'] = data[i].name;
-    //   item['Typ'] = typeList[data[i].type - 1].name;
-    //   item['Przypisani Ambasadorzy'] = getAmbassadorStr(data[i].ambassador);
-    //   // item['Rola'] = roleList[data[i].id_role - 1].name;
-    //   // item['E-mail'] = data[i].email;
-    //   // item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
-    //   export_data.push(item);
-    // }
-    // const options = {
-    //   fieldSeparator: ',',
-    //   quoteStrings: '"',
-    //   decimalSeparator: '.',
-    //   showLabels: false,
-    //   showTitle: false,
-    //   title: 'My Awesome CSV',
-    //   useTextFile: false,
-    //   useBom: true,
-    //   useKeysAsHeaders: true,
-    // };
-    // const csvExporter = new ExportToCsv(options);
-
-    // csvExporter.generateCsv(export_data);
+    let export_data = [];
+    for (let i = 0; i < data.length; i ++) {
+      let item = [];
+      item.push(data[i].id);
+      item.push(data[i].name);
+      export_data.push(item);
+    }
+    EXCEL.outPut({
+      header: ['ID', 'Nazwa ośrodka'],
+      data: export_data,
+      name: 'download'
+    })
   }
 
   return (

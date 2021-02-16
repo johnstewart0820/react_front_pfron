@@ -41,6 +41,7 @@ const Logs = props => {
   // const [ambassadorList, setAmbassadorList] = useState([]);
   const [typeListByID, setTypeListByID] = useState([]);
   const [ambassadorListByID, setAmbassadorListByID] = useState([]);
+  const [qualificationPointListByID, setQualificationPointListByID] = useState([]);
   const [stageListByID, setStageListByID] = useState([]);
   const [orkTeamListByID, setOrkTeamListByID] = useState([]);
   const [specializationListByID, setSpecializationListByID] = useState([]);
@@ -52,6 +53,8 @@ const Logs = props => {
   const [moduleListByID, setModuleListByID] = useState([]);
   const [paymentListByID, setPaymentListByID] = useState([]);
   const [userListByID, setUserListByID] = useState([]);
+  const [roleListByID, setRoleListByID] = useState([]);
+
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
@@ -69,6 +72,7 @@ const Logs = props => {
           setTypeListByID(columnAsKey(response.data.types, 'id'));
           setAmbassadorListByID(columnAsKey(response.data.ambassadors, 'id'));
           setStageListByID(columnAsKey(response.data.stages, 'id'));
+          setQualificationPointListByID(columnAsKey(response.data.qualification_points, 'id'));
           setOrkTeamListByID(columnAsKey(response.data.ork_teams, 'id'));
           setSpecializationListByID(columnAsKey(response.data.specializations, 'id'));
           setRehabitationCenterListByID(columnAsKey(response.data.rehabitation_centers, 'id'));
@@ -79,6 +83,7 @@ const Logs = props => {
           setModuleListByID(columnAsKey(response.data.modules, 'id'));
           setPaymentListByID(columnAsKey(response.data.payments, 'id'));
           setUserListByID(columnAsKey(response.data.users, 'id'));
+          setRoleListByID(columnAsKey(response.data.roles, 'id'));
         }
       })
     handleSearch();
@@ -213,6 +218,7 @@ const Logs = props => {
 
           typeListByID = {typeListByID}
           ambassadorListByID = {ambassadorListByID}
+          qualificationPointListByID = {qualificationPointListByID}
           stageListByID = {stageListByID}
           orkTeamListByID = {orkTeamListByID}
           specializationListByID  = {specializationListByID}
@@ -224,6 +230,7 @@ const Logs = props => {
           moduleListByID = {moduleListByID}
           paymentListByID = {paymentListByID}
           userListByID = {userListByID}
+          roleListByID = {roleListByID}
 
           handleDelete= {handleSelectedItem}
         />

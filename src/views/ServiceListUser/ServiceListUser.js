@@ -121,6 +121,7 @@ const ServiceListUser = props => {
       item.push(data[i].name);
       item.push(moduleList[data[i].module - 1].name);
       item.push(data[i].amount_usage + ' ' + unitList[data[i].unit - 1].name);
+      export_data.push(item);
     }
     EXCEL.outPut({
       header: ['ID', 'Numer', 'Nazwa', 'Moduł', 'Jednostka'],

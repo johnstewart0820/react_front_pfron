@@ -9,7 +9,7 @@ import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import candidate from '../../apis/candidate';
 import { useToasts } from 'react-toast-notifications'
-import { ExportToCsv } from 'export-to-csv';
+import EXCEL from 'js-export-xlsx';
 
 const CandidatesUser = props => {
   const { children } = props;
@@ -85,32 +85,21 @@ const CandidatesUser = props => {
 
   const handleExport = () => {
     let export_data = [];
-    console.log(data);
     for (let i = 0; i < data.length; i ++) {
-      let item = {};
-      item['ID'] = data[i].id;
-      item['Imie kandydata'] = data[i].name;
-      item['Nazwisko kandydata'] = data[i].surname;
-      // item['Punkt kwalifikacyjny'] = qualificationPointList[data[i].qualification_point - 1].name;
-      item['Etap rekutacji'] = stageList[data[i].stage - 1].name;
+      let item = [];
+      item.push(data[i].id);
+      item.push(data[i].name);
+      item.push(data[i].surname);
+      item.push(stageList[data[i].stage - 1].name);
       let date = new Date(data[i].updated_at);
-      item['Data modyfikacji'] = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+      item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
       export_data.push(item);
     }
-    const options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: false,
-      showTitle: false,
-      title: 'My Awesome CSV',
-      useTextFile: false,
-      useBom: true,
-      useKeysAsHeaders: true,
-    };
-    const csvExporter = new ExportToCsv(options);
-
-    csvExporter.generateCsv(export_data);
+    EXCEL.outPut({
+      header: ['ID', 'Imie kandydata', 'Nazwisko kandydata', 'Etap rekutacji', 'Data modyfikacji'],
+      data: export_data,
+      name: 'download'
+    })
   }
 
   const handleSelectedItem = (id) => {
@@ -138,7 +127,6 @@ const CandidatesUser = props => {
           setPage(1);
         }
       })
-      
   }
 
   return (

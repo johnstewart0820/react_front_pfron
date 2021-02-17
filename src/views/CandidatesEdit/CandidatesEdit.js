@@ -126,6 +126,7 @@ const CandidatesEdit = props => {
   }, []);
 
   useEffect(() => {
+    setProgressStatus(true);
     candidate.get(id)
     .then(response => {
       if (response.code === 401) {
@@ -190,6 +191,7 @@ const CandidatesEdit = props => {
         setStage(response.data.candidate.stage);
         setComment(response.data.candidate.comment);
       } 
+      setProgressStatus(false);
     })
    
   }, [employed_type_list]);

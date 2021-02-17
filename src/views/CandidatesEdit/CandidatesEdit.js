@@ -17,6 +17,7 @@ import clsx from 'clsx';
 import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {DeleteModal} from '../Candidates/components';
 
 const CandidatesEdit = props => {
   const { children } = props;
@@ -92,6 +93,7 @@ const CandidatesEdit = props => {
   const [uncomfortable_status, setUncomfortableStatus] = useState(2);
   const [progressStatus, setProgressStatus] = useState(false);
   const [error, setError] = useState({});
+  const [openModal, setOpenModal] = useState(false);
 
   const handleExportPdf = () => {
 
@@ -102,7 +104,24 @@ const CandidatesEdit = props => {
   }
 
   const handleDelete = () => {
+    setProgressStatus(true);
+    candidate
+      .delete(id)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+          if (response.code === 200) {
+            setTimeout(function(){history.push('/candidates');}, 1000);
+          }
+          setProgressStatus(false);
+        }
+      })
+  }
 
+  const handleCloseModal = () => {
+    setOpenModal(false);
   }
 
   useEffect(() => {
@@ -161,7 +180,7 @@ const CandidatesEdit = props => {
         setEducation(parseInt(response.data.candidate.education));
         setAcademicTitle(response.data.candidate.academic_title);
         setStayStatus(parseInt(response.data.candidate.stay_status));
-        setChildrenApplicable(response.data.candidate.children_applicable);
+        setChildrenApplicable(parseInt(response.data.candidate.children_applicable));
         setChildrenAmount(response.data.candidate.children_amount);
         setChildrenAge(response.data.candidate.children_age);
         setEmployedStatus(parseInt(response.data.candidate.employed_status));
@@ -1254,6 +1273,12 @@ const CandidatesEdit = props => {
       :
       <></>
     }
+    <DeleteModal
+      openModal={openModal}
+      handleClose={handleCloseModal}
+      handleDelete={handleDelete}
+      selectedIndex={id}
+    />
     </MuiPickersUtilsProvider>
   );
 };

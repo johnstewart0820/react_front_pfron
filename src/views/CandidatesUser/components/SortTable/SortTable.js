@@ -76,6 +76,15 @@ const SortTable = (props) => {
             </TableCell>
             <TableCell>
               <TableSortLabel
+                active={sortBy === 3}
+                direction={sortOrder}
+                onClick={() => requestSort(3)}
+              >
+                Punkt kwalifikacyjny
+            </TableSortLabel>
+            </TableCell>
+            <TableCell>
+              <TableSortLabel
                 active={sortBy === 4}
                 direction={sortOrder}
                 onClick={() => requestSort(4)}
@@ -92,11 +101,6 @@ const SortTable = (props) => {
                 Data modyfikacji
             </TableSortLabel>
             </TableCell>
-            <TableCell>
-              <TableSortLabel align="right">
-                Akcje
-            </TableSortLabel>
-            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -104,6 +108,7 @@ const SortTable = (props) => {
             <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchSurname} name="searchId" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
+            <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /></TableCell>
             <TableCell><SingleSelect value={searchStage} handleChange={setSearchStage} list={stageList} /></TableCell>
             <TableCell>
               <Grid container spacing={2}>
@@ -137,7 +142,6 @@ const SortTable = (props) => {
                 </Grid>
               </Grid>
             </TableCell>
-            <TableCell></TableCell>
           </TableRow>
           {rows.map((item, indx) => {
             return (
@@ -145,16 +149,13 @@ const SortTable = (props) => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.surname}</TableCell>
+                <TableCell>{item.qualification_point > 1  ?
+                            qualificationPointList && qualificationPointList.length > 0 && qualificationPointList[item.qualification_point - 1].name
+                            :
+                            ''
+                          }</TableCell>
                 <TableCell>{stageList && stageList.length > 0 && stageList[item.stage - 1].name}</TableCell>
                 <TableCell>{getDateTime(item.updated_at)}</TableCell>
-                <TableCell>
-                  <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
-                    <EditOutlinedIcon className={classes.icon} />
-                  </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
-                    <DeleteOutlineOutlinedIcon className={classes.icon} />
-                  </IconButton>
-                </TableCell>
               </TableRow>
             );
           })}

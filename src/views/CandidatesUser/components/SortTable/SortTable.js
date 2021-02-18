@@ -149,7 +149,7 @@ const SortTable = (props) => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.surname}</TableCell>
-                <TableCell>{item.qualification_point > 1  ?
+                <TableCell>{parseInt(item.qualification_point) >= 1  ?
                             qualificationPointList && qualificationPointList.length > 0 && qualificationPointList[item.qualification_point - 1].name
                             :
                             ''

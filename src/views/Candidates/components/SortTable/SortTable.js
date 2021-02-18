@@ -156,7 +156,7 @@ const SortTable = (props) => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.surname}</TableCell>
-                <TableCell>{item.qualification_point > 1  ?
+                <TableCell>{parseInt(item.qualification_point) >= 1  ?
                             qualificationPointList && qualificationPointList.length > 0 && qualificationPointList[item.qualification_point - 1].name
                             :
                             ''
@@ -167,7 +167,7 @@ const SortTable = (props) => {
                   <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`candidates/info/${item.id}`)}>
                     <InfoOutlinedIcon className={classes.icon} />
                   </IconButton>
                   <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>

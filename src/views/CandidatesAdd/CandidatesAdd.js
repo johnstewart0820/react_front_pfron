@@ -1108,20 +1108,6 @@ const CandidatesAdd = props => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Card className={classes.form}>
-                <Grid container spacing={2}>
-                  <div className={classes.form_title}>
-                    Karty informacyjne
-                  </div>
-                  <Grid item xs={12}>
-                    <Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
-                      Załoź kartę informacyjną
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Card>
-            </Grid>
-            <Grid item xs={12}>
-              <Card className={classes.form}>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <div className={classes.top_label} htmlFor="name">Etap</div>

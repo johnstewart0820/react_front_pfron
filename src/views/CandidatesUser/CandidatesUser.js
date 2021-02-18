@@ -90,7 +90,7 @@ const CandidatesUser = props => {
       item.push(data[i].id);
       item.push(data[i].name);
       item.push(data[i].surname);
-      item.push(parseInt(data[i].qualification_point) > 1 ? qualificationPointList[data[i].qualification_point - 1].name : '');
+      item.push(parseInt(data[i].qualification_point) >= 1 ? qualificationPointList[data[i].qualification_point - 1].name : '');
       item.push(stageList[data[i].stage - 1].name);
       let date = new Date(data[i].updated_at);
       item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());

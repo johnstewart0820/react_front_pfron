@@ -39,6 +39,90 @@ class Candidate {
             return error;
         })
     }
+
+    getCandidateInfo = (id) => {
+        return axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/candidate/candidate_info`, {
+            headers: authHeader(storage.getStorage('token')),
+            params: {
+                id: id
+            },
+        })
+        .then(response => {
+            if (response.data.code === 401) {
+                storage.removeStorage('token');
+                storage.removeStorage('role');
+                return response.data;
+            } else if (response.data.code === 200) {
+                return response.data;
+            }
+        }).catch(error => {
+            return error;
+        })
+    }
+    
+
+    getMarker = (qualification_point) => {
+        return axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/candidate/get_marker`, {
+            headers: authHeader(storage.getStorage('token')),
+            params: {
+                qualification_point: qualification_point
+            },
+        })
+        .then(response => {
+            if (response.data.code === 401) {
+                storage.removeStorage('token');
+                storage.removeStorage('role');
+                return response.data;
+            } else if (response.data.code === 200) {
+                return response.data;
+            }
+        }).catch(error => {
+            return error;
+        })
+    }
+
+    updateCandidateInfo = (stage, comment, qualification_point, gender, doctor, psycology, admission, doctor_recommendation,
+    doctor_date, doctor_remark, psycology_recommendation, psycology_date, psycology_remark, decision_central_commision, date_central_commision, general_remark, date_referal,
+    rehabitation_center, participant_number, date_rehabitation_center, type_to_stay, participant_remark, id) => {
+        return axios
+        .put(`${process.env.REACT_APP_BACKEND_URL}/candidate/candidate_info`, {
+            stage: stage,
+            comment: comment,
+            qualification_point: qualification_point,
+            gender: gender,
+            doctor: doctor,
+            psycology: psycology,
+            admission: admission,
+            doctor_recommendation: doctor_recommendation,
+            doctor_date: doctor_date,
+            doctor_remark: doctor_remark,
+            psycology_recommendation: psycology_recommendation,
+            psycology_date: psycology_date,
+            psycology_remark: psycology_remark,
+            decision_central_commision: decision_central_commision,
+            date_central_commision: date_central_commision,
+            general_remark: general_remark,
+            date_referal: date_referal,
+            rehabitation_center: rehabitation_center,
+            participant_number: participant_number,
+            date_rehabitation_center: date_rehabitation_center,
+            type_to_stay: type_to_stay,
+            participant_remark: participant_remark,
+            id: id
+        }, {
+            headers: authHeader(storage.getStorage('token'))
+        })
+        .then(response => {
+            if (response.data.code === 401)
+                storage.removeStorage('token');
+            return response.data;
+        }).catch(error => {
+            return error;
+        })
+    }
+
     create = (name, surname, person_id, date_of_birth, place_of_birth, street, house_number, apartment_number, post_code, post_office, city, 
         second_street, second_house_number, second_apartment_number, second_post_code, second_post_office, second_city,
         voivodeship, community, county, mobile_phone, home_phone, email, family_home_phone, family_mobile_phone,
@@ -211,6 +295,24 @@ class Candidate {
             house_hold_status: house_hold_status,
             house_hold_adult_status: house_hold_adult_status,
             uncomfortable_status: uncomfortable_status,
+            stage: stage,
+            comment: comment,
+            id: id
+        }, {
+            headers: authHeader(storage.getStorage('token'))
+        })
+        .then(response => {
+            if (response.data.code === 401)
+                storage.removeStorage('token');
+            return response.data;
+        }).catch(error => {
+            return error;
+        })
+    }
+
+    updateInfo = (stage, comment, id) => {
+        return axios
+        .put(`${process.env.REACT_APP_BACKEND_URL}/candidate/info`, {
             stage: stage,
             comment: comment,
             id: id

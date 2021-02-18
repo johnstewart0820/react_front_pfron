@@ -216,7 +216,7 @@ const CandidatesEdit = props => {
   }, [employed_type_list]);
 
   const handleGotoInformation = () => {
-
+    history.push(`/candidates/info/${id}`)
   }
 
   const handleError = () => {

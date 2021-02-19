@@ -19,6 +19,7 @@ import {
   MuiPickersUtilsProvider, KeyboardDatePicker
 } from '@material-ui/pickers';
 import { DateTime } from "luxon";
+import { modelName, modelPropertyLabel } from 'utils/modelFormatting';
 
 
 const getNamesFromList = (strIDs, list) => {
@@ -72,105 +73,39 @@ const SortTable = (props) => {
     setSearchDate(null)
   }
 
-  const modelPropertyLabels = (type, property) => {
-    const labels = {
-      'universal': {
-        // id:         'ID',
-        updated_at: 'Data modyfikacji',
-      },
-      'App\\Models\\QualificationPoint': {
-        name:       'Punkt kwalifikacyjny',
-        type:       'Typ',
-        ambassador: 'Przypisani Ambasadorzy',
-      },
-      'App\\Models\\Candidate': {
-        name:               'Imie kandydata',
-        surname:            'Nazwisko kandydata',
-        qualificationPoint: 'Punkt kwalifikacyjny',
-        stage:              'Etap rekutacji',
-      },
-      'App\\Models\\OrkTeam': {
-        name:                'Imię i nazwisko',
-        rehabitation_center: 'ORK',
-        specialization:      'Specjallizacja',
-      },
-      'App\\Models\\Payment': {
-        name:                'Nazwa kosztu',
-        value:               'Wysokość',
-        rehabitation_center: 'Koszt dla ORK',
-        service:             'Usluga',
-      },
-      'App\\Models\\ServiceList': {
-        number: 'Numer',
-        name:   'Nazwa',
-        module: 'Moduł',
-        unit:   'Minimalny zakres usługi',
-      },
-      'App\\Models\\Specialist': {
-        name:                'Imię i nazwisko',
-        qualification_point: 'Punkt kwalifikacyjny',
-        specialty:           'Specjalność',
-      },
-      'App\\Models\\User': {
-        name:            'Nazwa użytkownika (login)',
-        id_role:         'Rola',
-        email:           'E-mail',
-        activate_status: 'Aktywny',
-      },
-      // 'App\\Models\\TTTTTT': {
-      //   xxxxxx: 'yyyyyy',
-      //   xxxxxx: 'yyyyyy',
-      //   xxxxxx: 'yyyyyy',
-      //   xxxxxx: 'yyyyyy',
-      //   xxxxxx: 'yyyyyy',
-      //   xxxxxx: 'yyyyyy',
-      // },
-    }
-    return (labels[type] && labels[type][property]) || labels['universal'][property] || '';
-  }
+	const modelPropertyFormatter = (modelName, property) => {
+		const formatters = {
+			'App\\Models\\QualificationPoint': {
+			type:       value => getNameFromList(value, typeListByID),
+			ambassador: value => getNamesFromList(value, ambassadorListByID),
+			},
+			'App\\Models\\Candidate': {
+			stage:      value => getNameFromList(value, stageListByID),
+			},
+			'App\\Models\\OrkTeam': {
+			rehabitation_center: value => getNameFromList(value, rehabitationCenterListByID),
+			specialization:      value => getNameFromList(value, specializationListByID),
+			},
+			'App\\Models\\Payment': {
+			rehabitation_center: value => getNameFromList(value, rehabitationCenterListByID),
+			service: value => getNameFromList(value, serviceListListByID),
+			},
+			'App\\Models\\Specialist': {
+			qualification_point: value => getNameFromList(value, qualificationPointListByID),
+			specialty:           value => getNameFromList(value, specialtyTypeListByID),
+			},
+			'App\\Models\\User': {
+			role: value => getNameFromList(value, roleListByID),
+			},
+		}
 
-  const modelNames = (type) => {
-    const names = {
-      'App\\Models\\QualificationPoint': 'Qualification point',
-      'App\\Models\\Candidate': 'Cadidate',
-      'App\\Models\\OrkTeam': 'OrkTeam',
-      'App\\Models\\Payment': 'Zdefiniowane koszta usług',
-      'App\\Models\\ServiceList': 'Usługa',
-      'App\\Models\\Specialist': 'Specjalista',
-      'App\\Models\\User': 'Użytkownik',
-    }
-    return names[type] || '';
-  }
-  
-  const modelPropertyFormatting = {
-    'App\\Models\\QualificationPoint': {
-      type:       value => getNameFromList(value, typeListByID),
-      ambassador: value => getNamesFromList(value, ambassadorListByID),
-    },
-    'App\\Models\\Candidate': {
-      stage:      value => getNameFromList(value, stageListByID),
-    },
-    'App\\Models\\OrkTeam': {
-      rehabitation_center: value => getNameFromList(value, rehabitationCenterListByID),
-      specialization:      value => getNameFromList(value, specializationListByID),
-    },
-    'App\\Models\\Payment': {
-      rehabitation_center: value => getNameFromList(value, rehabitationCenterListByID),
-      service: value => getNameFromList(value, serviceListListByID),
-    },
-    'App\\Models\\Specialist': {
-      qualification_point: value => getNameFromList(value, qualificationPointListByID),
-      specialty:           value => getNameFromList(value, specialtyTypeListByID),
-    },
-    'App\\Models\\User': {
-      role: value => getNameFromList(value, roleListByID),
-    },
-
-  }
+		const model = formatters[modelName] || formatters[`App\\Models\\${modelName}`] || null
+		return (model && model[property]) || ((x) => x);
+	}
 
   const formatChange = (type, property, from, to) => {
-    const formatter = (modelPropertyFormatting[type] && modelPropertyFormatting[type][property]) || (x => x);
-    const formattedName = modelPropertyLabels(type, property);
+    const formatter = modelPropertyFormatter(type, property);
+    const formattedName = modelPropertyLabel(type, property);
     const formattedFrom = formatter(from);
     const formattedTo = formatter(to);
     return formattedName ? <div><b>{formattedName}</b>{from !== null ? <> from <u>{formattedFrom}</u> to</> : <>: </>} <u>{formattedTo}</u></div> : null;
@@ -187,7 +122,7 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(0)}
             >
-              ID
+							{modelPropertyLabel('Log', 'id')}
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -196,7 +131,7 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(1)}
             >
-              Użytkownik
+							{modelPropertyLabel('Log', 'user')}
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -205,7 +140,7 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(2)}
             >
-              Rola
+							{modelPropertyLabel('Log', 'role')}
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -214,7 +149,7 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(3)}
             >
-              Data
+							{modelPropertyLabel('Log', 'created_at')}
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -223,7 +158,7 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(4)}
             >
-              Czynność
+							{modelPropertyLabel('Log', 'event')}
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -267,7 +202,7 @@ const SortTable = (props) => {
               <TableCell>{item.role ? item.role.name : ''}</TableCell>
               <TableCell>{DateTime.fromISO(item.created_at).toFormat('dd.MM.yyyy hh:mm')}</TableCell>
               <TableCell>
-                <div>{item.event} {modelNames(item.auditable_type)}</div>
+                <div>{item.event} {modelName(item.auditable_type)}</div>
                 {(item.event === 'updated' || item.event === 'created') && 
                   Object.entries(item.changes).map( ([name, [from, to]]) => formatChange(item.auditable_type, name, from, to) )
                 }

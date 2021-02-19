@@ -11,7 +11,7 @@ class constants {
         '/forgotpassword',
         '/verification',
         '/reset_password'
-    ]
+    ];
 }
 
 export default new constants();

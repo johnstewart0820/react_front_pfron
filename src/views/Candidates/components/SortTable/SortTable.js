@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { SingleSelect } from 'components';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
@@ -113,7 +114,7 @@ const SortTable = (props) => {
             <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchSurname} name="searchId" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
-            <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /> </TableCell>
+            <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /></TableCell>
             <TableCell><SingleSelect value={searchStage} handleChange={setSearchStage} list={stageList} /></TableCell>
             <TableCell>
               <Grid container spacing={2}>
@@ -155,12 +156,19 @@ const SortTable = (props) => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.surname}</TableCell>
-                <TableCell>{qualificationPointList && qualificationPointList.length > 0 && qualificationPointList[item.qualification_point - 1].name}</TableCell>
+                <TableCell>{parseInt(item.qualification_point) >= 1  ?
+                            qualificationPointList && qualificationPointList.length > 0 && qualificationPointList[item.qualification_point - 1].name
+                            :
+                            ''
+                          }</TableCell>
                 <TableCell>{stageList && stageList.length > 0 && stageList[item.stage - 1].name}</TableCell>
                 <TableCell>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
                   <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
                     <EditOutlinedIcon className={classes.icon} />
+                  </IconButton>
+                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`candidates/info/${item.id}`)}>
+                    <InfoOutlinedIcon className={classes.icon} />
                   </IconButton>
                   <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                     <DeleteOutlineOutlinedIcon className={classes.icon} />

@@ -108,7 +108,7 @@ const SortTable = (props) => {
             <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchSurname} name="searchId" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
-            <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /> </TableCell>
+            <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /></TableCell>
             <TableCell><SingleSelect value={searchStage} handleChange={setSearchStage} list={stageList} /></TableCell>
             <TableCell>
               <Grid container spacing={2}>
@@ -149,7 +149,11 @@ const SortTable = (props) => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.surname}</TableCell>
-                <TableCell>{qualificationPointList && qualificationPointList.length > 0 && qualificationPointList[item.qualification_point - 1].name}</TableCell>
+                <TableCell>{parseInt(item.qualification_point) >= 1  ?
+                            qualificationPointList && qualificationPointList.length > 0 && qualificationPointList[item.qualification_point - 1].name
+                            :
+                            ''
+                          }</TableCell>
                 <TableCell>{stageList && stageList.length > 0 && stageList[item.stage - 1].name}</TableCell>
                 <TableCell>{getDateTime(item.updated_at)}</TableCell>
               </TableRow>

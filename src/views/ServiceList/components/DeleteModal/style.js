@@ -48,14 +48,29 @@ const useStyles = makeStyles(theme => ({
         },
         '&:hover': {
             backgroundColor: theme.palette.pink,
-            borderColor: theme.palette.pink,
         },
         padding: '4px',
-        border: '1px solid #a52b02',
         borderRadius: '0px',
         fontWeight: '400',
         backgroundColor: theme.palette.pink,
-        borderColor: theme.palette.pink,
+        color: 'white',
+        width: '100%'
+    },
+    btnClose: {
+        '& .MuiButton-label': {
+            textTransform: 'none',
+            fontSize: '15px',
+        },
+        '& .MuiButton-containedSecondary:hover': {
+
+        },
+        '&:hover': {
+            backgroundColor: theme.palette.gray,
+        },
+        padding: '4px',
+        borderRadius: '0px',
+        fontWeight: '400',
+        backgroundColor: theme.palette.gray,
         color: 'white',
         width: '100%'
     },

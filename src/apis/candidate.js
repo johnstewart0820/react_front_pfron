@@ -39,7 +39,100 @@ class Candidate {
             return error;
         })
     }
-    create = (name, surname, person_id, date_of_birth, place_of_birth, street, house_number, apartment_number, post_code, post_office, city, stage, comment) => {
+
+    getCandidateInfo = (id) => {
+        return axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/candidate/candidate_info`, {
+            headers: authHeader(storage.getStorage('token')),
+            params: {
+                id: id
+            },
+        })
+        .then(response => {
+            if (response.data.code === 401) {
+                storage.removeStorage('token');
+                storage.removeStorage('role');
+                return response.data;
+            } else if (response.data.code === 200) {
+                return response.data;
+            }
+        }).catch(error => {
+            return error;
+        })
+    }
+    
+
+    getMarker = (qualification_point) => {
+        return axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/candidate/get_marker`, {
+            headers: authHeader(storage.getStorage('token')),
+            params: {
+                qualification_point: qualification_point
+            },
+        })
+        .then(response => {
+            if (response.data.code === 401) {
+                storage.removeStorage('token');
+                storage.removeStorage('role');
+                return response.data;
+            } else if (response.data.code === 200) {
+                return response.data;
+            }
+        }).catch(error => {
+            return error;
+        })
+    }
+
+    updateCandidateInfo = (stage, comment, qualification_point, gender, doctor, psycology, admission, doctor_recommendation,
+    doctor_date, doctor_remark, psycology_recommendation, psycology_date, psycology_remark, decision_central_commision, date_central_commision, general_remark, date_referal,
+    rehabitation_center, participant_number, date_rehabitation_center, type_to_stay, participant_remark, id) => {
+        return axios
+        .put(`${process.env.REACT_APP_BACKEND_URL}/candidate/candidate_info`, {
+            stage: stage,
+            comment: comment,
+            qualification_point: qualification_point,
+            gender: gender,
+            doctor: doctor,
+            psycology: psycology,
+            admission: admission,
+            doctor_recommendation: doctor_recommendation,
+            doctor_date: doctor_date,
+            doctor_remark: doctor_remark,
+            psycology_recommendation: psycology_recommendation,
+            psycology_date: psycology_date,
+            psycology_remark: psycology_remark,
+            decision_central_commision: decision_central_commision,
+            date_central_commision: date_central_commision,
+            general_remark: general_remark,
+            date_referal: date_referal,
+            rehabitation_center: rehabitation_center,
+            participant_number: participant_number,
+            date_rehabitation_center: date_rehabitation_center,
+            type_to_stay: type_to_stay,
+            participant_remark: participant_remark,
+            id: id
+        }, {
+            headers: authHeader(storage.getStorage('token'))
+        })
+        .then(response => {
+            if (response.data.code === 401)
+                storage.removeStorage('token');
+            return response.data;
+        }).catch(error => {
+            return error;
+        })
+    }
+
+    create = (name, surname, person_id, date_of_birth, place_of_birth, street, house_number, apartment_number, post_code, post_office, city, 
+        second_street, second_house_number, second_apartment_number, second_post_code, second_post_office, second_city,
+        voivodeship, community, county, mobile_phone, home_phone, email, family_home_phone, family_mobile_phone,
+        education, academic_title, stay_status, children_applicable, children_amount, children_age,
+        employed_status, employed_type, employed_in, occupation, unemployed_status,
+        have_unemployed_person_status, unemployed_person_id, long_term_employed_status, seek_work_status,
+        passive_person_status, full_time_status, evening_student_status, disabled_person_status,
+        number_certificate, date_of_certificate, level_certificate, code_certificate, necessary_certificate,
+        ethnic_minority_status, homeless_person_status, stay_house_status, house_hold_status, house_hold_adult_status, uncomfortable_status,
+        stage, comment) => {
         return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/candidate`, {
             name: name,
@@ -53,6 +146,50 @@ class Candidate {
             post_code: post_code,
             post_office: post_office,
             city: city,
+            second_street: second_street,
+            second_house_number: second_house_number,
+            second_apartment_number: second_apartment_number,
+            second_post_code: second_post_code,
+            second_post_office: second_post_office,
+            second_city: second_city,
+            voivodeship: voivodeship,
+            community: community,
+            county: county,
+            mobile_phone: mobile_phone,
+            home_phone: home_phone,
+            email: email,
+            family_home_phone: family_home_phone,
+            family_mobile_phone: family_mobile_phone,
+            education: education,
+            academic_title: academic_title,
+            stay_status: stay_status,
+            children_applicable: children_applicable,
+            children_amount: children_amount,
+            children_age: children_age,
+            employed_status: employed_status,
+            employed_type: employed_type,
+            employed_in: employed_in,
+            occupation: occupation,
+            unemployed_status: unemployed_status,
+            have_unemployed_person_status: have_unemployed_person_status,
+            unemployed_person_id: unemployed_person_id,
+            long_term_employed_status: long_term_employed_status,
+            seek_work_status: seek_work_status,
+            passive_person_status: passive_person_status,
+            full_time_status: full_time_status,
+            evening_student_status: evening_student_status,
+            disabled_person_status: disabled_person_status,
+            number_certificate: number_certificate,
+            date_of_certificate: date_of_certificate,
+            level_certificate: level_certificate,
+            code_certificate: code_certificate,
+            necessary_certificate: necessary_certificate,
+            ethnic_minority_status: ethnic_minority_status,
+            homeless_person_status: homeless_person_status,
+            stay_house_status: stay_house_status,
+            house_hold_status: house_hold_status,
+            house_hold_adult_status: house_hold_adult_status,
+            uncomfortable_status: uncomfortable_status,
             stage: stage,
             comment: comment
         }, {
@@ -91,7 +228,16 @@ class Candidate {
         })
     }
 
-    update = (name, surname, person_id, date_of_birth, place_of_birth, street, house_number, apartment_number, post_code, post_office, city, stage, comment, id) => {
+    update = (name, surname, person_id, date_of_birth, place_of_birth, street, house_number, apartment_number, post_code, post_office, city, 
+        second_street, second_house_number, second_apartment_number, second_post_code, second_post_office, second_city,
+        voivodeship, community, county, mobile_phone, home_phone, email, family_home_phone, family_mobile_phone,
+        education, academic_title, stay_status, children_applicable, children_amount, children_age,
+        employed_status, employed_type, employed_in, occupation, unemployed_status,
+        have_unemployed_person_status, unemployed_person_id, long_term_employed_status, seek_work_status,
+        passive_person_status, full_time_status, evening_student_status, disabled_person_status,
+        number_certificate, date_of_certificate, level_certificate, code_certificate, necessary_certificate,
+        ethnic_minority_status, homeless_person_status, stay_house_status, house_hold_status, house_hold_adult_status, uncomfortable_status,
+        stage, comment, id) => {
         return axios
         .put(`${process.env.REACT_APP_BACKEND_URL}/candidate`, {
             name: name,
@@ -105,6 +251,68 @@ class Candidate {
             post_code: post_code,
             post_office: post_office,
             city: city,
+            second_street: second_street,
+            second_house_number: second_house_number,
+            second_apartment_number: second_apartment_number,
+            second_post_code: second_post_code,
+            second_post_office: second_post_office,
+            second_city: second_city,
+            voivodeship: voivodeship,
+            community: community,
+            county: county,
+            mobile_phone: mobile_phone,
+            home_phone: home_phone,
+            email: email,
+            family_home_phone: family_home_phone,
+            family_mobile_phone: family_mobile_phone,
+            education: education,
+            academic_title: academic_title,
+            stay_status: stay_status,
+            children_applicable: children_applicable,
+            children_amount: children_amount,
+            children_age: children_age,
+            employed_status: employed_status,
+            employed_type: employed_type,
+            employed_in: employed_in,
+            occupation: occupation,
+            unemployed_status: unemployed_status,
+            have_unemployed_person_status: have_unemployed_person_status,
+            unemployed_person_id: unemployed_person_id,
+            long_term_employed_status: long_term_employed_status,
+            seek_work_status: seek_work_status,
+            passive_person_status: passive_person_status,
+            full_time_status: full_time_status,
+            evening_student_status: evening_student_status,
+            disabled_person_status: disabled_person_status,
+            number_certificate: number_certificate,
+            date_of_certificate: date_of_certificate,
+            level_certificate: level_certificate,
+            code_certificate: code_certificate,
+            necessary_certificate: necessary_certificate,
+            ethnic_minority_status: ethnic_minority_status,
+            homeless_person_status: homeless_person_status,
+            stay_house_status: stay_house_status,
+            house_hold_status: house_hold_status,
+            house_hold_adult_status: house_hold_adult_status,
+            uncomfortable_status: uncomfortable_status,
+            stage: stage,
+            comment: comment,
+            id: id
+        }, {
+            headers: authHeader(storage.getStorage('token'))
+        })
+        .then(response => {
+            if (response.data.code === 401)
+                storage.removeStorage('token');
+            return response.data;
+        }).catch(error => {
+            return error;
+        })
+    }
+
+    updateInfo = (stage, comment, id) => {
+        return axios
+        .put(`${process.env.REACT_APP_BACKEND_URL}/candidate/info`, {
             stage: stage,
             comment: comment,
             id: id

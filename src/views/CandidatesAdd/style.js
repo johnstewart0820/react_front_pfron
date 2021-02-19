@@ -15,9 +15,16 @@ const useStyles = makeStyles((theme) => ({
     form_title: {
       fontWeight: '500'
     },
+    form_title_small: {
+      fontWeight: '400',
+      fontSize: '12px'
+    },
     textArea: {
       width: '100%',
       padding: theme.spacing(2)
+    },
+    error: {
+      border: '0.5px solid red'
     },
     btnSave: {
       '& .MuiButton-label': {
@@ -51,6 +58,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#727e91',
       borderColor: '#727e91',
       color: 'white',
+      width: '100%'
+    },
+    phone: {
       width: '100%'
     },
     date_picker: {

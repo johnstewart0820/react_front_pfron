@@ -10,6 +10,7 @@ import {
   CandidatesUser as CandidatesUserView,
   CandidatesAdd as CandidatesAddView,
   CandidatesEdit as CandidatesEditView,
+  CandidatesInfo as CandidatesInfoView,
   QualificationPoints as QualificationPointsView,
   QualificationPointsUser as QualificationPointsUserView,
   QualificationPointsAdd as QualificationPointsAddView,
@@ -80,6 +81,13 @@ const Routes = (props) => {
         layout={MainLayout}
         title='Kandydaci'
         path="/candidates/edit/:id"
+      />
+      <RouteWithLayout
+        component={CandidatesInfoView}
+        exact
+        layout={MainLayout}
+        title='Karta informacyjna kandydata'
+        path="/candidates/info/:id"
       />
       <RouteWithLayout
         component={props.role === 1 ? QualificationPointsView : QualificationPointsUserView}

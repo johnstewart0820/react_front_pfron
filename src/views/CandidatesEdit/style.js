@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
       color: 'white',
       width: '100%'
     },
+    error: {
+      border: '0.5px solid red',
+    },
     btnOption: {
       '& .MuiButton-label': {
         textTransform: 'none',

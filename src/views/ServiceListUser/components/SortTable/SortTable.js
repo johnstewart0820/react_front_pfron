@@ -93,7 +93,7 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(4)}
             >
-              Minimalny zakres usługi
+              Jednostka
             </TableSortLabel>
           </TableCell>
         </TableRow>

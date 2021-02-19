@@ -11,25 +11,55 @@ const useStyles = makeStyles((theme) => ({
     form: {
       padding: theme.spacing(3),
       fontFamily: 'roboto',
+      color: '#263238',
+      marginTop: theme.spacing(0)
     },
     form_title: {
       fontWeight: '500'
     },
+    textArea: {
+      width: '100%',
+      padding: theme.spacing(2)
+    },
     btnSave: {
-        '& .MuiButton-label': {
-          textTransform: 'none',
-          fontSize: '14px',
-        },
-        '&:hover': {
-          backgroundColor: 'darkgray',
-          borderColor: 'darkgray',
-        },
-        borderRadius: '0px',
-        fontWeight: '300',
+      '& .MuiButton-label': {
+        textTransform: 'none',
+        fontSize: '14px',
+      },
+      '&:hover': {
         backgroundColor: 'darkgray',
         borderColor: 'darkgray',
-        color: 'white',
-        width: '100%'
+      },
+      marginTop: theme.spacing(3),
+      borderRadius: '0px',
+      fontWeight: '300',
+      backgroundColor: 'darkgray',
+      borderColor: 'darkgray',
+      color: 'white',
+      width: '100%'
+    },
+    error: {
+      border: '0.5px solid red',
+    },
+    btnOption: {
+      '& .MuiButton-label': {
+        textTransform: 'none',
+        fontSize: '14px',
+      },
+      '&:hover': {
+        backgroundColor: '#727e91',
+        borderColor: '#727e91',
+      },
+      marginTop: theme.spacing(3),
+      borderRadius: '0px',
+      fontWeight: '300',
+      backgroundColor: '#727e91',
+      borderColor: '#727e91',
+      color: 'white',
+      width: '100%'
+    },
+    date_picker: {
+      marginTop: theme.spacing(1),
     },
     btnBack: {
         '& .MuiButton-label': {
@@ -53,25 +83,24 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         margin: theme.spacing(2.5, 0,)
     },
-    error: {
-      border: '1px solid red'
-    },
     top_label: {
-      marginBottom: theme.spacing(1),
-      fontSize: '14px',      
+        fontWeight: '500',
+        fontSize: '14px',
+    },
+    top_label_content: {
+        fontSize: '14px',
+    },
+    label_content: {
+        fontSize: '14px',
+        marginBottom: theme.spacing(1)
     },
     input_box_label: {
-      marginTop: theme.spacing(0),
+      marginTop: theme.spacing(2),
       marginBottom: theme.spacing(1),
       fontSize: '14px',
     },
     input_box: {
       padding: '10px 20px',
-      width: '100%',
-      fontSize: '14px'
-    },
-    label: {
-      marginTop: theme.spacing(2),
       width: '100%',
       fontSize: '14px'
     },
@@ -105,14 +134,6 @@ const useStyles = makeStyles((theme) => ({
     },
     progress: {
       color: theme.palette.pink
-    },
-    rememberMe: {
-      '& .MuiTypography-body1': {
-        color: theme.palette.gray,
-      },
-      '& .MuiCheckbox-colorSecondary.Mui-checked' : {
-        color: theme.palette.color
-      },
     },
 }));
 

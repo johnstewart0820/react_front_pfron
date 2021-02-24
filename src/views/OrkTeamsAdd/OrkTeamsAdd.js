@@ -56,7 +56,6 @@ const OrkTeamsAdd = props => {
   }
 
   const handleChangeRehabitationCenter = (value) => {
-    console.log(value);
     setRehabitationCenter(value);
     let _error = JSON.parse(JSON.stringify(error));
     _error.rehabitationCenter = (value.length === 0);

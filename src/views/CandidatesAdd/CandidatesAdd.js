@@ -53,37 +53,37 @@ const CandidatesAdd = props => {
   const [family_mobile_phone, setFamilyMobilePhone] = useState('');
   const [family_home_phone, setFamilyHomePhone] = useState('');
   const [educationList, setEducationList] = useState([]);
-  const [education, setEducation] = useState(1);
+  const [education, setEducation] = useState(0);
   const [academic_title, setAcademicTitle] = useState('');
-  const [stay_status, setStayStatus] = useState(2);
+  const [stay_status, setStayStatus] = useState(0);
   const [children_applicable, setChildrenApplicable] = useState(false);
   const [children_amount, setChildrenAmount] = useState('0');
   const [children_age, setChildrenAge] = useState('');
-  const [employed_status, setEmployedStatus] = useState(2);
+  const [employed_status, setEmployedStatus] = useState(0);
   const [employed_type, setEmployedType] = useState([false, false, false, false, false]);
   const [employed_type_list, setEmployedTypeList] = useState([]);
   const [employed_in, setEmployedIn] = useState('');
   const [occupation, setOccupation] = useState('');
-  const [unemployed_status, setUnemployedStatus] = useState(2);
-  const [have_unemployed_person_status, setHaveUnemployedPersonStatus] = useState(2);
+  const [unemployed_status, setUnemployedStatus] = useState(0);
+  const [have_unemployed_person_status, setHaveUnemployedPersonStatus] = useState(0);
   const [unemployed_person_id, setUnemployedPersonId] = useState('');
-  const [long_term_employed_status, setLongTermEmployedStatus] = useState(2);
-  const [seek_work_status, setSeekWorkStatus] = useState(2);
-  const [passive_person_status, setPassivePersonStatus] = useState(2);
-  const [full_time_status, setFullTimeStatus] = useState(2);
-  const [evening_student_status, setEveningStudentStatus] = useState(2);
-  const [disabled_person_status, setDisabledPersonStatus] = useState(2);
+  const [long_term_employed_status, setLongTermEmployedStatus] = useState(0);
+  const [seek_work_status, setSeekWorkStatus] = useState(0);
+  const [passive_person_status, setPassivePersonStatus] = useState(0);
+  const [full_time_status, setFullTimeStatus] = useState(0);
+  const [evening_student_status, setEveningStudentStatus] = useState(0);
+  const [disabled_person_status, setDisabledPersonStatus] = useState(0);
   const [number_certificate, setNumberCertificate] = useState('0');
   const [date_of_certificate, setDateOfCertificate] = useState(new Date());
   const [level_certificate, setLevelCertificate] = useState('');
   const [code_certificate, setCodeCertificate] = useState('');
   const [necessary_certificate, setNecessaryCertificate] = useState('');
-  const [ethnic_minority_status, setEthnicMinorityStatus] = useState(2);
-  const [homeless_person_status, setHomelessPersonStatus] = useState(2);
-  const [stay_house_status, setStayHouseStatus] = useState(2);
-  const [house_hold_status, setHouseHoldStatus] = useState(2);
-  const [house_hold_adult_status, setHouseHoldAdultStatus] = useState(2);
-  const [uncomfortable_status, setUncomfortableStatus] = useState(2);
+  const [ethnic_minority_status, setEthnicMinorityStatus] = useState(0);
+  const [homeless_person_status, setHomelessPersonStatus] = useState(0);
+  const [stay_house_status, setStayHouseStatus] = useState(0);
+  const [house_hold_status, setHouseHoldStatus] = useState(0);
+  const [house_hold_adult_status, setHouseHoldAdultStatus] = useState(0);
+  const [uncomfortable_status, setUncomfortableStatus] = useState(0);
   const [progressStatus, setProgressStatus] = useState(false);
   const [error, setError] = useState({});
 
@@ -119,7 +119,6 @@ const CandidatesAdd = props => {
     _error.place_of_birth = (place_of_birth.length === 0);
     _error.street = (street.length === 0);
     _error.house_number = (house_number.length === 0);
-    _error.apartment_number = (apartment_number.length === 0);
     _error.post_code = (post_code.length === 0);
     _error.post_office = (post_office.length === 0);
     _error.city = (city.length === 0);
@@ -129,7 +128,7 @@ const CandidatesAdd = props => {
     _error.comment = (comment.length === 0);
     _error.mobile_phone = (mobile_phone.length === 0);
     _error.home_phone = (home_phone.length === 0);
-    _error.email = (!pattern.test(email));
+    _error.email = (email.length != 0 && !pattern.test(email));
     _error.family_home_phone = (family_home_phone.length === 0);
     _error.family_mobile_phone = (family_mobile_phone.length === 0);
     _error.education = (parseInt(education) === 0);
@@ -192,7 +191,6 @@ const CandidatesAdd = props => {
     (place_of_birth.length === 0) ||
     (street.length === 0) ||
     (house_number.length === 0) ||
-    (apartment_number.length === 0) ||
     (post_code.length === 0) ||
     (post_office.length === 0) ||
     (city.length === 0) ||
@@ -202,7 +200,7 @@ const CandidatesAdd = props => {
     (comment.length === 0) ||
     (mobile_phone.length === 0) ||
      (home_phone.length === 0) ||
-    (!pattern.test(email)) ||
+    (email.length != 0 && !pattern.test(email)) ||
     (family_home_phone.length === 0) ||
     (family_mobile_phone.length === 0) ||
     (parseInt(education) === 0) ||
@@ -354,9 +352,6 @@ const CandidatesAdd = props => {
 
   const handleChangeApartmentNumber = (value) => {
     setApartmentNumber(value);
-    let _error = JSON.parse(JSON.stringify(error));
-    _error.apartment_number = (value.length === 0);
-    setError(_error);
   }
 
   const handleChangePostCode = (value) => {
@@ -412,7 +407,7 @@ const CandidatesAdd = props => {
     var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     setEmail(value);
     let _error = JSON.parse(JSON.stringify(error));
-    _error.email = (!pattern.test(value));
+    _error.email = (value.length != 0 && !pattern.test(value));
     setError(_error);
   }
 
@@ -461,18 +456,21 @@ const CandidatesAdd = props => {
     if (parseInt(e.target.value) !== 1) {
       _error.employed_in = false;
       _error.occupation = false;
+	  _error.employed_status = false;
       setEmployedIn('');
       setOccupation('');
       setError(_error);
-    }
+    } else {
+		_error.employed_status = false;
+		setError(_error);
+	}
   }
 
   const handleChangeEmployedType = (index, e) => {
-    console.log(employed_type);
     let _type = JSON.parse(JSON.stringify(employed_type));
     _type[index] = !_type[index];
     setEmployedType(_type);
-    console.log(_type);
+
   } 
 
   const handleChangeEmplotedIn = (value) => {
@@ -679,12 +677,15 @@ const CandidatesAdd = props => {
               <Grid item xs={9}>
                 <div className={classes.top_label} htmlFor="name">Imię(Imiona)</div>
                 <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
+				<div className={classes.error_label} style={{display: error.name ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
                 <div className={classes.input_box_label} htmlFor="name">Nazwisko</div>
                 <input className={clsx({[classes.input_box] : true, [classes.error] : error.surname})} type="name" value={surname} name="name" onChange={(e) => handleChangeSurName(e.target.value)} />
+				<div className={classes.error_label} style={{display: error.surname ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <div className={classes.input_box_label} htmlFor="name">PESEL</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.person_id})} type="name" value={person_id} name="name" onChange={(e) => handleChangePersonId(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.person_id ? 'block' : 'none' }}>Wpisz poprawny PESEL(ex: 83102570819).</div>
                   </Grid>
                   <Grid item xs={6}>
                     <div className={classes.input_box_label} htmlFor="name">Data urodzenia</div>
@@ -705,6 +706,7 @@ const CandidatesAdd = props => {
                 </Grid>
                 <div className={classes.input_box_label} htmlFor="type">Miejsce urodzenia</div>
                 <input className={clsx({[classes.input_box] : true, [classes.error] : error.place_of_birth})} type="name" value={place_of_birth} name="name" onChange={(e) => handleChangePlaceOfBirth(e.target.value)} />
+				<div className={classes.error_label} style={{display: error.place_of_birth ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
               </Grid>
             </Grid>
             <div className={classes.divide}/>
@@ -717,36 +719,44 @@ const CandidatesAdd = props => {
                   <Grid item xs={6}>
                     <div className={classes.top_label} htmlFor="name">Ulica</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.street})} type="name" value={street} name="name" onChange={(e) => handleChangeStreet(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.street ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
                   </Grid>
                   <Grid item xs={3}>
                     <div className={classes.top_label} htmlFor="name">nr domu</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.house_number})} type="name" value={house_number} name="name" onChange={(e) => handleChangeHouseNumber(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.house_number ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
                   </Grid>
                   <Grid item xs={3}>
                     <div className={classes.top_label} htmlFor="name">mieszkanie</div>
-                    <input className={clsx({[classes.input_box] : true, [classes.error] : error.apartment_number})} type="name" value={apartment_number} name="name" onChange={(e) => handleChangeApartmentNumber(e.target.value)} />
+                    <input className={classes.input_box} type="name" value={apartment_number} name="name" onChange={(e) => handleChangeApartmentNumber(e.target.value)} />
                   </Grid>
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={3}>
                     <div className={classes.input_box_label} htmlFor="name">Kod pocztowy</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.post_code})} type="name" value={post_code} name="name" onChange={(e) => handleChangePostCode(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.post_code ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
                   </Grid>
                   <Grid item xs={5}>
                     <div className={classes.input_box_label} htmlFor="name">Poczta</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.post_office})} type="name" value={post_office} name="name" onChange={(e) => handleChangePostOffice(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.post_office ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
                   </Grid>
                   <Grid item xs={4}>
                     <div className={classes.input_box_label} htmlFor="name">Miejscowość</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.city})} type="name" value={city} name="name" onChange={(e) => handleChangeCity(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.city ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
                   </Grid>
                 </Grid>
                 <div className={classes.input_box_label} htmlFor="type">Województwo</div>
                 <SingleSelect value={voivodeship} handleChange={(value) => handleChangeVoivodeship(value)} list={voivodeshipList} error={error.voivodeship}/>
+				<div className={classes.error_label} style={{display: error.voivodeship ? 'block' : 'none' }}>Wybierz prowincję.</div>
                 <div className={classes.input_box_label} htmlFor="type">Powiat</div>
                 <SingleSelect value={county} handleChange={(value) => handleChangeCounty(value)} list={countyList} error={error.county}/>
+				<div className={classes.error_label} style={{display: error.county ? 'block' : 'none' }}>Wybierz województwo.</div>
                 <div className={classes.input_box_label} htmlFor="type">Gmina</div>
                 <SingleSelect value={community} handleChange={(value) => handleChangeCommunity(value)} list={communityList} error={error.community}/>
+				<div className={classes.error_label} style={{display: error.surname ? 'block' : 'none' }}>Wybierz społeczność.</div>
               </Grid>
             </Grid>
             <div className={classes.divide}/>
@@ -757,14 +767,19 @@ const CandidatesAdd = props => {
               <Grid item xs={9}>
                 <div className={classes.input_box_label} htmlFor="type">Telefon komórkowy</div>
                 <PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputStyle={{width: '100%', borderRadius: '0px'}}/>
+				<div className={classes.error_label} style={{display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
                 <div className={classes.input_box_label} htmlFor="type">Telefon domowy</div>
                 <PhoneInput country="pl" value={home_phone} onChange={handleChangeHomePhone} inputStyle={{width: '100%', borderRadius: '0px'}}/>
+				<div className={classes.error_label} style={{display: error.home_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
                 <div className={classes.input_box_label} htmlFor="name">Adres e-mail</div>
                 <input className={clsx({[classes.input_box] : true, [classes.error] : error.email})} type="name" value={email} name="name" onChange={(e) => handleChangeEmail(e.target.value)} />
+				<div className={classes.error_label} style={{display: error.email ? 'block' : 'none' }}>Wpisz poprawny adres e-mail.</div>
                 <div className={classes.input_box_label} htmlFor="type">Numer kontaktowy do bliskiej osoby - Telefon komórkowy</div>
                 <PhoneInput country="pl" value={family_mobile_phone} onChange={handleChangeFamilyMobilePhone} inputStyle={{width: '100%', borderRadius: '0px'}}/>
+				<div className={classes.error_label} style={{display: error.family_mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
                 <div className={classes.input_box_label} htmlFor="type">Numer kontaktowy do bliskiej osoby - Telefon domowy</div>
                 <PhoneInput country="pl" value={family_home_phone} onChange={handleChangeFamilyHomePhone} inputStyle={{width: '100%', borderRadius: '0px'}}/> 
+				<div className={classes.error_label} style={{display: error.family_home_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
               </Grid>
             </Grid>
             <div className={classes.divide}/>
@@ -830,12 +845,13 @@ const CandidatesAdd = props => {
                     <Grid item xs={11}>
                       <div className={classes.input_box_label} htmlFor="name">Tytuł naukowy</div>
                       <input className={clsx({[classes.input_box] : true, [classes.error] : error.academic_title})} type="name" value={academic_title} name="name" onChange={(e) => handleChangeAcademicTitle(e.target.value)} />
+					  <div className={classes.error_label} style={{display: error.academic_title ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
                     </Grid>
                   </Grid>
                   :
                   <></>
                 }
-                
+                <div className={classes.error_label} style={{display: error.education ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
               </Grid>
             </Grid>
             <div className={classes.divide}/>
@@ -851,6 +867,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.stay_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div>
                   <FormControl component="fieldset">
                     <FormControlLabel
@@ -871,10 +888,12 @@ const CandidatesAdd = props => {
                     <Grid item xs={5}>
                       <div className={classes.input_box_label} htmlFor="name">Liczba dzieci</div>
                       <input className={clsx({[classes.input_box] : true, [classes.error] : error.children_amount})} type="name" value={children_amount} name="name" onChange={(e) => handleChangeChildrenAmount(e.target.value)} />
+					  <div className={classes.error_label} style={{display: error.children_amount ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                     </Grid>
                     <Grid item xs={6}>
                       <div className={classes.input_box_label} htmlFor="name">Wiek</div>
                       <input className={clsx({[classes.input_box] : true, [classes.error] : error.children_age})} type="name" value={children_age} name="name" onChange={(e) => handleChangeChildrenAge(e.target.value)} />
+					  <div className={classes.error_label} style={{display: error.children_age ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                     </Grid>
                   </Grid>
                   :
@@ -901,6 +920,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.employed_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 {
                   employed_status === 1 ?
                   <div>
@@ -922,8 +942,10 @@ const CandidatesAdd = props => {
                     </FormControl>
                     <div className={classes.input_box_label} htmlFor="name">Jestem zatrudniony w</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.employed_in})} type="name" value={employed_in} name="name" onChange={(e) => handleChangeEmplotedIn(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.employed_in ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                     <div className={classes.input_box_label} htmlFor="name">Wykonywany zawód</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.occupation})} type="name" value={occupation} name="name" onChange={(e) => handleChangeOccupation(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.occupation ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                   </div>
                   :
                   <></>
@@ -935,7 +957,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
-
+				<div className={classes.error_label} style={{display: error.unemployed_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Jestem zarejestrowany/a w PUP i posiadam status osoby bezrobotnej</div>
                 <FormControl component="fieldset" error={error.have_unemployed_person_status}>
                   <RadioGroup aria-label="gender" name="have_unemployed_person_status" value={have_unemployed_person_status} onChange={handleChangeHaveUnemployedPersonStatus} row>
@@ -943,11 +965,13 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.have_unemployed_person_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 {
                   have_unemployed_person_status === 1 ?
                   <>
                     <div className={classes.input_box_label} htmlFor="name">Numer statusu osoby bezrobotnej</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.unemployed_person_id})} type="name" value={unemployed_person_id} name="name" onChange={(e) => handleChangeUnemployedPersonId(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.have_unemployed_person_status ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                   </>
                   :
                   <></>
@@ -960,6 +984,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.long_term_employed_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Jestem zarejestrowany/a w PUP jako osoba poszukująca pracy</div>
                 <FormControl component="fieldset" error={error.seek_work_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={seek_work_status} onChange={handleChangeSeekWorkStatus} row>
@@ -967,6 +992,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.seek_work_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Jestem osoba bierną zawodowo</div>
                 <FormControl component="fieldset" error={error.passive_person_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={passive_person_status} onChange={handleChangePassivePersonStatus} row>
@@ -974,6 +1000,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.passive_person_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Jestem uczniem/studentem uczacym sie w systemie dziennym</div>
                 <FormControl component="fieldset" error={error.full_time_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={full_time_status} onChange={handleChangeFullTimeStatus} row>
@@ -981,6 +1008,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.full_time_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Jestem osobą ksztalcąca sie w systemie wieczorowym/pozaszkolnym</div>
                 <FormControl component="fieldset" error={error.evening_student_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={evening_student_status} onChange={handleChangeEveningStudentStatus} row>
@@ -988,6 +1016,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.evening_student_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Jestem osobą niepelnosprawną i posiadam orzeczenie</div>
                 <FormControl component="fieldset" error={error.disabled_person_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={disabled_person_status} onChange={handleChangeDisabledPersonStatus} row>
@@ -995,12 +1024,14 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={2} control={<Radio />} label="Nie" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.disabled_person_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 {
                   disabled_person_status === 1 ?
                   <Grid container spacing={1}>
                     <Grid item xs={8}>
                       <div className={classes.input_box_label} htmlFor="name">Numer orzeczenia o niepełnosprawności</div>
                       <input className={clsx({[classes.input_box] : true, [classes.error] : error.number_certificate})} type="name" value={number_certificate} name="name" onChange={(e) => handleChangeNumberCertificate(e.target.value)} />
+					  <div className={classes.error_label} style={{display: error.number_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                     </Grid>
                     <Grid item xs={4}>
                       <div className={classes.input_box_label} htmlFor="name">Data waźności</div>
@@ -1021,13 +1052,16 @@ const CandidatesAdd = props => {
                     <Grid item xs={8}>
                       <div className={classes.input_box_label} htmlFor="name">Stopien niepełnosprawności</div>
                       <input className={clsx({[classes.input_box] : true, [classes.error] : error.level_certificate})} type="name" value={level_certificate} name="name" onChange={(e) => handleChangeLevelCertificate(e.target.value)} />
+					  <div className={classes.error_label} style={{display: error.level_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                     </Grid>
                     <Grid item xs={4}>
                       <div className={classes.input_box_label} htmlFor="name">Kod orzeczenia</div>
                       <input className={clsx({[classes.input_box] : true, [classes.error] : error.code_certificate})} type="name" value={code_certificate} name="name" onChange={(e) => handleChangeCodeCertificate(e.target.value)} />
+					  <div className={classes.error_label} style={{display: error.code_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                     </Grid>
                     <div className={classes.input_box_label} htmlFor="name">Konieczne wymagania zwiazane z niepelnospawnoscia (np. pomoc asystenia, tlumacza migowego)</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.necessary_certificate})} type="name" value={necessary_certificate} name="name" onChange={(e) => handleChangeNecessaryCertificate(e.target.value)} />
+					<div className={classes.error_label} style={{display: error.necessary_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
                   </Grid>
                   :
                   <></>
@@ -1048,6 +1082,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.ethnic_minority_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Osoba bezdomna lub dotknieta wykluczeniem z dostepu do mieszkan</div>
                 <FormControl component="fieldset" error={error.homeless_person_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={homeless_person_status} onChange={handleChangeHomelessPersonStatus} row>
@@ -1056,6 +1091,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.homeless_person_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Osoba przebywajaca w gospodarstwie domowym bez osob pracujacych</div>
                 <FormControl component="fieldset" error={error.stay_house_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={stay_house_status} onChange={handleChangeStayHouseStatus} row>
@@ -1064,6 +1100,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.stay_house_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">w tym: w gospodarstwie domowym z dziecmi pozaszkolnym na utrzymaniu</div>
                 <FormControl component="fieldset" error={error.house_hold_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={house_hold_status} onChange={handleChangeHouseHoldStatus} row>
@@ -1072,6 +1109,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.house_hold_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Osoba zyjaca w gospodarstwie skladajacym sie z jednej osoby doroslej i dzieci pozostajacych na utrzymaniu</div>
                 <FormControl component="fieldset" error={error.house_hold_adult_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={house_hold_adult_status} onChange={handleChangeHouseHoldAdultStatus} row>
@@ -1080,6 +1118,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.house_hold_adult_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
                 <div className={classes.input_box_label} htmlFor="name">Osoba w innej niekorzystnej sytuacji spolecznej</div>
                 <FormControl component="fieldset" error={error.uncomfortable_status}>
                   <RadioGroup aria-label="gender" name="unemployed_status" value={uncomfortable_status} onChange={handleChangeUncomfortableStatus} row>
@@ -1088,6 +1127,7 @@ const CandidatesAdd = props => {
                     <FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
                   </RadioGroup>
                 </FormControl>
+				<div className={classes.error_label} style={{display: error.uncomfortable_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
               </Grid>
             </Grid>
           </Card>

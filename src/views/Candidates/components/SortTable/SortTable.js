@@ -56,7 +56,6 @@ const SortTable = (props) => {
 	return '';
   }
   const goCandidateStep = (id, id_stage) => {
-	  console.log(`/candidates/info/step${id_stage}/${id}`);
 	history.push(`/candidates/info/step${id_stage}/${id}`)
   }
 

@@ -40,7 +40,6 @@ const ResetPassword = props => {
         .reset_password(input.password, token)
         .then(response => {
           if (response.code === 200) {
-            console.log(response);
             setProgressStatus(false);
             addToast(response.message, { appearance: 'success', autoDismissTimeout: 1000, autoDismiss: true })
             setTimeout(function () { history.push('/login') }, 1000);

@@ -121,7 +121,6 @@ const CandidatesFourthStep = props => {
       handleError();
     } else {
       setProgressStatus(true);
-	  console.log(rehabitation_center);
 	  if (parseInt(rehabitation_center) == 0 || isNaN(rehabitation_center))
 		candidate.updateCandidateStep4(
 			comment, false, date_referal,

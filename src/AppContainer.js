@@ -3,65 +3,60 @@ import { withRouter } from "react-router";
 import auth from './apis/auth';
 import constants from './utils/constants';
 
-// A simple component that shows the pathname of the current location
 class AppContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {role: 0};
-  }
+	constructor(props) {
+		super(props);
+		this.state = { role: 0 };
+	}
 
-  componentDidMount() {
-    // this.setState({flag: false});
-    for (let i = 0; i < constants.unauthenticated_url.length; i ++) {
-      if (constants.unauthenticated_url[i] === this.props.location.pathname) {
-          this.setState({role: 1});
-          return;
-      }
-    }
-    auth
-    .validateToken()
-    .then(response => {
-      if (response.code !== 401) {
-        this.setState({role: response.role}) 
-      }
-      else {
-        this.setState({role: 0})
-        this.props.history.push('/login');
-      }
-    })
-  }
+	checkValidity() {
+		if (constants.unauthenticated_url.indexOf(this.props.location.pathname) !== -1) {
+			this.setState({ role: 1 });
+		} else {
+			auth
+				.validateToken()
+				.then(response => {
+					if (response.code !== 401) {
+						let index = response.role;
+						let count = 0;
+						constants.authenticated_url[index - 1].map((item, index) => {
+							if (item.endsWith('*')) {
+								let arr = this.props.location.pathname.split('/');
+								arr.pop();
+								let str = arr.join('/');
+								if (str === item.split('/*')[0])
+									count ++;
+							}
+							if (this.props.location.pathname === item) {
+								count ++;
+							}
+						})
+						if (count != 0)
+							this.setState({ role: response.role });
+						else {
+							this.setState({ role: 0});
+							this.props.history.push('/login');
+						}
+					}
+					else {
+						this.setState({ role: 0 })
+						this.props.history.push('/login');
+					}
+				})
+		}
+	}
+
+	componentDidMount() {
+		this.checkValidity();
+	}
 	componentDidUpdate(prevProps) {
 		if (this.props.location.pathname !== prevProps.location.pathname) {
-      // this.setState({flag: false});
-      for (let i = 0; i < constants.unauthenticated_url.length; i ++) {
-        if (constants.unauthenticated_url[i] === this.props.location.pathname) {
-            this.setState({role: 1});
-            return;
-        }
-      }
-      for (let i = 0; i < constants.unauthenticated_url.length; i ++) {
-        if (constants.unauthenticated_url[i] === prevProps.location.pathname) {
-            this.setState({role: 0});
-        }
-      }
-      auth
-      .validateToken()
-      .then(response => {
-        if (response.code !== 401) {
-          this.setState({role: response.role}) 
-        }
-        else {
-          this.setState({role: 0})
-          this.props.history.push('/login');
-        }
-      })
+			this.checkValidity();
 		}
 	}
 	render() {
-		return this.state.role !== 0 ? <>{React.cloneElement(this.props.children, {role: this.state.role})}</> : <></>;
+		return this.state.role !== 0 ? <>{React.cloneElement(this.props.children, { role: this.state.role })}</> : <></>;
 	}
 }
 
-// Create a new component that is "connected" (to borrow redux
-// terminology) to the router.
 export default AppContainer = withRouter(AppContainer);

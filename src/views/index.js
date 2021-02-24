@@ -3,7 +3,10 @@ export { default as Cockpit } from './Cockpit';
 export { default as Candidates } from './Candidates';
 export { default as CandidatesEdit } from './CandidatesEdit';
 export { default as CandidatesAdd } from './CandidatesAdd';
-export { default as CandidatesInfo } from './CandidatesInfo';
+export { CandidatesFirstStep as CandidatesFirstStep } from './CandidatesInfo';
+export { CandidatesSecondStep as CandidatesSecondStep } from './CandidatesInfo';
+export { CandidatesThirdStep as CandidatesThirdStep } from './CandidatesInfo';
+export { CandidatesFourthStep as CandidatesFourthStep } from './CandidatesInfo';
 
 export { default as QualificationPoints } from './QualificationPoints';
 export { default as QualificationPointsAdd } from './QualificationPointsAdd';

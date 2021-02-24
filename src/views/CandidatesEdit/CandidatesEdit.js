@@ -45,6 +45,8 @@ const CandidatesEdit = props => {
   const [second_city, setSecondCity] = useState('');
   const [stage, setStage] = useState(0);
   const [stageList, setStageList] = useState([]);
+  const [status, setStatus] = useState(0);
+  const [statusList, setStatusList] = useState([]);
   const [voivodeship, setVoivodeship] = useState(0);
   const [voivodeshipList, setVoivodeshipList] = useState([]);
   const [community, setCommunity] = useState(0);
@@ -131,6 +133,7 @@ const CandidatesEdit = props => {
           history.push('/login');
         } else {
           setStageList(response.data.stage);
+		  setStatusList(response.data.status);
           setVoivodeshipList(response.data.voivodeship);
           setCommunityTotalList(response.data.community);
           setCountyTotalList(response.data.county);
@@ -208,7 +211,7 @@ const CandidatesEdit = props => {
         setHouseHoldAdultStatus(parseInt(response.data.candidate.house_hold_adult_status));
         setUncomfortableStatus(parseInt(response.data.candidate.uncomfortable_status));
         setStage(response.data.candidate.stage);
-        setComment(response.data.candidate.comment);
+		setStatus(response.data.candidate.id_status);
       } 
       setProgressStatus(false);
     })
@@ -216,7 +219,7 @@ const CandidatesEdit = props => {
   }, [employed_type_list]);
 
   const handleGotoInformation = () => {
-    history.push(`/candidates/info/${id}`)
+	history.push(`/candidates/info/step${stage}/${id}`)
   }
 
   const handleError = () => {
@@ -232,7 +235,6 @@ const CandidatesEdit = props => {
     _error.post_code = (post_code.length === 0);
     _error.post_office = (post_office.length === 0);
     _error.city = (city.length === 0);
-    _error.stage = (parseInt(stage) === 0);
     _error.voivodeship = (parseInt(voivodeship) === 0);
     _error.community = (parseInt(community) === 0);
     _error.county = (parseInt(county) === 0);
@@ -306,7 +308,6 @@ const CandidatesEdit = props => {
     (post_code.length === 0) ||
     (post_office.length === 0) ||
     (city.length === 0) ||
-    (parseInt(stage) === 0) ||
     (parseInt(voivodeship) === 0) ||
     (parseInt(community) === 0) ||
     (parseInt(county) === 0) ||
@@ -361,7 +362,7 @@ const CandidatesEdit = props => {
         passive_person_status, full_time_status, evening_student_status, disabled_person_status,
         number_certificate, date_of_certificate, level_certificate, code_certificate, necessary_certificate,
         ethnic_minority_status, homeless_person_status, stay_house_status, house_hold_status, house_hold_adult_status, uncomfortable_status,
-        stage, comment, id)
+        comment, id)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
@@ -768,13 +769,6 @@ const CandidatesEdit = props => {
     setComment(value);
     let _error = JSON.parse(JSON.stringify(error));
     _error.comment = (value.length === 0);
-    setError(_error);
-  }
-
-  const handleChangeStage = (value) => {
-    setStage(value);
-    let _error = JSON.parse(JSON.stringify(error));
-    _error.stage = (parseInt(value) === 0);
     setError(_error);
   }
 
@@ -1232,7 +1226,9 @@ const CandidatesEdit = props => {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <div className={classes.top_label} htmlFor="name">Etap</div>
-                    <SingleSelect value={stage} handleChange={handleChangeStage} list={stageList} error={error.stage}/>
+                    <SingleSelect value={stage} list={stageList} disabled={true}/>
+					<div className={classes.top_label} htmlFor="name">Status</div>
+                    <SingleSelect value={status} list={statusList} disabled={true}/>
                     <div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
                     <TextareaAutosize className={clsx({[classes.textArea] : true, [classes.error] : error.comment})} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika"/>
                     <Grid container spacing={2}>

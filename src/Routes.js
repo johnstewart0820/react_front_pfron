@@ -9,7 +9,10 @@ import {
   Candidates as CandidatesView,
   CandidatesAdd as CandidatesAddView,
   CandidatesEdit as CandidatesEditView,
-  CandidatesInfo as CandidatesInfoView,
+  CandidatesFirstStep as CandidatesFirstStepView,
+  CandidatesSecondStep as CandidatesSecondStepView,
+  CandidatesThirdStep as CandidatesThirdStepView,
+  CandidatesFourthStep as CandidatesFourthStepView,
   QualificationPoints as QualificationPointsView,
   QualificationPointsAdd as QualificationPointsAddView,
   QualificationPointsEdit as QualificationPointsEditView,
@@ -76,11 +79,32 @@ const Routes = (props) => {
         path="/candidates/edit/:id"
       />
       <RouteWithLayout
-        component={CandidatesInfoView}
+        component={CandidatesFirstStepView}
         exact
         layout={MainLayout}
         title='Karta informacyjna kandydata'
-        path="/candidates/info/:id"
+        path="/candidates/info/step1/:id"
+      />
+	  <RouteWithLayout
+        component={CandidatesSecondStepView}
+        exact
+        layout={MainLayout}
+        title='Karta informacyjna kandydata'
+        path="/candidates/info/step2/:id"
+      />
+	  <RouteWithLayout
+        component={CandidatesThirdStepView}
+        exact
+        layout={MainLayout}
+        title='Karta informacyjna kandydata'
+        path="/candidates/info/step3/:id"
+      />
+	  <RouteWithLayout
+        component={CandidatesFourthStepView}
+        exact
+        layout={MainLayout}
+        title='Karta informacyjna kandydata'
+        path="/candidates/info/step4/:id"
       />
       <RouteWithLayout
         component={QualificationPointsView}

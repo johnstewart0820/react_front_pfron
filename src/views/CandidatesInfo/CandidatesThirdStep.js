@@ -20,44 +20,21 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import {DeleteModal} from '../Candidates/components';
 import { FirstStepView, FourthStepView, SecondStepView, ThirdStepView } from './components';
 
-const CandidatesInfo = props => {
+const CandidatesThirdStep = props => {
   const { children } = props;
   const id = props.match.params.id;
   const { history } = props;
   const classes = useStyles();
   const { addToast } = useToasts()
   const breadcrumbs = [{ active: true, label: 'Kandydaci', href: '/candidates' }, { active: false, label: 'Karta informacyjna' }];
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [person_id, setPersonId] = useState('');
   const [stage, setStage] = useState(0);
-  const [comment, setComment] = useState('');
   const [stageList, setStageList] = useState([]);
-  const [qualification_point, setQualificationPoint] = useState(0);
-  const [qualificationPointList, setQualificationPointList] = useState([]);
-  const [gender, setGender] = useState(0);
-  const [doctor, setDoctor] = useState(0);
-  const [doctorList, setDoctorList] = useState([]);
-  const [psycology, setPsycology] = useState(0);
-  const [psycologyList, setPsycologyList] = useState([]); 
-  const [admission, setAdmission] = useState(0);
-  const [doctor_recommendation, setDoctorRecommendation] = useState(0);
-  const [doctor_date, setDoctorDate] = useState(new Date());
-  const [doctor_remark, setDoctorRemark] = useState('');
-  const [psycology_recommendation, setPsycologyRecommendation] = useState(0);
-  const [psycology_date, setPsycologyDate] = useState(new Date());
-  const [psycology_remark, setPsycologyRemark] = useState('');
+  const [status, setStatus] = useState(0);
+  const [statusList, setStatusList] = useState([]);
+  const [comment, setComment] = useState('');
   const [decision_central_commision, setDecisionCentralCommision] = useState(0);
   const [date_central_commision, setDateCentralCommision] = useState(new Date());
   const [general_remark, setGeneralRemark] = useState('');
-  const [date_referal, setDateReferal] = useState(new Date());
-  const [rehabitation_center, setRehabitationCenter] = useState(0);
-  const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
-  const [participant_number, setParticipantNumber] = useState('');
-  const [date_rehabitation_center, setDateRehabitationCenter] = useState(new Date());
-  const [typeToStayList, setTypeToStayList] = useState([{id: 1, name: 'Stacjonarny'}, {id: 2, name: 'Niestacjonarny'}])
-  const [type_to_stay, setTypeToStay] = useState(0);
-  const [participant_remark, setParticipantRemark] = useState('');
   const [progressStatus, setProgressStatus] = useState(false);
   const [error, setError] = useState({});
   const [openModal, setOpenModal] = useState(false);
@@ -91,22 +68,6 @@ const CandidatesInfo = props => {
     setOpenModal(false);
   }
 
-  const handleChangeQualificationPoint = (value) => {
-    setQualificationPoint(value);
-  }
-
-  useEffect(() => {
-    candidate.getMarker(qualification_point)
-      .then(response => {
-        if (response.code === 401) {
-          history.push('/login');
-        } else {
-          setDoctorList(response.data.doctor);
-          setPsycologyList(response.data.psycology);
-        }
-      });
-  }, [qualification_point]);
-
   useEffect(() => {
     candidate.getInfo()
       .then(response => {
@@ -114,8 +75,7 @@ const CandidatesInfo = props => {
           history.push('/login');
         } else {
           setStageList(response.data.stage);
-          setQualificationPointList(response.data.qualification_point);
-          setRehabitationCenterList(response.data.rehabitation_center);
+		  setStatusList(response.data.status);
         }
       })
   }, []);
@@ -128,35 +88,15 @@ const CandidatesInfo = props => {
         history.push('/login');
       } else {
         setStage(response.data.candidate.stage);
-        setComment(response.data.candidate.comment);
-        setQualificationPoint(response.data.candidate.qualification_point);
-        setName(response.data.candidate.name);
-        setSurname(response.data.candidate.surname);
-        setPersonId(response.data.candidate.person_id);
-        setGender(parseInt(response.data.candidate_info.gender));
-        setAdmission(parseInt(response.data.candidate_info.admission));
-        setDoctorRecommendation(parseInt(response.data.candidate_info.doctor_recommendation));
-        setDoctorRemark(response.data.candidate_info.doctor_remark ? response.data.candidate_info.doctor_remark : '');
-        setDoctor(response.data.candidate_info.doctor);
-        setDoctorDate(response.data.candidate_info.doctor_date);
-        setPsycologyRecommendation(parseInt(response.data.candidate_info.psycology_recommendation));
-        setPsycologyRemark(response.data.candidate_info.psycology_remark ? response.data.candidate_info.psycology_remark : '');
-        setPsycology(response.data.candidate_info.psycology);
-        setPsycologyDate(response.data.candidate_info.psycology_date);
+		setStatus(response.data.candidate.status);
         setDecisionCentralCommision(parseInt(response.data.candidate_info.decision_central_commision));
         setDateCentralCommision(response.data.candidate_info.date_central_commision);
         setGeneralRemark(response.data.candidate_info.general_remark ? response.data.candidate_info.general_remark : '');
-        setDateReferal(response.data.candidate_info.date_referal);
-        setRehabitationCenter(response.data.candidate_info.rehabitation_center);
-        setParticipantNumber(response.data.candidate_info.participant_number);
-        setDateRehabitationCenter(response.data.candidate_info.date_rehabitation_center);
-        setTypeToStay(response.data.candidate_info.type_to_stay);
-        setParticipantRemark(response.data.candidate_info.participant_remark ? response.data.candidate_info.participant_remark : '');
       } 
       setProgressStatus(false);
     })
    
-  }, [qualificationPointList]);
+  }, [statusList]);
 
   const handleBack = () => {
     history.push('/candidates');
@@ -167,28 +107,42 @@ const CandidatesInfo = props => {
   }
 
   const handleSave = () => {
-    if (checkError()) {
+    if (checkError() || parseInt(decision_central_commision) == 0 || isNaN(decision_central_commision)) {
       addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
       handleError();
     } else {
       setProgressStatus(true);
+	  if (decision_central_commision == 2) {
+		candidate.updateCandidateStep3(
+			3, 3, comment,
+			decision_central_commision, date_central_commision, general_remark, id)
+		  .then(response => {
+			if (response.code === 401) {
+			  history.push('/login');
+			} else {
+			  addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+			  if (response.code === 200) {
+				history.push(`/candidates`);
+			  }
+			  setProgressStatus(false);
+			}
+		  })
+	  } else if (decision_central_commision == 1) {
+		candidate.updateCandidateStep3(
+			4, 4, comment,
+			decision_central_commision, date_central_commision, general_remark, id)
+		  .then(response => {
+			if (response.code === 401) {
+			  history.push('/login');
+			} else {
+			  if (response.code === 200) {
+				history.push(`/candidates/info/step4/${id}`);
+			  }
+			  setProgressStatus(false);
+			}
+		  })
+	  }
 
-      candidate.updateCandidateInfo(
-        stage, comment,
-        qualification_point, gender, doctor, psycology, admission, doctor_recommendation,
-        doctor_date, doctor_remark, psycology_recommendation, psycology_date, psycology_remark, decision_central_commision, date_central_commision, general_remark, date_referal,
-        rehabitation_center, participant_number, date_rehabitation_center, type_to_stay, participant_remark, id)
-      .then(response => {
-        if (response.code === 401) {
-          history.push('/login');
-        } else {
-          addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
-          if (response.code === 200) {
-            setTimeout(function(){history.push('/candidates');}, 1000);
-          }
-          setProgressStatus(false);
-        }
-      })
     }
   }
 
@@ -210,12 +164,6 @@ const CandidatesInfo = props => {
     setError(_error);
   }
 
-  const handleChangeStage = (value) => {
-    setStage(value);
-    let _error = JSON.parse(JSON.stringify(error));
-    _error.stage = (parseInt(value) === 0);
-    setError(_error);
-  }
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -233,47 +181,16 @@ const CandidatesInfo = props => {
       </div>
       <Grid container spacing={3} className={classes.formBlock}>
         <Grid item xs={9}>
-        <Tabs>
+        <Tabs defaultIndex={2}>
           <TabList>
-            <Tab>ETAP 1</Tab>
-            <Tab>ETAP 2</Tab>
+            <Tab disabled>ETAP 1</Tab>
+            <Tab disabled>ETAP 2</Tab>
             <Tab>ETAP 3</Tab>
-            <Tab>ETAP 4</Tab>
+            <Tab disabled>ETAP 4</Tab>
           </TabList>
           <TabPanel>
-            <FirstStepView 
-              name={name} 
-              surname={surname}
-              person_id={person_id}
-              qualification_point={qualification_point}
-              setQualificationPoint={handleChangeQualificationPoint}
-              qualificationPointList={qualificationPointList}
-              gender={gender}
-              setGender={setGender}/>
           </TabPanel>
           <TabPanel>
-            <SecondStepView 
-              admission={admission} 
-              setAdmission={setAdmission}
-              doctor_recommendation={doctor_recommendation}
-              setDoctorRecommendation={setDoctorRecommendation}
-              doctor_date={doctor_date}
-              setDoctorDate={setDoctorDate}
-              doctor={doctor}
-              setDoctor={setDoctor}
-              doctor_remark={doctor_remark}
-              setDoctorRemark={setDoctorRemark}
-              psycology_recommendation={psycology_recommendation}
-              setPsycologyRecommendation={setPsycologyRecommendation}
-              psycology_date={psycology_date}
-              setPsycologyDate={setPsycologyDate}
-              psycology={psycology}
-              setPsycology={setPsycology}
-              psycology_remark={psycology_remark}
-              setPsycologyRemark={setPsycologyRemark}
-              doctorList={doctorList}
-              psycologyList={psycologyList}
-              />
           </TabPanel>
           <TabPanel>
             <ThirdStepView 
@@ -286,22 +203,6 @@ const CandidatesInfo = props => {
             />
           </TabPanel>
           <TabPanel>
-            <FourthStepView
-              date_referal={date_referal}
-              setDateReferal={setDateReferal}
-              rehabitation_center={rehabitation_center}
-              setRehabitationCenter={setRehabitationCenter}
-              rehabitationCenterList={rehabitationCenterList}
-              participant_number={participant_number}
-              setParticipantNumber={setParticipantNumber}
-              date_rehabitation_center={date_rehabitation_center}
-              setDateRehabitationCenter={setDateRehabitationCenter}
-              typeToStayList={typeToStayList}
-              type_to_stay={type_to_stay}
-              setTypeToStay={setTypeToStay}
-              participant_remark={participant_remark}
-              setParticipantRemark={setParticipantRemark}
-            />
           </TabPanel>
         </Tabs>
         </Grid>
@@ -311,8 +212,10 @@ const CandidatesInfo = props => {
               <Card className={classes.form}>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
-                    <div className={classes.top_label} htmlFor="name">Etap</div>
-                    <SingleSelect value={stage} handleChange={handleChangeStage} list={stageList} error={error.stage}/>
+				  	<div className={classes.top_label} htmlFor="name">Etap</div>
+                    <SingleSelect value={stage} list={stageList} disabled={true}/>
+					<div className={classes.top_label} htmlFor="name">Status</div>
+                    <SingleSelect value={status} list={statusList} disabled={true}/>
                     <div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
                     <TextareaAutosize className={clsx({[classes.textArea] : true, [classes.error] : error.comment})} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika"/>
                     <Grid container spacing={2}>
@@ -363,4 +266,4 @@ const CandidatesInfo = props => {
   );
 };
 
-export default CandidatesInfo;
+export default CandidatesThirdStep;

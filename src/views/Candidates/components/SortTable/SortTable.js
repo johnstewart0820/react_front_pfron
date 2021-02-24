@@ -20,11 +20,12 @@ import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import qualification from 'apis/qualification';
 
 const SortTable = (props) => {
   const classes = useStyles();
   const { history } = props;
-  const { sortBy, sortOrder, requestSort, rows, searchId, setSearchId, searchName, setSearchName, searchSurname, setSearchSurname, searchQualificationPoint, setSearchQualificationPoint, qualificationPointList, searchStage, setSearchStage, stageList, searchDateModified, setSearchDateModified, handleDelete } = props;
+  const { sortBy, sortOrder, requestSort, rows, searchId, setSearchId, searchName, setSearchName, searchSurname, setSearchSurname, searchQualificationPoint, setSearchQualificationPoint, qualificationPointList, searchStage, setSearchStage, stageList, searchStatus, setSearchStatus, statusList, searchDateModified, setSearchDateModified, handleDelete } = props;
   useEffect(() => {
   }, []);
 
@@ -41,6 +42,22 @@ const SortTable = (props) => {
   const getDateTime = (value) => {
     let _date = new Date(value);
     return _date.getFullYear() + '.' + (_date.getMonth() + 1) + '.' + (_date.getDate()) + ' ' + _date.getHours() + ':' + _date.getMinutes();
+  }
+
+  const getQualificationPointName = (qualification_point_id) => {
+	if (parseInt(qualification_point_id) < 1) 
+		return '';
+	if (! qualificationPointList.length > 0)
+		return '';
+	for (let i = 0; i < qualificationPointList.length ; i ++) {
+		if (parseInt(qualificationPointList[i].id) === parseInt(qualification_point_id))
+			return qualificationPointList[i].name;
+	}
+	return '';
+  }
+  const goCandidateStep = (id, id_stage) => {
+	  console.log(`/candidates/info/step${id_stage}/${id}`);
+	history.push(`/candidates/info/step${id_stage}/${id}`)
   }
 
   return (
@@ -93,11 +110,20 @@ const SortTable = (props) => {
                 Etap rekutacji
             </TableSortLabel>
             </TableCell>
-            <TableCell>
+			<TableCell>
               <TableSortLabel
                 active={sortBy === 5}
                 direction={sortOrder}
                 onClick={() => requestSort(5)}
+              >
+                Status
+			</TableSortLabel>
+            </TableCell>
+            <TableCell>
+              <TableSortLabel
+                active={sortBy === 6}
+                direction={sortOrder}
+                onClick={() => requestSort(6)}
               >
                 Data modyfikacji
             </TableSortLabel>
@@ -116,6 +142,7 @@ const SortTable = (props) => {
             <TableCell><input className={classes.input_box} type="name" value={searchSurname} name="searchId" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
             <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /></TableCell>
             <TableCell><SingleSelect value={searchStage} handleChange={setSearchStage} list={stageList} /></TableCell>
+			<TableCell><SingleSelect value={searchStatus} handleChange={setSearchStatus} list={statusList} /></TableCell>
             <TableCell>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -156,18 +183,15 @@ const SortTable = (props) => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.surname}</TableCell>
-                <TableCell>{parseInt(item.qualification_point) >= 1  ?
-                            qualificationPointList && qualificationPointList.length > 0 && qualificationPointList[item.qualification_point - 1].name
-                            :
-                            ''
-                          }</TableCell>
+                <TableCell>{getQualificationPointName(item.qualification_point)}</TableCell>
                 <TableCell>{stageList && stageList.length > 0 && stageList[item.stage - 1].name}</TableCell>
+				<TableCell>{statusList && statusList.length > 0 && statusList[item.id_status - 1].name}</TableCell>
                 <TableCell>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
                   <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`candidates/info/${item.id}`)}>
+                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => goCandidateStep(item.id, item.stage)}>
                     <InfoOutlinedIcon className={classes.icon} />
                   </IconButton>
                   <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>

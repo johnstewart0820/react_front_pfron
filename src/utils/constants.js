@@ -44,7 +44,7 @@ class constants {
 			'/service_list/create',
 			'/service_list/edit/*',
 
-			'/working_shop',
+			'/workingshop',
 
 			'/notifications',
 
@@ -96,7 +96,7 @@ class constants {
 			'/service_list/create',
 			'/service_list/edit/*',
 
-			'/working_shop',
+			'/workingshop',
 
 			'/ork_list',
 			'/ork_list/create',

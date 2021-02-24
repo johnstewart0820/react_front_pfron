@@ -90,7 +90,6 @@ const FourthStepView = (props) => {
             <ReactQuill 
               onChange={setParticipantRemark}
               value={participant_remark}
-              placeholder="Write Something..."
               className={classes.qlClass}
             />
           </Grid>

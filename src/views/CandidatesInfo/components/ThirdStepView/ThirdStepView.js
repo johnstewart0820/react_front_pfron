@@ -68,7 +68,6 @@ const ThirdStepView = (props) => {
                 <ReactQuill 
                   onChange={setGeneralRemark}
                   value={general_remark}
-                  placeholder="Write Something..."
                   className={classes.qlClass}
                 />
               </Grid>

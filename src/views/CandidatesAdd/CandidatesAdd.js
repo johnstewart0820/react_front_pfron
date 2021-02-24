@@ -38,8 +38,6 @@ const CandidatesAdd = props => {
   const [second_post_code, setSecondPostCode] = useState('');
   const [second_post_office, setSecondPostOffice] = useState('');
   const [second_city, setSecondCity] = useState('');
-  const [stage, setStage] = useState(0);
-  const [stageList, setStageList] = useState([]);
   const [voivodeship, setVoivodeship] = useState(0);
   const [voivodeshipList, setVoivodeshipList] = useState([]);
   const [community, setCommunity] = useState(0);
@@ -95,7 +93,6 @@ const CandidatesAdd = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          setStageList(response.data.stage);
           setVoivodeshipList(response.data.voivodeship);
           setCommunityTotalList(response.data.community);
           setCountyTotalList(response.data.county);
@@ -126,7 +123,6 @@ const CandidatesAdd = props => {
     _error.post_code = (post_code.length === 0);
     _error.post_office = (post_office.length === 0);
     _error.city = (city.length === 0);
-    _error.stage = (parseInt(stage) === 0);
     _error.voivodeship = (parseInt(voivodeship) === 0);
     _error.community = (parseInt(community) === 0);
     _error.county = (parseInt(county) === 0);
@@ -200,7 +196,6 @@ const CandidatesAdd = props => {
     (post_code.length === 0) ||
     (post_office.length === 0) ||
     (city.length === 0) ||
-    (parseInt(stage) === 0) ||
     (parseInt(voivodeship) === 0) ||
     (parseInt(community) === 0) ||
     (parseInt(county) === 0) ||
@@ -255,7 +250,7 @@ const CandidatesAdd = props => {
         passive_person_status, full_time_status, evening_student_status, disabled_person_status,
         number_certificate, date_of_certificate, level_certificate, code_certificate, necessary_certificate,
         ethnic_minority_status, homeless_person_status, stay_house_status, house_hold_status, house_hold_adult_status, uncomfortable_status,
-        stage, comment)
+        1, 1, comment)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
@@ -662,13 +657,6 @@ const CandidatesAdd = props => {
     setComment(value);
     let _error = JSON.parse(JSON.stringify(error));
     _error.comment = (value.length === 0);
-    setError(_error);
-  }
-
-  const handleChangeStage = (value) => {
-    setStage(value);
-    let _error = JSON.parse(JSON.stringify(error));
-    _error.stage = (parseInt(value) === 0);
     setError(_error);
   }
 
@@ -1110,8 +1098,6 @@ const CandidatesAdd = props => {
               <Card className={classes.form}>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
-                    <div className={classes.top_label} htmlFor="name">Etap</div>
-                    <SingleSelect value={stage} handleChange={handleChangeStage} list={stageList} error={error.stage}/>
                     <div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
                     <TextareaAutosize className={clsx({[classes.textArea] : true, [classes.error] : error.comment})} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika"/>
                     <Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>

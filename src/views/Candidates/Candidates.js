@@ -25,6 +25,9 @@ const Candidates = props => {
   const [searchSurname, setSearchSurname] = useState('');
   const [searchQualificationPoint, setSearchQualificationPoint] = useState(0);
   const [qualificationPointList, setQualificationPointList] = useState([]);
+  const [status, setStatus] = useState(0);
+  const [statusList, setStatusList] = useState([]);
+  const [searchStatus, setSearchStatus] = useState(0);
   const [searchStage, setSearchStage] = useState(0);
   const [stageList, setStageList] = useState([]);
   const [searchDateModified, setSearchDateModified] = useState({from: new Date('2020-01-01'), to: new Date('2050-12-31')});
@@ -42,6 +45,7 @@ const Candidates = props => {
         } else {
           setStageList(response.data.stage);
           setQualificationPointList(response.data.qualification_point);
+		  setStatusList(response.data.status);
         }
       })
     handleSearch();
@@ -54,7 +58,7 @@ const Candidates = props => {
   useEffect(() => {
     handleSearch();
     setPage(1);
-  }, [selectedCount, searchId, searchName, searchDateModified, searchStage, searchSurname, searchQualificationPoint]);
+  }, [selectedCount, searchId, searchName, searchDateModified, searchStage, searchStatus, searchSurname, searchQualificationPoint]);
   
   const requestSort = (pSortBy) => {
     var sortOrder = "asc";
@@ -66,7 +70,7 @@ const Candidates = props => {
   
   const handleSearch = () => {
     candidate
-      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchName, searchSurname, searchQualificationPoint, searchStage, searchDateModified)
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchName, searchSurname, searchQualificationPoint, searchStage, searchStatus, searchDateModified)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
@@ -172,6 +176,9 @@ const Candidates = props => {
           searchStage={searchStage}
           setSearchStage={setSearchStage}
           stageList={stageList}
+		  searchStatus={searchStatus}
+		  setSearchStatus={setSearchStatus}
+		  statusList={statusList}
           searchDateModified={searchDateModified}
           setSearchDateModified={setSearchDateModified}
           handleDelete={handleSelectedItem}

@@ -5,12 +5,12 @@ import useStyles from './style';
 
 const SingleSelect = (props) => {
   const classes = useStyles();
-  const { value, handleChange, list, error} = props;
+  const { value, handleChange, list, error, disabled} = props;
   useEffect(() => {
   }, []);
 
   return (
-    <FormControl variant="outlined" className={classes.formControl} error={error}>
+    <FormControl variant="outlined" className={classes.formControl} error={error} disabled={disabled}>
       <InputLabel htmlFor="outlined-age-native-simple" className={classes.name_select_box} shrink={false}>
         {
           value == 0 ? '' : ''

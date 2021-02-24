@@ -96,7 +96,6 @@ const SecondStepView = (props) => {
                 <ReactQuill 
                   onChange={setDoctorRemark}
                   value={doctor_remark}
-                  placeholder="Write Something..."
                   className={classes.qlClass}
                 />
               </Grid>
@@ -137,7 +136,6 @@ const SecondStepView = (props) => {
                 <ReactQuill 
                   onChange={setPsycologyRemark}
                   value={psycology_remark}
-                  placeholder="Write Something..."
                   className={classes.qlClass}
                 />
               </Grid>

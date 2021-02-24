@@ -7,26 +7,21 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 import {
   Cockpit as CockpitView,
   Candidates as CandidatesView,
-  CandidatesUser as CandidatesUserView,
   CandidatesAdd as CandidatesAddView,
   CandidatesEdit as CandidatesEditView,
   CandidatesInfo as CandidatesInfoView,
   QualificationPoints as QualificationPointsView,
-  QualificationPointsUser as QualificationPointsUserView,
   QualificationPointsAdd as QualificationPointsAddView,
   QualificationPointsEdit as QualificationPointsEditView,
   Specialists as SpecialistsView,
-  SpecialistsUser as SpecialistsUserView,
   SpecialistsAdd as SpecialistsAddView,
   SpecialistsEdit as SpecialistsEditView,
   Participants as ParticipantsView,
   OrkTeams as OrkTeamsView,
-  OrkTeamsUser as OrkTeamsUserView,
   OrkTeamsAdd as OrkTeamsAddView,
   OrkTeamsEdit as OrkTeamsEditView,
   IprList as IprListView,
   ServiceList as ServiceListView,
-  ServiceListUser as ServiceListUserView,
   ServiceListAdd as ServiceListAddView,
   ServiceListEdit as ServiceListEditView,
   WorkingShop as WorkingShopView,
@@ -34,12 +29,10 @@ import {
   OrkList as OrkListView,
   OrkListEdit as OrkListEditView,
   Payments as PaymentsView,
-  PaymentsUser as PaymentsUserView,
   PaymentsAdd as PaymentsAddView,
   PaymentsEdit as PaymentsEditView,
   Reports as ReportsView,
   Users as UsersView,
-  UsersGeneral as UsersGeneralView,
   UsersAdd as UsersAddView,
   UsersEdit as UsersEditView,
   Profile as ProfileView,
@@ -62,7 +55,7 @@ const Routes = (props) => {
         path="/cockpit"
       />
       <RouteWithLayout
-        component={props.role === 1 ? CandidatesView : CandidatesUserView}
+        component={CandidatesView}
         exact
         layout={MainLayout}
         title='Kandydaci'
@@ -90,7 +83,7 @@ const Routes = (props) => {
         path="/candidates/info/:id"
       />
       <RouteWithLayout
-        component={props.role === 1 ? QualificationPointsView : QualificationPointsUserView}
+        component={QualificationPointsView}
         exact
         layout={MainLayout}
         title='Punkty kwalifikacyjne'
@@ -109,7 +102,7 @@ const Routes = (props) => {
         path="/qualification_points/edit/:id"
       />
       <RouteWithLayout
-        component={props.role === 1 ? SpecialistsView : SpecialistsUserView}
+        component={SpecialistsView}
         exact
         layout={MainLayout}
         title='Specjaliści'
@@ -135,7 +128,7 @@ const Routes = (props) => {
         path="/participants"
       />
       <RouteWithLayout
-        component={props.role === 1 ? OrkTeamsView : OrkTeamsUserView}
+        component={OrkTeamsView}
         exact
         layout={MainLayout}
         title='Zespół ORK'
@@ -161,7 +154,7 @@ const Routes = (props) => {
         path="/ipr_list"
       />
       <RouteWithLayout
-        component={props.role === 1 ? ServiceListView : ServiceListUserView}
+        component={ServiceListView}
         exact
         layout={MainLayout}
         title='Lista dostępnych usług'
@@ -207,7 +200,7 @@ const Routes = (props) => {
         path="/ork_list/edit/:id"
       />
       <RouteWithLayout
-        component={props.role === 1 ? PaymentsView : PaymentsUserView}
+        component={PaymentsView}
         exact
         layout={MainLayout}
         title='Zdefiniowane koszty usług'
@@ -235,7 +228,7 @@ const Routes = (props) => {
         path="/reports"
       />
       <RouteWithLayout
-        component={props.role === 1 ? UsersView : UsersGeneralView}
+        component={UsersView}
         exact
         layout={MainLayout}
         title='Uźytkownicy systemu'

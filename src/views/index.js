@@ -1,42 +1,48 @@
 export { default as Cockpit } from './Cockpit';
+
 export { default as Candidates } from './Candidates';
-export { default as CandidatesUser } from './CandidatesUser';
 export { default as CandidatesEdit } from './CandidatesEdit';
 export { default as CandidatesAdd } from './CandidatesAdd';
 export { default as CandidatesInfo } from './CandidatesInfo';
+
 export { default as QualificationPoints } from './QualificationPoints';
-export { default as QualificationPointsUser } from './QualificationPointsUser';
 export { default as QualificationPointsAdd } from './QualificationPointsAdd';
 export { default as QualificationPointsEdit } from './QualificationPointsEdit';
+
 export { default as Specialists } from './Specialists';
-export { default as SpecialistsUser } from './SpecialistsUser';
 export { default as SpecialistsAdd } from './SpecialistsAdd';
 export { default as SpecialistsEdit } from './SpecialistsEdit';
+
 export { default as Participants } from './Participants';
+
 export { default as OrkTeams } from './OrkTeams';
-export { default as OrkTeamsUser } from './OrkTeamsUser';
 export { default as OrkTeamsAdd } from './OrkTeamsAdd';
 export { default as OrkTeamsEdit } from './OrkTeamsEdit';
 
 export { default as IprList } from './IprList';
+
 export { default as ServiceList } from './ServiceList';
-export { default as ServiceListUser } from './ServiceListUser';
 export { default as ServiceListAdd } from './ServiceListAdd';
 export { default as ServiceListEdit } from './ServiceListEdit';
+
 export { default as WorkingShop } from './WorkingShop';
+
 export { default as Notifications } from './Notifications';
+
 export { default as OrkList } from './OrkList';
 export { default as OrkListEdit } from './OrkListEdit';
+
 export { default as Payments } from './Payments';
-export { default as PaymentsUser } from './PaymentsUser';
 export { default as PaymentsAdd } from './PaymentsAdd';
 export { default as PaymentsEdit } from './PaymentsEdit';
+
 export { default as Reports } from './Reports';
+
 export { default as Users } from './Users';
-export { default as UsersGeneral } from './UsersGeneral';
 export { default as UsersAdd } from './UsersAdd';
 export { default as UsersEdit } from './UsersEdit';
 export { default as Profile } from './Profile';
+
 export { default as Logs } from './Logs';
 export { default as SignIn } from './SignIn';
 export { default as Forgot } from './Forgot';

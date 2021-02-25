@@ -10,7 +10,7 @@ import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import users from '../../apis/users';
 import { useToasts } from 'react-toast-notifications'
-import { ExportToCsv } from 'export-to-csv';
+import EXCEL from 'js-export-xlsx';
 
 const Users = props => {
   const { children } = props;
@@ -86,32 +86,34 @@ const Users = props => {
   const handleProfile = () => {
     history.push('/profile');
   }
-
+  const getRoleName = (id) => {
+    let name = '';
+	let arr = id.split(',');
+	let _name_arr = [];
+    if (!roleList || roleList.length === 0)
+      return name;
+	for (let i = 0; i < arr.length; i ++) {
+		_name_arr.push(roleList[arr[i] - 1].name);
+	}
+	name = _name_arr.join(', ');
+    return name;
+  }
   const handleExport = () => {
     let export_data = [];
     for (let i = 0; i < data.length; i ++) {
-      let item = {};
-      item['ID'] = data[i].id;
-      item['Nazwa użytkownika (login)'] = data[i].name;
-      item['Rola'] = roleList[data[i].id_role - 1].name;
-      item['E-mail'] = data[i].email;
-      item['Aktywny'] = activateStatusList[data[i].activate_status - 1].name;
+      let item = [];
+      item.push(data[i].id);
+      item.push(data[i].name);
+      item.push(getRoleName(data[i].id_role));
+	  item.push(data[i].email);
+	  item.push(activateStatusList[(parseInt(data[i].activate_status) + 1) % 2].name);
       export_data.push(item);
     }
-    const options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: false,
-      showTitle: false,
-      title: 'My Awesome CSV',
-      useTextFile: false,
-      useBom: true,
-      useKeysAsHeaders: true,
-    };
-    const csvExporter = new ExportToCsv(options);
-
-    csvExporter.generateCsv(export_data);
+    EXCEL.outPut({
+      header: ['ID', 'Nazwa użytkownika (login)', 'Rola', 'E-mail', 'Aktywny'],
+      data: export_data,
+      name: 'download'
+    })
   }
 
   const handleSelectedItem = (id) => {

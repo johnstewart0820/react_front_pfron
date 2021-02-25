@@ -196,7 +196,14 @@ const Sidebar = props => {
 		]
 	];
 	useEffect(() => {
-		setPages(items[localStorage.getItem('role') - 1]);
+		let roleList = localStorage.getItem('role').split(',');
+		let role = 3;
+		for (let i = 0; i < roleList.length; i ++) {
+			if (parseInt(roleList[i]) < role) {
+				role = parseInt(roleList[i]);
+			}
+		}
+		setPages(items[role - 1]);
 	}, []);
 
 

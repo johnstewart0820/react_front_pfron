@@ -17,20 +17,23 @@ class AppContainer extends React.Component {
 				.validateToken()
 				.then(response => {
 					if (response.code !== 401) {
-						let index = response.role;
+						let roleList = response.role.split(',');
 						let count = 0;
-						constants.authenticated_url[index - 1].map((item, index) => {
-							if (item.endsWith('*')) {
-								let arr = this.props.location.pathname.split('/');
-								arr.pop();
-								let str = arr.join('/');
-								if (str === item.split('/*')[0])
+						roleList.map((item, index) => {
+							constants.authenticated_url[item - 1].map((item, index) => {
+								if (item.endsWith('*')) {
+									let arr = this.props.location.pathname.split('/');
+									arr.pop();
+									let str = arr.join('/');
+									if (str === item.split('/*')[0])
+										count ++;
+								}
+								if (this.props.location.pathname === item) {
 									count ++;
-							}
-							if (this.props.location.pathname === item) {
-								count ++;
-							}
+								}
+							})
 						})
+						
 						if (count != 0)
 							this.setState({ role: response.role });
 						else {

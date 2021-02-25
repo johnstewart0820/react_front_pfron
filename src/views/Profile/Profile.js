@@ -8,6 +8,7 @@ import { useToasts } from 'react-toast-notifications'
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import users from '../../apis/users';
+import { Autocomplete } from '@material-ui/lab';
 
 const Profile = props => {
   const { children } = props;
@@ -18,7 +19,7 @@ const Profile = props => {
   const breadcrumbs = [{active: true, href: '/users', label: 'Użytkownicy systemu'}, {active: false, label: 'Edytuj profil'}];
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState(0);
+  const [role, setRole] = useState([]);
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -46,7 +47,12 @@ const Profile = props => {
         setName(response.data.user.name);
         setEmail(response.data.user.email);
         setActivateStatus(response.data.user.activate_status === '1' ? true : false);
-        setRole(response.data.user.id_role);
+        let id_role_arr = response.data.user.id_role.split(',');
+		let role_arr = [];
+		for (let i = 0; i <id_role_arr.length; i ++) {
+			role_arr.push(roleList[id_role_arr[i] - 1]);
+		}
+        setRole(role_arr);
       }
     })
   }, [roleList]);
@@ -56,7 +62,7 @@ const Profile = props => {
   }
 
   const handleSave = () => {
-    if (name.length === 0 || email.length === 0 || parseInt(role) === 0) {
+    if (name.length === 0 || email.length === 0 || role.length === 0) {
       addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else if (password.length > 0 || newPassword.length > 0 || repeatPassword.length > 0) {
       if (password.length === 0 || newPassword.length === 0 || repeatPassword.length === 0 || (newPassword !== repeatPassword)) {
@@ -66,7 +72,11 @@ const Profile = props => {
           addToast('Wprowadź poprawne pola hasła.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
         else {
           setProgressStatus(true);
-          users.updateProfile(name, email, role, activateStatus, password, newPassword)
+		  let role_arr = [];
+			role.map((item, index) => {
+				role_arr.push(item.id);
+			})
+          users.updateProfile(name, email, role_arr, activateStatus, password, newPassword)
           .then(response => {
             if (response.code === 401) {
               history.push('/login');
@@ -131,7 +141,15 @@ const Profile = props => {
                 <div className={classes.input_box_label} htmlFor="type">E-mail</div>
                 <input className={classes.input_box} type="name" value={email} name="name" onChange={(e) => setEmail(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Rola</div>
-                <SingleSelect value={role} handleChange={setRole} list={roleList} />
+                <Autocomplete
+                  multiple
+                  className={classes.name_select_box}
+                  onChange={(event, value) => setRole(value ? value : [])}
+				  value={role}
+                  options={roleList}
+                  getOptionLabel={(option) => roleList && option && option.name}
+                  renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+                />
                 <FormControlLabel
                   className={classes.rememberMe}
                   control={

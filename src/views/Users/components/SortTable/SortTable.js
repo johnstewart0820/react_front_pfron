@@ -24,13 +24,14 @@ const SortTable = (props) => {
 
   const getRoleName = (id) => {
     let name = '';
+	let arr = id.split(',');
+	let _name_arr = [];
     if (!roleList || roleList.length === 0)
       return name;
-    name = roleList.map((item, index) => {
-      if (parseInt(item.id) === parseInt(id)) {
-        return item.name;
-      }
-    })
+	for (let i = 0; i < arr.length; i ++) {
+		_name_arr.push(roleList[arr[i] - 1].name);
+	}
+	name = _name_arr.join(', ');
     return name;
   }
 

@@ -7,6 +7,7 @@ import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { pl } from 'date-fns/locale';
 import { useToasts } from 'react-toast-notifications'
 
 import { Breadcrumb } from 'components';
@@ -188,7 +189,7 @@ const OrkListEdit = props => {
   }
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
       <div className={classes.public}>
         <div className={classes.controlBlock}>
           <Breadcrumb list={breadcrumbs} />

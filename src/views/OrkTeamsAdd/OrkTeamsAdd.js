@@ -9,6 +9,7 @@ import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { pl } from 'date-fns/locale';
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import ork_team from '../../apis/ork-team';
 import clsx from 'clsx';
@@ -113,7 +114,7 @@ const OrkTeamsAdd = props => {
   }
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <div className={classes.public}>
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />

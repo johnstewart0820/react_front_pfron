@@ -10,6 +10,7 @@ import candidate from '../../apis/candidate';
 import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import { pl } from 'date-fns/locale'
 import DateFnsUtils from '@date-io/date-fns';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/plain.css'
@@ -659,7 +660,7 @@ const CandidatesAdd = props => {
   }
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <div className={classes.public}>
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />

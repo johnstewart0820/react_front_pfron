@@ -8,6 +8,7 @@ import { Autocomplete } from '@material-ui/lab';
 import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import { pl } from 'date-fns/locale';
 import DateFnsUtils from '@date-io/date-fns';
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -173,7 +174,7 @@ const handleError = () => {
   }
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <div className={classes.public}>
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />

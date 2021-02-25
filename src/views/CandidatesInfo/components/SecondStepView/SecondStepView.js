@@ -8,6 +8,8 @@ import useStyles from './style';
 import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import { pl } from 'date-fns/locale';
+import DateFnsUtils from '@date-io/date-fns';
 import ReactQuill, {Quill} from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 
@@ -42,6 +44,7 @@ const SecondStepView = (props) => {
     }
 
   return (
+	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
       <Grid item xs={3} className={classes.form_title}>
         Dane kandydata
@@ -148,6 +151,7 @@ const SecondStepView = (props) => {
         </Grid>
       </Grid>
     </Grid>
+	</MuiPickersUtilsProvider>
   );
 };
 

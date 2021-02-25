@@ -14,6 +14,7 @@ import Routes from './Routes';
 import { ToastProvider } from 'react-toast-notifications';
 import AppContainer from './AppContainer';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { pl } from 'date-fns/locale'
 import LuxonUtils from '@date-io/luxon';
 
 const browserHistory = createBrowserHistory();
@@ -30,7 +31,7 @@ validate.validators = {
 export default class App extends Component {
   render() {
     return (
-      <MuiPickersUtilsProvider utils={LuxonUtils}>
+      <MuiPickersUtilsProvider utils={LuxonUtils} locale={pl}>
         <ToastProvider>
           <ThemeProvider theme={theme}>
             <Router history={browserHistory}>

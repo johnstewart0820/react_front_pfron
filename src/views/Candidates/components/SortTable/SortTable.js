@@ -20,6 +20,7 @@ import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { pl } from 'date-fns/locale'
 import qualification from 'apis/qualification';
 
 const SortTable = (props) => {
@@ -60,7 +61,7 @@ const SortTable = (props) => {
   }
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
       <Table>
         <TableHead>
           <TableRow>

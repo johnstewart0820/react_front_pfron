@@ -10,6 +10,7 @@ import candidate from '../../apis/candidate';
 import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import { pl } from 'date-fns/locale'
 import DateFnsUtils from '@date-io/date-fns';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './tab.css';
@@ -159,7 +160,7 @@ const CandidatesFirstStep = props => {
   }
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <div className={classes.public}>
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />

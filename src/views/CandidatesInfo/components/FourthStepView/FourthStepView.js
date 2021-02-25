@@ -6,6 +6,8 @@ import { SingleSelect} from 'components';
 import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import { pl } from 'date-fns/locale';
+import DateFnsUtils from '@date-io/date-fns';
 import ReactQuill, {Quill} from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 import { withRouter } from 'react-router-dom';
@@ -35,6 +37,7 @@ const FourthStepView = (props) => {
   }
 
   return (
+	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
       <Grid item xs={3} className={classes.form_title}>
         Przypisanie do ORK
@@ -96,6 +99,7 @@ const FourthStepView = (props) => {
         </Grid>
       </Grid>
     </Grid>
+	</MuiPickersUtilsProvider>
   );
 };
 

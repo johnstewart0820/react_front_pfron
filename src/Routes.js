@@ -20,6 +20,7 @@ import {
   SpecialistsAdd as SpecialistsAddView,
   SpecialistsEdit as SpecialistsEditView,
   Participants as ParticipantsView,
+  ParticipantsEdit as ParticipantsEditView,
   OrkTeams as OrkTeamsView,
   OrkTeamsAdd as OrkTeamsAddView,
   OrkTeamsEdit as OrkTeamsEditView,
@@ -144,12 +145,19 @@ const Routes = (props) => {
         title='Dodawanie specjalisty'
         path="/specialists/edit/:id"
       />
-      <RouteWithLayout
+	  <RouteWithLayout
         component={ParticipantsView}
         exact
         layout={MainLayout}
         title='Uczestnicy'
         path="/participants"
+      />
+      <RouteWithLayout
+        component={ParticipantsEditView}
+        exact
+        layout={MainLayout}
+        title='Kandydaci'
+        path="/participants/edit/:id"
       />
       <RouteWithLayout
         component={OrkTeamsView}

@@ -33,6 +33,7 @@ class constants {
 			'/specialists/edit/*',
 
 			'/participants',
+			'/participants/edit/*',
 
 			'/ork_teams',
 			'/ork_teams/create',
@@ -85,6 +86,7 @@ class constants {
 			'/specialists/edit/*',
 
 			'/participants',
+			'/participants/edit/*',
 
 			'/ork_teams',
 			'/ork_teams/create',

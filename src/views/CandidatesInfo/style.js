@@ -75,6 +75,9 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.btn_gray,
         borderColor: theme.palette.btn_gray
     },
+	button: {
+		color: 'black'
+	},
     btnProfile: {
       '& .MuiButton-label': {
         textTransform: 'none',

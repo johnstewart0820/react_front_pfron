@@ -3,6 +3,7 @@ import useStyles from './style';
 import {
   Button, Grid, Card, CircularProgress, TextareaAutosize , FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
 } from '@material-ui/core';
+import {Link} from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications'
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
@@ -184,10 +185,10 @@ const CandidatesThirdStep = props => {
         <Grid item xs={9}>
         <Tabs defaultIndex={2}>
           <TabList>
-            <Tab disabled>ETAP 1</Tab>
-            <Tab disabled>ETAP 2</Tab>
-            <Tab>ETAP 3</Tab>
-            <Tab disabled>ETAP 4</Tab>
+		  	<Tab disabled><Link to={`#`} className={classes.button}>ETAP 1</Link></Tab>
+            <Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 2</Link></Tab>
+            <Tab><Link to={`#`} className={classes.button} disabled>ETAP 3</Link></Tab>
+            <Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 4</Link></Tab>
           </TabList>
           <TabPanel>
           </TabPanel>

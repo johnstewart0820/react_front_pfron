@@ -19,6 +19,7 @@ import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {DeleteModal} from '../Candidates/components';
+import MaskedInput from 'react-text-mask';
 
 const CandidatesEdit = props => {
   const { children } = props;
@@ -877,7 +878,12 @@ const CandidatesEdit = props => {
                 <PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputStyle={{width: '100%', borderRadius: '0px'}}/>
 				<div className={classes.error_label} style={{display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
                 <div className={classes.input_box_label} htmlFor="type">Telefon domowy</div>
-                <PhoneInput country="pl" value={home_phone} onChange={handleChangeHomePhone} inputStyle={{width: '100%', borderRadius: '0px'}}/>
+				<MaskedInput
+					className={clsx({[classes.input_box] : true, [classes.error] : error.home_phone})}
+					mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+					value={home_phone}
+					onChange={(e) => handleChangeHomePhone(e.target.value)}
+				/>
 				<div className={classes.error_label} style={{display: error.home_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
                 <div className={classes.input_box_label} htmlFor="name">Adres e-mail</div>
                 <input className={clsx({[classes.input_box] : true, [classes.error] : error.email})} type="name" value={email} name="name" onChange={(e) => handleChangeEmail(e.target.value)} />
@@ -886,7 +892,12 @@ const CandidatesEdit = props => {
                 <PhoneInput country="pl" value={family_mobile_phone} onChange={handleChangeFamilyMobilePhone} inputStyle={{width: '100%', borderRadius: '0px'}}/>
 				<div className={classes.error_label} style={{display: error.family_mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
                 <div className={classes.input_box_label} htmlFor="type">Numer kontaktowy do bliskiej osoby - Telefon domowy</div>
-                <PhoneInput country="pl" value={family_home_phone} onChange={handleChangeFamilyHomePhone} inputStyle={{width: '100%', borderRadius: '0px'}}/> 
+                <MaskedInput
+					className={clsx({[classes.input_box] : true, [classes.error] : error.family_home_phone})}
+					mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+					value={family_home_phone}
+					onChange={(e) => handleChangeFamilyHomePhone(e.target.value)}
+				/>
 				<div className={classes.error_label} style={{display: error.family_home_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
               </Grid>
             </Grid>

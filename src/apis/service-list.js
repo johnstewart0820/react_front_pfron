@@ -39,12 +39,13 @@ class ServiceList {
             return error;
         })
     }
-    create = (number, name, module, amount_usage, unit, amount_takes, is_required, not_applicable) => {
+    create = (number, name, module, type, amount_usage, unit, amount_takes, is_required, not_applicable) => {
         return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/service-list`, {
             number: number,
             name: name,
             module: module,
+			type: type,
             amount_usage, amount_usage,
             unit: unit,
             amount_takes: amount_takes,
@@ -85,12 +86,13 @@ class ServiceList {
         })
     }
 
-    update = (number, name, module, amount_usage, unit, amount_takes, is_required, not_applicable, id) => {
+    update = (number, name, module, type, amount_usage, unit, amount_takes, is_required, not_applicable, id) => {
         return axios
         .put(`${process.env.REACT_APP_BACKEND_URL}/service-list`, {
             number: number,
             name: name,
             module: module,
+			type: type,
             amount_usage, amount_usage,
             unit: unit,
             amount_takes: amount_takes,

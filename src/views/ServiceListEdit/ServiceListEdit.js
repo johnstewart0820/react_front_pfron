@@ -20,6 +20,8 @@ const ServiceListEdit = props => {
   const [name, setName] = useState('');
   const [module, setModule] = useState(0);
   const [moduleList, setModuleList] = useState([]);
+  const [type, setType] = useState(0);
+  const [typeList, setTypeList] = useState([]);
   const [amount_usage, setAmountUsage] = useState('');
   const [unit, setUnit] = useState(0);
   const [unitList, setUnitList] = useState([]);
@@ -39,6 +41,7 @@ const ServiceListEdit = props => {
         } else {
           setUnitList(response.data.units);
           setModuleList(response.data.modules);
+		  setTypeList(response.data.types);
         }
       })
   }, []);
@@ -52,6 +55,7 @@ const ServiceListEdit = props => {
         setNumber(response.data.service_list.number)
         setName(response.data.service_list.name);
         setModule(response.data.service_list.module);
+		setType(response.data.service_list.type);
         setAmountUsage(response.data.service_list.amount_usage);
         setUnit(response.data.service_list.unit);
         setAmountTakes(response.data.service_list.amount_takes);
@@ -65,6 +69,7 @@ const handleError = () => {
     _error.number = (number.length === 0);
     _error.name = (name.length === 0);
     _error.module = (parseInt(module) === 0);
+	_error.type = (parseInt(type) === 0);
     _error.unit = (parseInt(unit) === 0);
     _error.amount_usage = (amount_usage.length === 0);
     _error.amount_takes = (amount_takes.length === 0);
@@ -94,6 +99,13 @@ const handleError = () => {
     setError(_error);
   }
 
+  const handleChangeType = (value) => {
+	  setType(value);
+	  let _error = JSON.parse(JSON.stringify(error));
+	  _error.type = (parseInt(value) === 0);
+	  setError(_error);
+  }
+
   const handleChangeUnit = (value) => {
     setUnit(value);
     let _error = JSON.parse(JSON.stringify(error));
@@ -121,7 +133,7 @@ const handleError = () => {
   }
   
   const checkError = () => {
-    return name.length === 0 || number.length === 0 || parseInt(module) === 0 || parseInt(unit) === 0 || amount_takes.length === 0 || amount_usage.length === 0;
+    return name.length === 0 || number.length === 0 || parseInt(module) === 0 || parseInt(type) === 0 || parseInt(unit) === 0 || amount_takes.length === 0 || amount_usage.length === 0;
   }
 
   const handleBack = () => {
@@ -135,7 +147,7 @@ const handleError = () => {
     } else {
       setProgressStatus(true);
 
-      service_list.update(number, name, module, amount_usage, unit, amount_takes, is_required, not_applicable, id)
+      service_list.update(number, name, module, type, amount_usage, unit, amount_takes, is_required, not_applicable, id)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
@@ -197,11 +209,17 @@ const handleError = () => {
                     <div className={classes.top_label} htmlFor="name">Nazwa usługi</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                   </Grid>
-                  <Grid item xs={12}>
-                    <div className={classes.input_box_label} htmlFor="type">Moduł</div>
+                  <Grid item xs={6}>
+                    <div className={classes.input_box_label} htmlFor="type">Sekcja</div>
                     <SingleSelect value={module} handleChange={handleChangeModule} list={moduleList} error={error.module}/>
-                    <div className={classes.label}>Minimalny zakres usługi</div>
                   </Grid>
+				  <Grid item xs={6}>
+                    <div className={classes.input_box_label} htmlFor="type">Rodzaj</div>
+                    <SingleSelect value={type} handleChange={handleChangeType} list={typeList} error={error.type}/>
+                  </Grid>
+				  <Grid item xs={12}>
+					<div className={classes.label}>Minimalny zakres usługi</div>
+				  </Grid>
                   <Grid item xs={3}>
                     <div className={classes.input_box_label}>Liczba</div>
                     <input className={clsx({[classes.input_box] : true, [classes.error] : error.amount_usage})} type="name" value={amount_usage} name="name" onChange={(e) => handleChangeAmountUsage(e.target.value)} />

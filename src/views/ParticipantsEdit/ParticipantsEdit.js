@@ -7,6 +7,7 @@ import { useToasts } from 'react-toast-notifications'
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import candidate from '../../apis/candidate';
+import participant from '../../apis/participant';
 import {
   KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
@@ -25,7 +26,7 @@ const ParticipantsEdit = props => {
   const { history } = props;
   const classes = useStyles();
   const { addToast } = useToasts()
-  const breadcrumbs = [{ active: true, label: 'Kandydaci', href: '/candidates' }, { active: false, label: 'Dodaj kandydata' }];
+  const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: false, label: 'Dodaj uczestnicy' }];
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [person_id, setPersonId] = useState('');
@@ -93,6 +94,11 @@ const ParticipantsEdit = props => {
   const [house_hold_status, setHouseHoldStatus] = useState(2);
   const [house_hold_adult_status, setHouseHoldAdultStatus] = useState(2);
   const [uncomfortable_status, setUncomfortableStatus] = useState(2);
+  const [participant_number, setParticipantNumber] = useState('');
+  const [rehabitation_center, setRehabitationCenter] = useState(-1);
+  const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
+  const [participant_status_type, setParticipantStatusType] = useState(0);
+  const [participantStatusTypeList, setParticipantStatusTypeList] = useState([]);
   const [progressStatus, setProgressStatus] = useState(false);
   const [error, setError] = useState({});
   const [openModal, setOpenModal] = useState(false);
@@ -115,7 +121,7 @@ const ParticipantsEdit = props => {
         } else {
           addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
           if (response.code === 200) {
-            setTimeout(function(){history.push('/candidates');}, 1000);
+            setTimeout(function(){history.push('/participants');}, 1000);
           }
           setProgressStatus(false);
         }
@@ -141,7 +147,15 @@ const ParticipantsEdit = props => {
           setEmployedTypeList(response.data.employed_type);
         }
       })
-
+	participant.getInfo()
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+			setRehabitationCenterList(response.data.rehabitation_center);
+			setParticipantStatusTypeList(response.data.participant_status_type);
+        }
+      })
     let _date = new Date();
     setDateOfBirth(_date.getFullYear() + '-' + (_date.getMonth() + 1) + '-' + (_date.getDate()));
     setDateOfCertificate(_date.getFullYear() + '-' + (_date.getMonth() + 1) + '-' + (_date.getDate()));
@@ -149,7 +163,7 @@ const ParticipantsEdit = props => {
 
   useEffect(() => {
     setProgressStatus(true);
-    candidate.get(id)
+    participant.get(id)
     .then(response => {
       if (response.code === 401) {
         history.push('/login');
@@ -212,6 +226,8 @@ const ParticipantsEdit = props => {
         setUncomfortableStatus(parseInt(response.data.candidate.uncomfortable_status));
         setStage(response.data.candidate.stage);
 		setStatus(response.data.candidate.id_status);
+		setParticipantNumber(response.data.candidate_info.participant_number);
+		setRehabitationCenter(response.data.candidate_info.rehabitation_center);
       } 
       setProgressStatus(false);
     })
@@ -219,7 +235,7 @@ const ParticipantsEdit = props => {
   }, [employed_type_list]);
 
   const handleGotoInformation = () => {
-	history.push(`/candidates/info/step${stage}/${id}`)
+	// history.push(`/candidates/info/step${stage}/${id}`)
   }
 
   const handleError = () => {
@@ -274,7 +290,7 @@ const ParticipantsEdit = props => {
   };
 
   const handleBack = () => {
-    history.push('/candidates');
+    history.push('/participants');
   }
 
   function validatepesel(pesel) {
@@ -351,7 +367,7 @@ const ParticipantsEdit = props => {
     } else {
       setProgressStatus(true);
 
-      candidate.update(name, surname, person_id, date_of_birth, place_of_birth, street, house_number, apartment_number, post_code, post_office, city, 
+      participant.update(name, surname, person_id, date_of_birth, place_of_birth, street, house_number, apartment_number, post_code, post_office, city, 
         second_street, second_house_number, second_apartment_number, second_post_code, second_post_office, second_city,
         voivodeship, community, county, mobile_phone, home_phone, email, family_home_phone, family_mobile_phone,
         education, academic_title, stay_status, children_applicable, children_amount, children_age,
@@ -360,14 +376,14 @@ const ParticipantsEdit = props => {
         passive_person_status, full_time_status, evening_student_status, disabled_person_status,
         number_certificate, date_of_certificate, level_certificate, code_certificate, necessary_certificate,
         ethnic_minority_status, homeless_person_status, stay_house_status, house_hold_status, house_hold_adult_status, uncomfortable_status,
-        comment, id)
+        comment, participant_status_type, id)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
         } else {
           addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
           if (response.code === 200) {
-            setTimeout(function(){history.push('/candidates');}, 1000);
+            setTimeout(function(){history.push('/participants');}, 1000);
           }
           setProgressStatus(false);
         }
@@ -771,7 +787,7 @@ const ParticipantsEdit = props => {
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />
         <Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-          Wróć do listy kandydatow
+          Wróć do listy uczestnikow
         </Button>
       </div>
       <Grid container spacing={3} className={classes.formBlock}>
@@ -779,7 +795,7 @@ const ParticipantsEdit = props => {
           <Card className={classes.form}>
             <Grid container spacing={3}>
               <Grid item xs={3} className={classes.form_title}>
-                Dane kandydata
+                Dane uczestnika
               </Grid>
               <Grid item xs={9}>
                 <div className={classes.top_label} htmlFor="name">Imię(Imiona)</div>
@@ -1244,12 +1260,48 @@ const ParticipantsEdit = props => {
             <Grid item xs={12}>
               <Card className={classes.form}>
                 <Grid container spacing={2}>
-                  <div className={classes.form_title}>
+                  <div className={classes.form_title_right}>
+                    Informacje o uczestnika
+                  </div>
+				  <Grid item xs={6}>
+					<div className={classes.input_box_label_left}>
+						Numer uczestnika
+					</div>
+	    		  </Grid>
+				  <Grid item xs={6}>
+					<div className={classes.input_box_label_left}>
+						{participant_number}
+					</div>
+	    		  </Grid>
+				  <Grid item xs={6}>
+					<div className={classes.input_box_label_left}>
+						ORK
+					</div>
+	    		  </Grid>
+				  <Grid item xs={6}>
+					<div className={classes.input_box_label_left}>
+						{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitation_center >= 1 && rehabitationCenterList[rehabitation_center - 1].name}
+					</div>
+	    		  </Grid>
+				  <div className={classes.form_title_right}>
                     Karty informacyjne
                   </div>
                   <Grid item xs={12}>
                     <Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
-                      Załoź kartę informacyjną
+						Zobacz kartę informacyjną
+                    </Button>
+                  </Grid>
+				  <div className={classes.form_title_right}>
+                    Indywidualny Program Rehabilitacji
+                  </div>
+                  <Grid item xs={12}>
+                    <Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
+						Dodaj IPR
+                    </Button>
+                  </Grid>
+				  <Grid item xs={12}>
+                    <Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleGotoInformation}>
+						Zobacz liste IPR uczestnika
                     </Button>
                   </Grid>
                 </Grid>
@@ -1259,10 +1311,8 @@ const ParticipantsEdit = props => {
               <Card className={classes.form}>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
-                    <div className={classes.top_label} htmlFor="name">Etap</div>
-                    <SingleSelect value={stage} list={stageList} disabled={true}/>
-					<div className={classes.top_label} htmlFor="name">Status</div>
-                    <SingleSelect value={status} list={statusList} disabled={true}/>
+                    <div className={classes.top_label} htmlFor="name">Status uczestnika</div>
+                    <SingleSelect value={participant_status_type} handleChange={setParticipantStatusType} list={participantStatusTypeList}/>
                     <div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
                     <TextareaAutosize className={clsx({[classes.textArea] : true, [classes.error] : error.comment})} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika"/>
                     <Grid container spacing={2}>

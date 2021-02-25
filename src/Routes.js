@@ -156,7 +156,7 @@ const Routes = (props) => {
         component={ParticipantsEditView}
         exact
         layout={MainLayout}
-        title='Kandydaci'
+        title='Edycja uczestnika'
         path="/participants/edit/:id"
       />
       <RouteWithLayout

@@ -11,8 +11,8 @@ import {
   Grid
 } from '@material-ui/core';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import EventNoteOutlinedIcon from '@material-ui/icons/EventNoteOutlined';
+import NoteAddOutlinedIcon from '@material-ui/icons/NoteAddOutlined';
 import { SingleSelect } from 'components';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
@@ -173,10 +173,10 @@ const SortTable = (props) => {
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
                   <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => showIprList(item.id)}>
-                    <InfoOutlinedIcon className={classes.icon} />
+                    <EventNoteOutlinedIcon className={classes.icon} />
                   </IconButton>
                   <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => createIpr(item.id)}>
-                    <DeleteOutlineOutlinedIcon className={classes.icon} />
+                    <NoteAddOutlinedIcon className={classes.icon} />
                   </IconButton>
                 </TableCell>
               </TableRow>

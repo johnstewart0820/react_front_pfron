@@ -15,6 +15,11 @@ const useStyles = makeStyles((theme) => ({
     form_title: {
       fontWeight: '500'
     },
+	form_title_right: {
+		fontWeight: '500',
+		marginBottom: theme.spacing(2),
+		marginTop: theme.spacing(1),
+	},
     textArea: {
       width: '100%',
       padding: theme.spacing(2)
@@ -48,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#727e91',
         borderColor: '#727e91',
       },
-      marginTop: theme.spacing(3),
+      margin: theme.spacing(0, 0),
       borderRadius: '0px',
       fontWeight: '300',
       backgroundColor: '#727e91',
@@ -56,6 +61,24 @@ const useStyles = makeStyles((theme) => ({
       color: 'white',
       width: '100%'
     },
+	btnIprList: {
+		'& .MuiButton-label': {
+		  textTransform: 'none',
+		  fontSize: '14px',
+		},
+		'&:hover': {
+		  backgroundColor: '#727e91',
+		  borderColor: '#727e91',
+		  color: 'white'
+		},
+		margin: theme.spacing(0, 0),
+		borderRadius: '0px',
+		fontWeight: '300',
+		backgroundColor: 'none',
+		borderColor: '#727e91',
+		color: '#727e91',
+		width: '100%'
+	  },
     date_picker: {
       marginTop: theme.spacing(1),
     },
@@ -90,6 +113,9 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(1),
       fontSize: '14px',
     },
+	input_box_label_left: {
+		fontSize: '14px',
+	},
     input_box: {
       padding: '10px 20px',
       width: '100%',

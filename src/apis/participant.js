@@ -74,7 +74,7 @@ class Participant {
         passive_person_status, full_time_status, evening_student_status, disabled_person_status,
         number_certificate, date_of_certificate, level_certificate, code_certificate, necessary_certificate,
         ethnic_minority_status, homeless_person_status, stay_house_status, house_hold_status, house_hold_adult_status, uncomfortable_status,
-        comment, id) => {
+        comment, participant_status_type, id) => {
         return axios
         .put(`${process.env.REACT_APP_BACKEND_URL}/participant`, {
             name: name,
@@ -133,6 +133,7 @@ class Participant {
             house_hold_adult_status: house_hold_adult_status,
             uncomfortable_status: uncomfortable_status,
             comment: comment,
+			participant_status_type: participant_status_type,
             id: id
         }, {
             headers: authHeader(storage.getStorage('token'))

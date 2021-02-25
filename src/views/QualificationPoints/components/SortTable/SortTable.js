@@ -30,6 +30,9 @@ const SortTable = (props) => {
   }
 
   const getAmbassadorStr = (str) => {
+	  if (str == null) {
+		  str = '';
+	  }
     if (!ambassadorList || ambassadorList.length == 0)
       return '';
     let list = str.split(',');

@@ -236,7 +236,7 @@ const Logs = props => {
         />
         <div className={classes.pagination}>
           <Pagination 
-            count={ total%selectedCount == 0 ? total / selectedCount : Math.round(total / selectedCount) + 1} 
+            count={ total%selectedCount == 0 ? total / selectedCount : parseInt(total / selectedCount) + 1} 
             onChange={(e, page) => {setPage(page)}} 
             page={page} 
             showFirstButton 

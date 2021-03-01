@@ -71,8 +71,6 @@ const handleError = () => {
     _error.module = (parseInt(module) === 0);
 	_error.type = (parseInt(type) === 0);
     _error.unit = (parseInt(unit) === 0);
-    _error.amount_usage = (amount_usage.length === 0);
-    _error.amount_takes = (amount_takes.length === 0);
     setError(_error);
   };
 
@@ -114,26 +112,15 @@ const handleError = () => {
   }
   
   const handleChangeAmountUsage = (value) => {
-    if (!isNaN(value)) {
-      setAmountUsage(value);     
-      let _error = JSON.parse(JSON.stringify(error));
-      _error.amount_usage = (parseInt(value) === 0);
-      setError(_error);
-    }
+	setAmountUsage(value);
   }
 
   const handleChangeAmountTakes = (value) => {
-    if (!isNaN(value)) {
-      setAmountTakes(value);
-      let _error = JSON.parse(JSON.stringify(error));
-      _error.amount_takes = (parseInt(value) === 0);
-      setError(_error);
-    }
-    
+	setAmountTakes(value);
   }
   
   const checkError = () => {
-    return name.length === 0 || number.length === 0 || parseInt(module) === 0 || parseInt(type) === 0 || parseInt(unit) === 0 || amount_takes.length === 0 || amount_usage.length === 0;
+    return name.length === 0 || number.length === 0 || parseInt(module) === 0 || parseInt(type) === 0 || parseInt(unit) === 0;
   }
 
   const handleBack = () => {
@@ -222,7 +209,7 @@ const handleError = () => {
 				  </Grid>
                   <Grid item xs={3}>
                     <div className={classes.input_box_label}>Liczba</div>
-                    <input className={clsx({[classes.input_box] : true, [classes.error] : error.amount_usage})} type="name" value={amount_usage} name="name" onChange={(e) => handleChangeAmountUsage(e.target.value)} />
+                    <input className={classes.input_box} type="name" value={amount_usage} name="name" onChange={(e) => handleChangeAmountUsage(e.target.value)} />
                   </Grid>
                   <Grid item xs={5}>
                     <div className={classes.input_box_label}>Jednostka</div>
@@ -230,7 +217,7 @@ const handleError = () => {
                   </Grid>
                   <Grid item xs={4}>
                     <div className={classes.input_box_label}>Czas trwania (w minutach)</div>
-                    <input className={clsx({[classes.input_box] : true, [classes.error] : error.amount_takes})} type="name" value={amount_takes} name="name" onChange={(e) => handleChangeAmountTakes(e.target.value)} />
+                    <input className={classes.input_box} type="name" value={amount_takes} name="name" onChange={(e) => handleChangeAmountTakes(e.target.value)} />
                   </Grid>
                   <Grid item xs={12}>
                     <FormControlLabel

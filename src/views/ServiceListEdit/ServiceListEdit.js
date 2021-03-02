@@ -237,7 +237,7 @@ const handleError = () => {
                       control={
                         <Checkbox
                           checked={not_applicable}
-                          onChange={() => setIsRequired(!is_required)}
+                          onChange={() => setNotApplicable(!not_applicable)}
                         />
                       }
                       label='Zezwalaj na "Nie dotyczy"'

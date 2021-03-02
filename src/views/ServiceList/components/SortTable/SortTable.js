@@ -53,15 +53,6 @@ const SortTable = (props) => {
         <TableRow>
           <TableCell>
             <TableSortLabel
-              active={sortBy === 0}
-              direction={sortOrder}
-              onClick={() => requestSort(0)}
-            >
-              ID
-            </TableSortLabel>
-          </TableCell>
-          <TableCell>
-            <TableSortLabel
               active={sortBy === 1}
               direction={sortOrder}
               onClick={() => requestSort(1)}
@@ -105,7 +96,6 @@ const SortTable = (props) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
           <TableCell><input className={classes.input_box} type="name" value={searchNumber} name="searchId" onChange={(e) => setSearchNumber(e.target.value)} /></TableCell>
           <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchModule} handleChange={setSearchModule} list={moduleList} /> </TableCell>
@@ -115,11 +105,10 @@ const SortTable = (props) => {
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell>{item.id}</TableCell>
               <TableCell>{item.number}</TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>{getModuleName(item.module)}</TableCell>
-              <TableCell>{`${item.amount_usage} ${getUnitName(item.unit)}`}</TableCell>
+              <TableCell>{getUnitName(item.unit)}</TableCell>
               <TableCell>
                 <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/service_list/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

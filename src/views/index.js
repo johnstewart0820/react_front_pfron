@@ -24,6 +24,8 @@ export { default as OrkTeamsAdd } from './OrkTeamsAdd';
 export { default as OrkTeamsEdit } from './OrkTeamsEdit';
 
 export { default as IprList } from './IprList';
+export { default as IprAdd } from './IprAdd';
+export { default as IprEdit } from './IprEdit';
 
 export { default as ServiceList } from './ServiceList';
 export { default as ServiceListAdd } from './ServiceListAdd';

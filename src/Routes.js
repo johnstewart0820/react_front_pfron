@@ -25,6 +25,8 @@ import {
   OrkTeamsAdd as OrkTeamsAddView,
   OrkTeamsEdit as OrkTeamsEditView,
   IprList as IprListView,
+  IprAdd as IprAddView,
+  IprEdit as IprEditView,
   ServiceList as ServiceListView,
   ServiceListAdd as ServiceListAddView,
   ServiceListEdit as ServiceListEditView,
@@ -182,8 +184,22 @@ const Routes = (props) => {
         component={IprListView}
         exact
         layout={MainLayout}
-        title='Lista IPR'
+        title='Indywidualne Programy Rehabilitacji'
         path="/ipr_list"
+      />
+	  <RouteWithLayout
+        component={IprAddView}
+        exact
+        layout={MainLayout}
+        title='Dodaj IPR'
+        path="/ipr_list/create"
+      />
+	  <RouteWithLayout
+        component={IprEditView}
+        exact
+        layout={MainLayout}
+        title='Dodaj IPR dla uczestnika'
+        path="/ipr_list/edit/:id"
       />
       <RouteWithLayout
         component={ServiceListView}

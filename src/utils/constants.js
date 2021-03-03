@@ -40,6 +40,8 @@ class constants {
 			'/ork_teams/edit/*',
 
 			'/ipr_list',
+			'/ipr_list/create',
+			'/ipr_list/edit/*',
 
 			'/service_list',
 			'/service_list/create',
@@ -93,6 +95,8 @@ class constants {
 			'/ork_teams/edit/*',
 
 			'/ipr_list',
+			'/ipr_list/create',
+			'/ipr_list/edit/*',
 
 			'/service_list',
 			'/service_list/create',

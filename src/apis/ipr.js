@@ -20,10 +20,13 @@ class Ipr {
         })
     }
 
-	getPlanInfo = () => {
+	getPlanInfo = (id) => {
         return axios
         .get(`${process.env.REACT_APP_BACKEND_URL}/ipr/get_plan_info`, {
             headers: authHeader(storage.getStorage('token')),
+			params: {
+				id: id
+			}
         })
         .then(response => {
             if (response.data.code === 401) {

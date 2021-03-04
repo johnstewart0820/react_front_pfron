@@ -31,58 +31,7 @@ const ScheduleView = (props) => {
 
   return (
 	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
-    <Grid container spacing={3} className={classes.form}>
-      <Grid item xs={3} className={classes.form_title}>
-        Decyzja komisji
-      </Grid>
-      <Grid item xs={9}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <FormControl component="fieldset">
-              <FormLabel>Decyzja komisji centralnej</FormLabel>
-              <RadioGroup aria-label="decision_central_commision" name="decision_central_commision" value={parseInt(decision_central_commision)} onChange={(e) => setDecisionCentralCommision(parseInt(e.target.value))} row>
-                <FormControlLabel value={1} control={<Radio />} label='TAK' />
-                <FormControlLabel value={2} control={<Radio />} label='NIE' />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          {
-            decision_central_commision === 1 ?
-            <>
-              <Grid item xs={12}>
-                <div className={classes.label_content}>Data wydania decyzji</div>
-                <KeyboardDatePicker
-                  disableToolbar
-                  className={classes.date_picker}
-                  variant="inline"
-                  format="dd.MM.yyyy"
-                  margin="normal"
-                  id="date-picker-inline"
-                  value={date_central_commision}
-                  onChange={(value) => setDateCentralCommision(handleDate(value))}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              </Grid>
-            
-              <Grid item xs={12}>
-                <div className={classes.label_content}>Uwagi ogolne</div>
-                <ReactQuill 
-                  onChange={setGeneralRemark}
-                  value={general_remark}
-                  className={classes.qlClass}
-                />
-              </Grid>
-            </>
-            :
-            <></>
-          }
-          
-          
-        </Grid>
-      </Grid>
-    </Grid>
+    
 	</MuiPickersUtilsProvider>
   );
 };

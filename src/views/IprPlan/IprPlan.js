@@ -37,11 +37,25 @@ const IprPlan = props => {
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Plan realizacji IPR' }];
 	const [show_status, setShowStatus] = useState(false);
 	const [moduleList, setModuleList] = useState([]);
+	const [selectedItem, setSelectedItem] = useState(0);
+
+	const [participant_number, setParticipantNumber] = useState('');
+	const [participant_name, setParticipantName] = useState('');
+	const [participant, setParticipant] = useState(0);
+	const [participantList, setParticipantList] = useState([]);
+	const [ipr_type, setIprType] = useState(0);
+	const [iprTypeList, setIprTypeList] = useState([]);
+	const [number, setNumber] = useState(0);
+	const [schedule_date, setScheduleDate] = useState(new Date());
+	const [ork_person, setOrkPerson] = useState(null);
+	const [orkPersonList, setOrkPersonList] = useState([]);
+	const [profession, setProfession] = useState('');
+
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
 	useEffect(() => {
-		ipr.getPlanInfo()
+		ipr.getPlanInfo(id)
 			.then(response => {
 				if (response.code === 401) {
 					history.push('/login');
@@ -68,26 +82,80 @@ const IprPlan = props => {
 					setModuleList(_arr);
 				}
 			})
+		
+		ipr.getInfo()
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					setIprTypeList(response.data.ipr_type);
+					setParticipantList(response.data.participant);
+				}
+			})
 	}, []);
+
+	
+	useEffect(() => {
+		ipr.get(id)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					setParticipant(response.data.ipr.id_candidate);
+					getOrkPersonData(response.data.ipr.id_candidate, response.data.ipr.id_ork_person);
+					for (let i = 0; i < participantList.length; i ++) {
+						if (participantList[i].id === response.data.ipr.id_candidate) {
+							setParticipantName(participantList[i].name + ' ' + participantList[i].surname);
+							setParticipantNumber(participantList[i].participant_number);
+						}
+					}
+					setIprType(response.data.ipr.ipr_type);
+					setNumber(response.data.ipr.number);
+					// setOrkPerson(response.data.ipr.id_ork_person);
+					setProfession(response.data.ipr.profession);
+					setScheduleDate(new Date(response.data.ipr.schedule_date));
+				}
+			})
+	}, [participantList]);
+
+	const getOrkPersonData = (data, id_ork_person) => {
+		ipr.getOrkPerson(data)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					setNumber(response.data.count);
+					setOrkPersonList(response.data.ork_person);
+					for (let i = 0; i < response.data.ork_person.length; i ++) {
+						if (response.data.ork_person[i].id == id_ork_person)
+							setOrkPerson(response.data.ork_person[i]);
+					}
+				}
+			})
+	}
 
 	const handleBack = () => {
 		history.push('/ipr_list');
 	}
 
 	const handleSave = () => {
-		setProgressStatus(true);
-		ipr.updatePlan(moduleList, id)
-			.then(response => {
-				if (response.code === 401) {
-					history.push('/login');
-				} else {
-					addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
-					if (response.code === 200) {
-						setTimeout(function () { history.push('/ipr_list'); }, 1000);
+		if (selectedItem == 0) {
+			setProgressStatus(true);
+			ipr.updatePlan(moduleList, id)
+				.then(response => {
+					if (response.code === 401) {
+						history.push('/login');
+					} else {
+						addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						if (response.code === 200) {
+							setTimeout(function () { history.push('/ipr_list'); }, 1000);
+						}
+						setProgressStatus(false);
 					}
-					setProgressStatus(false);
-				}
-			})
+				})
+		} else {
+			
+		}
 	}
 
 	const handleDelete = () => {
@@ -145,37 +213,89 @@ const IprPlan = props => {
 								</div>
 							</Grid>
 						</Grid>
+						{
+							show_status ?
+							<Grid container spacing={3}>
+							<Grid item xs={3}></Grid>
+							<Grid item xs={9}>
+								<Grid container spacing={3}>
+									<Grid item xs={5}>
+										<div className={classes.top_label} htmlFor="name">Numer uczestnika</div>
+										<div className={classes.number}>{participant_number}</div>
+									</Grid>
+									<Grid item xs={7}>
+										<div className={classes.top_label} htmlFor="name">Uczestnik</div>
+										<div className={classes.number}>{participant_name}</div>
+									</Grid>
+									<Grid item xs={5}>
+										<div className={classes.top_label} htmlFor="name">Typ</div>
+										<SingleSelect value={ipr_type} list={iprTypeList} disabled={true}/>
+									</Grid>
+									<Grid item xs={2}>
+										<div className={classes.top_label} htmlFor="name">Numer</div>
+										<div className={classes.number}>{number}</div>
+									</Grid>
+									<Grid item xs={5}>
+										<div className={classes.top_label} htmlFor="name">Data wypelnienia</div>
+										<KeyboardDatePicker
+											disableToolbar
+											disabled={true}
+											variant="inline"
+											format="dd.MM.yyyy"
+											margin="normal"
+											id="date-picker-inline"
+											value={schedule_date}
+											onChange={setScheduleDate}
+											KeyboardButtonProps={{
+												'aria-label': 'change date',
+											}}
+										/>
+									</Grid>
+									<Grid item xs={12}>
+										<div className={classes.top_label} htmlFor="name">Specjalista ds. zarzadzania rehabilitacja</div>
+										<Autocomplete
+											disabled={true}
+											className={classes.name_select_box}
+											onChange={(event, value) => setOrkPerson(value)}
+											value={ork_person}
+											options={orkPersonList}
+											getOptionLabel={(option) => participantList && option && option.name}
+											renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+										/>
+									</Grid>
+									<Grid item xs={12}>
+										<div className={classes.top_label} htmlFor="name">Wybrany zawod</div>
+										<input className={classes.input_box} type="name" value={profession} name="name" disabled={true}/>
+									</Grid>
+								</Grid>
+							</Grid>
+							</Grid>
+							:
+							<></>
+						}
 					</Card>
-					{
-						show_status ?
-						<div className={classes.second_form	}>
-							<Tabs>
-								<TabList>
-									<Tab style={{width: '50%'}}>PLAN REALIZACJI</Tab>
-									<Tab style={{width: '50%'}}>HARMONOGRAMY TYGODNIOWE</Tab>
-								</TabList>
-								<TabPanel>
-									<PlanView
-										moduleList={moduleList}
-										setModuleList={setModuleList}
-									/>
-								</TabPanel>
-								<TabPanel>
-									<ScheduleView/>
-								</TabPanel>
-							</Tabs>
-						</div>
-						:
-						<></>
-					}
+					<div className={classes.second_form	}>
+						<Tabs onSelect={setSelectedItem}>
+							<TabList >
+								<Tab style={{width: '50%'}}>PLAN REALIZACJI</Tab>
+								<Tab style={{width: '50%'}}>HARMONOGRAMY TYGODNIOWE</Tab>
+							</TabList>
+							<TabPanel>
+								<PlanView
+									moduleList={moduleList}
+									setModuleList={setModuleList}
+								/>
+							</TabPanel>
+							<TabPanel>
+								<ScheduleView/>
+							</TabPanel>
+						</Tabs>
+					</div>
 					
 				</Grid>
 				<Grid item xs={3}>
 					<Card className={classes.form}>
 						<Grid container spacing={3}>
-							<Grid item xs={12}>
-								<Link to={`/ipr_list/plan/edit/${id}`} className={classes.link}><div className={classes.top_label}>Dodaj proponowany zakres wsparcia</div></Link>
-							</Grid>
 							<Grid item xs={4}>
 								<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
 								<PictureAsPdfOutlinedIcon/>

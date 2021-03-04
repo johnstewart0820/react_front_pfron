@@ -152,7 +152,7 @@ const SortTable = (props) => {
 			  <TableCell>{getDate(item.created_at)}</TableCell>
 			  <TableCell>{getDate(item.schedule_date)}</TableCell>
               <TableCell>
-                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/ipr_list/edit/${item.id}`)}>
+                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/ipr_list/plan/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>
                 </IconButton>
                 <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>

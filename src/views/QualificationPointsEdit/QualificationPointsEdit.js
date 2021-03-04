@@ -48,7 +48,7 @@ const QualificationPointsEdit = props => {
       } else {
         setName(response.data.qualification_point.name);
         setType(response.data.qualification_point.type);
-        let list = response.data.qualification_point.ambassador.split(',');
+        let list = response.data.qualification_point.ambassador ? response.data.qualification_point.ambassador.split(',') : [];
         let ambass_list = [];
         ambassadorList.map((item, index) => {
           for (let i = 0; i < list.length; i ++) {

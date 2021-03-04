@@ -20,6 +20,24 @@ class Ipr {
         })
     }
 
+	getPlanInfo = () => {
+        return axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/ipr/get_plan_info`, {
+            headers: authHeader(storage.getStorage('token')),
+        })
+        .then(response => {
+            if (response.data.code === 401) {
+                storage.removeStorage('token');
+                storage.removeStorage('role');
+                return response.data;
+            } else if (response.data.code === 200) {
+                return response.data;
+            }
+        }).catch(error => {
+            return error;
+        })
+    }
+
 	getOrkPerson = (id) => {
         return axios
         .get(`${process.env.REACT_APP_BACKEND_URL}/ipr/ork_person`, {
@@ -80,6 +98,22 @@ class Ipr {
             return error;
         })
     }
+
+	updatePlan = (moduleList, id) => {
+		return axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/ipr/plan`, {
+            moduleList: moduleList,
+			id: id,
+        }, {
+            headers: authHeader(storage.getStorage('token'))
+        }).then(response => {
+            if (response.data.code === 401)
+                storage.removeStorage('token');
+            return response.data;
+        }).catch(error => {
+            return error;
+        })
+	}
     
     getListByOption = (sort_column, sort_order, count, page, searchId, searchName, searchIprType, searchNumber, searchCreatedAt, searchScheduleDate) => {
         return axios

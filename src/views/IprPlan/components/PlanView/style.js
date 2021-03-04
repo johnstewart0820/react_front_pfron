@@ -11,27 +11,42 @@ const useStyles = makeStyles((theme) => ({
     form: {
       padding: theme.spacing(3),
       fontFamily: 'roboto',
+      color: '#263238',
+      marginTop: theme.spacing(0)
     },
     form_title: {
       fontWeight: '500'
     },
-    btnSave: {
-        '& .MuiButton-label': {
-          textTransform: 'none',
-          fontSize: '14px',
-        },
-        '&:hover': {
-          backgroundColor: 'darkgray',
-          borderColor: 'darkgray',
-        },
-        borderRadius: '0px',
-        fontWeight: '300',
-        backgroundColor: 'darkgray',
-        borderColor: 'darkgray',
-        color: 'white',
-        width: '100%'
+	small_title: {
+		fontSize: '13px',
+		marginTop: theme.spacing(0.5)
+	},
+	normal_font: {
+		fontSize: '14px'
+	},
+	name: {
+		fontSize: '14px',
+		marginLeft: theme.spacing(2),
+		marginTop: theme.spacing(2),
+	},
+    textArea: {
+      width: '100%',
+      padding: theme.spacing(2)
     },
-    btnDelete: {
+	divide: {
+        backgroundColor: 'lightgray',
+        height: '1px',
+        width: 'calc(100% / 3 * 4)',
+        margin: theme.spacing(2.5, 0,),
+		marginLeft: 'calc(-100% / 3)',
+    },
+	divide_big: {
+        backgroundColor: 'lightgray',
+        height: '1px',
+        width: '100%',
+        margin: theme.spacing(2.5, 0,),
+    },
+    btnSave: {
       '& .MuiButton-label': {
         textTransform: 'none',
         fontSize: '14px',
@@ -40,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'darkgray',
         borderColor: 'darkgray',
       },
+      marginTop: theme.spacing(3),
       borderRadius: '0px',
       fontWeight: '300',
       backgroundColor: 'darkgray',
@@ -47,7 +63,30 @@ const useStyles = makeStyles((theme) => ({
       color: 'white',
       width: '100%'
     },
-    btnBack: {
+    error: {
+      border: '0.5px solid red',
+    },
+    btnOption: {
+      '& .MuiButton-label': {
+        textTransform: 'none',
+        fontSize: '14px',
+      },
+      '&:hover': {
+        backgroundColor: '#727e91',
+        borderColor: '#727e91',
+      },
+      marginTop: theme.spacing(3),
+      borderRadius: '0px',
+      fontWeight: '300',
+      backgroundColor: '#727e91',
+      borderColor: '#727e91',
+      color: 'white',
+      width: '100%'
+    },
+    date_picker: {
+      marginTop: theme.spacing(1),
+    },
+    btnCreate: {
         '& .MuiButton-label': {
           textTransform: 'none',
           fontSize: '14px',
@@ -63,15 +102,17 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.btn_gray,
         borderColor: theme.palette.btn_gray
     },
-    divide: {
-        backgroundColor: 'lightgray',
-        height: '1px',
-        width: '100%',
-        margin: theme.spacing(2.5, 0,)
-    },
     top_label: {
-      marginBottom: theme.spacing(1),
-      fontSize: '14px',      
+        fontWeight: '400',
+        fontSize: '14px',
+		marginBottom: theme.spacing(1)
+    },
+    top_label_content: {
+        fontSize: '14px',
+    },
+    label_content: {
+        fontSize: '14px',
+        marginBottom: theme.spacing(1)
     },
     input_box_label: {
       marginTop: theme.spacing(2),
@@ -83,14 +124,6 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       fontSize: '14px'
     },
-    error: {
-      border: '0.5px solid red'
-    },
-	number: {
-		marginTop: theme.spacing(2),
-		marginLeft: theme.spacing(2),
-		fontSize: '14px',
-	},
     name_select_box: {
       '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {
         padding: '2px 10px',
@@ -112,27 +145,6 @@ const useStyles = makeStyles((theme) => ({
         height: '70%'
       }
     },
-	btnOption: {
-		'& .MuiButton-label': {
-		  textTransform: 'none',
-		  fontSize: '14px',
-		},
-		'&:hover': {
-		  backgroundColor: '#727e91',
-		  borderColor: '#727e91',
-		},
-		borderRadius: '0px',
-		fontWeight: '300',
-		backgroundColor: '#727e91',
-		borderColor: '#727e91',
-		color: 'white',
-		width: '100%'
-	},
-	link: {
-		color: theme.palette.green,
-		fontSize: '15px',
-		fontWeight: '500'
-	},
     progressContainer: {
       position: 'absolute',
       top: '50%',

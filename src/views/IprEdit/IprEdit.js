@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import useStyles from './style';
 import {
 	Button, Grid, Card, TextField, CircularProgress
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { useToasts } from 'react-toast-notifications'
 import { Autocomplete } from '@material-ui/lab';
 
@@ -16,6 +16,10 @@ import {
 } from '@material-ui/pickers';
 import { pl } from 'date-fns/locale';
 import DateFnsUtils from '@date-io/date-fns';
+
+import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
+import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const IprEdit = props => {
 	const id = props.match.params.id;
@@ -158,6 +162,15 @@ const IprEdit = props => {
 				}
 			})
 	}
+
+	const handlePreview = () => {
+
+	}
+
+	const handleExportPdf = () => {
+
+	}
+
 	const handleCloseModal = () => {
 		setOpenModal(false);
 	}
@@ -227,18 +240,6 @@ const IprEdit = props => {
 										<input className={classes.input_box} type="name" value={profession} name="name" onChange={(e) => handleChangeProfession(e.target.value)} />
 									</Grid>
 								</Grid>
-
-								{/* <div className={classes.input_box_label} htmlFor="type">Typ punktu</div>
-								<SingleSelect value={type} handleChange={(value) => handleChangeType(value)} list={typeList} error={error.type} />
-								<div className={classes.input_box_label} htmlFor="ambassador">Ambasadorzy</div>
-								<Autocomplete
-									multiple
-									className={classes.name_select_box}
-									onChange={(event, value) => setAmbassador(value ? value : [])}
-									options={ambassadorList}
-									getOptionLabel={(option) => ambassadorList && option && option.name}
-									renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
-								/> */}
 							</Grid>
 						</Grid>
 					</Card>
@@ -246,6 +247,24 @@ const IprEdit = props => {
 				<Grid item xs={3}>
 					<Card className={classes.form}>
 						<Grid container spacing={3}>
+							<Grid item xs={12}>
+								<Link to={`/ipr_list/plan/edit/${id}`} className={classes.link}><div className={classes.top_label}>Dodaj proponowany zakres wsparcia</div></Link>
+							</Grid>
+							<Grid item xs={4}>
+								<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
+								<PictureAsPdfOutlinedIcon/>
+								</Button>
+							</Grid>
+							<Grid item xs={4}>
+								<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
+								<FindInPageOutlinedIcon/>
+								</Button>
+							</Grid>
+							<Grid item xs={4}>
+								<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
+								<DeleteIcon/>
+								</Button>
+							</Grid>
 							<Grid item xs={12}>
 								<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
 									Zapisz

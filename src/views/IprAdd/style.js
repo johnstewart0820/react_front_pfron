@@ -59,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
     },
 	number: {
 		marginTop: theme.spacing(2),
-		marginLeft: theme.spacing(2)
+		marginLeft: theme.spacing(2),
+		fontSize: '14px',
 	},
     input_box_label: {
       marginTop: theme.spacing(2),

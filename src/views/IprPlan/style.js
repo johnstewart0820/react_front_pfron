@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(3),
       fontFamily: 'roboto',
     },
+	second_form: {
+		marginTop: theme.spacing(3),
+		fontFamily: 'roboto',
+	},
     form_title: {
       fontWeight: '500'
     },

@@ -21,7 +21,6 @@ const Payments = props => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [searchId, setSearchId] = useState('');
-  const [searchName, setSearchName] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [searchRehabitationCenter, setSearchRehabitationCenter] = useState(0);
   const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
@@ -53,7 +52,7 @@ const Payments = props => {
   useEffect(() => {
     handleSearch();
     setPage(1);
-  }, [selectedCount, searchId, searchName, searchValue, searchRehabitationCenter, searchService]);
+  }, [selectedCount, searchId, searchValue, searchRehabitationCenter, searchService]);
   
   const requestSort = (pSortBy) => {
     var sortOrder = "asc";
@@ -65,7 +64,7 @@ const Payments = props => {
   
   const handleSearch = () => {
     payment
-      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchName, searchValue, searchRehabitationCenter, searchService)
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchValue, searchRehabitationCenter, searchService)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
@@ -87,7 +86,6 @@ const Payments = props => {
     for (let i = 0; i < data.length; i ++) {
       let item = [];
       item.push(data[i].id);
-      item.push(data[i].name);
 	  item.push(data[i].value);
 	  item.push(rehabitationCenterList[data[i].rehabitation_center - 1].name);
       item.push(serviceList[data[i].service - 1].name);
@@ -95,7 +93,7 @@ const Payments = props => {
     }
     
     EXCEL.outPut({
-      header: ['ID', 'Nazwa kosztu', 'Wysokość', 'Koszt dla ORK', 'Usluga'],
+      header: ['ID', 'Wysokość', 'Koszt dla ORK', 'Usluga'],
       data: export_data,
       name: 'download'
     })
@@ -162,8 +160,6 @@ const Payments = props => {
           setSearchId={setSearchId}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
-          searchName={searchName}
-          setSearchName={setSearchName}
           searchRehabitationCenter={searchRehabitationCenter}
           setSearchRehabitationCenter={setSearchRehabitationCenter}
           rehabitationCenterList={rehabitationCenterList}

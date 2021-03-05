@@ -39,10 +39,9 @@ class Payment {
             return error;
         })
     }
-    create = (name, value, rehabitation_center, service) => {
+    create = (value, rehabitation_center, service) => {
         return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/payment`, {
-            name: name,
             value: value,
             rehabitation_center: rehabitation_center,
             service: service
@@ -57,7 +56,7 @@ class Payment {
         })
     }
     
-    getListByOption = (sort_column, sort_order, count, page, searchId, searchName, searchValue, searchRehabitationCenter, searchService) => {
+    getListByOption = (sort_column, sort_order, count, page, searchId, searchValue, searchRehabitationCenter, searchService) => {
         return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/payment/getListByOption`, {
             sort_column: sort_column,
@@ -65,7 +64,6 @@ class Payment {
             count: count,
             page: page,
             searchId: searchId,
-            searchName: searchName,
             searchValue: searchValue,
             searchRehabitationCenter: searchRehabitationCenter,
             searchService: searchService,
@@ -81,10 +79,9 @@ class Payment {
         })
     }
 
-    update = (name, value, rehabitation_center, service, id) => {
+    update = (value, rehabitation_center, service, id) => {
         return axios
         .put(`${process.env.REACT_APP_BACKEND_URL}/payment`, {
-            name: name,
             value: value,
             rehabitation_center: rehabitation_center,
             service: service,

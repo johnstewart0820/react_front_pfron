@@ -15,7 +15,6 @@ const PaymentsEdit = props => {
   const classes = useStyles();
   const { addToast } = useToasts()
   const breadcrumbs = [{ active: true, label: 'Finanse', href: '/' },{ active: true, label: 'Zdefiniowane koszty usług', href: '/payments' }, { active: false, label: 'Dodaj koszt' }];
-  const [name, setName] = useState('');
   const [value, setValue] = useState('');
   const [rehabitationCenter, setRehabitationCenter] = useState(0);
   const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
@@ -41,7 +40,6 @@ const PaymentsEdit = props => {
       if (response.code === 401) {
         history.push('/login');
       } else {
-        setName(response.data.payment.name);
         setValue(response.data.payment.value);
         setRehabitationCenter(response.data.payment.rehabitation_center);
         setService(response.data.payment.service);
@@ -54,12 +52,12 @@ const PaymentsEdit = props => {
   }
 
   const handleSave = () => {
-    if (name.length === 0 || isNaN(value) || parseInt(rehabitationCenter) === 0 || parseInt(service) === 0) {
+    if (isNaN(value) || parseInt(rehabitationCenter) === 0 || parseInt(service) === 0) {
       addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else {
       setProgressStatus(true);
 
-      payment.update(name, value, rehabitationCenter, service, id)
+      payment.update(value, rehabitationCenter, service, id)
       .then(response => {
         if (response.code === 401) {
           history.push('/login');
@@ -109,9 +107,7 @@ const PaymentsEdit = props => {
                 Dane podstawowe
               </Grid>
               <Grid item xs={9}>
-                <div className={classes.top_label} htmlFor="name">Nazwa kosztu</div>
-                <input className={classes.input_box} type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
-                <div className={classes.input_box_label} htmlFor="name">Wysokość kosztu</div>
+                <div className={classes.top_label} htmlFor="name">Wysokość kosztu</div>
                 <input className={classes.input_box} type="name" value={value} name="name" onChange={(e) => setValue(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Wybierz ORK</div>
                 <SingleSelect value={rehabitationCenter} handleChange={setRehabitationCenter} list={rehabitationCenterList} />

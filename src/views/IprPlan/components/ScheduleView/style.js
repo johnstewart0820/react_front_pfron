@@ -9,11 +9,11 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1.5)
     },
     form: {
-      padding: theme.spacing(3),
-      fontFamily: 'roboto',
-      color: '#263238',
-      marginTop: theme.spacing(0)
-    },
+		padding: theme.spacing(3),
+		fontFamily: 'roboto',
+		color: '#263238',
+		marginTop: theme.spacing(0)
+	},
     form_title: {
       fontWeight: '500'
     },
@@ -89,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
     },
     top_label_content: {
         fontSize: '14px',
+		marginBottom: theme.spacing(1)
     },
     label_content: {
         fontSize: '14px',
@@ -99,6 +100,10 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(1),
       fontSize: '14px',
     },
+	small_title: {
+		fontSize: '13px',
+		marginTop: theme.spacing(0.5)
+	},
     input_box: {
       padding: '10px 20px',
       width: '100%',

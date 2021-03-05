@@ -223,7 +223,7 @@ const PlanView = (props) => {
 	))
   }
   return (
-    <Grid container spacing={3} className={classes.form}>
+    <Grid container spacing={3} className={classes.form}  style={{backgroundColor: 'white', margin: '0px', width: '100%'}}>
 		{
 			moduleList.map((module, index) => (
 				<>

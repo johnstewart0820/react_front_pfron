@@ -20,6 +20,28 @@ class Ipr {
         })
     }
 
+	getWeekStatus = (from, to, id) => {
+        return axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/ipr/week_status`, {
+			from: from,
+			to: to,
+			id: id,
+		},{
+            headers: authHeader(storage.getStorage('token')),
+        })
+        .then(response => {
+            if (response.data.code === 401) {
+                storage.removeStorage('token');
+                storage.removeStorage('role');
+                return response.data;
+            } else if (response.data.code === 200) {
+                return response.data;
+            }
+        }).catch(error => {
+            return error;
+        })
+    }
+
 	getPlanInfo = (id) => {
         return axios
         .get(`${process.env.REACT_APP_BACKEND_URL}/ipr/get_plan_info`, {
@@ -82,6 +104,28 @@ class Ipr {
             return error;
         })
     }
+
+	getScheduleData = (id, _arr) => {
+        return axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/ipr/get_schedule`,{
+			id: id,
+			dates: _arr
+		}, {
+            headers: authHeader(storage.getStorage('token')),        
+        })
+        .then(response => {
+            if (response.data.code === 401) {
+                storage.removeStorage('token');
+                storage.removeStorage('role');
+                return response.data;
+            } else if (response.data.code === 200) {
+                return response.data;
+            }
+        }).catch(error => {
+            return error;
+        })
+    }
+
     create = (id_candidate, ipr_type, number, schedule_date, ork_person, profession) => {
         return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/ipr`, {
@@ -117,7 +161,25 @@ class Ipr {
             return error;
         })
 	}
-    
+
+	updateSchedule = (schedule_data, date, status, id) => {
+		return axios
+        .post(`${process.env.REACT_APP_BACKEND_URL}/ipr/schedule`, {
+			schedule_data: schedule_data,
+            date: date,
+			status: status,
+			id: id,
+        }, {
+            headers: authHeader(storage.getStorage('token'))
+        }).then(response => {
+            if (response.data.code === 401)
+                storage.removeStorage('token');
+            return response.data;
+        }).catch(error => {
+            return error;
+        })
+	}
+	
     getListByOption = (sort_column, sort_order, count, page, searchId, searchName, searchIprType, searchNumber, searchCreatedAt, searchScheduleDate) => {
         return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/ipr/getListByOption`, {

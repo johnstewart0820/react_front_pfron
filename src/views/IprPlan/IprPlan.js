@@ -16,7 +16,7 @@ import {
 } from '@material-ui/pickers';
 import { pl } from 'date-fns/locale';
 import DateFnsUtils from '@date-io/date-fns';
-
+import moment from 'moment';
 import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -50,6 +50,13 @@ const IprPlan = props => {
 	const [ork_person, setOrkPerson] = useState(null);
 	const [orkPersonList, setOrkPersonList] = useState([]);
 	const [profession, setProfession] = useState('');
+
+	const [scheduleData, setScheduleData] = useState([]);
+	const [week, setWeek] = useState(0);
+	const [weeks, setWeeks] = useState([]);
+	const [status, setStatus] = useState([]);
+	const [dateList, setDateList] = useState([]);
+	const [selectedScheduleItem, setSelectedScheduleItem] = useState(0);
 
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
@@ -118,6 +125,19 @@ const IprPlan = props => {
 			})
 	}, [participantList]);
 
+	const handleGetScheduleData = (date) => {
+		const format2 = "YYYY-MM-DD";
+		let _date = moment(date).format(format2);
+		ipr.getScheduleData(id, _date)
+		.then(response => {
+			if (response.code === 401) {
+				history.push('/login');
+			} else {
+				setScheduleData(response.data.module);
+			}
+		})
+	}
+
 	const getOrkPersonData = (data, id_ork_person) => {
 		ipr.getOrkPerson(data)
 			.then(response => {
@@ -154,7 +174,22 @@ const IprPlan = props => {
 					}
 				})
 		} else {
-			
+			setProgressStatus(true);
+			let date = dateList[selectedScheduleItem].date;
+			const format2 = "YYYY-MM-DD";
+			let _date = moment(dateList[selectedScheduleItem].date).format(format2);
+			ipr.updateSchedule(scheduleData, _date, status, id)
+				.then(response => {
+					if (response.code === 401) {
+						history.push('/login');
+					} else {
+						addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						if (response.code === 200) {
+							// setTimeout(function () { history.push('/ipr_list'); }, 1000);
+						}
+						setProgressStatus(false);
+					}
+				})
 		}
 	}
 
@@ -287,7 +322,23 @@ const IprPlan = props => {
 								/>
 							</TabPanel>
 							<TabPanel>
-								<ScheduleView/>
+								<ScheduleView
+									scheduleDate={schedule_date}
+									scheduleData={scheduleData}
+									setScheduleData={setScheduleData}
+									handleGetScheduleData={handleGetScheduleData}
+									week={week}
+									setWeek={setWeek}
+									weeks={weeks}
+									setWeeks={setWeeks}
+									status={status}
+									setStatus={setStatus}
+									dateList={dateList}
+									setDateList={setDateList}
+									selectedItem={selectedScheduleItem}
+									setSelectedItem={setSelectedScheduleItem}
+									id={id}
+								/>
 							</TabPanel>
 						</Tabs>
 					</div>

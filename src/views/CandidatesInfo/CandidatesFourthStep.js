@@ -209,7 +209,7 @@ const CandidatesFourthStep = props => {
           </TabPanel>
           <TabPanel>
           </TabPanel>
-          <TabPanel>
+		  <TabPanel style={{backgroundColor: 'white'}}>
             <FourthStepView
               date_referal={date_referal}
               setDateReferal={setDateReferal}

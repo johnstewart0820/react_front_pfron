@@ -182,7 +182,7 @@ const CandidatesFirstStep = props => {
             <Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 3</Link></Tab>
             <Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 4</Link></Tab>
           </TabList>
-          <TabPanel>
+          <TabPanel style={{backgroundColor: 'white'}}>
             <FirstStepView 
               name={name} 
               surname={surname}

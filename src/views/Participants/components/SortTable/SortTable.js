@@ -163,20 +163,20 @@ const SortTable = (props) => {
           {rows.map((item, indx) => {
             return (
               <TableRow key={indx} className={classes.root}>
-                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.id_candidate}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.surname}</TableCell>
                 <TableCell>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
                 <TableCell>{parseInt(item.participant_status_type) >= 1 ? (participantStatusTypeList && participantStatusTypeList.length > 0 && participantStatusTypeList[item.participant_status_type - 1].name) : ''}</TableCell>
                 <TableCell>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
-                  <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id}`)}>
+                  <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => showIprList(item.id)}>
+                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => showIprList(item.id_candidate)}>
                     <EventNoteOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => createIpr(item.id)}>
+                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => createIpr(item.id_candidate)}>
                     <NoteAddOutlinedIcon className={classes.icon} />
                   </IconButton>
                 </TableCell>

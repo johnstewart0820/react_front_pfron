@@ -194,7 +194,7 @@ const CandidatesThirdStep = props => {
           </TabPanel>
           <TabPanel>
           </TabPanel>
-          <TabPanel>
+          <TabPanel style={{backgroundColor: 'white'}}>
             <ThirdStepView 
               decision_central_commision={decision_central_commision}
               setDecisionCentralCommision={setDecisionCentralCommision}

@@ -15,39 +15,47 @@ const useStyles = makeStyles((theme) => ({
     form_title: {
       fontWeight: '500'
     },
-    btnSave: {
+	table: {
+		minHeight: '420px',
+		borderRadius: '0px',
+		fontFamily: 'roboto',
+	},
+	table_header: {
+		backgroundColor: theme.palette.green,
+		color: theme.palette.white,
+		padding: theme.spacing(2, 4),
+		fontWeight: '300',
+	},
+	table_footer: {
+		textAlign: 'right'
+	},
+	table_content: {
+		padding: theme.spacing(2)
+	},
+	table_body: {
+		minHeight: '330px'
+	},
+	table_item: {
+		display: 'flex',
+		alignItems: 'center'
+	},
+    btnOutline: {
         '& .MuiButton-label': {
           textTransform: 'none',
           fontSize: '14px',
         },
         '&:hover': {
-          backgroundColor: 'darkgray',
-          borderColor: 'darkgray',
+          backgroundColor: theme.palette.pink,
+          borderColor: theme.palette.pink,
+          color: 'white'
         },
+        padding: theme.spacing(0.5, 8),
         borderRadius: '0px',
         fontWeight: '300',
-        backgroundColor: 'darkgray',
-        borderColor: 'darkgray',
-        color: 'white',
-        width: '100%'
+        color: theme.palette.pink,
+        borderColor: theme.palette.pink
     },
-    btnDelete: {
-      '& .MuiButton-label': {
-        textTransform: 'none',
-        fontSize: '14px',
-      },
-      '&:hover': {
-        backgroundColor: 'darkgray',
-        borderColor: 'darkgray',
-      },
-      borderRadius: '0px',
-      fontWeight: '300',
-      backgroundColor: 'darkgray',
-      borderColor: 'darkgray',
-      color: 'white',
-      width: '100%'
-    },
-    btnBack: {
+    btnFull: {
         '& .MuiButton-label': {
           textTransform: 'none',
           fontSize: '14px',
@@ -57,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
           border: 'none',
           color: 'white',
         },
-        padding: theme.spacing(0.5, 6),
+        padding: theme.spacing(1, 6),
         borderRadius: '0px',
         fontWeight: '300',
 		backgroundColor: theme.palette.btn_gray,
@@ -153,7 +161,7 @@ const useStyles = makeStyles((theme) => ({
     progressContainer: {
       position: 'absolute',
       top: '50%',
-      width: 'calc(100% - 600px)',
+      width: 'calc((100% - 320px))',
       display: 'flex',
       justifyContent: 'center',
     },

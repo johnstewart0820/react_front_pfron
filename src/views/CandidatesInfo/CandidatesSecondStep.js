@@ -219,7 +219,7 @@ const CandidatesSecondStep = props => {
           </TabList>
           <TabPanel>
           </TabPanel>
-          <TabPanel>
+          <TabPanel style={{backgroundColor: 'white'}}>
             <SecondStepView 
               admission={admission} 
               setAdmission={setAdmission}

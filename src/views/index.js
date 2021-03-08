@@ -32,7 +32,9 @@ export { default as ServiceList } from './ServiceList';
 export { default as ServiceListAdd } from './ServiceListAdd';
 export { default as ServiceListEdit } from './ServiceListEdit';
 
-export { default as WorkingShop } from './WorkingShop';
+export { default as Trainings } from './Trainings';
+export { default as TrainingsAdd } from './TrainingsAdd';
+export { default as TrainingsEdit } from './TrainingsEdit';
 
 export { default as Notifications } from './Notifications';
 

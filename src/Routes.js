@@ -31,7 +31,9 @@ import {
   ServiceList as ServiceListView,
   ServiceListAdd as ServiceListAddView,
   ServiceListEdit as ServiceListEditView,
-  WorkingShop as WorkingShopView,
+  Trainings as TrainingsView,
+  TrainingsAdd as TrainingsAddView,
+  TrainingsEdit as TrainingsEditView,
   Notifications as NotificationsView,
   OrkList as OrkListView,
   OrkListEdit as OrkListEditView,
@@ -229,11 +231,25 @@ const Routes = (props) => {
         path="/service_list/edit/:id"
       />
       <RouteWithLayout
-        component={WorkingShopView}
+        component={TrainingsView}
         exact
         layout={MainLayout}
-        title='Warsztaty/szkolenia'
-        path="/workingshop"
+        title='Szkolenia'
+        path="/trainings"
+      />
+	  <RouteWithLayout
+        component={TrainingsAddView}
+        exact
+        layout={MainLayout}
+        title='Szkolenia'
+        path="/trainings/create"
+      />
+	  <RouteWithLayout
+        component={TrainingsEditView}
+        exact
+        layout={MainLayout}
+        title='Szkolenia'
+        path="/trainings/edit/:id"
       />
       <RouteWithLayout
         component={NotificationsView}

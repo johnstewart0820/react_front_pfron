@@ -70,8 +70,8 @@ const Sidebar = props => {
 				icon: <HelpOutlineOutlinedIcon />
 			},
 			{
-				title: 'Warsztaty/szkolenia',
-				href: '/workingshop',
+				title: 'Szkolenia',
+				href: '/trainings',
 				icon: <HelpOutlineOutlinedIcon />
 			},
 			{
@@ -159,8 +159,8 @@ const Sidebar = props => {
 				icon: <HelpOutlineOutlinedIcon />
 			},
 			{
-				title: 'Warsztaty/szkolenia',
-				href: '/workingshop',
+				title: 'Szkolenia',
+				href: '/trainings',
 				icon: <HelpOutlineOutlinedIcon />
 			},
 			{

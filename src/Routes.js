@@ -22,6 +22,7 @@ import {
   SpecialistsEdit as SpecialistsEditView,
   Participants as ParticipantsView,
   ParticipantsEdit as ParticipantsEditView,
+	ParticipantsProfile as ParticipantsProfileView,
   OrkTeams as OrkTeamsView,
   OrkTeamsAdd as OrkTeamsAddView,
   OrkTeamsEdit as OrkTeamsEditView,
@@ -85,7 +86,7 @@ const Routes = (props) => {
         title='Kandydaci'
         path="/candidates/edit/:id"
       />
-	  <RouteWithLayout
+	  	<RouteWithLayout
         component={CandidatesProfileView}
         exact
         layout={MainLayout}
@@ -171,6 +172,13 @@ const Routes = (props) => {
         layout={MainLayout}
         title='Edycja uczestnika'
         path="/participants/edit/:id"
+      />
+			<RouteWithLayout
+        component={ParticipantsProfileView}
+        exact
+        layout={MainLayout}
+        title='Dane uczestnika'
+        path="/participants/profile/:id"
       />
       <RouteWithLayout
         component={OrkTeamsView}

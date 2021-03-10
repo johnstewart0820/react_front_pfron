@@ -35,6 +35,7 @@ class constants {
 
 			'/participants',
 			'/participants/edit/*',
+			'/participants/profile/*',
 
 			'/ork_teams',
 			'/ork_teams/create',
@@ -94,7 +95,8 @@ class constants {
 
 			'/participants',
 			'/participants/edit/*',
-
+			'/participants/profile/*',
+			
 			'/ork_teams',
 			'/ork_teams/create',
 			'/ork_teams/edit/*',

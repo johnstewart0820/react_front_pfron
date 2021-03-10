@@ -57,8 +57,11 @@ const SortTable = (props) => {
 	return '';
   }
   const goCandidateStep = (id, id_stage) => {
-	history.push(`/candidates/info/step${id_stage}/${id}`)
+		history.push(`/candidates/info/step${id_stage}/${id}`)
   }
+	const handlePreview = (id) => {
+		history.push(`/candidates/profile/${id}`)
+	}
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
@@ -110,14 +113,14 @@ const SortTable = (props) => {
                 Etap rekutacji
             </TableSortLabel>
             </TableCell>
-			<TableCell>
+						<TableCell>
               <TableSortLabel
                 active={sortBy === 5}
                 direction={sortOrder}
                 onClick={() => requestSort(5)}
               >
                 Status
-			</TableSortLabel>
+						</TableSortLabel>
             </TableCell>
             <TableCell>
               <TableSortLabel
@@ -142,7 +145,7 @@ const SortTable = (props) => {
             <TableCell><input className={classes.input_box} type="name" value={searchSurname} name="searchId" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
             <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /></TableCell>
             <TableCell><SingleSelect value={searchStage} handleChange={setSearchStage} list={stageList} /></TableCell>
-			<TableCell><SingleSelect value={searchStatus} handleChange={setSearchStatus} list={statusList} /></TableCell>
+						<TableCell><SingleSelect value={searchStatus} handleChange={setSearchStatus} list={statusList} /></TableCell>
             <TableCell>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -180,13 +183,13 @@ const SortTable = (props) => {
           {rows.map((item, indx) => {
             return (
               <TableRow key={indx} className={classes.root}>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.surname}</TableCell>
-                <TableCell>{getQualificationPointName(item.qualification_point)}</TableCell>
-                <TableCell>{stageList && stageList.length > 0 && stageList[item.stage - 1].name}</TableCell>
-				<TableCell>{statusList && statusList.length > 0 && statusList[item.id_status - 1].name}</TableCell>
-                <TableCell>{getDateTime(item.updated_at)}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)}>{item.id}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)}>{item.name}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)}>{item.surname}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)}>{getQualificationPointName(item.qualification_point)}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)}>{stageList && stageList.length > 0 && stageList[item.stage - 1].name}</TableCell>
+								<TableCell onClick={() => handlePreview(item.id)}>{statusList && statusList.length > 0 && statusList[item.id_status - 1].name}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)}>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
                   <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
                     <EditOutlinedIcon className={classes.icon} />

@@ -7,24 +7,28 @@ import { useToasts } from 'react-toast-notifications'
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import candidate from '../../apis/candidate';
+import participant from '../../apis/participant';
 import {
 	KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-import { pl } from 'date-fns/locale'
+import { pl } from 'date-fns/locale';
 import DateFnsUtils from '@date-io/date-fns';
+import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/plain.css'
+import clsx from 'clsx';
 import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { DeleteModal } from '../Candidates/components';
+import MaskedInput from 'react-text-mask';
 
-const CandidatesProfile = props => {
+const ParticipantsProfile = props => {
 	const { children } = props;
 	const id = props.match.params.id;
 	const { history } = props;
 	const classes = useStyles();
 	const { addToast } = useToasts()
-	const breadcrumbs = [{ active: true, label: 'Kandydaci', href: '/candidates' }, { active: false, label: 'Dodaj kandydata' }];
+	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: false, label: 'Dodaj uczestnicy' }];
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
 	const [person_id, setPersonId] = useState('');
@@ -92,6 +96,11 @@ const CandidatesProfile = props => {
 	const [house_hold_status, setHouseHoldStatus] = useState(2);
 	const [house_hold_adult_status, setHouseHoldAdultStatus] = useState(2);
 	const [uncomfortable_status, setUncomfortableStatus] = useState(2);
+	const [participant_number, setParticipantNumber] = useState('');
+	const [rehabitation_center, setRehabitationCenter] = useState(-1);
+	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
+	const [participant_status_type, setParticipantStatusType] = useState(0);
+	const [participantStatusTypeList, setParticipantStatusTypeList] = useState([]);
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 	const [openModal, setOpenModal] = useState(false);
@@ -114,7 +123,7 @@ const CandidatesProfile = props => {
 				} else {
 					addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 					if (response.code === 200) {
-						setTimeout(function () { history.push('/candidates'); }, 1000);
+						setTimeout(function () { history.push('/participants'); }, 1000);
 					}
 					setProgressStatus(false);
 				}
@@ -140,7 +149,15 @@ const CandidatesProfile = props => {
 					setEmployedTypeList(response.data.employed_type);
 				}
 			})
-
+		participant.getInfo()
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					setRehabitationCenterList(response.data.rehabitation_center);
+					setParticipantStatusTypeList(response.data.participant_status_type);
+				}
+			})
 		let _date = new Date();
 		setDateOfBirth(_date.getFullYear() + '-' + (_date.getMonth() + 1) + '-' + (_date.getDate()));
 		setDateOfCertificate(_date.getFullYear() + '-' + (_date.getMonth() + 1) + '-' + (_date.getDate()));
@@ -148,7 +165,7 @@ const CandidatesProfile = props => {
 
 	useEffect(() => {
 		setProgressStatus(true);
-		candidate.get(id)
+		participant.get(id)
 			.then(response => {
 				if (response.code === 401) {
 					history.push('/login');
@@ -211,6 +228,8 @@ const CandidatesProfile = props => {
 					setUncomfortableStatus(parseInt(response.data.candidate.uncomfortable_status));
 					setStage(response.data.candidate.stage);
 					setStatus(response.data.candidate.id_status);
+					setParticipantNumber(response.data.candidate_info.participant_number);
+					setRehabitationCenter(response.data.candidate_info.rehabitation_center);
 				}
 				setProgressStatus(false);
 			})
@@ -218,16 +237,16 @@ const CandidatesProfile = props => {
 	}, [employed_type_list]);
 
 	const handleGotoInformation = () => {
-		history.push(`/candidates/info/step${stage}/${id}`)
+		// history.push(`/candidates/info/step${stage}/${id}`)
 	}
-
 	const handleBack = () => {
-		history.push('/candidates');
+		history.push('/participants');
 	}
 
 	const handleEdit = () => {
-		history.push(`/candidates/edit/${id}`);
+		history.push(`/participants/edit/${id}`);
 	}
+
 	const getDateStr = (value) => {
 		let _date = new Date(value);
 		let date = _date.getDate();
@@ -242,7 +261,7 @@ const CandidatesProfile = props => {
 
 	const getStrFromList = (id, list) => {
 		let result = '';
-		for (let i = 0; i < list.length; i ++) {
+		for (let i = 0; i < list.length; i++) {
 			if (parseInt(list[i].id) === parseInt(id))
 				result = list[i].name;
 		}
@@ -253,7 +272,7 @@ const CandidatesProfile = props => {
 		let result = [];
 		if (list.length === 0 || list_type.length === 0)
 			return result.join('');
-		for (let i = 0; i < list.length; i ++) {
+		for (let i = 0; i < list.length; i++) {
 			if (parseInt(list_type[i]) === 1) {
 				result.push(list[i].name);
 			}
@@ -278,7 +297,7 @@ const CandidatesProfile = props => {
 							Edytuj kandydata
 						</Button>
 						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-							Wróć do listy kandydatow
+							Wróć do listy uczestnikow
 						</Button>
 					</div>
 				</div>
@@ -287,7 +306,7 @@ const CandidatesProfile = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={3} className={classes.form_title}>
-									Dane kandydata
+									Dane uczestnika
               	</Grid>
 								<Grid item xs={9}>
 									<Grid container spacing={2}>
@@ -427,47 +446,47 @@ const CandidatesProfile = props => {
 								<Grid item xs={9}>
 									{
 										employed_status === 1 ?
-										<>
-											<Grid container spacing={2}>
-												<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">{`Jestem zatrudniony: ${getEmployedStatus(employed_type_list, employed_type)}`}</div></Grid>
-											</Grid>
-											<Grid container spacing={2}>
-												<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Jestem zatrudniony w</div></Grid>
-												<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{employed_in}</div></Grid>
-											</Grid>
-											<Grid container spacing={2}>
-												<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Wykonywany zawód</div></Grid>
-												<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{occupation}</div></Grid>
-											</Grid>
-										</>
-										:
-										<></>
+											<>
+												<Grid container spacing={2}>
+													<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">{`Jestem zatrudniony: ${getEmployedStatus(employed_type_list, employed_type)}`}</div></Grid>
+												</Grid>
+												<Grid container spacing={2}>
+													<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Jestem zatrudniony w</div></Grid>
+													<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{employed_in}</div></Grid>
+												</Grid>
+												<Grid container spacing={2}>
+													<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Wykonywany zawód</div></Grid>
+													<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{occupation}</div></Grid>
+												</Grid>
+											</>
+											:
+											<></>
 									}
 									{
 										disabled_person_status === 1 ?
-										<>
-											<Grid container spacing={2}>
-												<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Jestem osobą niepelnosprawną i posiadam orzeczenie</div></Grid>
-											</Grid>
-											<Grid container spacing={2}>
-												<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Numer orzeczenia o niepełnosprawności</div></Grid>
-												<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{number_certificate}</div></Grid>
-											</Grid>
-											<Grid container spacing={2}>
-												<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Data waźności</div></Grid>
-												<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{getDateStr(date_of_certificate)}</div></Grid>
-											</Grid>
-											<Grid container spacing={2}>
-												<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Stopien niepełnosprawności</div></Grid>
-												<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{level_certificate}</div></Grid>
-											</Grid>
-											<Grid container spacing={2}>
-												<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Konieczne wymagania zwiazane z niepelnospawnoscia (np. pomoc asystenia, tlumacza migowego)</div></Grid>
-												<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{necessary_certificate}</div></Grid>
-											</Grid>
-										</>
-										:
-										<></>						
+											<>
+												<Grid container spacing={2}>
+													<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Jestem osobą niepelnosprawną i posiadam orzeczenie</div></Grid>
+												</Grid>
+												<Grid container spacing={2}>
+													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Numer orzeczenia o niepełnosprawności</div></Grid>
+													<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{number_certificate}</div></Grid>
+												</Grid>
+												<Grid container spacing={2}>
+													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Data waźności</div></Grid>
+													<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{getDateStr(date_of_certificate)}</div></Grid>
+												</Grid>
+												<Grid container spacing={2}>
+													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Stopien niepełnosprawności</div></Grid>
+													<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{level_certificate}</div></Grid>
+												</Grid>
+												<Grid container spacing={2}>
+													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Konieczne wymagania zwiazane z niepelnospawnoscia (np. pomoc asystenia, tlumacza migowego)</div></Grid>
+													<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{necessary_certificate}</div></Grid>
+												</Grid>
+											</>
+											:
+											<></>
 									}
 								</Grid>
 							</Grid>
@@ -522,12 +541,48 @@ const CandidatesProfile = props => {
 							<Grid item xs={12}>
 								<Card className={classes.form}>
 									<Grid container spacing={2}>
-										<div className={classes.form_title}>
+										<div className={classes.form_title_right}>
+											Informacje o uczestnika
+                  </div>
+										<Grid item xs={6}>
+											<div className={classes.input_box_label_left}>
+												Numer uczestnika
+					</div>
+										</Grid>
+										<Grid item xs={6}>
+											<div className={classes.input_box_label_left}>
+												{participant_number}
+											</div>
+										</Grid>
+										<Grid item xs={6}>
+											<div className={classes.input_box_label_left}>
+												ORK
+											</div>
+										</Grid>
+										<Grid item xs={6}>
+											<div className={classes.input_box_label_left}>
+												{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitation_center >= 1 && rehabitationCenterList[rehabitation_center - 1].name}
+											</div>
+										</Grid>
+										<div className={classes.form_title_right}>
 											Karty informacyjne
                   </div>
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
-												Załoź kartę informacyjną
+												Zobacz kartę informacyjną
+                    </Button>
+										</Grid>
+										<div className={classes.form_title_right}>
+											Indywidualny Program Rehabilitacji
+                  </div>
+										<Grid item xs={12}>
+											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
+												Dodaj IPR
+                    </Button>
+										</Grid>
+										<Grid item xs={12}>
+											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleGotoInformation}>
+												Zobacz liste IPR uczestnika
                     </Button>
 										</Grid>
 									</Grid>
@@ -582,4 +637,4 @@ const CandidatesProfile = props => {
 	);
 };
 
-export default CandidatesProfile;
+export default ParticipantsProfile;

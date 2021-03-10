@@ -15,7 +15,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/plain.css'
 import clsx from 'clsx';
-import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
+import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {DeleteModal} from '../Candidates/components';
@@ -99,12 +99,12 @@ const CandidatesEdit = props => {
   const [error, setError] = useState({});
   const [openModal, setOpenModal] = useState(false);
 
-  const handleExportPdf = () => {
+  const handleHistory = () => {
 
   }
 
   const handlePreview = () => {
-
+		history.push(`/candidates/profile/${id}`)
   }
 
   const handleDelete = () => {
@@ -1279,8 +1279,8 @@ const CandidatesEdit = props => {
                     <TextareaAutosize className={clsx({[classes.textArea] : true, [classes.error] : error.comment})} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika"/>
                     <Grid container spacing={2}>
                       <Grid item xs={4}>
-                        <Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
-                          <PictureAsPdfOutlinedIcon/>
+                        <Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleHistory}>
+                          <HistoryOutlinedIcon/>
                         </Button>
                       </Grid>
                       <Grid item xs={4}>

@@ -20,6 +20,7 @@ export { default as SpecialistsEdit } from './SpecialistsEdit';
 
 export { default as Participants } from './Participants';
 export { default as ParticipantsEdit } from './ParticipantsEdit';
+export { default as ParticipantsProfile } from './ParticipantsProfile';
 
 export { default as OrkTeams } from './OrkTeams';
 export { default as OrkTeamsAdd } from './OrkTeamsAdd';

@@ -19,6 +19,7 @@ class constants {
 			'/candidates',
 			'/candidates/create',
 			'/candidates/edit/*',
+			'/candidates/profile/*',
 			'/candidates/info/step1/*',
 			'/candidates/info/step2/*',
 			'/candidates/info/step3/*',
@@ -78,6 +79,7 @@ class constants {
 			'/candidates',
 			'/candidates/create',
 			'/candidates/edit/*',
+			'/candidates/profile/*',
 			'/candidates/info/step1/*',
 			'/candidates/info/step2/*',
 			'/candidates/info/step4/*',
@@ -128,6 +130,7 @@ class constants {
 			'/candidates',
 			'/candidates/create',
 			'/candidates/edit/*',
+			'/candidates/profile/*',
 			'/candidates/info/step1/*',
 			'/candidates/info/step2/*',
 		]

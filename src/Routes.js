@@ -10,6 +10,7 @@ import {
   CandidatesAdd as CandidatesAddView,
   CandidatesEdit as CandidatesEditView,
   CandidatesProfile as CandidatesProfileView,
+	CandidatesHistory as CandidatesHistoryView,
   CandidatesFirstStep as CandidatesFirstStepView,
   CandidatesSecondStep as CandidatesSecondStepView,
   CandidatesThirdStep as CandidatesThirdStepView,
@@ -92,6 +93,13 @@ const Routes = (props) => {
         layout={MainLayout}
         title='Dane kandydata'
         path="/candidates/profile/:id"
+      />
+			<RouteWithLayout
+        component={CandidatesHistoryView}
+        exact
+        layout={MainLayout}
+        title='Historia modyfikacji'
+        path="/candidates/history/:id"
       />
       <RouteWithLayout
         component={CandidatesFirstStepView}

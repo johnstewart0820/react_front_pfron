@@ -101,7 +101,7 @@ const CandidatesProfile = props => {
 	}
 
 	const handleHistory = () => {
-
+		history.push(`/candidates/history/${id}`)
 	}
 
 	const handleDelete = () => {

@@ -100,7 +100,7 @@ const CandidatesEdit = props => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleHistory = () => {
-
+		history.push(`/candidates/history/${id}`)
   }
 
   const handlePreview = () => {

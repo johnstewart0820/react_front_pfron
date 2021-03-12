@@ -43,11 +43,13 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     color: '#2f2f37',
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
     display: 'flex',
     alignItems: 'center',
     marginRight: theme.spacing(3),
+		backgroundRepeat: 'no-repeat',
+		
     '&:hover': {
       color: '#EBECF0'
     },

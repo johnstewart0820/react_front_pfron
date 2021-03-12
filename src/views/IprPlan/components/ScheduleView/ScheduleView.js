@@ -205,6 +205,33 @@ const ScheduleView = (props) => {
 											<Grid item xs={9}>
 												<Grid container spacing={2}>
 													{
+														index_module == 0 ?
+														<>
+														<Grid item xs={5}/>
+														<Grid item xs={7}>
+															<Grid container spacing={2} style={{alignItems: 'end'}}>
+																<Grid item xs>od</Grid>
+																<Grid item xs>do</Grid>
+																<Grid item xs>
+																	przerwy
+																	<div>(w min)</div>
+																</Grid>
+																<Grid item xs>
+																	lacznie
+																	<div>(w godz)</div>
+																</Grid>
+																<Grid item xs>
+																	lacznie
+																	<div>(w jednostce)</div>
+																</Grid>
+															</Grid>
+														</Grid>
+														</>
+														:
+														<></>
+													}
+														
+														{
 														module.service_list.map((service, index_service) => (
 															<>
 																<Grid item xs={5}>

@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Drawer, Button } from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import ImageIcon from '@material-ui/icons/Image';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
+import { Drawer, Button, SvgIcon } from '@material-ui/core';
+import kandydaci from './svg/kandydaci.svg';
+import kokpit from './svg/kokpit.svg';
+import listaIPR from './svg/listaIPR.svg';
+import listaORK from './svg/list_ork.svg';
+import listaUslug from './svg/listaUslug.svg';
+import logZdarzen from './svg/logZdarzen.svg';
+import powiadomienia from './svg/powiadomienia.svg';
+import punktyKwalifikacyjne from './svg/punktyKwalifikacyjne.svg';
+import raporty from './svg/raporty.svg';
+import specjalisci from './svg/specjalisci.svg';
+import szkolenia from './svg/szkolenia.svg';
+import uczestnicy from './svg/uczestnicy.svg';
+import uzytkownicySystemu from './svg/uzytkownicySystemu.svg';
+import costs from './svg/costs.svg';
+import zespolOrk from './svg/zespolOrk.svg';
 import storage from '../../../../utils/storage';
 import { SidebarNav } from './components';
 import { withRouter } from 'react-router-dom';
@@ -26,22 +31,22 @@ const Sidebar = props => {
 			{
 				title: 'Kokpit',
 				href: '/cockpit',
-				icon: <DashboardIcon />
+				icon: kokpit
 			},
 			{
 				title: 'Kandydaci',
 				href: '/candidates',
-				icon: <PeopleIcon />
+				icon: kandydaci
 			},
 			{
 				title: 'Punkty kwalifikacyjne',
 				href: '/qualification_points',
-				icon: <ShoppingBasketIcon />
+				icon: punktyKwalifikacyjne
 			},
 			{
 				title: 'Specjaliści',
 				href: '/specialists',
-				icon: <LockOpenIcon />
+				icon: specjalisci
 			},
 			{
 				label: 'UCZESTNICY'
@@ -49,17 +54,17 @@ const Sidebar = props => {
 			{
 				title: 'Uczestnicy',
 				href: '/participants',
-				icon: <TextFieldsIcon />
+				icon: uczestnicy
 			},
 			{
 				title: 'Zespół ORK',
 				href: '/ork_teams',
-				icon: <ImageIcon />
+				icon: zespolOrk
 			},
 			{
 				title: 'Lista IPR',
 				href: '/ipr_list',
-				icon: <AccountBoxIcon />
+				icon: listaIPR
 			},
 			{
 				label: 'USŁUGI'
@@ -67,17 +72,17 @@ const Sidebar = props => {
 			{
 				title: 'Lista usług',
 				href: '/service_list',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: listaUslug
 			},
 			{
 				title: 'Szkolenia',
 				href: '/trainings',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: szkolenia
 			},
 			{
 				title: 'Powiadomienia',
 				href: '/notifications',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: powiadomienia
 			},
 			{
 				label: 'FINANSE'
@@ -85,17 +90,17 @@ const Sidebar = props => {
 			{
 				title: 'Lista ORK',
 				href: '/ork_list',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: listaORK
 			},
 			{
 				title: 'Zdefiniowane koszty usług',
 				href: '/payments',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: costs
 			},
 			{
 				title: 'Raporty',
 				href: '/reports',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: raporty
 			},
 			{
 				label: 'USTAWIENIA SYSTEMOWE'
@@ -103,34 +108,34 @@ const Sidebar = props => {
 			{
 				title: 'Uźytkownicy systemu',
 				href: '/users',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: uzytkownicySystemu
 			},
 			{
 				title: 'Log zdarzeń',
 				href: '/logs',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: logZdarzen
 			},
 		],
 		[
 			{
 				title: 'Kokpit',
 				href: '/cockpit',
-				icon: <DashboardIcon />
+				icon: kokpit
 			},
 			{
 				title: 'Kandydaci',
 				href: '/candidates',
-				icon: <PeopleIcon />
+				icon: kandydaci
 			},
 			{
 				title: 'Punkty kwalifikacyjne',
 				href: '/qualification_points',
-				icon: <ShoppingBasketIcon />
+				icon: punktyKwalifikacyjne
 			},
 			{
 				title: 'Specjaliści',
 				href: '/specialists',
-				icon: <LockOpenIcon />
+				icon: specjalisci
 			},
 			{
 				label: 'UCZESTNICY'
@@ -138,17 +143,17 @@ const Sidebar = props => {
 			{
 				title: 'Uczestnicy',
 				href: '/participants',
-				icon: <TextFieldsIcon />
+				icon: uczestnicy
 			},
 			{
 				title: 'Zespół ORK',
 				href: '/ork_teams',
-				icon: <ImageIcon />
+				icon: zespolOrk
 			},
 			{
 				title: 'Lista IPR',
 				href: '/ipr_list',
-				icon: <AccountBoxIcon />
+				icon: listaIPR
 			},
 			{
 				label: 'USŁUGI'
@@ -156,12 +161,12 @@ const Sidebar = props => {
 			{
 				title: 'Lista usług',
 				href: '/service_list',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: listaUslug
 			},
 			{
 				title: 'Szkolenia',
 				href: '/trainings',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: szkolenia
 			},
 			{
 				label: 'FINANSE'
@@ -169,29 +174,29 @@ const Sidebar = props => {
 			{
 				title: 'Lista ORK',
 				href: '/ork_list',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: listaORK
 			},
 			{
 				title: 'Zdefiniowane koszty usług',
 				href: '/payments',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: costs
 			},
 			{
 				title: 'Raporty',
 				href: '/reports',
-				icon: <HelpOutlineOutlinedIcon />
+				icon: raporty
 			},
 		],
 		[
 			{
 				title: 'Kokpit',
 				href: '/cockpit',
-				icon: <DashboardIcon />
+				icon: kokpit
 			},
 			{
 				title: 'Kandydaci',
 				href: '/candidates',
-				icon: <PeopleIcon />
+				icon: kandydaci
 			},
 		]
 	];

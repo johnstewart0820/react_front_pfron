@@ -99,7 +99,7 @@ const SidebarNav = props => {
             component={CustomRouterLink}
             to={page.href}
           >
-            <div className={classes.icon}>{page.icon}</div>
+            <div className={classes.icon} style={{backgroundImage: `url("${page.icon}")`,backgroundColor: 'transparent'}}></div>
             {page.title}
           </Button>
         </ListItem>

@@ -139,7 +139,7 @@ const Cockpit = props => {
 								candidateList.map((item, index) => (
 									<Grid container spacing={0} className={classes.table_item}>
 										<Grid item xs={6}>
-											{item.name}
+											{item.name + ' ' + item.surname}
 										</Grid>
 										<Grid item xs={6}>
 											<Grid container justify="flex-end">
@@ -177,7 +177,7 @@ const Cockpit = props => {
 								participantList.map((item, index) => (
 									<Grid container spacing={0} className={classes.table_item}>
 										<Grid item xs={4}>
-											{item.name}
+											{item.name + ' ' + item.surname}
 										</Grid>
 										<Grid item xs={4}>
 											{item.rehabitation_center_name}

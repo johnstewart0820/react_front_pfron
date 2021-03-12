@@ -31,6 +31,7 @@ export { default as IprList } from './IprList';
 export { default as IprAdd } from './IprAdd';
 export { default as IprEdit } from './IprEdit';
 export { default as IprPlan } from './IprPlan';
+export { default as IprBalance } from './IprBalance';
 
 export { default as ServiceList } from './ServiceList';
 export { default as ServiceListAdd } from './ServiceListAdd';

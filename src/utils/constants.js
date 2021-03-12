@@ -46,6 +46,7 @@ class constants {
 			'/ipr_list/create',
 			'/ipr_list/edit/*',
 			'/ipr_list/plan/edit/*',
+			'/ipr_list/balance/edit/*',
 
 			'/service_list',
 			'/service_list/create',
@@ -107,6 +108,7 @@ class constants {
 			'/ipr_list/create',
 			'/ipr_list/edit/*',
 			'/ipr_list/plan/edit/*',
+			'/ipr_list/balance/edit/*',
 			
 			'/service_list',
 			'/service_list/create',

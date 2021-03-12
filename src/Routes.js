@@ -31,6 +31,7 @@ import {
   IprAdd as IprAddView,
   IprEdit as IprEditView,
   IprPlan as IprPlanView,
+	IprBalance as IprBalanceView,
   ServiceList as ServiceListView,
   ServiceListAdd as ServiceListAddView,
   ServiceListEdit as ServiceListEditView,
@@ -234,6 +235,13 @@ const Routes = (props) => {
         layout={MainLayout}
         title='Plan realizacji IPR'
         path="/ipr_list/plan/edit/:id"
+      />
+			<RouteWithLayout
+        component={IprBalanceView}
+        exact
+        layout={MainLayout}
+        title='Bilans realizacji IPR'
+        path="/ipr_list/balance/edit/:id"
       />
       <RouteWithLayout
         component={ServiceListView}

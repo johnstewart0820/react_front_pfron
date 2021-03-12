@@ -116,7 +116,7 @@ const IprAdd = props => {
 					} else {
 						addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 						if (response.code === 200) {
-							setTimeout(function () { history.push(`/ipr_list/plan/edit/${response.data.id}`); }, 1000);
+							setTimeout(function () { history.push(parseInt(ipr_type) !== 1 ? `/ipr_list/plan/edit/${response.data.id}` : `/ipr_list/balance/edit/${response.data.id}`) }, 1000);
 						}
 						setProgressStatus(false);
 					}

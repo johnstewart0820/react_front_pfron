@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     btnSave: {
       '& .MuiButton-label': {
         textTransform: 'none',
-        fontSize: '14px',
+        fontSize: '0.8750em',
       },
       '&:hover': {
         backgroundColor: 'darkgray',
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     btnOption: {
       '& .MuiButton-label': {
         textTransform: 'none',
-        fontSize: '14px',
+        fontSize: '0.8750em',
       },
       '&:hover': {
         backgroundColor: '#727e91',
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     btnBack: {
         '& .MuiButton-label': {
           textTransform: 'none',
-          fontSize: '14px',
+          fontSize: '0.8750em',
         },
         '&:hover': {
           backgroundColor: theme.palette.btn_gray,
@@ -85,29 +85,29 @@ const useStyles = makeStyles((theme) => ({
     },
     top_label: {
         fontWeight: '500',
-        fontSize: '14px',
+        fontSize: '0.8750em',
     },
     top_label_content: {
-        fontSize: '14px',
+        fontSize: '0.8750em',
 		marginBottom: theme.spacing(1)
     },
     label_content: {
-        fontSize: '14px',
+        fontSize: '0.8750em',
         marginBottom: theme.spacing(1)
     },
     input_box_label: {
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(1),
-      fontSize: '14px',
+      fontSize: '0.8750em',
     },
 	small_title: {
-		fontSize: '13px',
+		fontSize: '0.8125em',
 		marginTop: theme.spacing(0.5)
 	},
     input_box: {
       padding: '10px 20px',
       width: '100%',
-      fontSize: '14px'
+      fontSize: '0.8750em'
     },
     name_select_box: {
       '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {

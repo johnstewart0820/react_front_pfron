@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     flexGrow: 1,
-    fontSize: '14px',
+    fontSize: '0.8750em',
     lineHeight: '16px',
     letterSpacing: '-0.05px'
   }

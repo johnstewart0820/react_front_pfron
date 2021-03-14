@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   input_box_label: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(1),
-    fontSize: '15px',
+    fontSize: '0.9375em',
   },
   input_box: {
     padding: '10px 20px',
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   btnLogin: {
     '& .MuiButton-label': {
       textTransform: 'none',
-      fontSize: '17px',
+      fontSize: '1.0625em',
     },
     '&:hover': {
       backgroundColor: theme.palette.green

@@ -1,11 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
   <defs>
-    <clipPath id="clip-kandydaci">
+    <clipPath id="clip-_2_kandydaci">
       <rect width="15" height="15"/>
     </clipPath>
   </defs>
-  <g id="kandydaci" clip-path="url(#clip-kandydaci)">
-    <rect width="15" height="15" fill="#fff"/>
+  <g id="_2_kandydaci" data-name="2 kandydaci" clip-path="url(#clip-_2_kandydaci)">
     <g id="job-search">
       <g id="Group_1344" data-name="Group 1344" transform="translate(3.75 0.001)">
         <g id="Group_1343" data-name="Group 1343" transform="translate(0 0)">

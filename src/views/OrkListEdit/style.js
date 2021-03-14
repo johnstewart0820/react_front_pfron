@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     btnSave: {
         '& .MuiButton-label': {
           textTransform: 'none',
-          fontSize: '14px',
+          fontSize: '0.8750em',
         },
         '&:hover': {
           backgroundColor: 'darkgray',
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     btnDelete: {
       '& .MuiButton-label': {
         textTransform: 'none',
-        fontSize: '14px',
+        fontSize: '0.8750em',
       },
       '&:hover': {
         backgroundColor: 'darkgray',
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     btnBack: {
         '& .MuiButton-label': {
           textTransform: 'none',
-          fontSize: '14px',
+          fontSize: '0.8750em',
         },
         '&:hover': {
           backgroundColor: theme.palette.btn_gray,
@@ -71,17 +71,17 @@ const useStyles = makeStyles((theme) => ({
     },
     top_label: {
       marginBottom: theme.spacing(1),
-      fontSize: '14px',      
+      fontSize: '0.8750em',      
     },
     input_box_label: {
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(1),
-      fontSize: '14px',
+      fontSize: '0.8750em',
     },
     input_box: {
       padding: '10px 20px',
       width: '100%',
-      fontSize: '14px'
+      fontSize: '0.8750em'
     },
     name_select_box: {
       '& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {
@@ -107,11 +107,11 @@ const useStyles = makeStyles((theme) => ({
     name: {
       paddingLeft: '20px',
       marginTop: '20px',
-      fontSize: '13px',
+      fontSize: '0.8125em',
       fontWeight: 'bold'
     },
     quater: {
-      fontSize: '14px',
+      fontSize: '0.8750em',
       paddingRight: '50px !important',
       position: 'relative',
     },
@@ -140,10 +140,10 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'end',
     },
     title: {
-      fontSize: '12px',
+      fontSize: '0.75em',
     },
     error: {
-      fontSize: '12px',
+      fontSize: '0.75em',
       color: 'red'
     },
     progressContainer: {

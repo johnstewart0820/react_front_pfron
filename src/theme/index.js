@@ -1,11 +1,12 @@
 import { createMuiTheme } from '@material-ui/core';
 
 import palette from './palette';
+import palette_dark from './palette_dark';
 import typography from './typography';
 import overrides from './overrides';
 
-const theme = createMuiTheme({
-  palette,
+const theme = (is_contrast) => createMuiTheme({
+  palette : is_contrast ? palette_dark : palette,
   typography,
   overrides,
   zIndex: {

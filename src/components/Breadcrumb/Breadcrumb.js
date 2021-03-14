@@ -6,10 +6,10 @@ import { Typography, Link, Breadcrumbs } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
   link: {
     color: theme.palette.green,
-    fontSize: '13px',
+    fontSize: '0.8125em',
   },
   typo: {
-    fontSize: '13px',
+    fontSize: '0.8125em',
   }
 }));
 

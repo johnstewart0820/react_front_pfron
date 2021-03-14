@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
       width: 300,
     },
     root: {
-      backgroundColor: 'white',
+      backgroundColor: theme.palette.white,
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
       letterSpacing: 0,
       width: '100%',
       fontWeight: 400,
-      fontSize: '16px',
+      fontSize: '1em',
       color: '#8b919a',
       lineHeight: '1em',
       '&:hover': {

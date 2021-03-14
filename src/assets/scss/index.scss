@@ -45,3 +45,22 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #3da239; 
 }
+
+body {
+  background-color: #f4f6f8;
+  height: 100%;
+  &.links-underline{
+		a:not(.button-link){
+			text-decoration: underline;
+    }
+    button {
+      text-decoration: underline;
+    }
+    &.language-switcher{
+      li {
+        text-decoration: underline !important;
+      }
+    }
+  }
+
+}

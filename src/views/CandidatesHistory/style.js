@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     btnCreate: {
         '& .MuiButton-label': {
           textTransform: 'none',
-          fontSize: '14px',
+          fontSize: '0.8750em',
         },
         '&:hover': {
           backgroundColor: theme.palette.btn_gray
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     btnExport: {
         '& .MuiButton-label': {
           textTransform: 'none',
-          fontSize: '14px',
+          fontSize: '0.8750em',
         },
         '&:hover': {
           backgroundColor: theme.palette.pink,
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         fontFamily: 'roboto',
-        fontSize: '15px'
+        fontSize: '0.9375em'
     },
     filter: {
         display: 'flex',

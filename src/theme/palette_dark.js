@@ -1,7 +1,7 @@
 import { colors } from '@material-ui/core';
 
-const white = '#FFFFFF';
-const black = '#000000';
+const white = '#000000';
+const black = '#FFFFFF';
 const pink = '#ff6b66';
 const gray = '#44545e';
 const green= '#4db249';
@@ -10,7 +10,7 @@ const btn_gray = '#727E91';
 const pink_disable = '#a02000';
 const gray_disable = '#404040';
 const topbar_color = '#FFFFFF';
-const topbar_background = '#575658';
+const topbar_background = '#000000';
 export default {
   black,
   white,

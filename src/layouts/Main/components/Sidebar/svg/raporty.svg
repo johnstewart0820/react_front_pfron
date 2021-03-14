@@ -1,11 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
   <defs>
-    <clipPath id="clip-raporty">
+    <clipPath id="clip-_13_raporty">
       <rect width="15" height="15"/>
     </clipPath>
   </defs>
-  <g id="raporty" clip-path="url(#clip-raporty)">
-    <rect width="15" height="15" fill="#fff"/>
+  <g id="_13_raporty" data-name="13 raporty" clip-path="url(#clip-_13_raporty)">
     <g id="analytics">
       <g id="Group_539" data-name="Group 539">
         <g id="Group_538" data-name="Group 538">

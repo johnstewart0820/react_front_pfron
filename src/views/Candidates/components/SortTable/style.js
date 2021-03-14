@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
     btnCreate: {
         '& .MuiButton-label': {
             textTransform: 'none',
-            fontSize: '15px',
+            fontSize: '0.9375em',
         },
         '&:hover': {
             backgroundColor: theme.palette.pink
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     input_box: {
       padding: '10px 20px',
       width: '100%',
-      fontSize: '14px'
+      fontSize: '0.8750em'
     },
     iconButton: {
       marginRight: theme.spacing(1),
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     },
     icon: {
       height: '50%',
-      fontSize: '20px'
+      fontSize: '1.25em'
     },
     root: {
       '& .MuiTableCell-root': {

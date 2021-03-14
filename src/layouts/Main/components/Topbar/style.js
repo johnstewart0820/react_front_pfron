@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
       left: '299px',
       width: 'calc(100% - 299px)',
       height: '80px',
-      backgroundColor: '#575658',
+      backgroundColor: theme.palette.topbar_background,
       display: 'flex',
       zIndex: '101'
     },
@@ -25,13 +25,13 @@ const useStyles = makeStyles(theme => ({
     close_drawer_icon: {
       display: 'flex',
       justifyContent: 'center',
-      color: 'white',
+      color: theme.palette.topbar_color,
       '& .MuiSvgIcon-root': {
-        fontSize: '18px'
+        fontSize: '1.3em'
       }
     },
     title: {
-      fontSize: '20px',
+      fontSize: '1em',
       fontFamily: 'roboto',
       fontWeight: '400',
       display: 'flex',
@@ -44,19 +44,38 @@ const useStyles = makeStyles(theme => ({
       top: '45px',
       paddingLeft: '30px',
       boxShadow: '0 0 0 1px rgb(63 63 68 / 5%), 0 1px 3px 0 rgb(63 63 68 / 15%)',
-      backgroundColor: theme.palette.green
+      backgroundColor: theme.palette.green,
+			color: theme.palette.topbar_color
     },
     avatar: {
 
     },
     titlebar: {
       display: 'flex',
-      color: 'white'
+      color: theme.palette.topbar_color
     },
     avataricon: {
-      fontSize: '30px',
-      color: 'white'
+      fontSize: '1.3em',
+      color: theme.palette.topbar_color
     },
+		rightControllerArea: {
+      display: 'flex'
+    },
+		controllerArea: {
+      display: 'flex',
+    },
+		helper: {
+      color: theme.palette.topbar_color,
+      fontSize: '8px',
+      margin: theme.spacing(0, 2.5),
+      display: 'flex',
+      alignItems: 'center'
+    },
+		vertical_separator: {
+      height: '100%',
+      width: '1px',
+      backgroundColor: theme.palette.topbar_color,    
+		}
   }));
 
   export default useStyles;

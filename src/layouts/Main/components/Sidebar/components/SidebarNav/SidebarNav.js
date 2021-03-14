@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     color: 'gray',
     fontFamily: 'roboto',
-    fontSize: '13px'
+    fontSize: '0.8125em'
   },
   button: {
     padding: '16px 32px',
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: 0,
     width: '100%',
     fontWeight: 400,
-    fontSize: '14px',
+    fontSize: '0.8750em',
     color: '#2f2f37',
     lineHeight: '1em',
     '&:hover': {

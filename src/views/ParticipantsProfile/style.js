@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	top_label_header: {
 		marginBottom: theme.spacing(1),
-		fontSize: '14px',
+		fontSize: '0.8750em',
 		fontWeight: '500'
 	},
 	top_label: {
 		marginBottom: theme.spacing(1),
-		fontSize: '14px',
+		fontSize: '0.8750em',
 	},
 	form_title_right: {
 		fontWeight: '500',
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 	btnControl: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
-			fontSize: '14px',
+			fontSize: '0.8750em',
 		},
 		'&:hover': {
 			backgroundColor: '#727e91',
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 	btnSave: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
-			fontSize: '14px',
+			fontSize: '0.8750em',
 		},
 		'&:hover': {
 			backgroundColor: 'darkgray',
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 	btnOption: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
-			fontSize: '14px',
+			fontSize: '0.8750em',
 		},
 		'&:hover': {
 			backgroundColor: '#727e91',
@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
 	btnIprList: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
-			fontSize: '14px',
+			fontSize: '0.8750em',
 		},
 		'&:hover': {
 			backgroundColor: '#727e91',
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
 	btnBack: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
-			fontSize: '14px',
+			fontSize: '0.8750em',
 		},
 		'&:hover': {
 			backgroundColor: theme.palette.btn_gray,
@@ -132,20 +132,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 	top_label: {
 		marginBottom: theme.spacing(1),
-		fontSize: '14px',
+		fontSize: '0.8750em',
 	},
 	input_box_label: {
 		marginTop: theme.spacing(2),
 		marginBottom: theme.spacing(1),
-		fontSize: '14px',
+		fontSize: '0.8750em',
 	},
 	input_box_label_left: {
-		fontSize: '14px',
+		fontSize: '0.8750em',
 	},
 	input_box: {
 		padding: '10px 20px',
 		width: '100%',
-		fontSize: '14px'
+		fontSize: '0.8750em'
 	},
 	name_select_box: {
 		'& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {

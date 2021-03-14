@@ -16,32 +16,46 @@ import AppContainer from './AppContainer';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { pl } from 'date-fns/locale'
 import LuxonUtils from '@date-io/luxon';
-
+const SiteInfoContext = React.createContext(null);
+const SiteInfoContextConsumer = SiteInfoContext.Consumer;
 const browserHistory = createBrowserHistory();
 
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
-  draw: chartjs.draw
+	draw: chartjs.draw
 });
 
 validate.validators = {
-  ...validate.validators,
-  ...validators
+	...validate.validators,
+	...validators
 };
 
 export default class App extends Component {
-  render() {
-    return (
-      <MuiPickersUtilsProvider utils={LuxonUtils} locale={pl}>
-        <ToastProvider>
-          <ThemeProvider theme={theme}>
-            <Router history={browserHistory}>
-              <AppContainer>
-                <Routes />
-              </AppContainer>
-            </Router>
-          </ThemeProvider>
-        </ToastProvider>
-      </MuiPickersUtilsProvider>
-    );
-  }
+	state = {
+		is_contrast: false,
+	}
+	toggleContrast = () => {
+		this.setState({ is_contrast: !this.state.is_contrast });
+	}
+	render() {
+		return (
+			<MuiPickersUtilsProvider utils={LuxonUtils} locale={pl}>
+				<ToastProvider>
+					<SiteInfoContext.Provider value={{
+						...this.state,
+						toggleContrast: this.toggleContrast
+					}} >
+						<ThemeProvider theme={theme(this.state.is_contrast)}>
+							<Router history={browserHistory}>
+								<AppContainer>
+									<Routes />
+								</AppContainer>
+							</Router>
+						</ThemeProvider>
+					</SiteInfoContext.Provider>
+				</ToastProvider>
+			</MuiPickersUtilsProvider>
+		);
+	}
 }
+
+export { SiteInfoContextConsumer };

@@ -44,27 +44,15 @@ const Topbar = props => {
     history.push('/login');
   }
 
-	const changeFontSize = e => {
-    e.preventDefault();
+	const changeFontSize = type => {
 
     let
-      target = e.target,
       body = document.body,
-      fontSize = parseInt(window.getComputedStyle(body).fontSize.replace("px", "")),
-      fontAction;
-    if (target.tagName === 'svg')
-      target = target.parentElement;
-    if (target.tagName === 'path')
-      target = target.parentElement.parentElement;
-    if (target.name === 'plus')
-      fontAction = 'more';
-    else if (target.name === 'minus')
-      fontAction = 'less';
-    else if (target.name === 'normal')
-      fontAction = 'normal';
-    if (fontAction === 'less' && fontSize > 10) fontSize -= 1;
-    if (fontAction === 'more' && fontSize < 22) fontSize += 1;
-    if (fontAction === 'normal') fontSize = 16;
+      fontSize = parseInt(window.getComputedStyle(body).fontSize.replace("px", ""));
+
+    if (type === 'less' && fontSize > 10) fontSize -= 1;
+    if (type === 'more' && fontSize < 22) fontSize += 1;
+    if (type === 'normal') fontSize = 16;
 
     fontSize += "px";
     body.style.fontSize = fontSize;
@@ -91,30 +79,30 @@ const Topbar = props => {
 				<div className={classes.rightControllerArea}>
 					<div className={classes.controllerArea}>
 						<div className={classes.vertical_separator}/>
-						<a href="#" className={classes.helper} name="plus"
-							onClick={(e) => changeFontSize(e)}>
+						<div className={classes.helper} name="plus"
+							onClick={(e) => changeFontSize('more')}>
 							<FontAwesomeIcon icon={faFont} size="2x" />
 							<FontAwesomeIcon icon={faPlus} size="1x" />
-						</a>
+						</div>
 						<div className={classes.vertical_separator}/>
-						<a href="#" className={classes.helper} name="normal"
-								onClick={(e) => changeFontSize(e)}>
+						<div className={classes.helper} name="normal"
+								onClick={(e) => changeFontSize('normal')}>
 								<FontAwesomeIcon icon={faFont} size="2x"/>
-						</a>
+						</div>
 						<div className={classes.vertical_separator}/>
-						<a href="#" className={classes.helper} name="minus"
-								onClick={(e) => changeFontSize(e)}>
+						<div className={classes.helper} name="minus"
+								onClick={(e) => changeFontSize('less')}>
 								<FontAwesomeIcon icon={faFont} size="2x"/>
 								<FontAwesomeIcon icon={faMinus} size="1x"/>
-						</a>
+						</div>
 						<div className={classes.vertical_separator}/>
-						<a href="#" className={classes.helper} onClick={(e) => {e.preventDefault(); props.toggleContrast();}}>
+						<div className={classes.helper} onClick={(e) => {e.preventDefault(); props.toggleContrast();}}>
 								<FontAwesomeIcon icon={faEye} size="2x"/>
-						</a>
+						</div>
 						<div className={classes.vertical_separator}/>
-						<a href="#" className={classes.helper} onClick={(e) => toggleUnderlineLinks(e)}>
+						<div className={classes.helper} onClick={(e) => toggleUnderlineLinks(e)}>
 								<FontAwesomeIcon icon={faLink} size="2x"/>
-						</a>
+						</div>
 						<div className={classes.vertical_separator}/>
 					</div>
 					<div className={classes.avatar}>

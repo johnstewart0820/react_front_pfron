@@ -69,7 +69,8 @@ const useStyles = makeStyles(theme => ({
       fontSize: '8px',
       margin: theme.spacing(0, 2.5),
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+			cursor: 'pointer'
     },
 		vertical_separator: {
       height: '100%',

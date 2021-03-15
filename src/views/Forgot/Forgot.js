@@ -77,8 +77,8 @@ const Forgot = props => {
           <div className={classes.loginForm}>
             <span>Podaj swój adres e-mail, aby odzyskać hasło</span>
             <div>
-              <div className={classes.input_box_label} htmlFor="emailInput">E-mail</div>
-              <input className={classes.input_box} type="email" value={input.email} name="email" onChange={handleChange} onKeyPress={handleKeyPress} />
+              <div className={classes.input_box_label}><label htmlFor="emailInput">E-mail</label></div>
+              <input className={classes.input_box} type="email" value={input.email} name="email" id="emailInput" onChange={handleChange} onKeyPress={handleKeyPress} />
               <div className={classes.error_log}>{error["email"] && error["email"].length > 0 && error.email}</div>
             </div>
             <div className={classes.buttonContainer}>    

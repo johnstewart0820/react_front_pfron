@@ -225,7 +225,7 @@ const Sidebar = props => {
 				className={clsx(classes.root, className)}
 			>
 				<div className={classes.logoBlock}>
-					<img src="/images/logos/logo.png" className={classes.main_logo} />
+					<img src="/images/logos/logo.png" className={classes.main_logo} alt="Main Logo"/>
 				</div>
 				<SidebarNav
 					className={classes.nav}

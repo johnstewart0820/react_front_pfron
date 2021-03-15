@@ -103,11 +103,11 @@ const SignIn = props => {
           </div>
           <div className={classes.loginForm}>
             <div>
-              <div className={classes.input_box_label} htmlFor="emailInput">Login</div>
-              <input className={classes.input_box} type="email" value={input.email} name="email" onChange={handleChange} onKeyPress={handleKeyPress} autocomplete='off' />
+              <div className={classes.input_box_label}><label for="email">Login</label></div>
+              <input className={classes.input_box} type="email" value={input.email} name="email" id="email" onChange={handleChange} onKeyPress={handleKeyPress} autocomplete='off' />
               <div className={classes.error_log}>{tryLogin && error["email"] && error["email"].length > 0 && error.email}</div>
-              <div className={classes.input_box_label} htmlFor="passwordInput">Hasło</div>
-              <input className={classes.input_box} type="password" value={input.password} name="password" onChange={handleChange} onKeyPress={handleKeyPress} />
+              <div className={classes.input_box_label}><label htmlFor="password">Hasło</label></div>
+              <input className={classes.input_box} type="password" value={input.password} label="password" name="password" id="password" onChange={handleChange} onKeyPress={handleKeyPress} />
               <div className={classes.error_log}>{tryLogin && error["password"] && error["password"].length > 0 && error.password}</div>
               <FormControlLabel
                 className={classes.rememberMe}

@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     height: 'calc(100vh - 160px)',
     overflow: 'scroll',
-		backgroundColor: theme.palette.white
+		backgroundColor: theme.palette.background.default
   },
   mainContainer: {
     padding: theme.spacing(6, 4, 0, 4),

@@ -17,7 +17,7 @@ const SingleSelect = (props) => {
         }
       </InputLabel>
       <Select
-        native
+        native 
         value={value}
         onChange={(event) =>handleChange(event.target.value ? event.target.value : {})}
         inputProps={{

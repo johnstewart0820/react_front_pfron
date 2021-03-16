@@ -20,10 +20,13 @@ const useStyles = makeStyles(theme => ({
         padding: '10px',
         '&:disabled': {
           backgroundColor: theme.palette.pink_disable,
-          color: 'darkgray'
+          color: theme.palette.btn_darkgray
       }
     },
     input_box: {
+    '& svg': {
+			fill: theme.palette.text.secondary
+		},
 			color: theme.palette.text.primary,
     backgroundColor: theme.palette.black_white,
 			border: `1px solid ${theme.palette.text.primary}`,
@@ -32,6 +35,9 @@ const useStyles = makeStyles(theme => ({
       fontSize: '0.8750em'
     },
     iconButton: {
+   '& svg': {
+			fill: theme.palette.text.secondary
+		},
       marginRight: theme.spacing(1),
       padding: theme.spacing(1),
     },

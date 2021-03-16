@@ -13,6 +13,9 @@ const useStyles = makeStyles(theme => ({
         },
     },
     input_box: {
+    '& svg': {
+			fill: theme.palette.text.secondary
+		},
 			color: theme.palette.text.primary,
         '& select': {
             border: `1px solid ${theme.palette.gray}`,

@@ -12,7 +12,8 @@ const SingleSelect = (props) => {
   return (
     <FormControl variant="outlined" className={classes.formControl}>
       <Select
-        native
+        native 
+				className={classes.input_box}
         value={value}
         className={classes.name_select_box}
         onChange={(event) =>handleChange(event.target.value ? event.target.value : {})}

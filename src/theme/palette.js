@@ -16,7 +16,7 @@ const sidebar_color = '#2f2f37';
 const sidebar_hover_color = '#EBECF0';
 const sidebar_title_color = 'gray';
 const card_border = 'none';
-
+const pagination_background = 'rgba(0, 0, 0, 0.08)';
 export default {
   black,
   white,
@@ -34,6 +34,7 @@ export default {
 	sidebar_hover_color,
 	sidebar_title_color,
 	card_border,
+	pagination_background,
   primary: {
     contrastText: white,
     dark: colors.indigo[900],
@@ -80,5 +81,7 @@ export default {
     paper: white
   },
   icon: colors.blueGrey[600],
-  divider: colors.grey[200]
+  divider: colors.grey[200],
+	pagination_color: colors.blueGrey[900],
+	btn_darkgray: 'darkgray',
 };

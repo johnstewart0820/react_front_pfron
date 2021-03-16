@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2.5, 0,)
     },
     rowsBlock: {
+           color: theme.palette.text.primary,
         display: 'flex',
         alignItems: 'center',
         fontFamily: 'roboto',
@@ -52,12 +53,19 @@ const useStyles = makeStyles((theme) => ({
     },
     table: {
         margin: theme.spacing(2.5, 0),
+       border: theme.palette.card_border,
     },
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
         padding: theme.spacing(1)
-    }
+    },
+		pagenation_class: {
+			'& .MuiPaginationItem-page.Mui-selected': {
+				backgroundColor: theme.palette.pagination_background,
+				color: theme.palette.pagination_color
+			}
+		}
 }));
 
 export default useStyles;

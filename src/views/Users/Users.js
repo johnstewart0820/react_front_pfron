@@ -194,7 +194,8 @@ const Users = props => {
           handleDelete={handleSelectedItem}
         />
         <div className={classes.pagination}>
-          <Pagination 
+          <Pagination
+className={classes.pagenation_class}
             count={ total%selectedCount == 0 ? total / selectedCount : parseInt(total / selectedCount) + 1} 
             onChange={(e, page) => {setPage(page)}} 
             page={page} 

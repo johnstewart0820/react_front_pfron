@@ -7,6 +7,9 @@ const useStyles = makeStyles(theme => ({
     },
     name_select_box: {
         // fontStyle: 'italic',
+                               '& svg': {
+					fill: theme.palette.text.secondary
+				},
         fontWeight: '400',
         // padding: '5px 14px',
         '& .MuiInputLabel-outlined .MuiInputLabel-shrink': {
@@ -18,6 +21,7 @@ border: `1px solid ${theme.palette.gray}`,
             padding: '10px 30px 10px 20px !important'
         }
     },
+		
 }));
 
 export default useStyles;

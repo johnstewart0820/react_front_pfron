@@ -160,6 +160,7 @@ const SortTable = (props) => {
                     KeyboardButtonProps={{
                       'aria-label': 'change date',
                     }}
+										className={classes.date_picker}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -174,6 +175,7 @@ const SortTable = (props) => {
                     KeyboardButtonProps={{
                       'aria-label': 'change date',
                     }}
+										className={classes.date_picker}
                   />
                 </Grid>
               </Grid>

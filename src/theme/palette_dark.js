@@ -16,6 +16,8 @@ const sidebar_color = green;
 const sidebar_hover_color = white;
 const sidebar_title_color = green;
 const card_border = `1px solid ${green}`;
+const pagination_background = green;
+
 export default {
   black,
   white,
@@ -33,6 +35,7 @@ export default {
 	sidebar_hover_color,
 	sidebar_title_color,
 	card_border,
+	pagination_background,
   primary: {
     contrastText: white,
     dark: colors.indigo[900],
@@ -78,6 +81,8 @@ export default {
     default: 'black',
     paper: white
   },
+	pagination_color: colors.blueGrey[900],
   icon: colors.blueGrey[600],
-  divider: colors.grey[200]
+  divider: colors.grey[200],
+	btn_darkgray: green,
 };

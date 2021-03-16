@@ -29,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: '500'
     },
     textArea: {
+                backgroundColor: theme.palette.black_white,
+		color: theme.palette.text.primary,
+		border: `1px solid ${theme.palette.text.primary}`,
+		'&::placeholder': {
+			color: theme.palette.text.primary,
+		},
       width: '100%',
       padding: theme.spacing(2)
     },
@@ -38,14 +44,14 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.8750em',
       },
       '&:hover': {
-        backgroundColor: 'darkgray',
-        borderColor: 'darkgray',
+        backgroundColor: theme.palette.btn_darkgray,
+        borderColor: theme.palette.btn_darkgray,
       },
       marginTop: theme.spacing(3),
       borderRadius: '0px',
       fontWeight: '300',
-      backgroundColor: 'darkgray',
-      borderColor: 'darkgray',
+      backgroundColor: theme.palette.btn_darkgray,
+      borderColor: theme.palette.btn_darkgray,
       color: theme.palette.black_white,
       width: '100%'
     },
@@ -58,14 +64,14 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.8750em',
       },
       '&:hover': {
-        backgroundColor: '#727e91',
-        borderColor: '#727e91',
+        backgroundColor: theme.palette.btn_gray,
+        borderColor: theme.palette.btn_gray,
       },
       marginTop: theme.spacing(3),
       borderRadius: '0px',
       fontWeight: '300',
-      backgroundColor: '#727e91',
-      borderColor: '#727e91',
+      backgroundColor: theme.palette.btn_gray,
+      borderColor: theme.palette.btn_gray,
       color: theme.palette.black_white,
       width: '100%'
     },
@@ -116,6 +122,9 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(0.5)
 	},
     input_box: {
+    '& svg': {
+			fill: theme.palette.text.secondary
+		},
 			color: theme.palette.text.primary,
     backgroundColor: theme.palette.black_white,
 			border: `1px solid ${theme.palette.text.primary}`,

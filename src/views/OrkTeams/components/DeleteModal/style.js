@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'flex-end'
     },
     input_box: {
+    '& svg': {
+			fill: theme.palette.text.secondary
+		},
 			color: theme.palette.text.primary,
     backgroundColor: theme.palette.black_white,
 			border: `1px solid ${theme.palette.text.primary}`,

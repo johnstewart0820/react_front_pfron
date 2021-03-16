@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1.5)
     },
     form: {
+			border: theme.palette.card_border,
       padding: theme.spacing(3),
       fontFamily: 'roboto',
     },
@@ -16,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: '500'
     },
     textArea: {
+                backgroundColor: theme.palette.black_white,
+		color: theme.palette.text.primary,
+		border: `1px solid ${theme.palette.text.primary}`,
+		'&::placeholder': {
+			color: theme.palette.text.primary,
+		},
       width: '100%',
       padding: theme.spacing(2)
     },
@@ -25,14 +32,14 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.8750em',
       },
       '&:hover': {
-        backgroundColor: 'darkgray',
-        borderColor: 'darkgray',
+        backgroundColor: theme.palette.btn_darkgray,
+        borderColor: theme.palette.btn_darkgray,
       },
       marginTop: theme.spacing(3),
       borderRadius: '0px',
       fontWeight: '300',
-      backgroundColor: 'darkgray',
-      borderColor: 'darkgray',
+      backgroundColor: theme.palette.btn_darkgray,
+      borderColor: theme.palette.btn_darkgray,
       color: theme.palette.black_white,
       width: '100%'
     },
@@ -45,19 +52,22 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.8750em',
       },
       '&:hover': {
-        backgroundColor: '#727e91',
-        borderColor: '#727e91',
+        backgroundColor: theme.palette.btn_gray,
+        borderColor: theme.palette.btn_gray,
       },
       marginTop: theme.spacing(3),
       borderRadius: '0px',
       fontWeight: '300',
-      backgroundColor: '#727e91',
-      borderColor: '#727e91',
+      backgroundColor: theme.palette.btn_gray,
+      borderColor: theme.palette.btn_gray,
       color: theme.palette.black_white,
       width: '100%'
     },
     date_picker: {
       marginTop: theme.spacing(1),
+			'& svg': {
+				fill: theme.palette.text.secondary
+			},
     },
     btnBack: {
         '& .MuiButton-label': {
@@ -91,6 +101,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '0.8750em',
     },
     input_box: {
+    '& svg': {
+			fill: theme.palette.text.secondary
+		},
 			color: theme.palette.text.primary,
     backgroundColor: theme.palette.black_white,
 			border: `1px solid ${theme.palette.text.primary}`,
@@ -129,6 +142,45 @@ const useStyles = makeStyles((theme) => ({
     progress: {
       color: theme.palette.pink
     },
+		phone_input: {
+			width: '100% !important', 
+			borderRadius: '0px !important', 
+			backgroundColor: `${theme.palette.black_white} !important`, 
+			color: `${theme.palette.text.primary} !important`, 
+			border: `1px solid ${theme.palette.text.primary} !important` 
+		},
+		phone_drop_down: {
+			borderRadius: '0px !important', 
+			backgroundColor: `${theme.palette.black_white} !important`, 
+			color: `${theme.palette.text.primary} !important`, 
+			border: `1px solid ${theme.palette.text.primary} !important`,
+			'& li': {
+				'&:hover': {
+					backgroundColor: `${theme.palette.text.primary} !important`, 
+					color: `${theme.palette.black_white} !important`, 
+				},
+				'&:active': {
+					backgroundColor: `${theme.palette.text.primary} !important`, 
+					color: `${theme.palette.black_white} !important`, 
+				}
+			}
+		},
+		buttonStyle: {
+			borderRadius: '0px !important', 
+			backgroundColor: `${theme.palette.black_white} !important`, 
+			color: `${theme.palette.text.primary} !important`, 
+			border: `1px solid ${theme.palette.text.primary} !important`,
+			'& div': {
+				'&:hover': {
+					backgroundColor: `${theme.palette.text.primary} !important`, 
+					color: `${theme.palette.black_white} !important`, 
+				},
+			},
+			'&:active': {
+				backgroundColor: `${theme.palette.text.primary} !important`, 
+				color: `${theme.palette.black_white} !important`, 
+			},
+		}
 }));
 
 export default useStyles;

@@ -32,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'right'
 	},
 	iconButton: {
-		'& svg': {
+   '& svg': {
 			fill: theme.palette.text.secondary
-		}
+		},
+		
 	},
 	table_content: {
 		padding: theme.spacing(2)
@@ -100,6 +101,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '0.8750em',
     },
     input_box: {
+    '& svg': {
+			fill: theme.palette.text.secondary
+		},
 			color: theme.palette.text.primary,
     backgroundColor: theme.palette.black_white,
 			border: `1px solid ${theme.palette.text.primary}`,

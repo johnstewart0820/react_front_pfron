@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: '300',
         backgroundColor: 'darkgray',
         borderColor: 'darkgray',
-        color: 'white',
+        color: theme.palette.black_white,
         width: '100%'
     },
     btnBack: {
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
           backgroundColor: theme.palette.btn_gray,
           borderColor: theme.palette.btn_gray,
-          color: 'white'
+          color: theme.palette.black_white
         },
         padding: theme.spacing(0.5, 6),
         borderRadius: '0px',
@@ -66,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '0.8750em',
     },
     input_box: {
+			color: theme.palette.text.primary,
+    backgroundColor: theme.palette.black_white,
+			border: `1px solid ${theme.palette.text.primary}`,
       padding: '10px 20px',
       width: '100%',
       fontSize: '0.8750em'
@@ -77,17 +80,17 @@ const useStyles = makeStyles((theme) => ({
         border: '0px'
       },
       '& fieldset': {
-        border: '1px solid gray',
+        border: `1px solid ${theme.palette.gray}`,
       },
       '& .MuiChip-root': {
         borderRadius: '2px',
         backgroundColor: theme.palette.green,
-        color: 'white',
+        color: theme.palette.black_white,
         padding: '0px 10px',
         height: '26px'
       }, 
       '& .MuiChip-deleteIcon': {
-        color: 'white',
+        color: theme.palette.black_white,
         height: '70%'
       }
     },

@@ -2,7 +2,7 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.black_white,
     color: theme.palette.color,
     fontFamily: 'roboto',
     height: '100vh',

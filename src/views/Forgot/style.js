@@ -31,6 +31,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.9375em',
   },
   input_box: {
+			color: theme.palette.text.primary,
+    backgroundColor: theme.palette.black_white,
+			border: `1px solid ${theme.palette.text.primary}`,
     padding: '10px 20px',
     width: '360px',
   },
@@ -50,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '0px',
     fontWeight: '300',
     backgroundColor: theme.palette.green,
-    color: 'white',
+    color: theme.palette.black_white,
     width: '100%'
   },
   btnBack: {

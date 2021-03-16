@@ -11,6 +11,12 @@ const pink_disable = '#a02000';
 const gray_disable = '#404040';
 const topbar_color = '#FFFFFF';
 const topbar_background = '#575658';
+const black_white = '#FFFFFF';
+const sidebar_color = '#2f2f37';
+const sidebar_hover_color = '#EBECF0';
+const sidebar_title_color = 'gray';
+const card_border = 'none';
+
 export default {
   black,
   white,
@@ -23,6 +29,11 @@ export default {
   gray_disable,
 	topbar_color,
 	topbar_background,
+	black_white,
+	sidebar_color,
+	sidebar_hover_color,
+	sidebar_title_color,
+	card_border,
   primary: {
     contrastText: white,
     dark: colors.indigo[900],

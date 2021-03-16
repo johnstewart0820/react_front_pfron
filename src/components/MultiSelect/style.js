@@ -13,8 +13,9 @@ const useStyles = makeStyles(theme => ({
     },
     multiple_select: {
         '& .MuiSelect-outlined.MuiSelect-outlined': {
+border: `1px solid ${theme.palette.gray}`,
             padding: '10px 20px',
-            border: '1px solid gray',
+            border: `1px solid ${theme.palette.gray}`,
             borderRadius: '0px',
         },
         marginTop: '-1px !important'

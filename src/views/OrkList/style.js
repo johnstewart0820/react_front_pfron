@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0px',
         fontWeight: '300',
         backgroundColor: theme.palette.btn_gray,
-        color: 'white',
+        color: theme.palette.black_white,
     },
     btnExport: {
         '& .MuiButton-label': {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
           backgroundColor: theme.palette.pink,
           borderColor: theme.palette.pink,
-          color: 'white'
+          color: theme.palette.black_white
         },
         padding: theme.spacing(0.5, 8),
         borderRadius: '0px',

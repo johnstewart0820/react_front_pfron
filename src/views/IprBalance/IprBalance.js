@@ -26,8 +26,6 @@ import ExpandLessOutlinedIcon from '@material-ui/icons/ExpandLessOutlined';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './tab.css';
 
-import { PlanView, ScheduleView } from './components';
-
 const IprBalance = props => {
 	const id = props.match.params.id;
 	const [openModal, setOpenModal] = useState(false);

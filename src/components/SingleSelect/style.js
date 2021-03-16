@@ -13,8 +13,9 @@ const useStyles = makeStyles(theme => ({
         },
     },
     input_box: {
+			color: theme.palette.text.primary,
         '& select': {
-            border: '1px solid gray',
+            border: `1px solid ${theme.palette.gray}`,
             borderRadius: '0px'
         },
         '& .MuiOutlinedInput-input': {

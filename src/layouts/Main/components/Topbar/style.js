@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: '30px',
       boxShadow: '0 0 0 1px rgb(63 63 68 / 5%), 0 1px 3px 0 rgb(63 63 68 / 15%)',
       backgroundColor: theme.palette.green,
-			color: theme.palette.topbar_color
+			color: theme.palette.black_white
     },
     avatar: {
 

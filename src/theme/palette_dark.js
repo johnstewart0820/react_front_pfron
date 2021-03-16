@@ -1,16 +1,21 @@
 import { colors } from '@material-ui/core';
 
 const white = '#000000';
-const black = '#FFFFFF';
-const pink = '#ff6b66';
-const gray = '#44545e';
-const green= '#4db249';
+const black = '#FFC401';
+const pink = '#FFC401';
+const gray = '#FFC401';
+const green= '#FFC401';
 const color = '#454648';
-const btn_gray = '#727E91';
+const btn_gray = green;
 const pink_disable = '#a02000';
 const gray_disable = '#404040';
-const topbar_color = '#FFFFFF';
+const topbar_color = '#FFC401';
 const topbar_background = '#000000';
+const black_white = '#000000';
+const sidebar_color = green;
+const sidebar_hover_color = white;
+const sidebar_title_color = green;
+const card_border = `1px solid ${green}`;
 export default {
   black,
   white,
@@ -23,6 +28,11 @@ export default {
   gray_disable,
 	topbar_color,
 	topbar_background,
+	black_white,
+	sidebar_color,
+	sidebar_hover_color,
+	sidebar_title_color,
+	card_border,
   primary: {
     contrastText: white,
     dark: colors.indigo[900],
@@ -60,8 +70,8 @@ export default {
     light: colors.red[400]
   },
   text: {
-    primary: colors.blueGrey[900],
-    secondary: colors.blueGrey[600],
+    primary: green,
+    secondary: green,
     link: colors.blue[600]
   },
   background: {

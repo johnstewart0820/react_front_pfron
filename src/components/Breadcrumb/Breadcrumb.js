@@ -4,11 +4,16 @@ import { makeStyles } from '@material-ui/styles';
 import { Typography, Link, Breadcrumbs } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
+	breadcrumb: {
+    color: theme.palette.sidebar_title_color,
+		fontFamily: 'roboto'
+	},
   link: {
     color: theme.palette.green,
     fontSize: '0.8125em',
   },
   typo: {
+		color: theme.palette.sidebar_title_color,
     fontSize: '0.8125em',
   }
 }));

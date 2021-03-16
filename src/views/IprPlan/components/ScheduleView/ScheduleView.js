@@ -155,7 +155,7 @@ const ScheduleView = (props) => {
 	
 	return (
 		<>
-			<Grid container spacing={3} className={classes.form} style={{backgroundColor: 'white', margin: '0px', width: '100%'}}>
+			<Grid container spacing={3} className={classes.form}>
 				<Grid item xs={3}>
 					<div className={classes.form_title}>
 						Tydzien
@@ -190,7 +190,7 @@ const ScheduleView = (props) => {
 				{
 					dateList.map((item, index) => (
 						<TabPanel>
-							<Grid container spacing={3} style={{display: 'flex', justifyContent: 'flex-end', width: '100%', backgroundColor: 'white', margin: '0px', padding: '30px'}}>
+							<Grid container spacing={3} className={classes.grid}>
 								{
 									scheduleData.map((module, index_module) => (
 										<>

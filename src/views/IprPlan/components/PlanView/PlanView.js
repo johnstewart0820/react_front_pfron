@@ -12,9 +12,11 @@ import {
 import DateFnsUtils from '@date-io/date-fns';
 import { pl } from 'date-fns/locale'
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useTheme } from '@material-ui/styles';
 
 const PlanView = (props) => {
   const classes = useStyles();
+	const theme = useTheme();
   const { moduleList, setModuleList } = props;
 
   const handleChangeApplicable = (index, index_module) => {
@@ -223,7 +225,7 @@ const PlanView = (props) => {
 	))
   }
   return (
-    <Grid container spacing={3} className={classes.form}  style={{backgroundColor: 'white', margin: '0px', width: '100%'}}>
+    <Grid container spacing={3} className={classes.form}  style={{backgroundColor: theme.palette.black_white, margin: '0px', width: '100%'}}>
 		{
 			moduleList.map((module, index) => (
 				<>

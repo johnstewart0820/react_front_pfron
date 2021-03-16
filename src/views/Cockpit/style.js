@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     form: {
       padding: theme.spacing(3),
       fontFamily: 'roboto',
+			border: theme.palette.card_border
     },
     form_title: {
       fontWeight: '500'
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 		minHeight: '420px',
 		borderRadius: '0px',
 		fontFamily: 'roboto',
+		border: theme.palette.card_border
 	},
 	table_header: {
 		backgroundColor: theme.palette.green,
@@ -28,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 	table_footer: {
 		textAlign: 'right'
+	},
+	iconButton: {
+		'& svg': {
+			fill: theme.palette.text.secondary
+		}
 	},
 	table_content: {
 		padding: theme.spacing(2)
@@ -47,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
           backgroundColor: theme.palette.pink,
           borderColor: theme.palette.pink,
-          color: 'white'
+          color: theme.palette.black_white
         },
         padding: theme.spacing(0.5, 8),
         borderRadius: '0px',
@@ -63,13 +70,12 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
           backgroundColor: theme.palette.btn_gray,
           border: 'none',
-          color: 'white',
         },
+				color: theme.palette.black_white,
         padding: theme.spacing(1, 6),
         borderRadius: '0px',
         fontWeight: '300',
-		backgroundColor: theme.palette.btn_gray,
-        color: 'white',
+				backgroundColor: theme.palette.btn_gray,
         border: 'none',
 		width: '100%'
     },
@@ -94,6 +100,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '0.8750em',
     },
     input_box: {
+			color: theme.palette.text.primary,
+    backgroundColor: theme.palette.black_white,
+			border: `1px solid ${theme.palette.text.primary}`,
       padding: '10px 20px',
       width: '100%',
       fontSize: '0.8750em'
@@ -105,17 +114,17 @@ const useStyles = makeStyles((theme) => ({
         border: '0px'
       },
       '& fieldset': {
-        border: '1px solid gray',
+        border: `1px solid ${theme.palette.gray}`,
       },
       '& .MuiChip-root': {
         borderRadius: '2px',
         backgroundColor: theme.palette.green,
-        color: 'white',
+        color: theme.palette.black_white,
         padding: '0px 10px',
         height: '26px'
       }, 
       '& .MuiChip-deleteIcon': {
-        color: 'white',
+        color: theme.palette.black_white,
         height: '70%'
       }
     },

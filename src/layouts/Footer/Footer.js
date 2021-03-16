@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   logoBlock: {
-    backgroundColor: 'white'
+    backgroundColor: theme.palette.black_white
   },
   logo: {
     maxWidth: '100%',

@@ -20,6 +20,7 @@ import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {DeleteModal} from '../Candidates/components';
 import { FirstStepView, FourthStepView, SecondStepView, ThirdStepView } from './components';
+import { useTheme } from '@material-ui/styles';
 
 const CandidatesFirstStep = props => {
   const { children } = props;
@@ -43,7 +44,7 @@ const CandidatesFirstStep = props => {
   const [progressStatus, setProgressStatus] = useState(false);
   const [error, setError] = useState({});
   const [openModal, setOpenModal] = useState(false);
-
+	const theme = useTheme();
   const handleHistory = () => {
 		history.push(`/candidates/history/${id}`)
   }
@@ -182,7 +183,7 @@ const CandidatesFirstStep = props => {
             <Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 3</Link></Tab>
             <Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 4</Link></Tab>
           </TabList>
-          <TabPanel style={{backgroundColor: 'white'}}>
+          <TabPanel style={{backgroundColor: theme.palette.black_white}}>
             <FirstStepView 
               name={name} 
               surname={surname}

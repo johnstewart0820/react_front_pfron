@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
             // padding: '5px 14px'
         },
         '& .MuiSelect-outlined.MuiSelect-outlined': {
+border: `1px solid ${theme.palette.gray}`,
             padding: '10px 30px 10px 20px !important'
         }
     },

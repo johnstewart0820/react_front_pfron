@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { List, ListItem, Button } from '@material-ui/core';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -17,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   label: {
     padding: '16px 32px',
     justifyContent: 'flex-start',
-    color: 'gray',
+    color: theme.palette.sidebar_title_color,
     fontFamily: 'roboto',
     fontSize: '0.8125em'
   },
@@ -29,38 +30,51 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     fontWeight: 400,
     fontSize: '0.8750em',
-    color: '#2f2f37',
+    color: theme.palette.sidebar_color,
     lineHeight: '1em',
+		'& path': {
+			fill: theme.palette.sidebar_title_color,
+		},
     '&:hover': {
       backgroundColor: theme.palette.green,
-      color: '#EBECF0',
+      color: theme.palette.sidebar_hover_color,
       fontWeight: 400,
       borderRadius: '0px',
+			
       '& $icon': {
-        color: '#EBECF0',
+        color: theme.palette.sidebar_hover_color,
+				'& path': {
+					fill: theme.palette.sidebar_hover_color,
+				}
       },
     },
   },
   icon: {
-    color: '#2f2f37',
-    width: 15,
-    height: 15,
+    color: theme.palette.sidebar_color,
+    width: 20,
+    height: 20,
     display: 'flex',
     alignItems: 'center',
     marginRight: theme.spacing(3),
 		backgroundRepeat: 'no-repeat',
 		
     '&:hover': {
-      color: '#EBECF0'
+      color: theme.palette.sidebar_hover_color,
+			'& path': {
+				fill: theme.palette.sidebar_hover_color,
+			}
     },
   },
   active: {
     fontWeight: 400,
+		'& path': {
+			fill: theme.palette.sidebar_hover_color,
+		},
     '& $icon': {
-      color: '#EBECF0',
+      color: theme.palette.sidebar_hover_color,
     },
     backgroundColor: theme.palette.green,
-    color: '#EBECF0',
+    color: theme.palette.sidebar_hover_color,
     borderRadius: '0px'
   }
 }));
@@ -101,7 +115,10 @@ const SidebarNav = props => {
             component={CustomRouterLink}
             to={page.href}
           >
-            <div className={classes.icon} style={{backgroundImage: `url("${page.icon}")`,backgroundColor: 'transparent'}}></div>
+						<SvgIcon className={classes.icon}>
+							{page.icon}
+						</SvgIcon>
+            {/* <div  style={{backgroundImage: `url("${page.icon}")`,backgroundColor: 'transparent'}}></div> */}
             {page.title}
           </Button>
         </ListItem>

@@ -23,6 +23,11 @@ const useStyles = makeStyles(theme => ({
           color: theme.palette.btn_darkgray
       }
     },
+		date_picker: {
+			'& svg': {
+				fill: theme.palette.text.secondary
+			},
+		},
     input_box: {
     '& svg': {
 			fill: theme.palette.text.secondary

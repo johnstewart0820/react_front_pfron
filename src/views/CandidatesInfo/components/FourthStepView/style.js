@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     form: {
       padding: theme.spacing(3),
       fontFamily: 'roboto',
-      color: '#263238',
+      color: theme.palette.text.primary,
       marginTop: theme.spacing(0)
     },
     form_title: {
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2)
     },
     btnSave: {
+height: '100%',
       '& .MuiButton-label': {
         textTransform: 'none',
         fontSize: '0.8750em',
@@ -66,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
     },
     date_picker: {
       marginTop: theme.spacing(1),
+			'& svg': {
+				fill: theme.palette.text.secondary
+			},
     },
     btnBack: {
         '& .MuiButton-label': {

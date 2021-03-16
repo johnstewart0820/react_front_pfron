@@ -45,6 +45,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     btnSave: {
+height: '100%',
         '& .MuiButton-label': {
             textTransform: 'none',
             fontSize: '0.9375em',

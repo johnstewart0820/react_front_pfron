@@ -528,6 +528,7 @@ const TrainingsEdit = props => {
 														KeyboardButtonProps={{
 															'aria-label': 'change date',
 														}}
+														className={classes.date_picker}
 													/>
 												</Grid>
 												<Grid item xs={4}>

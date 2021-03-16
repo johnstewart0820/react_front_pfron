@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(1.5)
 	},
 	form: {
+		border: theme.palette.card_border,
 		padding: theme.spacing(3),
 		fontFamily: 'roboto',
 	},
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(5.5)
 	},
 	btnSave: {
+height: '100%',
 		'& .MuiButton-label': {
 			textTransform: 'none',
 			fontSize: '0.8750em',

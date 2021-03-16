@@ -124,6 +124,7 @@ const SortTable = (props) => {
 								KeyboardButtonProps={{
 									'aria-label': 'change date',
 								}}
+								className={classes.date_picker}
 							/>
 						</TableCell>
 						<TableCell>
@@ -138,6 +139,7 @@ const SortTable = (props) => {
 								KeyboardButtonProps={{
 									'aria-label': 'change date',
 								}}
+								className={classes.date_picker}
 							/>
 						</TableCell>
 						<TableCell></TableCell>

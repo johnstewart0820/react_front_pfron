@@ -127,6 +127,7 @@ const SortTable = (props) => {
 								KeyboardButtonProps={{
 									'aria-label': 'change date',
 								}}
+								className={classes.date_picker}
 							/>
 						</TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchDescription} name="searchId" onChange={(e) => setSearchDescription(e.target.value)} /></TableCell>

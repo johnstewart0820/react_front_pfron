@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: '500'
     },
     btnSave: {
+height: '100%',
         '& .MuiButton-label': {
           textTransform: 'none',
           fontSize: '0.8750em',
@@ -127,7 +128,10 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: '500'
     },
     date_picker: {
-        marginTop: theme.spacing(1)
+        marginTop: theme.spacing(1),
+				'& svg': {
+					fill: theme.palette.text.secondary
+				},
     },
     addContainer: {
       display: 'flex',

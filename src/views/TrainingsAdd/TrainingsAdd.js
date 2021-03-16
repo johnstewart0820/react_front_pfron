@@ -24,15 +24,15 @@ const TrainingsAdd = props => {
 	const classes = useStyles();
 	const { addToast } = useToasts()
 	const breadcrumbs = [{ active: true, label: 'Uslugi', href: '/service_list' }, { active: true, label: 'Szkolenia', href: '/trainings' }, { active: false, label: 'Dodaj szkolenie' }];
-	const [training, setTraining] = useState({name: '', number: '', rehabitation_center: 0, service: 0, participant: [{}], comment: '', training_status: 0});
-	const [training_class, setTrainingClass] = useState([{name: '', date: null, start_hour: '', end_hour: '', break_amount: '', total_hour: '', ork_team: []}]);
-	const [trainingStatusList, setTrainingStatusList] = useState([{id: 1, name: 'TAK'}, {id: 2, name: 'NIE'}]);
+	const [training, setTraining] = useState({ name: '', number: '', rehabitation_center: 0, service: 0, participant: [{}], comment: '', training_status: 0 });
+	const [training_class, setTrainingClass] = useState([{ name: '', date: null, start_hour: '', end_hour: '', break_amount: '', total_hour: '', ork_team: [] }]);
+	const [trainingStatusList, setTrainingStatusList] = useState([{ id: 1, name: 'TAK' }, { id: 2, name: 'NIE' }]);
 	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
 	const [orkTeamList, setOrkTeamList] = useState([]);
 	const [serviceList, setServiceList] = useState([]);
 	const [participantList, setParticipantList] = useState([]);
 	const [progressStatus, setProgressStatus] = useState(false);
-	const [error, setError] = useState({participant: [true]});
+	const [error, setError] = useState({ participant: [true] });
 	const [error_class, setErrorClass] = useState([{}]);
 
 	useEffect(() => {
@@ -49,12 +49,12 @@ const TrainingsAdd = props => {
 	}, []);
 
 	const handleError = () => {
-		let _error = {participant: []}
+		let _error = { participant: [] }
 		_error.name = (training.name.length === 0);
 		_error.number = (training.number.length === 0);
 		_error.rehabitation_center = (parseInt(training.rehabitation_center) === 0);
 		_error.service = (parseInt(training.service) === 0);
-		for(let i = 0; i < training.participant.length; i ++) {
+		for (let i = 0; i < training.participant.length; i++) {
 			_error.participant.push(true);
 			_error.participant[i] = !(training.participant[i].id > 0);
 		}
@@ -62,7 +62,7 @@ const TrainingsAdd = props => {
 		_error.training_status = (parseInt(training.training_status) === 0);
 		setError(_error);
 		let _error_class = []
-		for (let i = 0; i < training_class.length; i ++) {
+		for (let i = 0; i < training_class.length; i++) {
 			_error_class.push({});
 			_error_class[i].name = (training_class[i].name.length === 0);
 			_error_class[i].date = (!training_class[i].date || training_class[i].date.length === 0);
@@ -193,8 +193,8 @@ const TrainingsAdd = props => {
 	const handleCreateClass = () => {
 		let _training_class = JSON.parse(JSON.stringify(training_class));
 		let _error_class = JSON.parse(JSON.stringify(error_class));
-		_training_class.push({name: '', date: null, start_hour: '', end_hour: '', break_amount: '', total_hour: '', ork_team: ''});
-		_error_class.push({name: true, date: true, start_hour: true, end_hour: true, break_amount: true, total_hour: true, ork_team: true});
+		_training_class.push({ name: '', date: null, start_hour: '', end_hour: '', break_amount: '', total_hour: '', ork_team: '' });
+		_error_class.push({ name: true, date: true, start_hour: true, end_hour: true, break_amount: true, total_hour: true, ork_team: true });
 		setTrainingClass(_training_class);
 		setErrorClass(_error_class);
 	}
@@ -246,7 +246,7 @@ const TrainingsAdd = props => {
 
 	const handleExportClass = () => {
 		let export_data = [];
-		for (let i = 0; i < training_class.length; i ++) {
+		for (let i = 0; i < training_class.length; i++) {
 			let item = [];
 			item.push(training_class[i].name);
 			item.push(training_class[i].date);
@@ -256,7 +256,7 @@ const TrainingsAdd = props => {
 			item.push(training_class[i].total_hour);
 			export_data.push(item);
 		}
-		
+
 		EXCEL.outPut({
 			header: ['Nazwa zajec', 'Data zajec', 'Godzina rozpoczecia', 'Godzina zakonczenia', 'Czas przerw(w minutach)', 'Czas trwania(w godzinach)'],
 			data: export_data,
@@ -266,15 +266,15 @@ const TrainingsAdd = props => {
 
 	const checkError = () => {
 		let result = (training.name.length === 0) ||
-		(training.number.length === 0) ||
-		(parseInt(training.rehabitation_center) === 0) ||
-		(parseInt(training.service) === 0) ||
-		(training.comment.length === 0) ||
-		(parseInt(training.training_status) === 0);
-		for(let i = 0; i < training.participant.length; i ++) {
+			(training.number.length === 0) ||
+			(parseInt(training.rehabitation_center) === 0) ||
+			(parseInt(training.service) === 0) ||
+			(training.comment.length === 0) ||
+			(parseInt(training.training_status) === 0);
+		for (let i = 0; i < training.participant.length; i++) {
 			result = result || !training.participant[i].id > 0;
 		}
-		for (let i = 0; i < training_class.length; i ++) {
+		for (let i = 0; i < training_class.length; i++) {
 			result = result || (training_class[i].name.length === 0)
 				|| (!training_class[i].date || training_class[i].date.length === 0)
 				|| (training_class[i].start_hour.length === 0)
@@ -301,9 +301,9 @@ const TrainingsAdd = props => {
 				participant_arr.push(item.id);
 			})
 			let participant_str = participant_arr.join(',');
-			for (let i = 0; i < training_class.length; i ++ ) {
+			for (let i = 0; i < training_class.length; i++) {
 				let ork_team_arr = []
-				for (let j = 0; j < training_class[i].ork_team.length; j ++) {
+				for (let j = 0; j < training_class[i].ork_team.length; j++) {
 					ork_team_arr.push(training_class[i].ork_team[j].id);
 				}
 				training_class[i].ork_team_str = ork_team_arr.join(',');
@@ -327,14 +327,14 @@ const TrainingsAdd = props => {
 
 	const handleExportParticipants = () => {
 		let export_data = [];
-		for (let i = 0; i < training.participant.length; i ++) {
+		for (let i = 0; i < training.participant.length; i++) {
 			let item = [];
 			item.push(training.participant[i].id);
 			item.push(training.participant[i].name);
 			item.push(training.participant[i].participant_number);
 			export_data.push(item);
 		}
-		
+
 		EXCEL.outPut({
 			header: ['ID', 'Nazwisko', 'Numer'],
 			data: export_data,
@@ -366,14 +366,14 @@ const TrainingsAdd = props => {
 									<div className={classes.input_box_label} htmlFor="type">ORK</div>
 									<SingleSelect value={training.rehabitation_center} handleChange={(value) => handleChangeRehabitationCenter(value)} list={rehabitationCenterList} error={error.rehabitation_center} />
 									<div className={classes.input_box_label} htmlFor="type">Usluga, do ktorej jest przypisane szkolenie</div>
-									<SingleSelect value={training.service} handleChange={(value) => handleChangeService(value)} list={serviceList} error={error.service} />									
+									<SingleSelect value={training.service} handleChange={(value) => handleChangeService(value)} list={serviceList} error={error.service} />
 								</Grid>
 							</Grid>
-							<div className={classes.divide}/>
+							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3}/>
+								<Grid item xs={3} />
 								<Grid item xs={9}>
-									<div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
+									<div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
 										<div className={classes.top_label}>
 											Uczestnicy
 										</div>
@@ -397,24 +397,24 @@ const TrainingsAdd = props => {
 												</Grid>
 												{
 													index == 0 && training.participant.length === 1 ?
-													<Grid item xs={1}/>
-													:
-													<Grid item xs={1}>
-														<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDeleteParticipant(index)}>
-															<DeleteOutlineOutlinedIcon className={classes.icon}/>
-														</IconButton>
-													</Grid>
+														<Grid item xs={1} />
+														:
+														<Grid item xs={1}>
+															<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDeleteParticipant(index)}>
+																<DeleteOutlineOutlinedIcon className={classes.icon} />
+															</IconButton>
+														</Grid>
 												}
 												{
 													index == training.participant.length - 1 ?
-													<Grid item xs={3}>
-														<Button variant="contained" color="secondary" className={classes.btnAdd} onClick={handleCreateParticipant}>
-															<AddIcon style={{marginRight: '20px'}}/>
+														<Grid item xs={3}>
+															<Button variant="contained" color="secondary" className={classes.btnAdd} onClick={handleCreateParticipant}>
+																<AddIcon style={{ marginRight: '20px' }} />
 															Dodaj
 														</Button>
-													</Grid>
-													:
-													<></>
+														</Grid>
+														:
+														<></>
 												}
 
 											</Grid>
@@ -429,19 +429,19 @@ const TrainingsAdd = props => {
 									{
 										training_class.map((item, index) => (
 											<Grid container spacing={2}>
-												<Grid item xs={ index == 0 && training_class.length === 1 ? 12 : 11}>
+												<Grid item xs={index == 0 && training_class.length === 1 ? 12 : 11}>
 													<div className={classes.input_box_label}>Nazwa zajec</div>
 													<input className={clsx({ [classes.input_box]: true, [classes.error]: error_class[index].name })} type="name" value={item.name} name="name" onChange={(e) => handleChangeClassName(e.target.value, index)} />
 												</Grid>
 												{
 													index == 0 && training_class.length === 1 ?
-													<></>
-													:
-													<Grid item xs={1} style={{marginTop: '35px'}}>
-														<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDeleteClass(index)}>
-															<DeleteOutlineOutlinedIcon className={classes.icon}/>
-														</IconButton>
-													</Grid>
+														<></>
+														:
+														<Grid item xs={1} style={{ marginTop: '35px' }}>
+															<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDeleteClass(index)}>
+																<DeleteOutlineOutlinedIcon className={classes.icon} />
+															</IconButton>
+														</Grid>
 												}
 												<Grid item xs={4}>
 													<div className={classes.input_box_label}>Data zajec</div>
@@ -454,8 +454,9 @@ const TrainingsAdd = props => {
 														value={item.date}
 														onChange={(value) => handleChangeClassDate(value, index)}
 														KeyboardButtonProps={{
-														'aria-label': 'change date',
+															'aria-label': 'change date',
 														}}
+														className={classes.date_picker}
 													/>
 												</Grid>
 												<Grid item xs={4}>
@@ -463,7 +464,7 @@ const TrainingsAdd = props => {
 													<MaskedInput
 														className={classes.input_box}
 														mask={[/\d/, /\d/, ':', /\d/, /\d/]}
-														value={training_class[index].start_hour }
+														value={training_class[index].start_hour}
 														onChange={(e) => handleChangeStartHour(e.target.value, index)}
 													/>
 												</Grid>
@@ -472,7 +473,7 @@ const TrainingsAdd = props => {
 													<MaskedInput
 														className={classes.input_box}
 														mask={[/\d/, /\d/, ':', /\d/, /\d/]}
-														value={training_class[index].end_hour }
+														value={training_class[index].end_hour}
 														onChange={(e) => handleChangeEndHour(e.target.value, index)}
 													/>
 												</Grid>
@@ -494,12 +495,12 @@ const TrainingsAdd = props => {
 														renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 													/>
 												</Grid>
-												
+
 												{
 													index !== training_class.length - 1 ?
-													<div className={classes.divide_small}/>
-													:
-													<></>
+														<div className={classes.divide_small} />
+														:
+														<></>
 												}
 
 											</Grid>
@@ -507,7 +508,7 @@ const TrainingsAdd = props => {
 									}
 								</Grid>
 								<Grid item xs={3}>
-									<div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '10px'}}>
+									<div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
 										<Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExportClass}>
 											Eksportuj harmonogram do XLS
 										</Button>
@@ -515,7 +516,7 @@ const TrainingsAdd = props => {
 								</Grid>
 							</Grid>
 						</Card>
-						<div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '10px'}}>
+						<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
 							<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleCreateClass}>
 								Dodaj kolejne zajecia
 							</Button>
@@ -526,9 +527,9 @@ const TrainingsAdd = props => {
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
 									<div className={classes.top_label}>Zaakceptowane</div>
-									<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status}/>
+									<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
 									<div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
-									<TextareaAutosize className={clsx({[classes.textArea] : true, [classes.error] : error.comment})} value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika"/>
+									<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
 										Zapisz
                						</Button>

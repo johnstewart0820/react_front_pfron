@@ -34,6 +34,11 @@ const useStyles = makeStyles(theme => ({
       width: '100%',
       fontSize: '0.8750em'
     },
+		date_picker: {
+			'& svg': {
+				fill: theme.palette.text.secondary
+			},
+		},
     iconButton: {
    '& svg': {
 			fill: theme.palette.text.secondary

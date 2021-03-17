@@ -57,7 +57,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(0)}
             >
-              ID
+							<label htmlFor="id">
+								ID
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -66,7 +68,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(1)}
             >
+							<label htmlFor="name">
               Nazwa użytkownika (login)
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -84,7 +88,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(3)}
             >
+							<label htmlFor="email">
               E-mail
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -105,10 +111,10 @@ const SortTable = (props) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-          <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="name" value={searchName} id="name" name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchRole} handleChange={setSearchRole} list={roleList} /> </TableCell>
-          <TableCell><input className={classes.input_box} type="name" value={searchEmail} name="searchEmail" onChange={(e) => setSearchEmail(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="name" value={searchEmail} id="email" name="searchEmail" onChange={(e) => setSearchEmail(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchActivateStatus} handleChange={setSearchActivateStatus} list={activateStatusList} /></TableCell>
           <TableCell></TableCell>
         </TableRow>

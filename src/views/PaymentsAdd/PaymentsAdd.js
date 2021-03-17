@@ -74,8 +74,8 @@ const PaymentsAdd = props => {
                 Dane podstawowe
               </Grid>
               <Grid item xs={9}>
-                <div className={classes.top_label} htmlFor="name">Wysokość kosztu</div>
-                <input className={classes.input_box} type="name" value={value} name="name" onChange={(e) => setValue(e.target.value)} />
+                <div className={classes.top_label}><label  htmlFor="value">Wysokość kosztu</label></div>
+                <input className={classes.input_box} type="name" id="value" value={value} name="name" onChange={(e) => setValue(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Wybierz ORK</div>
                 <SingleSelect value={rehabitationCenter} handleChange={setRehabitationCenter} list={rehabitationCenterList} />
                 <div className={classes.input_box_label} htmlFor="ambassador">Wybierz usługę</div>

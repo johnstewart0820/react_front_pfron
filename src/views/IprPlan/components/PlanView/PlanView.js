@@ -94,7 +94,7 @@ const PlanView = (props) => {
   const renderService = (module, index_module) => {
 	let order = 1;
 	return module.plan.map((service, index) => (							
-			<Grid container spacing={3}>
+			<Grid container spacing={3} key={index}>
 				<Grid item xs={1}>
 					{order ++}.
 				</Grid>
@@ -157,8 +157,8 @@ const PlanView = (props) => {
 						<Grid item xs={12}>
 							<Grid container spacing={2}>
 								<Grid item xs={2}>
-									<div className={classes.top_label} htmlFor="name">Wymiar</div>
-									<input className={classes.input_box} type="name" value={service.amount} name="name" onChange={(e) => handleChangeAmount(e.target.value, index, index_module)} disabled={service.disable_status}/>
+									<div className={classes.top_label}><label htmlFor="amount">Wymiar</label></div>
+									<input aria-lebel="a" className={classes.input_box} type="name" value={service.amount} name="name" id="amount" onChange={(e) => handleChangeAmount(e.target.value, index, index_module)} disabled={service.disable_status}/>
 								</Grid>
 								<Grid item xs={10}>
 									<div className={classes.top_label} htmlFor="name">Jednostka</div>
@@ -169,14 +169,14 @@ const PlanView = (props) => {
 						<Grid item xs={12}>
 							<Grid container spacing={2}>
 								<Grid item xs={4}>
-									<div className={classes.top_label} htmlFor="name">Data rozpoczecia</div>
+									<div className={classes.top_label}><label htmlFor="start_date">Data rozpoczecia</label></div>
 									<KeyboardDatePicker
 										disableToolbar
 										disabled={service.disable_status}
+										id="start_date"
 										variant="inline"
 										format="dd.MM.yyyy"
 										margin="normal"
-										id="date-picker-inline"
 										value={service.start_date}
 										onChange={(value) => handleChangeStartDate(value, index, index_module)}
 										KeyboardButtonProps={{
@@ -185,9 +185,10 @@ const PlanView = (props) => {
 									/>
 								</Grid>
 								<Grid item xs={6}>
-									<div className={classes.top_label} htmlFor="name">Osoba realizujaca (Rehabilitant powadzacy)</div>
+									<div className={classes.top_label}><label htmlFor="ork_person">Osoba realizujaca (Rehabilitant powadzacy)</label></div>
 									<Autocomplete
 										disabled={service.disable_status}
+										id="ork_person"
 										className={classes.name_select_box}
 										onChange={(event, value) => handleChangeOrkPerson(value, index, index_module)}
 										value={getOrkPerson(module, service.id_ork_person, index_module)}
@@ -197,14 +198,14 @@ const PlanView = (props) => {
 									/>
 								</Grid>
 								<Grid item xs={2}>
-									<div className={classes.top_label} htmlFor="name">Sala</div>
-									<input className={classes.input_box} type="name" value={service.room_number} name="name" onChange={(e) => handleChangeRoomNumber(e.target.value, index, index_module)} disabled={service.disable_status}/>
+									<div className={classes.top_label}><label htmlFor="room_number">Sala</label></div>
+									<input className={classes.input_box} type="name" value={service.room_number} id="room_number" name="name" onChange={(e) => handleChangeRoomNumber(e.target.value, index, index_module)} disabled={service.disable_status}/>
 								</Grid>
 							</Grid>
 						</Grid>
 						<Grid item xs={12}>
-							<div className={classes.top_label} htmlFor="name">Uwagi/suma wymiaru</div>
-							<input className={classes.input_box} type="name" value={service.remarks} name="name" onChange={(e) => handleChangeRemarks(e.target.value, index, index_module)} disabled={service.disable_status}/>
+							<div className={classes.top_label}><label htmlFor="remark">Uwagi/suma wymiaru</label></div>
+							<input className={classes.input_box} type="name" value={service.remarks} name="name" id="remark" onChange={(e) => handleChangeRemarks(e.target.value, index, index_module)} disabled={service.disable_status}/>
 						</Grid>
 					</Grid>
 				</Grid>

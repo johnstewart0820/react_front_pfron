@@ -72,7 +72,7 @@ const Topbar = props => {
     >
       <div className={classes.toolbar}>
         <div className={classes.titlebar}>
-          <Button className={classes.close_drawer_icon} onClick={onMaxTopbar}>
+          <Button className={classes.close_drawer_icon} onClick={onMaxTopbar} aria-label="a">
             <MenuIcon color="white"/>
           </Button>
         </div>

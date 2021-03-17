@@ -359,10 +359,10 @@ const TrainingsAdd = props => {
 									Dane podstawowe
               					</Grid>
 								<Grid item xs={9}>
-									<div className={classes.top_label} htmlFor="name">Nazwa</div>
-									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} type="name" value={training.name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
-									<div className={classes.input_box_label} htmlFor="type">Numer szkolenia</div>
-									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.number })} type="name" value={training.number} name="name" onChange={(e) => handleChangeNumber(e.target.value)} />
+									<div className={classes.top_label}><label htmlFor="name">Nazwa</label></div>
+									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} id="name" type="name" value={training.name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
+									<div className={classes.input_box_label}><label htmlFor="number">Numer szkolenia</label></div>
+									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.number })} id="number" type="name" value={training.number} name="name" onChange={(e) => handleChangeNumber(e.target.value)} />
 									<div className={classes.input_box_label} htmlFor="type">ORK</div>
 									<SingleSelect value={training.rehabitation_center} handleChange={(value) => handleChangeRehabitationCenter(value)} list={rehabitationCenterList} error={error.rehabitation_center} />
 									<div className={classes.input_box_label} htmlFor="type">Usluga, do ktorej jest przypisane szkolenie</div>
@@ -385,10 +385,11 @@ const TrainingsAdd = props => {
 										training.participant.map((item, index) => (
 											<Grid container spacing={2}>
 												<Grid item xs={1}></Grid>
-												<Grid item xs={1} className={classes.input_box_label}>{index + 1}.</Grid>
+												<Grid item xs={1} className={classes.input_box_label}><label htmlFor="participant">{index + 1}.</label></Grid>
 												<Grid item xs={6}>
 													<Autocomplete
 														className={classes.name_select_box}
+														id="participant"
 														onChange={(event, value) => handleChangeParticipant(value ? value : [], index)}
 														options={participantList}
 														getOptionLabel={(option) => participantList && option && (option.participant_name)}
@@ -430,8 +431,8 @@ const TrainingsAdd = props => {
 										training_class.map((item, index) => (
 											<Grid container spacing={2}>
 												<Grid item xs={index == 0 && training_class.length === 1 ? 12 : 11}>
-													<div className={classes.input_box_label}>Nazwa zajec</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error_class[index].name })} type="name" value={item.name} name="name" onChange={(e) => handleChangeClassName(e.target.value, index)} />
+													<div className={classes.input_box_label}><label htmlFor="class_name">Nazwa zajec</label></div>
+													<input className={clsx({ [classes.input_box]: true, [classes.error]: error_class[index].name })} id="class_name" type="name" value={item.name} name="name" onChange={(e) => handleChangeClassName(e.target.value, index)} />
 												</Grid>
 												{
 													index == 0 && training_class.length === 1 ?
@@ -444,13 +445,13 @@ const TrainingsAdd = props => {
 														</Grid>
 												}
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}>Data zajec</div>
+													<div className={classes.input_box_label}><label htmlFor="class_date">Data zajec</label></div>
 													<KeyboardDatePicker
 														disableToolbar
 														variant="inline"
 														format="dd.MM.yyyy"
 														margin="normal"
-														id="date-picker-inline"
+														id="class_date"
 														value={item.date}
 														onChange={(value) => handleChangeClassDate(value, index)}
 														KeyboardButtonProps={{
@@ -460,34 +461,37 @@ const TrainingsAdd = props => {
 													/>
 												</Grid>
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}>Godzina rozpoczecia</div>
+													<div className={classes.input_box_label}><label htmlFor="start_hour">Godzina rozpoczecia</label></div>
 													<MaskedInput
 														className={classes.input_box}
+														id="start_hour"
 														mask={[/\d/, /\d/, ':', /\d/, /\d/]}
 														value={training_class[index].start_hour}
 														onChange={(e) => handleChangeStartHour(e.target.value, index)}
 													/>
 												</Grid>
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}>Godzina zakonczenia</div>
+													<div className={classes.input_box_label}><label htmlFor="end_hour">Godzina zakonczenia</label></div>
 													<MaskedInput
 														className={classes.input_box}
+														id="end_hour"
 														mask={[/\d/, /\d/, ':', /\d/, /\d/]}
 														value={training_class[index].end_hour}
 														onChange={(e) => handleChangeEndHour(e.target.value, index)}
 													/>
 												</Grid>
 												<Grid item xs={6}>
-													<div className={classes.input_box_label}>Czas przerw(w minutach)</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error_class[index].break_amount })} type="name" value={item.break_amount} name="name" onChange={(e) => handleChangeClassBreakAmount(e.target.value, index)} />
+													<div className={classes.input_box_label}><label htmlFor="break_amount">Czas przerw(w minutach)</label></div>
+													<input className={clsx({ [classes.input_box]: true, [classes.error]: error_class[index].break_amount })} id="break_amount" type="name" value={item.break_amount} name="name" onChange={(e) => handleChangeClassBreakAmount(e.target.value, index)} />
 												</Grid>
 												<Grid item xs={6}>
-													<div className={classes.input_box_label}>Czas trwania(w godzinach)</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error_class[index].total_hour })} type="name" value={item.total_hour} name="name" onChange={(e) => handleChangeClassTotalHour(e.target.value, index)} />
+													<div className={classes.input_box_label}><label htmlFor="total_hour">Czas trwania(w godzinach)</label></div>
+													<input className={clsx({ [classes.input_box]: true, [classes.error]: error_class[index].total_hour })} id="total_hour" type="name" value={item.total_hour} name="name" onChange={(e) => handleChangeClassTotalHour(e.target.value, index)} />
 												</Grid>
 												<Grid item xs={12}>
 													<Autocomplete
 														multiple
+														id="total_hour"
 														className={classes.name_select_box}
 														onChange={(event, value) => handleChangeOrkTeam(value ? value : [], index)}
 														options={orkTeamList}
@@ -528,8 +532,8 @@ const TrainingsAdd = props => {
 								<Grid item xs={12}>
 									<div className={classes.top_label}>Zaakceptowane</div>
 									<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
-									<div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
-									<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
+									<div className={classes.input_box_label} htmlFor="name"><label htmlFor="comment">Komentarz dotyczący edycji(max 100 znków)</label></div>
+									<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} id="comment" value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
 										Zapisz
                						</Button>

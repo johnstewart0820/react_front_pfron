@@ -223,8 +223,10 @@ const OrkListEdit = props => {
                         <Grid container spacing={2}>
                           <Grid item xs={6}>
                             <div className={classes.title}>
-                              Data rozpocęcia
-                          </div>
+															<label htmlFor={`start_date${index}`}>
+																Data rozpocęcia
+															</label>
+                          	</div>
                             <Grid item xs={12}>
                               <KeyboardDatePicker
                                 className={classes.date_picker}
@@ -232,7 +234,7 @@ const OrkListEdit = props => {
                                 variant="inline"
                                 format="dd.MM.yyyy"
                                 margin="normal"
-                                id="date-picker-inline"
+                                id={`start_date${index}`}
                                 value={item.start_date}
                                 onChange={(e) => handleDateChange(e, index, "from")}
                                 KeyboardButtonProps={{
@@ -243,7 +245,9 @@ const OrkListEdit = props => {
                           </Grid>
                           <Grid item xs={6}>
                             <div className={classes.title}>
-                              Data zakończenia
+															<label htmlFor={`end_date${index}`}>
+																Data zakończenia
+															</label>
                             </div>
                             <Grid item xs={12}>
                               <KeyboardDatePicker
@@ -252,7 +256,7 @@ const OrkListEdit = props => {
                                 variant="inline"
                                 format="dd.MM.yyyy"
                                 margin="normal"
-                                id="date-picker-inline"
+                                id={`end_date${index}`}
                                 value={item.end_date}
                                 onChange={(e) => handleDateChange(e, index, "to")}
                                 KeyboardButtonProps={{
@@ -284,22 +288,22 @@ const OrkListEdit = props => {
               <Grid item xs={9}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <div className={classes.top_label} htmlFor="leader_name">Nazwa podmiotu</div>
-                    <input className={classes.input_box} type="text" value={rehabitationCenter.leader_name} name="leader_name" onChange={handleChange} />
+                    <div className={classes.top_label} ><label htmlFor="leader_name">Nazwa podmiotu</label></div>
+                    <input className={classes.input_box} type="text" value={rehabitationCenter.leader_name} name="leader_name" id="leader_name" onChange={handleChange} />
                   </Grid>
                   <Grid item xs={4}>
-                    <div className={classes.top_label} htmlFor="leader_regon_number">Regon</div>
-                    <input className={classes.input_box} type="text" value={rehabitationCenter.leader_regon_number} name="leader_regon_number" onChange={handleChange} />
+                    <div className={classes.top_label} ><label htmlFor="leader_regon_number">Regon</label></div>
+                    <input className={classes.input_box} type="text" value={rehabitationCenter.leader_regon_number} name="leader_regon_number" id="leader_regon_number" onChange={handleChange} />
                     <div className={classes.error} style={{display: !firstLogin || rehabitationCenterError.leader_regon_number ? 'none' : 'block'}}>Wpisz prawidłowy numer.</div>
                   </Grid>
                   <Grid item xs={5}>
-                    <div className={classes.top_label} htmlFor="leader_nip_number">NIP</div>
-                    <input className={classes.input_box} type="text" value={rehabitationCenter.leader_nip_number} name="leader_nip_number" onChange={handleChange} />
+                    <div className={classes.top_label}><label htmlFor="leader_nip_number">NIP</label></div>
+                    <input className={classes.input_box} type="text" value={rehabitationCenter.leader_nip_number} name="leader_nip_number" id="leader_nip_number" onChange={handleChange} />
                     <div className={classes.error} style={{display: !firstLogin || rehabitationCenterError.leader_nip_number ? 'none' : 'block'}}>Wpisz prawidłowy numer.</div>
                   </Grid>
                   <Grid item xs={3}>
-                    <div className={classes.top_label} htmlFor="macroregion_number">nr makroregionu</div>
-                    <input className={classes.input_box} type="text" value={rehabitationCenter.macroregion_number} name="macroregion_number" onChange={handleChange} />
+                    <div className={classes.top_label} ><label htmlFor="macroregion_number">nr makroregionu</label></div>
+                    <input className={classes.input_box} type="text" value={rehabitationCenter.macroregion_number} name="macroregion_number" id="macroregion_number" onChange={handleChange} />
                   </Grid>
                 </Grid>
               </Grid>
@@ -310,25 +314,25 @@ const OrkListEdit = props => {
               <Grid item xs={9}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <div className={classes.top_label} htmlFor="partner_count">Liczba partnerów</div>
-                    <input className={classes.input_box} type="text" value={JSON.parse(partners).length} name="partner_count" onChange={handleChangePartnerCount} />
+                    <div className={classes.top_label}><label htmlFor="partner_count">Liczba partnerów</label></div>
+                    <input className={classes.input_box} type="text" value={JSON.parse(partners).length} id="partner_count" name="partner_count" onChange={handleChangePartnerCount} />
                   </Grid>
                   {
                     JSON.parse(partners).map((item, index) => (
                       <>
                         <Grid item xs={10}>
                           <div className={classes.top_label} style={{fontWeight: '500', marginBottom: '15px'}}>Dane o partnerze {index + 1}.:</div>
-                          <div className={classes.top_label} htmlFor="name">Nazwa podmiotu</div>
-                          <input className={classes.input_box} type="text" value={item.name} name="name" onChange={(e) => handlePartnerChange(e.target.value, index, 'name')} />
+                          <div className={classes.top_label}><label  htmlFor="name">Nazwa podmiotu</label></div>
+                          <input className={classes.input_box} type="text" value={item.name} name="name" id="name" onChange={(e) => handlePartnerChange(e.target.value, index, 'name')} />
                         </Grid>
                         <Grid item xs={4}>
-                          <div className={classes.top_label} htmlFor="regon">REGON</div>
-                          <input className={classes.input_box} type="text" value={item.regon} name="regon" onChange={(e) => handlePartnerChange(e.target.value, index, 'regon')} />
+                          <div className={classes.top_label}><label htmlFor="regon">REGON</label></div>
+                          <input className={classes.input_box} type="text" value={item.regon} name="regon" id="regon" onChange={(e) => handlePartnerChange(e.target.value, index, 'regon')} />
                           <div className={classes.error} style={{display: !firstLogin || JSON.parse(partnerErrors)[index].regon ? 'none' : 'block'}}>Wpisz prawidłowy numer.</div>
                         </Grid>
                         <Grid item xs={6}>
-                          <div className={classes.top_label} htmlFor="nip">NIP</div>
-                          <input className={classes.input_box} type="text" value={item.nip} name="nip" onChange={(e) => handlePartnerChange(e.target.value, index, 'nip')} />
+                          <div className={classes.top_label}><label htmlFor="nip">NIP</label></div>
+                          <input className={classes.input_box} type="text" value={item.nip} name="nip" id="nip" onChange={(e) => handlePartnerChange(e.target.value, index, 'nip')} />
                           <div className={classes.error} style={{display: !firstLogin || JSON.parse(partnerErrors)[index].nip ? 'none' : 'block'}}>Wpisz prawidłowy numer.</div>
                         </Grid>
                       </>
@@ -343,20 +347,20 @@ const OrkListEdit = props => {
               <Grid item xs={9}>
                 <Grid container spacing={2}>
                   <Grid item xs={7}>
-                    <div className={classes.top_label} htmlFor="contact_person">Imię i nazwiko</div>
-                    <input className={classes.input_box} type="text" value={rehabitationCenter.contact} name="contact" onChange={handleChange} />
+                    <div className={classes.top_label}><label  htmlFor="contact_person">Imię i nazwiko</label></div>
+                    <input className={classes.input_box} type="text" value={rehabitationCenter.contact} name="contact" id="contact_person" onChange={handleChange} />
                   </Grid>
                   <Grid item xs={5}>
-                    <div className={classes.top_label} htmlFor="position_person">funkcja</div>
-                    <input className={classes.input_box} type="text" value={rehabitationCenter.position} name="position" onChange={handleChange} />
+                    <div className={classes.top_label}><label htmlFor="position_person">funkcja</label></div>
+                    <input className={classes.input_box} type="text" value={rehabitationCenter.position} name="position" id="position_person" onChange={handleChange} />
                   </Grid>
                   <Grid item xs={7}>
-                    <div className={classes.top_label} htmlFor="phone_number">Numer telefonu</div>
-                    <input className={classes.input_box} type="text" value={rehabitationCenter.phone} name="phone" onChange={handleChange} />
+                    <div className={classes.top_label}><label  htmlFor="phone_number">Numer telefonu</label></div>
+                    <input className={classes.input_box} type="text" value={rehabitationCenter.phone} id="phone_number" name="phone" onChange={handleChange} />
                   </Grid>
                   <Grid item xs={5}>
-                    <div className={classes.top_label} htmlFor="email">E-mail</div>
-                    <input className={classes.input_box} type="email" value={rehabitationCenter.email} name="email" onChange={handleChange} />
+                    <div className={classes.top_label}><label htmlFor="email">E-mail</label></div>
+                    <input className={classes.input_box} type="email" value={rehabitationCenter.email} name="email" id="email" onChange={handleChange} />
                     <div className={classes.error} style={{display: !firstLogin || rehabitationCenterError.email ? 'none' : 'block'}}>Wpisz prawidłowy adres e-mail.</div>
                   </Grid>
                 </Grid>

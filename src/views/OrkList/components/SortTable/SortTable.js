@@ -30,7 +30,9 @@ const SortTable = (props) => {
 							direction={sortOrder}
 							onClick={() => requestSort(0)}
 						>
+							<label htmlFor="id">
 							{modelPropertyLabel('OrkList', 'id')}
+							</label>
 						</TableSortLabel>
 					</TableCell>
 					<TableCell>
@@ -39,7 +41,9 @@ const SortTable = (props) => {
 							direction={sortOrder}
 							onClick={() => requestSort(1)}
 						>
+							<label htmlFor="name">
 							{modelPropertyLabel('OrkList', 'name')}
+							</label>
 						</TableSortLabel>
 					</TableCell>
 					<TableCell>
@@ -51,8 +55,8 @@ const SortTable = (props) => {
 			</TableHead>
 			<TableBody>
 				<TableRow>
-					<TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-					<TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+					<TableCell><input className={classes.input_box} type="id" id="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+					<TableCell><input className={classes.input_box} type="name" id="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
 					<TableCell></TableCell>
 				</TableRow>
 				{rows.map((item, indx) => {

@@ -79,7 +79,7 @@ const OrkTeamsEdit = props => {
     })
   }, [specializationList]);
 
-const handleError = () => {
+	const handleError = () => {
     let _error = {}
     _error.name = (name.length === 0);
     _error.rehabitationCenter = (rehabitationCenter.length === 0);
@@ -190,11 +190,12 @@ const handleError = () => {
                 Dane podstawowe
               </Grid>
               <Grid item xs={9}>
-                <div className={classes.top_label} htmlFor="name">Tytuł, imię i nazwisko osoby w zespole</div>
-                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
-                <div className={classes.input_box_label} htmlFor="type">Wybierz ORK</div>
+                <div className={classes.top_label}><label htmlFor="name">Tytuł, imię i nazwisko osoby w zespole</label></div>
+                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} id="name" name="name" onChange={(e) => handleChangeName(e.target.value)} />
+                <div className={classes.input_box_label}><label htmlFor="RehabitationCenter">Wybierz ORK</label></div>
                 <Autocomplete
                   multiple
+									id="RehabitationCenter"
                   value={rehabitationCenter}
                   className={classes.name_select_box}
                   onChange={(event, value) => handleChangeRehabitationCenter(value ? value : [])}
@@ -202,9 +203,10 @@ const handleError = () => {
                   getOptionLabel={(option) => rehabitationCenterList && option && option.name}
                   renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.rehabitationCenter}/>}
                 />
-                <div className={classes.input_box_label} htmlFor="specialization">Specjallizacja</div>
+                <div className={classes.input_box_label}><label  htmlFor="specialization">Specjallizacja</label></div>
                 <Autocomplete
                   multiple
+									id="specialization"
                   value={specialization}
                   className={classes.name_select_box}
                   onChange={(event, value) => handleChangeSpecialization(value ? value : [])}
@@ -221,13 +223,13 @@ const handleError = () => {
                 </FormControl>
                 {is_accepted === 'true' || is_accepted === true ?
                   <>
-                    <div className={classes.input_box_label}>Data akceptacji</div>
+                    <div className={classes.input_box_label}><label htmlFor="date">Data akceptacji</label></div>
                     <KeyboardDatePicker
                       disableToolbar
+											id="date"
                       variant="inline"
                       format="dd.MM.yyyy"
                       margin="normal"
-                      id="date-picker-inline"
                       value={date_of_acceptance}
                       onChange={(e) => handleChangeDate(e)}
                       KeyboardButtonProps={{

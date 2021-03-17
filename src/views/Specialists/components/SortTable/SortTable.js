@@ -57,7 +57,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(0)}
             >
-              ID
+							<label htmlFor="id">
+								ID
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -66,7 +68,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(1)}
             >
-              Imię i nazwisko
+							<label htmlFor="name">
+								Imię i nazwisko
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -96,8 +100,8 @@ const SortTable = (props) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-          <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="name" value={searchName} id="name" name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /> </TableCell>
           <TableCell><SingleSelect value={searchSpecialty} handleChange={setSearchSpecialty} list={specialtyList} /></TableCell>
           <TableCell></TableCell>

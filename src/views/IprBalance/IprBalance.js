@@ -256,10 +256,11 @@ const IprBalance = props => {
 													<div className={classes.number}>{number}</div>
 												</Grid>
 												<Grid item xs={5}>
-													<div className={classes.top_label} htmlFor="name">Data wypelnienia</div>
+													<div className={classes.top_label}><label htmlFor="date">Data wypelnienia</label></div>
 													<KeyboardDatePicker
 														disableToolbar
 														disabled={true}
+														id="date"
 														variant="inline"
 														format="dd.MM.yyyy"
 														margin="normal"
@@ -272,10 +273,11 @@ const IprBalance = props => {
 													/>
 												</Grid>
 												<Grid item xs={12}>
-													<div className={classes.top_label} htmlFor="name">Specjalista ds. zarzadzania rehabilitacja</div>
+													<div className={classes.top_label}><label htmlFor="name">Specjalista ds. zarzadzania rehabilitacja</label></div>
 													<Autocomplete
 														disabled={true}
 														className={classes.name_select_box}
+														id="name"
 														onChange={(event, value) => setOrkPerson(value)}
 														value={ork_person}
 														options={orkPersonList}
@@ -284,8 +286,8 @@ const IprBalance = props => {
 													/>
 												</Grid>
 												<Grid item xs={12}>
-													<div className={classes.top_label} htmlFor="name">Wybrany zawod</div>
-													<input className={classes.input_box} type="name" value={profession} name="name" disabled={true} />
+													<div className={classes.top_label}><label htmlFor="profession">Wybrany zawod</label></div>
+													<input className={classes.input_box} type="name" value={profession} name="name" id="profession" disabled={true} />
 												</Grid>
 											</Grid>
 										</Grid>
@@ -333,7 +335,9 @@ const IprBalance = props => {
 									</Grid>
 									<Grid item xs={3} className={classes.service}>
 										<div className={classes.form_service_title_end}>
-											dzialania zaplanowane po wyjsciu
+											<label htmlFor="value_balance">
+												dzialania zaplanowane po wyjsciu
+											</label>
 										</div>
 									</Grid>
 									{
@@ -377,11 +381,11 @@ const IprBalance = props => {
 																</Grid>
 															</Grid>
 															<Grid item xs={3}>
-																<input className={classes.input_box} type="name" value={item.balance.amount} name="name" onChange={(e) => handleChangeBalanceAmount(e.target.value, index_module, index_service)}/>
+																<input className={classes.input_box} type="name" value={item.balance.amount} name="name" id="value_balance" onChange={(e) => handleChangeBalanceAmount(e.target.value, index_module, index_service)}/>
 															</Grid>
 															<Grid item xs={4} className={classes.service}>Uwagi dotyczace realizacji wsparcia (zmiany, odstepstwa od IPR, powody opoznien realizacji ...)</Grid>
 															<Grid item xs={8}>
-																<input className={classes.input_box} type="name" value={item.balance.remarks} name="name" onChange={(e) => handleChangeBalanceRemark(e.target.value, index_module, index_service)}/>
+																<input className={classes.input_box} aria-label="remark" type="name" value={item.balance.remarks} name="name" onChange={(e) => handleChangeBalanceRemark(e.target.value, index_module, index_service)}/>
 															</Grid>
 															<div className={classes.divide}/>
 														</>

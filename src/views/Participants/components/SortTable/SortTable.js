@@ -68,7 +68,9 @@ const SortTable = (props) => {
                 direction={sortOrder}
                 onClick={() => requestSort(0)}
               >
-                ID
+								<label htmlFor="id">
+									ID
+								</label>
             </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -77,7 +79,9 @@ const SortTable = (props) => {
                 direction={sortOrder}
                 onClick={() => requestSort(1)}
               >
-                Imie uczestnika
+								<label htmlFor="firstname">
+									Imie uczestnika
+								</label>
             </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -86,7 +90,9 @@ const SortTable = (props) => {
                 direction={sortOrder}
                 onClick={() => requestSort(2)}
               >
-                Nazwisko uczestnika
+								<label htmlFor="lastname">
+									Nazwisko uczestnika
+								</label>
             </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -113,7 +119,9 @@ const SortTable = (props) => {
                 direction={sortOrder}
                 onClick={() => requestSort(5)}
               >
-                Data modyfikacji
+								<label htmlFor="date">
+									Data modyfikacji
+								</label>
             </TableSortLabel>
             </TableCell>
             <TableCell>
@@ -125,9 +133,9 @@ const SortTable = (props) => {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-            <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
-            <TableCell><input className={classes.input_box} type="name" value={searchSurname} name="searchId" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
+            <TableCell><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+            <TableCell><input className={classes.input_box} type="name" value={searchName} id="firstname" name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+            <TableCell><input className={classes.input_box} type="name" value={searchSurname} id="lastname" name="searchId" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
             <TableCell><SingleSelect value={searchRehabitationCenter} handleChange={setSearchRehabitationCenter} list={rehabitationCenterList} /></TableCell>
             <TableCell><SingleSelect value={searchParticipantStatusType} handleChange={setSearchParticipantStatusType} list={participantStatusTypeList} /></TableCell>
             <TableCell>
@@ -138,7 +146,7 @@ const SortTable = (props) => {
                     variant="inline"
                     format="dd.MM.yyyy"
                     margin="normal"
-                    id="date-picker-inline"
+                    id="date"
                     value={searchDateModified.from}
                     onChange={(e) => handleChangeDate(e, 'from')}
                     KeyboardButtonProps={{
@@ -153,7 +161,7 @@ const SortTable = (props) => {
                     variant="inline"
                     format="dd.MM.yyyy"
                     margin="normal"
-                    id="date-picker-inline"
+                    id="date"
                     value={searchDateModified.to}
                     onChange={(e) => handleChangeDate(e, 'to')}
                     KeyboardButtonProps={{

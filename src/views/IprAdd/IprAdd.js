@@ -143,9 +143,10 @@ const IprAdd = props => {
 								<Grid item xs={9}>
 									<Grid container spacing={3}>
 										<Grid item xs={5}>
-											<div className={classes.top_label} htmlFor="name">Numer uczestnika</div>
+											<div className={classes.top_label}><label htmlFor="number">Numer uczestnika</label></div>
 											<Autocomplete
 												className={classes.name_select_box}
+												id="number"
 												onChange={(event, value) => handleChangeParticipantNumber(value)}
 												value={participant_number}
 												options={participantList}
@@ -154,9 +155,10 @@ const IprAdd = props => {
 											/>
 										</Grid>
 										<Grid item xs={7}>
-											<div className={classes.top_label} htmlFor="name">Uczestnik</div>
+											<div className={classes.top_label}><label htmlFor="name">Uczestnik</label></div>
 											<Autocomplete
 												className={classes.name_select_box}
+												id="name"
 												onChange={(event, value) => handleChangeParticipantName(value)}
 												value={participant_name}
 												options={participantList}
@@ -173,13 +175,13 @@ const IprAdd = props => {
 											<div className={classes.number}>{number + 1}</div>
 										</Grid>
 										<Grid item xs={5}>
-											<div className={classes.top_label} htmlFor="name">Data wypelnienia</div>
+											<div className={classes.top_label}><label htmlFor="date">Data wypelnienia</label></div>
 											<KeyboardDatePicker
 												disableToolbar
 												variant="inline"
 												format="dd.MM.yyyy"
 												margin="normal"
-												id="date-picker-inline"
+												id="date"
 												value={schedule_date}
 												onChange={setScheduleDate}
 												KeyboardButtonProps={{
@@ -188,9 +190,10 @@ const IprAdd = props => {
 											/>
 										</Grid>
 										<Grid item xs={12}>
-											<div className={classes.top_label} htmlFor="name">Specjalista ds. zarzadzania rehabilitacja</div>
+											<div className={classes.top_label}><label htmlFor="ork_person">Specjalista ds. zarzadzania rehabilitacja</label></div>
 											<Autocomplete
 												className={classes.name_select_box}
+												id="ork_person"
 												onChange={(event, value) => setOrkPerson(value)}
 												value={ork_person}
 												options={orkPersonList}
@@ -199,8 +202,8 @@ const IprAdd = props => {
 											/>
 										</Grid>
 										<Grid item xs={12}>
-											<div className={classes.top_label} htmlFor="name">Wybrany zawod</div>
-											<input className={classes.input_box} type="name" value={profession} name="name" onChange={(e) => handleChangeProfession(e.target.value)} />
+											<div className={classes.top_label}><label htmlFor="profession">Wybrany zawod</label></div>
+											<input className={classes.input_box} type="name" value={profession} id="profession" name="name" onChange={(e) => handleChangeProfession(e.target.value)} />
 										</Grid>
 									</Grid>
 

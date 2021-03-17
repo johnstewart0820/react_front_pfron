@@ -58,7 +58,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(0)}
             >
-              ID
+							<label htmlFor="id">
+								ID
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -67,7 +69,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(1)}
             >
-              Punkt kwalifikacyjny
+							<label htmlFor="qualification_point">
+								Punkt kwalifikacyjny
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -97,8 +101,8 @@ const SortTable = (props) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-          <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" id="id" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" id="qualification_point" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchType} handleChange={setSearchType} list={typeList} /> </TableCell>
           <TableCell><SingleSelect value={searchAmbassador} handleChange={setSearchAmbassador} list={ambassadorList} /></TableCell>
           <TableCell></TableCell>

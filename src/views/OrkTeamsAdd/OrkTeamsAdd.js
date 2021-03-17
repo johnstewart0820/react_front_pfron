@@ -130,20 +130,22 @@ const OrkTeamsAdd = props => {
                 Dane podstawowe
               </Grid>
               <Grid item xs={9}>
-                <div className={classes.top_label} htmlFor="name">Tytuł, imię i nazwisko osoby w zespole</div>
-                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
-                <div className={classes.input_box_label} htmlFor="type">Wybierz ORK</div>
+                <div className={classes.top_label}><label htmlFor="name">Tytuł, imię i nazwisko osoby w zespole</label></div>
+                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} id="name" name="name" onChange={(e) => handleChangeName(e.target.value)} />
+                <div className={classes.input_box_label}><label htmlFor="rehabitationCenter">Wybierz ORK</label></div>
                 <Autocomplete
                   multiple
+									id="rehabitationCenter"
                   className={classes.name_select_box}
                   onChange={(event, value) => handleChangeRehabitationCenter(value ? value : [])}
                   options={rehabitationCenterList}
                   getOptionLabel={(option) => rehabitationCenterList && option && option.name}
                   renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.rehabitationCenter}/>}
                 />
-                <div className={classes.input_box_label} htmlFor="specialization">Specjallizacja</div>
+                <div className={classes.input_box_label}><label htmlFor="specialization">Specjallizacja</label></div>
                 <Autocomplete
                   multiple
+									id="specialization"
                   className={classes.name_select_box}
                   onChange={(event, value) => handleChangeSpecialization(value ? value : [])}
                   options={specializationList}

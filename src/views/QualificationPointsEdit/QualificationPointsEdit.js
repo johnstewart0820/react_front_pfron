@@ -154,15 +154,16 @@ const QualificationPointsEdit = props => {
                 Dane podstawowe
               </Grid>
               <Grid item xs={9}>
-                <div className={classes.top_label} htmlFor="name">Nazwa punktu</div>
-                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
+                <div className={classes.top_label}><label  htmlFor="name">Nazwa punktu</label></div>
+                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Typ punktu</div>
                 <SingleSelect value={type} handleChange={(value) => handleChangeType(value)} list={typeList} error={error.type} />
-                <div className={classes.input_box_label} htmlFor="ambassador">Ambasadorzy</div>
+                <div className={classes.input_box_label}><label  htmlFor="ambassador">Ambasadorzy</label></div>
                 <Autocomplete
                   multiple
                   className={classes.name_select_box}
                   value={ambassador}
+									id="ambassador"
                   onChange={(event, value) => setAmbassador(value ? value : [])}
                   options={ambassadorList}
                   getOptionLabel={(option) => ambassadorList && option && option.name}

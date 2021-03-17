@@ -111,8 +111,8 @@ const SpecialistsAdd = props => {
                 Dane podstawowe
               </Grid>
               <Grid item xs={9}>
-                <div className={classes.top_label} htmlFor="name">Tytuł, imię, i nazwisko specjalisty</div>
-                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
+                <div className={classes.top_label} ><label htmlFor="name">Tytuł, imię, i nazwisko specjalisty</label></div>
+                <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Wybierz punkt kwalifikacyjny</div>
                 <SingleSelect value={qualification} handleChange={(value) => handleChangeQualification(value)} list={qualificationList} error={error.qualification}/>
                 <div className={classes.input_box_label} htmlFor="ambassador">Specjalność</div>

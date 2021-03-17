@@ -189,12 +189,12 @@ const handleError = () => {
               <Grid item xs={9}>
                 <Grid container spacing={1}>
                   <Grid item xs={3}>
-                    <div className={classes.top_label} htmlFor="name">Numer</div>
-                    <input className={clsx({[classes.input_box] : true, [classes.error] : error.number})} type="name" value={number} name="name" onChange={(e) => handleChangeNumber(e.target.value)} />
+                    <div className={classes.top_label}><label htmlFor="number">Numer</label></div>
+                    <input className={clsx({[classes.input_box] : true, [classes.error] : error.number})} id="number" type="name" value={number} name="name" onChange={(e) => handleChangeNumber(e.target.value)} />
                   </Grid>
                   <Grid item xs={9}>
-                    <div className={classes.top_label} htmlFor="name">Nazwa usługi</div>
-                    <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
+                    <div className={classes.top_label}><label htmlFor="name">Nazwa usługi</label></div>
+                    <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                   </Grid>
                   <Grid item xs={6}>
                     <div className={classes.input_box_label} htmlFor="type">Sekcja</div>
@@ -208,16 +208,16 @@ const handleError = () => {
 					<div className={classes.label}>Minimalny zakres usługi</div>
 				  </Grid>
                   <Grid item xs={3}>
-                    <div className={classes.input_box_label}>Liczba</div>
-                    <input className={classes.input_box} type="name" value={amount_usage} name="name" onChange={(e) => handleChangeAmountUsage(e.target.value)} />
+                    <div className={classes.input_box_label}><label htmlFor="amount_usage">Liczba</label></div>
+                    <input className={classes.input_box} type="name" value={amount_usage} id="amount_usage" name="name" onChange={(e) => handleChangeAmountUsage(e.target.value)} />
                   </Grid>
                   <Grid item xs={5}>
                     <div className={classes.input_box_label}>Jednostka</div>
                     <SingleSelect value={unit} handleChange={handleChangeUnit} list={unitList} error={error.unit}/>
                   </Grid>
                   <Grid item xs={4}>
-                    <div className={classes.input_box_label}>Czas trwania (w minutach)</div>
-                    <input className={classes.input_box} type="name" value={amount_takes} name="name" onChange={(e) => handleChangeAmountTakes(e.target.value)} />
+                    <div className={classes.input_box_label}><label htmlFor="amount_takes">Czas trwania (w minutach)</label></div>
+                    <input className={classes.input_box} type="name" value={amount_takes} name="name" id="amount_takes" onChange={(e) => handleChangeAmountTakes(e.target.value)} />
                   </Grid>
                   <Grid item xs={12}>
                     <FormControlLabel

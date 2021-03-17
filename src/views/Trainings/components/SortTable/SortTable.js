@@ -73,7 +73,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(0)}
 							>
-								ID
+								<label htmlFor="id">
+									ID
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -82,7 +84,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(1)}
 							>
-								Nazwa
+								<label htmlFor="name">
+									Nazwa
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -109,7 +113,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(4)}
 							>
-								Data rozpoczecia
+								<label htmlFor="date">
+									Data rozpoczecia
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -121,17 +127,17 @@ const SortTable = (props) => {
 				</TableHead>
 				<TableBody>
 					<TableRow>
-						<TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-						<TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+						<TableCell><input className={classes.input_box} type="id" id="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+						<TableCell><input className={classes.input_box} type="name" id="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
 						<TableCell><SingleSelect value={searchParticipant} handleChange={setSearchParticipant} list={participantList} /> </TableCell>
 						<TableCell><SingleSelect value={searchTrainingStatus} handleChange={setSearchTrainingStatus} list={trainingStatusList} /></TableCell>
 						<TableCell>
 							<KeyboardDatePicker
 								disableToolbar
+								id="date"
 								variant="inline"
 								format="dd.MM.yyyy"
 								margin="normal"
-								id="date-picker-inline"
 								value={searchScheduleDate}
 								onChange={setSearchScheduleDate}
 								KeyboardButtonProps={{

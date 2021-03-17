@@ -19,7 +19,6 @@ const SingleSelect = (props) => {
         onChange={(event) =>handleChange(event.target.value ? event.target.value : {})}
         inputProps={{
           name: 'age',
-          id: 'outlined-age-native-simple',
         }}
       >
         {

@@ -7,7 +7,8 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
     },
     paper: {
-        backgroundColor: '#E6E9EE',
+        backgroundColor: theme.palette.background.paper,
+border: theme.palette.card_border,
         boxShadow: theme.shadows[5],
         padding: '25px',
         outline: 'none',

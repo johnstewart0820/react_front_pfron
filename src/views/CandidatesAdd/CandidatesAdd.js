@@ -677,27 +677,27 @@ const CandidatesAdd = props => {
 									Dane kandydata
               </Grid>
 								<Grid item xs={9}>
-									<div className={classes.top_label} htmlFor="name">Imię(Imiona)</div>
-									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
+									<div className={classes.top_label}><label for="name">Imię(Imiona)</label></div>
+									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} type="name" value={name} name="name" id="name" onChange={(e) => handleChangeName(e.target.value)} />
 									<div className={classes.error_label} style={{ display: error.name ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
-									<div className={classes.input_box_label} htmlFor="name">Nazwisko</div>
-									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.surname })} type="name" value={surname} name="name" onChange={(e) => handleChangeSurName(e.target.value)} />
+									<div className={classes.input_box_label}><label htmlFor="surname">Nazwisko</label></div>
+									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.surname })} type="name" value={surname} name="surname" id="surname" onChange={(e) => handleChangeSurName(e.target.value)} />
 									<div className={classes.error_label} style={{ display: error.surname ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
 									<Grid container spacing={2}>
 										<Grid item xs={6}>
-											<div className={classes.input_box_label} htmlFor="name">PESEL</div>
-											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.person_id })} type="name" value={person_id} name="name" onChange={(e) => handleChangePersonId(e.target.value)} />
+											<div className={classes.input_box_label}><label htmlFor="pesel">PESEL</label></div>
+											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.person_id })} type="name" value={person_id} name="name" id="pesel" onChange={(e) => handleChangePersonId(e.target.value)} />
 											<div className={classes.error_label} style={{ display: error.person_id ? 'block' : 'none' }}>Wpisz poprawny PESEL(ex: 83102570819).</div>
 										</Grid>
 										<Grid item xs={6}>
-											<div className={classes.input_box_label} htmlFor="name">Data urodzenia</div>
+											<div className={classes.input_box_label} ><label htmlFor="date_birth">Data urodzenia</label></div>
 											<KeyboardDatePicker
 												disableToolbar
 												className={classes.date_picker}
 												variant="inline"
 												format="dd.MM.yyyy"
 												margin="normal"
-												id="date-picker-inline"
+												id="date_birth"
 												value={date_of_birth}
 												onChange={(value) => handleChangeDateOfBirth(value)}
 												KeyboardButtonProps={{
@@ -706,8 +706,8 @@ const CandidatesAdd = props => {
 											/>
 										</Grid>
 									</Grid>
-									<div className={classes.input_box_label} htmlFor="type">Miejsce urodzenia</div>
-									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.place_of_birth })} type="name" value={place_of_birth} name="name" onChange={(e) => handleChangePlaceOfBirth(e.target.value)} />
+									<div className={classes.input_box_label}><label htmlFor="place_of_birth">Miejsce urodzenia</label></div>
+									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.place_of_birth })} type="name" value={place_of_birth} name="name" id="place_of_birth" onChange={(e) => handleChangePlaceOfBirth(e.target.value)} />
 									<div className={classes.error_label} style={{ display: error.place_of_birth ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
 								</Grid>
 							</Grid>
@@ -719,38 +719,38 @@ const CandidatesAdd = props => {
 								<Grid item xs={9}>
 									<Grid container spacing={2}>
 										<Grid item xs={6}>
-											<div className={classes.top_label} htmlFor="name">Ulica</div>
-											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.street })} type="name" value={street} name="name" onChange={(e) => handleChangeStreet(e.target.value)} />
+											<div className={classes.top_label}><label htmlFor="street">Ulica</label></div>
+											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.street })} type="name" value={street} name="name" id="street" onChange={(e) => handleChangeStreet(e.target.value)} />
 											<div className={classes.error_label} style={{ display: error.street ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
 										</Grid>
 										<Grid item xs={3}>
-											<div className={classes.top_label} htmlFor="name">nr domu</div>
-											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.house_number })} type="name" value={house_number} name="name" onChange={(e) => handleChangeHouseNumber(e.target.value)} />
+											<div className={classes.top_label} ><label htmlFor="house_number">nr domu</label></div>
+											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.house_number })} type="name" value={house_number} name="name" id="house_number" onChange={(e) => handleChangeHouseNumber(e.target.value)} />
 											<div className={classes.error_label} style={{ display: error.house_number ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
 										</Grid>
 										<Grid item xs={3}>
-											<div className={classes.top_label} htmlFor="name">mieszkanie</div>
-											<input className={classes.input_box} type="name" value={apartment_number} name="name" onChange={(e) => handleChangeApartmentNumber(e.target.value)} />
+											<div className={classes.top_label} ><label htmlFor="apartment_number">mieszkanie</label></div>
+											<input className={classes.input_box} type="name" value={apartment_number} name="name" id="apartment_number" onChange={(e) => handleChangeApartmentNumber(e.target.value)} />
 										</Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={3}>
-											<div className={classes.input_box_label} htmlFor="name">Kod pocztowy</div>
-											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.post_code })} type="name" value={post_code} name="name" onChange={(e) => handleChangePostCode(e.target.value)} />
+											<div className={classes.input_box_label} ><label htmlFor="post_code">Kod pocztowy</label></div>
+											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.post_code })} type="name" value={post_code} name="name" id="post_code" onChange={(e) => handleChangePostCode(e.target.value)} />
 											<div className={classes.error_label} style={{ display: error.post_code ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
 										</Grid>
 										<Grid item xs={5}>
-											<div className={classes.input_box_label} htmlFor="name">Poczta</div>
-											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.post_office })} type="name" value={post_office} name="name" onChange={(e) => handleChangePostOffice(e.target.value)} />
+											<div className={classes.input_box_label} ><label htmlFor="post_office">Poczta</label></div>
+											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.post_office })} type="name" value={post_office} name="name" id="post_office" onChange={(e) => handleChangePostOffice(e.target.value)} />
 											<div className={classes.error_label} style={{ display: error.post_office ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
 										</Grid>
 										<Grid item xs={4}>
-											<div className={classes.input_box_label} htmlFor="name">Miejscowość</div>
-											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.city })} type="name" value={city} name="name" onChange={(e) => handleChangeCity(e.target.value)} />
+											<div className={classes.input_box_label} ><label htmlFor="city">Miejscowość</label></div>
+											<input className={clsx({ [classes.input_box]: true, [classes.error]: error.city })} type="name" value={city} name="name" id="city" onChange={(e) => handleChangeCity(e.target.value)} />
 											<div className={classes.error_label} style={{ display: error.city ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
 										</Grid>
 									</Grid>
-									<div className={classes.input_box_label} htmlFor="type">Województwo</div>
+									<div className={classes.input_box_label} ><label htmlFor="voivodeship">Województwo</label></div>
 									<SingleSelect value={voivodeship} handleChange={(value) => handleChangeVoivodeship(value)} list={voivodeshipList} error={error.voivodeship} />
 									<div className={classes.error_label} style={{ display: error.voivodeship ? 'block' : 'none' }}>Wybierz prowincję.</div>
 									<div className={classes.input_box_label} htmlFor="type">Powiat</div>
@@ -767,29 +767,31 @@ const CandidatesAdd = props => {
 									Dane kontaktowe
               </Grid>
 								<Grid item xs={9}>
-									<div className={classes.input_box_label} htmlFor="type">Telefon komórkowy</div>
-									<PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputClass={classes.phone_input} dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle}/>
+									<div className={classes.input_box_label}><label htmlFor="mobile_phone">Telefon komórkowy</label></div>
+									<PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputClass={classes.phone_input} id="mobile_phone" dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle}/>
 									<div className={classes.error_label} style={{ display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
-									<div className={classes.input_box_label} htmlFor="type">Telefon domowy</div>
+									<div className={classes.input_box_label} ><label htmlFor="home_phone">Telefon domowy</label></div>
 									<MaskedInput
 										className={clsx({ [classes.input_box]: true, [classes.error]: error.home_phone })}
 										mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
 										value={home_phone}
 										onChange={(e) => handleChangeHomePhone(e.target.value)}
+										id="home_phone"
 									/>
 									<div className={classes.error_label} style={{ display: error.home_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
-									<div className={classes.input_box_label} htmlFor="name">Adres e-mail</div>
-									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.email })} type="name" value={email} name="name" onChange={(e) => handleChangeEmail(e.target.value)} />
+									<div className={classes.input_box_label} ><label htmlFor="email">Adres e-mail</label></div>
+									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.email })} type="name" value={email} name="name" id="email" onChange={(e) => handleChangeEmail(e.target.value)} />
 									<div className={classes.error_label} style={{ display: error.email ? 'block' : 'none' }}>Wpisz poprawny adres e-mail.</div>
 									<div className={classes.input_box_label} htmlFor="type">Numer kontaktowy do bliskiej osoby - Telefon komórkowy</div>
 									<PhoneInput country="pl" value={family_mobile_phone} onChange={handleChangeFamilyMobilePhone} inputClass={classes.phone_input} dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle}/>
 									<div className={classes.error_label} style={{ display: error.family_mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
-									<div className={classes.input_box_label} htmlFor="type">Numer kontaktowy do bliskiej osoby - Telefon domowy</div>
+									<div className={classes.input_box_label}><label  htmlFor="family_home_phone">Numer kontaktowy do bliskiej osoby - Telefon domowy</label></div>
 									<MaskedInput
 										className={clsx({ [classes.input_box]: true, [classes.error]: error.family_home_phone })}
 										mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
 										value={family_home_phone}
 										onChange={(e) => handleChangeFamilyHomePhone(e.target.value)}
+										id="family_home_phone"
 									/>
 									<div className={classes.error_label} style={{ display: error.family_home_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
 								</Grid>
@@ -807,30 +809,30 @@ const CandidatesAdd = props => {
 								<Grid item xs={9}>
 									<Grid container spacing={2}>
 										<Grid item xs={6}>
-											<div className={classes.top_label} htmlFor="name">Ulica</div>
-											<input className={classes.input_box} type="name" value={second_street} name="name" onChange={(e) => setSecondStreet(e.target.value)} />
+											<div className={classes.top_label} ><label htmlFor="second_street">Ulica</label></div>
+											<input className={classes.input_box} type="name" value={second_street} name="name" id="second_street" onChange={(e) => setSecondStreet(e.target.value)} />
 										</Grid>
 										<Grid item xs={3}>
-											<div className={classes.top_label} htmlFor="name">nr domu</div>
-											<input className={classes.input_box} type="name" value={second_house_number} name="name" onChange={(e) => setSecondHouseNumber(e.target.value)} />
+											<div className={classes.top_label} ><label htmlFor="second_house_number">nr domu</label></div>
+											<input className={classes.input_box} type="name" value={second_house_number} name="name" id="second_house_number" onChange={(e) => setSecondHouseNumber(e.target.value)} />
 										</Grid>
 										<Grid item xs={3}>
-											<div className={classes.top_label} htmlFor="name">mieszkanie</div>
-											<input className={classes.input_box} type="name" value={second_apartment_number} name="name" onChange={(e) => setSecondApartmentNumber(e.target.value)} />
+											<div className={classes.top_label} ><label htmlFor="second_apartment_number">mieszkanie</label></div>
+											<input className={classes.input_box} type="name" value={second_apartment_number} name="name" id="second_apartment_number" onChange={(e) => setSecondApartmentNumber(e.target.value)} />
 										</Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={3}>
-											<div className={classes.input_box_label} htmlFor="name">Kod pocztowy</div>
-											<input className={classes.input_box} type="name" value={second_post_code} name="name" onChange={(e) => setSecondPostCode(e.target.value)} />
+											<div className={classes.input_box_label} ><label htmlFor="second_post_code">Kod pocztowy</label></div>
+											<input className={classes.input_box} type="name" value={second_post_code} name="name" id="second_post_code" onChange={(e) => setSecondPostCode(e.target.value)} />
 										</Grid>
 										<Grid item xs={5}>
-											<div className={classes.input_box_label} htmlFor="name">Poczta</div>
-											<input className={classes.input_box} type="name" value={second_post_office} name="name" onChange={(e) => setSecondPostOffice(e.target.value)} />
+											<div className={classes.input_box_label} ><label htmlFor="second_post_office">Poczta</label></div>
+											<input className={classes.input_box} type="name" value={second_post_office} name="name" id="second_post_office" onChange={(e) => setSecondPostOffice(e.target.value)} />
 										</Grid>
 										<Grid item xs={4}>
-											<div className={classes.input_box_label} htmlFor="name">Miejscowość</div>
-											<input className={classes.input_box} type="name" value={second_city} name="name" onChange={(e) => setSecondCity(e.target.value)} />
+											<div className={classes.input_box_label} ><label htmlFor="second_city">Miejscowość</label></div>
+											<input className={classes.input_box} type="name" value={second_city} name="name" id="second_city" onChange={(e) => setSecondCity(e.target.value)} />
 										</Grid>
 									</Grid>
 								</Grid>
@@ -1150,8 +1152,8 @@ const CandidatesAdd = props => {
 								<Card className={classes.form}>
 									<Grid container spacing={3}>
 										<Grid item xs={12}>
-											<div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
-											<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
+											<div className={classes.input_box_label} ><label htmlFor="comment">Komentarz dotyczący edycji(max 100 znków)</label></div>
+											<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} id="comment" value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 											<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
 												Zapisz
                     </Button>

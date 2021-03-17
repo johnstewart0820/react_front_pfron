@@ -51,7 +51,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(0)}
 							>
-								ID
+								<label htmlFor="id">
+									ID
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -60,7 +62,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(1)}
 							>
-								Imię i nazwisko uczestnika
+								<label htmlFor="name">
+									Imię i nazwisko uczestnika
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -69,7 +73,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(2)}
 							>
-								Typ IPR
+								<label htmlFor="ipr_type">
+									Typ IPR
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -78,7 +84,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(3)}
 							>
-								Numer
+								<label htmlFor="number">
+									Numer
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -87,7 +95,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(4)}
 							>
-								Data powstania
+								<label htmlFor="start_date">
+									Data powstania
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -96,7 +106,9 @@ const SortTable = (props) => {
 								direction={sortOrder}
 								onClick={() => requestSort(5)}
 							>
-								Data wypelnienia
+								<label htmlFor="end_date">
+									Data wypelnienia
+								</label>
             </TableSortLabel>
 						</TableCell>
 						<TableCell>
@@ -108,17 +120,17 @@ const SortTable = (props) => {
 				</TableHead>
 				<TableBody>
 					<TableRow>
-						<TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-						<TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+						<TableCell><input className={classes.input_box} type="id" id="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+						<TableCell><input className={classes.input_box} type="name" id="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
 						<TableCell><SingleSelect value={searchIprType} handleChange={setSearchIprType} list={iprTypeList} /> </TableCell>
-						<TableCell><input className={classes.input_box} type="name" value={searchNumber} name="searchId" onChange={(e) => setSearchNumber(e.target.value)} /></TableCell>
+						<TableCell><input className={classes.input_box} id="number" type="name" value={searchNumber} name="searchId" onChange={(e) => setSearchNumber(e.target.value)} /></TableCell>
 						<TableCell>
 							<KeyboardDatePicker
 								disableToolbar
 								variant="inline"
 								format="dd.MM.yyyy"
 								margin="normal"
-								id="date-picker-inline"
+								id="start_date"
 								value={searchCreatedAt}
 								onChange={(e) => setSearchCreatedAt(getDate(e))}
 								KeyboardButtonProps={{
@@ -133,7 +145,7 @@ const SortTable = (props) => {
 								variant="inline"
 								format="dd.MM.yyyy"
 								margin="normal"
-								id="date-picker-inline"
+								id="end_date"
 								value={searchScheduleDate}
 								onChange={(e) => setSearchScheduleDate(getDate(e))}
 								KeyboardButtonProps={{

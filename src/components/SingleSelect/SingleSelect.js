@@ -11,18 +11,13 @@ const SingleSelect = (props) => {
 
   return (
     <FormControl variant="outlined" className={classes.formControl} error={error} disabled={disabled}>
-      <InputLabel htmlFor="outlined-age-native-simple" className={classes.name_select_box} shrink={false}>
-        {
-          value == 0 ? '' : ''
-        }
-      </InputLabel>
       <Select
         native 
         value={value}
         onChange={(event) =>handleChange(event.target.value ? event.target.value : {})}
         inputProps={{
           name: 'age',
-          id: 'outlined-age-native-simple',
+          // id: 'outlined-age-native-simple',
         }}
         className={classes.input_box}
       >

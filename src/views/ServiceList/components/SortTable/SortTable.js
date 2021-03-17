@@ -57,7 +57,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(1)}
             >
-              Numer
+							<label htmlFor="number">
+								Numer
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -66,7 +68,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(2)}
             >
-              Nazwa
+							<label htmlFor="name">
+								Nazwa
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -75,7 +79,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(3)}
             >
-              Sekcja
+							<label htmlFor="section">
+								Sekcja
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -84,7 +90,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(4)}
             >
-              Jednostka
+							<label htmlFor="unit">
+								Jednostka
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -96,8 +104,8 @@ const SortTable = (props) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <TableCell><input className={classes.input_box} type="name" value={searchNumber} name="searchId" onChange={(e) => setSearchNumber(e.target.value)} /></TableCell>
-          <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="name" value={searchNumber} name="searchId" id="number" onChange={(e) => setSearchNumber(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" id="name" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchModule} handleChange={setSearchModule} list={moduleList} /> </TableCell>
           <TableCell><SingleSelect value={searchUnit} handleChange={setSearchUnit} list={unitList} /></TableCell>
           <TableCell></TableCell>

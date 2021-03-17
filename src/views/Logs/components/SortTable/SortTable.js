@@ -122,7 +122,9 @@ const SortTable = (props) => {
 							direction={sortOrder}
 							onClick={() => requestSort(0)}
 						>
+							<label htmlFor="id">
 							{modelPropertyLabel('Log', 'id')}
+							</label>
 						</TableSortLabel>
 					</TableCell>
 					<TableCell>
@@ -131,7 +133,9 @@ const SortTable = (props) => {
 							direction={sortOrder}
 							onClick={() => requestSort(1)}
 						>
+							<label htmlFor="user">
 							{modelPropertyLabel('Log', 'user')}
+							</label>
 						</TableSortLabel>
 					</TableCell>
 					<TableCell>
@@ -140,7 +144,9 @@ const SortTable = (props) => {
 							direction={sortOrder}
 							onClick={() => requestSort(2)}
 						>
+							<label htmlFor="role">
 							{modelPropertyLabel('Log', 'role')}
+							</label>
 						</TableSortLabel>
 					</TableCell>
 					<TableCell>
@@ -149,7 +155,9 @@ const SortTable = (props) => {
 							direction={sortOrder}
 							onClick={() => requestSort(3)}
 						>
-							{modelPropertyLabel('Log', 'created_at')}
+							<label htmlFor="created_at">
+							{modelPropertyLabel('Log', 'date')}
+							</label>
 						</TableSortLabel>
 					</TableCell>
 					<TableCell>
@@ -170,15 +178,15 @@ const SortTable = (props) => {
 			</TableHead>
 			<TableBody>
 				<TableRow>
-					<TableCell><input className={classes.input_box} type="text" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-					<TableCell><input className={classes.input_box} type="text" value={searchUserName} name="searchUserName" onChange={(e) => setSearchUserName(e.target.value)} /></TableCell>
+					<TableCell><input className={classes.input_box} type="text" id="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+					<TableCell><input className={classes.input_box} type="text" id="user" value={searchUserName} name="searchUserName" onChange={(e) => setSearchUserName(e.target.value)} /></TableCell>
 					<TableCell><SingleSelect value={searchRole} handleChange={setSearchRole} list={roleList} /> </TableCell>
 					<TableCell><KeyboardDatePicker
 						className={classes.date_picker}
+						id="created_at"
 						disableToolbar
 						variant="inline"
 						format="dd.MM.yyyy"
-						id="date-picker-inline"
 						value={searchDate}
 						onChange={setSearchDate}
 						KeyboardButtonProps={{

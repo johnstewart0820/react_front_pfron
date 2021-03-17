@@ -32,7 +32,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(0)}
             >
-              ID
+							<label htmlFor="id">
+								ID
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -41,7 +43,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(2)}
             >
+							<label htmlFor="value">
               Wysokość
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -71,8 +75,8 @@ const SortTable = (props) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-          <TableCell><input className={classes.input_box} type="name" value={searchValue} name="searchId" onChange={(e) => setSearchValue(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="name" value={searchValue} id="value" name="searchId" onChange={(e) => setSearchValue(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchRehabitationCenter} handleChange={setSearchRehabitationCenter} list={rehabitationCenterList} /> </TableCell>
           <TableCell><SingleSelect value={searchService} handleChange={setSearchService} list={serviceList} /></TableCell>
           <TableCell></TableCell>

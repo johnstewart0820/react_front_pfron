@@ -62,7 +62,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(0)}
             >
-              ID
+							<label htmlFor="id">
+								ID
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -71,7 +73,9 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(1)}
             >
-              Imię i nazwisko
+							<label htmlFor="name">
+								Imię i nazwisko
+							</label>
             </TableSortLabel>
           </TableCell>
           <TableCell>
@@ -101,8 +105,8 @@ const SortTable = (props) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
-          <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" id="id" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+          <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" id="name" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchRehabitationCenter} handleChange={setSearchRehabitationCenter} list={rehabitationCenterList} /> </TableCell>
           <TableCell><SingleSelect value={searchSpecialization} handleChange={setSearchSpecialization} list={specializationList} /></TableCell>
           <TableCell></TableCell>

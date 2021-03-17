@@ -118,7 +118,7 @@ const Cockpit = props => {
 									<></>
 								}
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnFull}>
+									<Button variant="outlined" color="secondary" className={classes.btnFull} onClick={() => history.push('/payments')}>
 										Finanse
 									</Button>
 								</Grid>

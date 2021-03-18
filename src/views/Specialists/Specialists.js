@@ -28,7 +28,7 @@ const Specialists = props => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: false, label: 'Specjaliści'}];
+  const breadcrumbs = [{active: false, label: 'Lista specjalistów', title: 'Po zmianie opcji wyszukiwania formularz przeładuje się automatycznie'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast } = useToasts()
   

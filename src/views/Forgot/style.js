@@ -4,7 +4,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(7)
+    marginTop: theme.spacing(7),
+		color: theme.palette.text.primary
   },
 
   logoContainer: {

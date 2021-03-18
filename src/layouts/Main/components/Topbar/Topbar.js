@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SiteInfoContextConsumer } from "App";
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { AppBar, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { AppBar, Button, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -17,6 +17,8 @@ const Topbar = props => {
   const [ open, setOpen] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const [avatarOpen, setAvatarOpen] = useState(Boolean(anchorEl));
+	const [underlineStatus, setUnderlineStatus] = useState(false);
+	const [contrastStatus, setContrastStatus] = useState(false);
   const classes = useStyles();
   let history = useHistory();
 
@@ -61,7 +63,14 @@ const Topbar = props => {
   const toggleUnderlineLinks = e => {
     e.preventDefault();
     document.body.classList.toggle("links-underline");
+		setUnderlineStatus(!underlineStatus);
   }
+
+	const toggleContrast = (e, handle) => {
+		e.preventDefault(); 
+		handle();
+		setContrastStatus(!contrastStatus);
+	}
 
   return (
 		<SiteInfoContextConsumer>
@@ -79,30 +88,37 @@ const Topbar = props => {
 				<div className={classes.rightControllerArea}>
 					<div className={classes.controllerArea}>
 						<div className={classes.vertical_separator}/>
-						<div className={classes.helper} name="plus"
-							onClick={(e) => changeFontSize('more')}>
-							<FontAwesomeIcon icon={faFont} size="2x" />
-							<FontAwesomeIcon icon={faPlus} size="1x" />
-						</div>
+						<Button title="Wczytaj domyślny rozmiar tekstu"	onClick={(e) => changeFontSize('normal')}>
+							<div className={classes.helper} name="normal">
+									<FontAwesomeIcon icon={faFont} size="2x"/>
+							</div>
+						</Button>
 						<div className={classes.vertical_separator}/>
-						<div className={classes.helper} name="normal"
-								onClick={(e) => changeFontSize('normal')}>
-								<FontAwesomeIcon icon={faFont} size="2x"/>
-						</div>
+						<Button title="Pomniejsz tekst na stronie" onClick={(e) => changeFontSize('less')}>
+							<div className={classes.helper} name="minus">
+									<FontAwesomeIcon icon={faFont} size="2x"/>
+									<FontAwesomeIcon icon={faMinus} size="1x"/>
+							</div>
+						</Button>
 						<div className={classes.vertical_separator}/>
-						<div className={classes.helper} name="minus"
-								onClick={(e) => changeFontSize('less')}>
-								<FontAwesomeIcon icon={faFont} size="2x"/>
-								<FontAwesomeIcon icon={faMinus} size="1x"/>
-						</div>
+						<Button title="Powiększ tekst na stronie" onClick={(e) => changeFontSize('more')}>
+							<div className={classes.helper} name="plus">
+								<FontAwesomeIcon icon={faFont} size="2x" />
+								<FontAwesomeIcon icon={faPlus} size="1x" />
+							</div>
+						</Button>
 						<div className={classes.vertical_separator}/>
-						<div className={classes.helper} onClick={(e) => {e.preventDefault(); props.toggleContrast();}}>
-								<FontAwesomeIcon icon={faEye} size="2x"/>
-						</div>
+						<Button title={!contrastStatus ? "Wyłącz tryb wysokokontrastowy": "Włącz tryb wysokokontrastowy"} onClick={(e) => toggleContrast(e, props.toggleContrast)}>
+							<div className={classes.helper}>
+									<FontAwesomeIcon icon={faEye} size="2x"/>
+							</div>
+						</Button>
 						<div className={classes.vertical_separator}/>
-						<div className={classes.helper} onClick={(e) => toggleUnderlineLinks(e)}>
-								<FontAwesomeIcon icon={faLink} size="2x"/>
-						</div>
+						<Button title={!underlineStatus ? "Wyłącz podkreślenie linków" : "Włącz podkreślenie linków"}  onClick={(e) => toggleUnderlineLinks(e)}>
+							<div className={classes.helper}>
+									<FontAwesomeIcon icon={faLink} size="2x"/>
+							</div>
+						</Button>
 						<div className={classes.vertical_separator}/>
 					</div>
 					<div className={classes.avatar}>
@@ -133,9 +149,9 @@ const Topbar = props => {
 						</Menu>
 					</div>
 				</div>
-        <div className={classes.title}>
-          {title}
-        </div>
+				<Typography variant="h1" className={classes.title}>
+					{title}
+				</Typography>
       </div>
     </AppBar>
 		)}

@@ -21,7 +21,7 @@ const SingleSelect = (props) => {
         }}
         className={classes.input_box}
       >
-        <option aria-label="None" value={0} />
+        <option aria-label="None" value={0}>Wybierz opcję</option>
         {
           list.map((item, index) => 
             <option key={index} value={item.id}>{item.name}</option>

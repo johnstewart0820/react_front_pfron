@@ -122,7 +122,7 @@ const OrkTeams = props => {
       export_data.push(item);
     }
     EXCEL.outPut({
-      header: ['ID', 'Imie i nazwisko', 'ORK', 'Specjallizacja'],
+      header: ['ID', 'Imie i nazwisko', 'ORK', 'Specjalizacja'],
       data: export_data,
       name: 'download'
     })

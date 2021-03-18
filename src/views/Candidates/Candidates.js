@@ -106,7 +106,7 @@ const Candidates = props => {
 			export_data.push(item);
 		}
 		EXCEL.outPut({
-			header: ['ID', 'Imie kandydata', 'Nazwisko kandydata', 'Punkt kwalifikacyjny', 'Etap rekutacji', 'Data modyfikacji'],
+			header: ['ID', 'Imię kandydata', 'Nazwisko kandydata', 'Punkt kwalifikacyjny', 'Etap rekutacji', 'Data modyfikacji'],
 			data: export_data,
 			name: 'download'
 		})

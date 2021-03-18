@@ -80,7 +80,7 @@ const SortTable = (props) => {
                 onClick={() => requestSort(1)}
               >
 								<label htmlFor="firstname">
-									Imie uczestnika
+									Imię uczestnika
 								</label>
             </TableSortLabel>
             </TableCell>
@@ -101,7 +101,7 @@ const SortTable = (props) => {
                 direction={sortOrder}
                 onClick={() => requestSort(3)}
               >
-                Osorodek
+                Ośrodek
             </TableSortLabel>
             </TableCell>
             <TableCell>

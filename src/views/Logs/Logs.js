@@ -58,7 +58,7 @@ const Logs = props => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: false, label: 'Punkty kwalifikacyjne'}];
+  const breadcrumbs = [{active: true, href: '/users', label: 'Ustawienia systemowe'}, {active: false, label: 'Log zdarzeń'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast } = useToasts()
   useEffect(() => {

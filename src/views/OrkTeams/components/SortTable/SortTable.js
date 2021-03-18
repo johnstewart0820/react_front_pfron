@@ -93,7 +93,7 @@ const SortTable = (props) => {
               direction={sortOrder}
               onClick={() => requestSort(3)}
             >
-              Specjallizacja
+              Specjalizacja
             </TableSortLabel>
           </TableCell>
           <TableCell>

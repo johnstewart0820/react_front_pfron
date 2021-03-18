@@ -5,7 +5,7 @@ import { NavLink as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { List, ListItem, Button } from '@material-ui/core';
+import { List, ListItem, Button, Typography } from '@material-ui/core';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = makeStyles(theme => ({
@@ -99,10 +99,15 @@ const SidebarNav = props => {
       className={clsx(classes.root, className)}
     >
       {pages.map(page => (
-        page.label ?
-        <div className={classes.label}>
-          {page.label}
-        </div>
+        page.main_label ?
+        <Typography variant="h2" className={classes.label}>
+          {page.main_label}
+        </Typography>
+				:
+				page.label ?
+				<Typography variant="h3" className={classes.label}>
+					{page.label}
+				</Typography>
         :
         <ListItem
           className={classes.item}

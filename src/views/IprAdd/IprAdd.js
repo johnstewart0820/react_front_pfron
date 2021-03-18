@@ -175,7 +175,7 @@ const IprAdd = props => {
 											<div className={classes.number}>{number + 1}</div>
 										</Grid>
 										<Grid item xs={5}>
-											<div className={classes.top_label}><label htmlFor="date">Data wypelnienia</label></div>
+											<div className={classes.top_label}><label htmlFor="date">Data wypełnienia</label></div>
 											<KeyboardDatePicker
 												disableToolbar
 												variant="inline"
@@ -190,7 +190,7 @@ const IprAdd = props => {
 											/>
 										</Grid>
 										<Grid item xs={12}>
-											<div className={classes.top_label}><label htmlFor="ork_person">Specjalista ds. zarzadzania rehabilitacja</label></div>
+											<div className={classes.top_label}><label htmlFor="ork_person">Specjalista ds. zarządzania rehabilitacją</label></div>
 											<Autocomplete
 												className={classes.name_select_box}
 												id="ork_person"

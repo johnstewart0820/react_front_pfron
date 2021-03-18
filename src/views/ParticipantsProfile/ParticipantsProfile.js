@@ -297,7 +297,7 @@ const ParticipantsProfile = props => {
 							Edytuj kandydata
 						</Button>
 						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-							Wróć do listy uczestnikow
+							Wróć do listy uczestników
 						</Button>
 					</div>
 				</div>
@@ -408,7 +408,7 @@ const ParticipantsProfile = props => {
               	</Grid>
 								<Grid item xs={9}>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Ze względów logistycznyck (brak moźliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Ze względów logistycznych (brak możliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{stay_status === 1 ? "TAK" : "NIE"}</div></Grid>
@@ -466,22 +466,22 @@ const ParticipantsProfile = props => {
 										disabled_person_status === 1 ?
 											<>
 												<Grid container spacing={2}>
-													<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Jestem osobą niepelnosprawną i posiadam orzeczenie</div></Grid>
+													<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Jestem osobą niepełnosprawną i posiadam orzeczenie</div></Grid>
 												</Grid>
 												<Grid container spacing={2}>
 													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Numer orzeczenia o niepełnosprawności</div></Grid>
 													<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{number_certificate}</div></Grid>
 												</Grid>
 												<Grid container spacing={2}>
-													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Data waźności</div></Grid>
+													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Data ważności</div></Grid>
 													<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{getDateStr(date_of_certificate)}</div></Grid>
 												</Grid>
 												<Grid container spacing={2}>
-													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Stopien niepełnosprawności</div></Grid>
+													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Stopień niepełnosprawności</div></Grid>
 													<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{level_certificate}</div></Grid>
 												</Grid>
 												<Grid container spacing={2}>
-													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Konieczne wymagania zwiazane z niepelnospawnoscia (np. pomoc asystenia, tlumacza migowego)</div></Grid>
+													<Grid item xs={6}><div className={classes.top_label_header} htmlFor="name">Konieczne wymagania związane z niepełnosprawnością (np. pomoc asystenta, tłumacza migowego)</div></Grid>
 													<Grid item xs={6}><div className={classes.top_label} htmlFor="name">{necessary_certificate}</div></Grid>
 												</Grid>
 											</>
@@ -497,37 +497,37 @@ const ParticipantsProfile = props => {
               	</Grid>
 								<Grid item xs={9}>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba nalezaca do mniejszosci narodowej etnicznej, migrant, osoba obcego pochodzenia</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label} htmlFor="name">{getStatus(ethnic_minority_status)}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba bezdomna lub dotknieta wykluczeniem z dostepu do mieszkan</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label} htmlFor="name">{getStatus(homeless_person_status)}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba przebywajaca w gospodarstwie domowym bez osob pracujacych</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba przebywająca w gospodarstwie domowym bez osób pracujących</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label} htmlFor="name">{getStatus(stay_house_status)}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">w tym: w gospodarstwie domowym z dziecmi pozaszkolnym na utrzymaniu</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">w tym: w gospodarstwie domowym z dziećmi pozostającymi na utrzymaniu</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label} htmlFor="name">{getStatus(house_hold_status)}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba zyjaca w gospodarstwie skladajacym sie z jednej osoby doroslej i dzieci pozostajacych na utrzymaniu</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba żyjąca w gospodarstwie składającym się z jednej osoby dorosłej i dzieci pozostających na utrzymaniu</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label} htmlFor="name">{getStatus(house_hold_adult_status)}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba w innej niekorzystnej sytuacji spolecznej</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba w innej niekorzystnej sytuacji społecznej </div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label} htmlFor="name">{getStatus(uncomfortable_status)}</div></Grid>
@@ -542,7 +542,7 @@ const ParticipantsProfile = props => {
 								<Card className={classes.form}>
 									<Grid container spacing={2}>
 										<div className={classes.form_title_right}>
-											Informacje o uczestnika
+											Informacje o uczestniku
                   </div>
 										<Grid item xs={6}>
 											<div className={classes.input_box_label_left}>
@@ -582,7 +582,7 @@ const ParticipantsProfile = props => {
 										</Grid>
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleGotoInformation}>
-												Zobacz liste IPR uczestnika
+												Zobacz listę IPR uczestnika
                     </Button>
 										</Grid>
 									</Grid>

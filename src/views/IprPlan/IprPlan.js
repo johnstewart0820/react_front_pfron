@@ -271,7 +271,7 @@ const IprPlan = props => {
 										<div className={classes.number}>{number}</div>
 									</Grid>
 									<Grid item xs={5}>
-										<div className={classes.top_label} htmlFor="name">Data wypelnienia</div>
+										<div className={classes.top_label} htmlFor="name">Data wypełnienia</div>
 										<KeyboardDatePicker
 											disableToolbar
 											disabled={true}
@@ -287,7 +287,7 @@ const IprPlan = props => {
 										/>
 									</Grid>
 									<Grid item xs={12}>
-										<div className={classes.top_label} htmlFor="name">Specjalista ds. zarzadzania rehabilitacja</div>
+										<div className={classes.top_label} htmlFor="name">Specjalista ds. zarządzania rehabilitacją</div>
 										<Autocomplete
 											disabled={true}
 											className={classes.name_select_box}

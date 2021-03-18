@@ -261,7 +261,7 @@ const CandidatesSecondStep = props => {
                     <SingleSelect value={stage} list={stageList} disabled={true}/>
 					<div className={classes.top_label} htmlFor="name">Status</div>
                     <SingleSelect value={status} list={statusList} disabled={true}/>
-                    <div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
+                    <div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji (max 100 znaków)</div>
                     <TextareaAutosize className={clsx({[classes.textArea] : true, [classes.error] : error.comment})} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika"/>
                     <Grid container spacing={2}>
                       <Grid item xs={4}>

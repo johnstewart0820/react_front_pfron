@@ -29,7 +29,7 @@ const IprList = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(-1);
 	const classes = useStyles();
-	const breadcrumbs = [{ active: true, href: '/participants', label: 'Uczestnicy' }, { active: false, label: 'Indywidualne Programy Rehabilitacji poszczegolnych uczestnikow' }];
+	const breadcrumbs = [{ active: true, href: '/participants', label: 'Uczestnicy' }, { active: false, label: 'Indywidualne Programy Rehabilitacji poszczególnych uczestników ' }];
 	const [progressStatus, setProgressStatus] = useState(false);
 	const { addToast } = useToasts()
 	useEffect(() => {
@@ -94,7 +94,7 @@ const IprList = props => {
 		}
 
 		EXCEL.outPut({
-			header: ['ID', 'Imię i nazwisko uczestnika', 'Typ IPR', 'Numer', 'Data powstania', 'Data wypelnienia'],
+			header: ['ID', 'Imię i nazwisko uczestnika', 'Typ IPR', 'Numer', 'Data powstania', 'Data wypełnienia'],
 			data: export_data,
 			name: 'download'
 		})

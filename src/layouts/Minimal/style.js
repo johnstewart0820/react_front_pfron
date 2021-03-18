@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.black_white,
     color: theme.palette.color,
     fontFamily: 'roboto',
-    height: '100vh',
+    minHeight: '100vh',
   },
   logo: {
     maxWidth: '100%',
@@ -26,7 +26,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.6875em',
     textAlign: 'center',
     marginTop: theme.spacing(11)
-  }
+  },
+	helper: {
+		color: theme.palette.text.primary,
+		fontSize: '8px',
+		margin: theme.spacing(0, 2.5),
+		display: 'flex',
+		alignItems: 'center',
+		cursor: 'pointer'
+	},
 }));
 
 export default useStyles;

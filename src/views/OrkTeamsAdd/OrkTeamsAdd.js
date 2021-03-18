@@ -142,7 +142,7 @@ const OrkTeamsAdd = props => {
                   getOptionLabel={(option) => rehabitationCenterList && option && option.name}
                   renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.rehabitationCenter}/>}
                 />
-                <div className={classes.input_box_label}><label htmlFor="specialization">Specjallizacja</label></div>
+                <div className={classes.input_box_label}><label htmlFor="specialization">Specjalizacja</label></div>
                 <Autocomplete
                   multiple
 									id="specialization"

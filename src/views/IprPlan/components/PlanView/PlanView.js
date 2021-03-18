@@ -169,7 +169,7 @@ const PlanView = (props) => {
 						<Grid item xs={12}>
 							<Grid container spacing={2}>
 								<Grid item xs={4}>
-									<div className={classes.top_label}><label htmlFor="start_date">Data rozpoczecia</label></div>
+									<div className={classes.top_label}><label htmlFor="start_date">Data rozpoczęcia</label></div>
 									<KeyboardDatePicker
 										disableToolbar
 										disabled={service.disable_status}
@@ -185,7 +185,7 @@ const PlanView = (props) => {
 									/>
 								</Grid>
 								<Grid item xs={6}>
-									<div className={classes.top_label}><label htmlFor="ork_person">Osoba realizujaca (Rehabilitant powadzacy)</label></div>
+									<div className={classes.top_label}><label htmlFor="ork_person">Osoba realizująca (Rehabilitant powadzacy)</label></div>
 									<Autocomplete
 										disabled={service.disable_status}
 										id="ork_person"

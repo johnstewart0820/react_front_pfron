@@ -449,7 +449,7 @@ const TrainingsEdit = props => {
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.number })} type="name" value={training.number} name="name" onChange={(e) => handleChangeNumber(e.target.value)} />
 									<div className={classes.input_box_label} htmlFor="type">ORK</div>
 									<SingleSelect value={training.rehabitation_center} handleChange={(value) => handleChangeRehabitationCenter(value)} list={rehabitationCenterList} error={error.rehabitation_center} />
-									<div className={classes.input_box_label} htmlFor="type">Usluga, do ktorej jest przypisane szkolenie</div>
+									<div className={classes.input_box_label} htmlFor="type">Usługa, do ktorej jest przypisane szkolenie</div>
 									<SingleSelect value={training.service} handleChange={(value) => handleChangeService(value)} list={serviceList} error={error.service} />
 								</Grid>
 							</Grid>
@@ -615,7 +615,7 @@ const TrainingsEdit = props => {
 								<Grid item xs={12}>
 									<div className={classes.top_label}>Zaakceptowane</div>
 									<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
-									<div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji(max 100 znków)</div>
+									<div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji (max 100 znaków)</div>
 									<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 									<Grid container spacing={2}>
 										<Grid item xs={6}>

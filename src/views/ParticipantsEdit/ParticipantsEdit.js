@@ -788,7 +788,7 @@ const ParticipantsEdit = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy uczestnikow
+						Wróć do listy uczestników
         </Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
@@ -926,7 +926,7 @@ const ParticipantsEdit = props => {
 										Adres korespondencyjny
                 </div>
 									<div className={classes.form_title_small}>
-										(wypełnić jeśli inny niź adres zameldowania)
+										(wypełnić jeśli inny niż adres zameldowania)
                 </div>
 								</Grid>
 								<Grid item xs={9}>
@@ -997,7 +997,7 @@ const ParticipantsEdit = props => {
 									Tryb pobytu
               	</Grid>
 								<Grid item xs={9}>
-									<div className={classes.input_box_label} htmlFor="name">Ze względów logistycznyck (brak moźliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji</div>
+									<div className={classes.input_box_label} htmlFor="name">Ze względów logistycznych (brak możliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji</div>
 									<FormControl component="fieldset" error={error.stay_status}>
 										<RadioGroup aria-label="gender" name="education" value={stay_status} onChange={handleChangeStayStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1130,7 +1130,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.seek_work_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">Jestem osoba bierną zawodowo</div>
+									<div className={classes.input_box_label} htmlFor="name">Jestem osobą bierną zawodowo</div>
 									<FormControl component="fieldset" error={error.passive_person_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={passive_person_status} onChange={handleChangePassivePersonStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1138,7 +1138,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.passive_person_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">Jestem uczniem/studentem uczacym sie w systemie dziennym</div>
+									<div className={classes.input_box_label} htmlFor="name">Jestem uczniem /studentem uczącym się w systemie dziennym</div>
 									<FormControl component="fieldset" error={error.full_time_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={full_time_status} onChange={handleChangeFullTimeStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1146,7 +1146,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.full_time_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">Jestem osobą ksztalcąca sie w systemie wieczorowym/pozaszkolnym</div>
+									<div className={classes.input_box_label} htmlFor="name">Jestem osobą kształcąca się w systemie wieczorowym/pozaszkolnym</div>
 									<FormControl component="fieldset" error={error.evening_student_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={evening_student_status} onChange={handleChangeEveningStudentStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1154,7 +1154,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.evening_student_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">Jestem osobą niepelnosprawną i posiadam orzeczenie</div>
+									<div className={classes.input_box_label} htmlFor="name">Jestem osobą niepełnosprawną i posiadam orzeczenie</div>
 									<FormControl component="fieldset" error={error.disabled_person_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={disabled_person_status} onChange={handleChangeDisabledPersonStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1171,7 +1171,7 @@ const ParticipantsEdit = props => {
 													<div className={classes.error_label} style={{ display: error.number_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												</Grid>
 												<Grid item xs={4}>
-													<div className={classes.input_box_label} htmlFor="name">Data waźności</div>
+													<div className={classes.input_box_label} htmlFor="name">Data ważności</div>
 													<KeyboardDatePicker
 														disableToolbar
 														className={classes.date_picker}
@@ -1187,7 +1187,7 @@ const ParticipantsEdit = props => {
 													/>
 												</Grid>
 												<Grid item xs={8}>
-													<div className={classes.input_box_label}><label htmlFor="level_certificate">Stopien niepełnosprawności</label></div>
+													<div className={classes.input_box_label}><label htmlFor="level_certificate">Stopień niepełnosprawności</label></div>
 													<input className={clsx({ [classes.input_box]: true, [classes.error]: error.level_certificate })} type="name" id="level_certificate" value={level_certificate} name="name" onChange={(e) => handleChangeLevelCertificate(e.target.value)} />
 													<div className={classes.error_label} style={{ display: error.level_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												</Grid>
@@ -1196,7 +1196,7 @@ const ParticipantsEdit = props => {
 													<input className={clsx({ [classes.input_box]: true, [classes.error]: error.code_certificate })} type="name" id="code_certificate" value={code_certificate} name="name" onChange={(e) => handleChangeCodeCertificate(e.target.value)} />
 													<div className={classes.error_label} style={{ display: error.code_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												</Grid>
-												<div className={classes.input_box_label} ><label htmlFor="necessary_certificate">Konieczne wymagania zwiazane z niepelnospawnoscia (np. pomoc asystenia, tlumacza migowego)</label></div>
+												<div className={classes.input_box_label} ><label htmlFor="necessary_certificate">Konieczne wymagania związane z niepełnosprawnością (np. pomoc asystenta, tłumacza migowego)</label></div>
 												<input className={clsx({ [classes.input_box]: true, [classes.error]: error.necessary_certificate })} type="name" id="necessary_certificate" value={necessary_certificate} name="name" onChange={(e) => handleChangeNecessaryCertificate(e.target.value)} />
 												<div className={classes.error_label} style={{ display: error.necessary_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 											</Grid>
@@ -1211,7 +1211,7 @@ const ParticipantsEdit = props => {
 									Inne
               </Grid>
 								<Grid item xs={9}>
-									<div className={classes.input_box_label} htmlFor="name">Osoba nalezaca do mniejszosci narodowej etnicznej, migrant, osoba obcego pochodzenia</div>
+									<div className={classes.input_box_label} htmlFor="name">Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia</div>
 									<FormControl component="fieldset" error={error.ethnic_minority_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={ethnic_minority_status} onChange={handleChangeEthnicMinorityStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1220,7 +1220,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.ethnic_minority_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">Osoba bezdomna lub dotknieta wykluczeniem z dostepu do mieszkan</div>
+									<div className={classes.input_box_label} htmlFor="name">Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań</div>
 									<FormControl component="fieldset" error={error.homeless_person_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={homeless_person_status} onChange={handleChangeHomelessPersonStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1229,7 +1229,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.homeless_person_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">Osoba przebywajaca w gospodarstwie domowym bez osob pracujacych</div>
+									<div className={classes.input_box_label} htmlFor="name">Osoba przebywająca w gospodarstwie domowym bez osób pracujących</div>
 									<FormControl component="fieldset" error={error.stay_house_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={stay_house_status} onChange={handleChangeStayHouseStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1238,7 +1238,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.stay_house_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">w tym: w gospodarstwie domowym z dziecmi pozaszkolnym na utrzymaniu</div>
+									<div className={classes.input_box_label} htmlFor="name">w tym: w gospodarstwie domowym z dziećmi pozostającymi na utrzymaniu</div>
 									<FormControl component="fieldset" error={error.house_hold_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={house_hold_status} onChange={handleChangeHouseHoldStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1247,7 +1247,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.house_hold_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">Osoba zyjaca w gospodarstwie skladajacym sie z jednej osoby doroslej i dzieci pozostajacych na utrzymaniu</div>
+									<div className={classes.input_box_label} htmlFor="name">Osoba żyjąca w gospodarstwie składającym się z jednej osoby dorosłej i dzieci pozostających na utrzymaniu</div>
 									<FormControl component="fieldset" error={error.house_hold_adult_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={house_hold_adult_status} onChange={handleChangeHouseHoldAdultStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1256,7 +1256,7 @@ const ParticipantsEdit = props => {
 										</RadioGroup>
 									</FormControl>
 									<div className={classes.error_label} style={{ display: error.house_hold_adult_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
-									<div className={classes.input_box_label} htmlFor="name">Osoba w innej niekorzystnej sytuacji spolecznej</div>
+									<div className={classes.input_box_label} htmlFor="name">Osoba w innej niekorzystnej sytuacji społecznej </div>
 									<FormControl component="fieldset" error={error.uncomfortable_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={uncomfortable_status} onChange={handleChangeUncomfortableStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -1275,7 +1275,7 @@ const ParticipantsEdit = props => {
 								<Card className={classes.form}>
 									<Grid container spacing={2}>
 										<div className={classes.form_title_right}>
-											Informacje o uczestnika
+											Informacje o uczestniku
                   </div>
 										<Grid item xs={6}>
 											<div className={classes.input_box_label_left}>
@@ -1315,7 +1315,7 @@ const ParticipantsEdit = props => {
 										</Grid>
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleGotoInformation}>
-												Zobacz liste IPR uczestnika
+												Zobacz listę IPR uczestnika
                     </Button>
 										</Grid>
 									</Grid>
@@ -1327,7 +1327,7 @@ const ParticipantsEdit = props => {
 										<Grid item xs={12}>
 											<div className={classes.top_label} htmlFor="name">Status uczestnika</div>
 											<SingleSelect value={participant_status_type} handleChange={setParticipantStatusType} list={participantStatusTypeList} />
-											<div className={classes.input_box_label} ><label htmlFor="comment">Komentarz dotyczący edycji(max 100 znków)</label></div>
+											<div className={classes.input_box_label} ><label htmlFor="comment">Komentarz dotyczący edycji (max 100 znaków)</label></div>
 											<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} id="comment" value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 											<Grid container spacing={2}>
 												<Grid item xs={4}>

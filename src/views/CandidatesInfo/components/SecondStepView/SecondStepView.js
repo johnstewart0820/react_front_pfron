@@ -69,12 +69,12 @@ const SecondStepView = (props) => {
                   <RadioGroup aria-label="gender" name="education" value={doctor_recommendation} onChange={(e) => setDoctorRecommendation(parseInt(e.target.value))} row>
                     <FormControlLabel value={1} control={<Radio />} label='TAK' />
                     <FormControlLabel value={2} control={<Radio />} label='NIE' />
-                    <FormControlLabel value={3} control={<Radio />} label='NIE MOZNA STWIERDZIC' />
+                    <FormControlLabel value={3} control={<Radio />} label='NIE MOŻNA STWIERDZIĆ' />
                   </RadioGroup>
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <div className={classes.label_content}>orzeczenie o kwalifikacji z dnia</div>
+                <div className={classes.label_content}>Orzeczenie o kwalifikacji z dnia</div>
                 <KeyboardDatePicker
                   disableToolbar
                   className={classes.date_picker}
@@ -109,7 +109,7 @@ const SecondStepView = (props) => {
                   <RadioGroup aria-label="gender" name="education" value={psycology_recommendation} onChange={(e) => setPsycologyRecommendation(parseInt(e.target.value))} row>
                     <FormControlLabel value={1} control={<Radio />} label='TAK' />
                     <FormControlLabel value={2} control={<Radio />} label='NIE' />
-                    <FormControlLabel value={3} control={<Radio />} label='NIE MOZNA STWIERDZIC' />
+                    <FormControlLabel value={3} control={<Radio />} label='NIE MOŻNA STWIERDZIĆ' />
                   </RadioGroup>
                 </FormControl>
               </Grid>

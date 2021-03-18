@@ -218,11 +218,11 @@ const ScheduleView = (props) => {
 																	<div>(w min)</div>
 																</Grid>
 																<Grid item xs>
-																	lacznie
+																	łącznie
 																	<div>(w godz)</div>
 																</Grid>
 																<Grid item xs>
-																	lacznie
+																	łącznie
 																	<div>(w jednostce)</div>
 																</Grid>
 															</Grid>

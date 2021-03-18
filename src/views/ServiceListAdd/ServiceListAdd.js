@@ -133,7 +133,7 @@ const ServiceListAdd = props => {
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />
         <Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-          Wróć do listy specjalistów
+					Wróć do listy usług
         </Button>
       </div>
       <Grid container spacing={3} className={classes.formBlock}>
@@ -184,7 +184,7 @@ const ServiceListAdd = props => {
                           onChange={() => setIsRequired(!is_required)}
                         />
                       }
-                      label="Usluga obowiazkowa"
+                      label="Usługa obowiązkowa"
                     />  
                   </Grid>
                   <Grid item xs={12}>

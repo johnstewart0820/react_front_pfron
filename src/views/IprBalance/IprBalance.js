@@ -256,7 +256,7 @@ const IprBalance = props => {
 													<div className={classes.number}>{number}</div>
 												</Grid>
 												<Grid item xs={5}>
-													<div className={classes.top_label}><label htmlFor="date">Data wypelnienia</label></div>
+													<div className={classes.top_label}><label htmlFor="date">Data wypełnienia</label></div>
 													<KeyboardDatePicker
 														disableToolbar
 														disabled={true}
@@ -273,7 +273,7 @@ const IprBalance = props => {
 													/>
 												</Grid>
 												<Grid item xs={12}>
-													<div className={classes.top_label}><label htmlFor="name">Specjalista ds. zarzadzania rehabilitacja</label></div>
+													<div className={classes.top_label}><label htmlFor="name">Specjalista ds. zarządzania rehabilitacją</label></div>
 													<Autocomplete
 														disabled={true}
 														className={classes.name_select_box}
@@ -336,7 +336,7 @@ const IprBalance = props => {
 									<Grid item xs={3} className={classes.service}>
 										<div className={classes.form_service_title_end}>
 											<label htmlFor="value_balance">
-												dzialania zaplanowane po wyjsciu
+												Działania zaplanowane po wyjściu
 											</label>
 										</div>
 									</Grid>

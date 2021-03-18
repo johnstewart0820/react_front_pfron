@@ -31,6 +31,9 @@ const Sidebar = props => {
 	const items = [
 		[
 			{
+				main_label: 'MENU GŁÓWNE'
+			},
+			{
 				title: 'Kokpit',
 				href: '/cockpit',
 				icon: <KokpitIcon/>

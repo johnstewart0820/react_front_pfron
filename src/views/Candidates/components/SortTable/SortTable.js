@@ -86,7 +86,7 @@ const SortTable = (props) => {
                 onClick={() => requestSort(1)}
               >
 								<label htmlFor="candidate_firstname">
-									Imie kandydata
+									Imię kandydata
 								</label>
             </TableSortLabel>
             </TableCell>

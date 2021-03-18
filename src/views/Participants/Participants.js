@@ -31,7 +31,7 @@ const Participants = props => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/'}, {active: false, label: 'Lista uczestnikow'}];
+  const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/'}, {active: false, label: 'Lista uczestników'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast } = useToasts()
   useEffect(() => {
@@ -93,7 +93,7 @@ const Participants = props => {
       export_data.push(item);
     }
     EXCEL.outPut({
-      header: ['ID', 'Imie uczestnika', 'Nazwisko uczestnika', 'Osorodek', 'Status', 'Data modyfikacji'],
+      header: ['ID', 'Imię uczestnika', 'Nazwisko uczestnika', 'Ośrodek', 'Status', 'Data modyfikacji'],
       data: export_data,
       name: 'download'
     })

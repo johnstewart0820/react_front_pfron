@@ -13,7 +13,7 @@ export const modelPropertyLabel = (modelName, property) => {
 			ambassador: 'Przypisani Ambasadorzy',
 		},
 		'App\\Models\\Candidate': {
-			name:               'Imie kandydata',
+			name:               'Imię kandydata',
 			surname:            'Nazwisko kandydata',
 			qualificationPoint: 'Punkt kwalifikacyjny',
 			stage:              'Etap rekutacji',
@@ -24,13 +24,13 @@ export const modelPropertyLabel = (modelName, property) => {
 		'App\\Models\\OrkTeam': {
 			name:                'Imię i nazwisko',
 			rehabitation_center: 'ORK',
-			specialization:      'Specjallizacja',
+			specialization:      'Specjalizacja',
 		},
 		'App\\Models\\Payment': {
 			name:                'Nazwa kosztu',
 			value:               'Wysokość',
 			rehabitation_center: 'Koszt dla ORK',
-			service:             'Usluga',
+			service:             'Usługa',
 		},
 		'App\\Models\\ServiceList': {
 			number: 'Numer',

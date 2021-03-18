@@ -107,7 +107,7 @@ const SortTable = (props) => {
 								onClick={() => requestSort(5)}
 							>
 								<label htmlFor="end_date">
-									Data wypelnienia
+									Data wypełnienia
 								</label>
             </TableSortLabel>
 						</TableCell>

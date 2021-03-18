@@ -29,7 +29,7 @@ const Trainings = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(-1);
 	const classes = useStyles();
-	const breadcrumbs = [{ active: true, label: 'Uslugi', href: '/service_list' }, { active: false, label: 'Warsztaty/szkolenia' }];
+	const breadcrumbs = [{ active: true, label: 'Usługi', href: '/service_list' }, { active: false, label: 'Szkolenia' }];
 	const [progressStatus, setProgressStatus] = useState(false);
 	const { addToast } = useToasts()
 
@@ -120,7 +120,7 @@ const Trainings = props => {
 		}
 
 		EXCEL.outPut({
-			header: ['ID', 'Nazwa', 'Zaipisani uczestnicy', 'Zaakceptowane', 'Data rozpoczecia'],
+			header: ['ID', 'Nazwa', 'Zaipisani uczestnicy', 'Zaakceptowane', 'Data rozpoczęcia'],
 			data: export_data,
 			name: 'download'
 		})

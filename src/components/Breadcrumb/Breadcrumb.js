@@ -28,11 +28,11 @@ const Breadcrumb = props => {
       {
         list && list.map((item, index) => (
           item.active ? 
-            <Link color="inherit" href={item.href} className={classes.link}>
+            <Link color="inherit" href={item.href} className={classes.link} title={item.title}>
               {item.label}
             </Link>
           :
-          <Typography color="textPrimary" className={classes.typo}>{item.label}</Typography>
+          <Typography color="textPrimary" className={classes.typo} title={item.title}>{item.label}</Typography>
         ))
       }
     </Breadcrumbs>

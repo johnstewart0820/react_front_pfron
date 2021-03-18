@@ -67,7 +67,7 @@ const ThirdStepView = (props) => {
               </Grid>
             
               <Grid item xs={12}>
-                <div className={classes.label_content}>Uwagi ogolne</div>
+                <div className={classes.label_content}>Uwagi ogólne</div>
                 <ReactQuill 
                   onChange={setGeneralRemark}
                   value={general_remark}

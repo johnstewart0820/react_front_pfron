@@ -28,22 +28,22 @@ const Footer = props => {
     <div className={classes.logoBlock}>
       <Grid container spacing={4} className={classes.logoContainer}>
         <Grid item xs={2}>
-          <img className={classes.logo} src="/images/logos/footer_FE.png" alt="footer_FE"/>
+          <img className={classes.logo} src="/images/logos/footer_FE.png" alt="Logo Fundusze Europejskie Wiedza Edukacja Rozwój"/>
         </Grid>
         <Grid item xs={2}>
-          <img className={classes.logo} src="/images/logos/footer_RP.png" alt="footer_RP"/>
+          <img className={classes.logo} src="/images/logos/footer_RP.png" alt="Logo Rzeczpospolita Polska"/>
         </Grid>
         <Grid item xs={2}>
-          <img className={classes.logo} src="/images/logos/footer_pfron.png" alt="footer_PFRON" />
+          <img className={classes.logo} src="/images/logos/footer_pfron.png" alt="Logo Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych" />
         </Grid>
         <Grid item xs={2}>
-          <img className={classes.logo} src="/images/logos/footer_zus.png" alt="footer_ZUS" />
+          <img className={classes.logo} src="/images/logos/footer_zus.png" alt="Logo Zakład Ubezpieczeń Społecznych" />
         </Grid>
         <Grid item xs={2}>
-          <img className={classes.logo} src="/images/logos/footer_ciop.png" alt="footer_CIOP" />
+          <img className={classes.logo} src="/images/logos/footer_ciop.png" alt="Logo Centralny Instytut Ochrony Pracy" />
         </Grid>
         <Grid item xs={2} className={classes.alignRight}>
-          <img className={classes.logo} src="/images/logos/footer_UE.png" alt="footer_UE" />
+          <img className={classes.logo} src="/images/logos/footer_UE.png" alt="Logo Unia Europejska Europejski Fundusz Społeczny" />
         </Grid>
       </Grid>
     </div>

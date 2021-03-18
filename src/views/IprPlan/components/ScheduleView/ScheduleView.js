@@ -61,13 +61,14 @@ const ScheduleView = (props) => {
 			for (let i = 0; i < 7; i++) {
 				let default_start_date = JSON.parse(JSON.stringify(_start_date));
 				let date = moment(default_start_date).add(i, 'days');
-				if (index === 0 && parseInt(week) === 1 && date > moment(scheduleDate)) {
+				if (index === 0 && parseInt(week) === 1 && date >= moment(scheduleDate)) {
 					index = i;
 				}
 				_arr.push({ name: `${date.get('date')}.${date.get('month') + 1}.${date.get('year')}`, date: date, id: i });
 			}
 			setDateList(_arr);
 			handleGetWeekStatus(weeks[week - 1]);
+			handleGetScheduleData(_arr[index].date);
 			setSelectedItem(index);
 		}
 	}, [week]);
@@ -91,14 +92,14 @@ const ScheduleView = (props) => {
 	const getDay = (moment_date, days) => {
 		let default_date = moment().set({ 'year': 2020, 'month': 0, 'date': 6 });
 		let diff = moment_date.diff(default_date, 'days');
-		let diff_final = Math.floor(diff / 7) * 7 + days;
+		let diff_final = Math.floor((diff + 1) / 7) * 7 + days;
 		return default_date.add(diff_final, 'days');
 	}
 
 	const handleChangeScheduleFrom = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		if (!_schedule_data[index_module].service_list[index_service].schedule) {
-			_schedule_data[index_module].service_list[index_service].schedule = {}
+			_schedule_data[index_module].service_list[index_service].schedule = {start_time: '00:00', end_time: '00:00'}
 		}
 		_schedule_data[index_module].service_list[index_service].schedule.start_time = value;
 		let end_time = _schedule_data[index_module].service_list[index_service].schedule.end_time;
@@ -114,7 +115,7 @@ const ScheduleView = (props) => {
 	const handleChangeScheduleTo = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		if (!_schedule_data[index_module].service_list[index_service].schedule) {
-			_schedule_data[index_module].service_list[index_service].schedule = {}
+			_schedule_data[index_module].service_list[index_service].schedule = {start_time: '00:00', end_time: '00:00'}
 		}
 		_schedule_data[index_module].service_list[index_service].schedule.end_time = value;
 		let start_time = _schedule_data[index_module].service_list[index_service].schedule.start_time;
@@ -130,7 +131,7 @@ const ScheduleView = (props) => {
 	const handleChangeScheduleBreak = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		if (!_schedule_data[index_module].service_list[index_service].schedule) {
-			_schedule_data[index_module].service_list[index_service].schedule = {}
+			_schedule_data[index_module].service_list[index_service].schedule = {start_time: '00:00', end_time: '00:00'}
 		}
 		_schedule_data[index_module].service_list[index_service].schedule.break_time = value;
 		setScheduleData(_schedule_data);
@@ -142,7 +143,7 @@ const ScheduleView = (props) => {
 	const handleChangeTotalAmount = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		if (!_schedule_data[index_module].service_list[index_service].schedule) {
-			_schedule_data[index_module].service_list[index_service].schedule = {}
+			_schedule_data[index_module].service_list[index_service].schedule = {start_time: '00:00', end_time: '00:00'}
 		}
 		_schedule_data[index_module].service_list[index_service].schedule.total_amount = value;
 		let total_unit_amount = 0;
@@ -287,7 +288,7 @@ const ScheduleView = (props) => {
 												</Grid>
 											</Grid>
 											<Grid container spacing={0} style={{display: 'flex', justifyContent:'flex-end', padding: '15px'}}>
-												<Grid item xs={3}>
+												<Grid item xs={3} className={classes.sum_title}>
 													<div>
 														łącznie (w danym module)
 													</div>

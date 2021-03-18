@@ -24,7 +24,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0,0,0,0.06);
     color: black;
     bottom: 0px;
 	cursor: pointer
@@ -34,5 +33,5 @@
     box-shadow: initial;
 }
 .react-tabs__tab--disabled {
-	background-color: darkgray;
+	background-color: darkgray !important;
 }

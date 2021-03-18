@@ -6,7 +6,10 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center'
 	},
 	formBlock: {
-		marginTop: theme.spacing(1.5)
+		marginTop: theme.spacing(1.5),
+		'& .react-tabs__tab-panel--selected': {
+			boxShadow: '0.055rem 0.055rem 1.11rem rgb(20 20 20 / 27%)'
+		}
 	},
 	form: {
 		border: theme.palette.card_border,

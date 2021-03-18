@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(3),
 		fontFamily: 'roboto',
 		color: theme.palette.text.primary,
-		marginTop: theme.spacing(0)
+		marginTop: theme.spacing(0),
 	},
 	form_title: {
 		fontWeight: '500'
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2)
 	},
 	btnSave: {
-height: '100%',
+		height: '100%',
 		'& .MuiButton-label': {
 			textTransform: 'none',
 			fontSize: '0.8750em',

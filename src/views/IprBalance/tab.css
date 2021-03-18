@@ -13,7 +13,7 @@
 .react-tabs__tab--selected {
     border-radius: 0px;
     border: none;
-    background-color: transparent !important;
+		background-color: white !important;
 }
 .react-tabs__tab {
     font-weight: 500;
@@ -31,5 +31,5 @@
 .react-tabs__tab-panel--selected {
     background-color: transparent;
     min-height: 50px;
-    box-shadow: 0.055rem 0.055rem 1.11rem rgba(20, 20, 20, 0.27);
+    
 }

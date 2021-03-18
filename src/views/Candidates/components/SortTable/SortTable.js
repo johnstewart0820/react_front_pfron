@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import SpeakerNotesOutlinedIcon from '@material-ui/icons/SpeakerNotesOutlined';
 import { SingleSelect } from 'components';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
@@ -205,7 +205,7 @@ const SortTable = (props) => {
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
                   <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => goCandidateStep(item.id, item.stage)}>
-                    <InfoOutlinedIcon className={classes.icon} />
+                    <SpeakerNotesOutlinedIcon className={classes.icon} />
                   </IconButton>
                   <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                     <DeleteOutlineOutlinedIcon className={classes.icon} />

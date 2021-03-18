@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(3),
       fontFamily: 'roboto',
       color: theme.palette.text.primary,
-      marginTop: theme.spacing(0)
+      marginTop: theme.spacing(0),
+			boxShadow: '0.055rem 0.055rem 1.11rem rgba(20, 20, 20, 0.27)'
     },
     form_title: {
       fontWeight: '500'

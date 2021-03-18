@@ -41,7 +41,7 @@ const TrainingsAdd = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					setParticipantList(response.data.participants_edit);
+					setParticipantList(response.data.participant);
 					setRehabitationCenterList(response.data.rehabitation_center);
 					setServiceList(response.data.service_list);
 				}
@@ -264,6 +264,22 @@ const TrainingsAdd = props => {
 		})
 	}
 
+	const getRemainParticipantNumber = () => {
+		let _arr = [];
+		participantList.map((item, index) => {
+			let count = 0;
+			for(let i = 0; i < training.participant.length; i ++) {
+				if (parseInt(item.id) === parseInt(training.participant[i].id)) {
+					count ++;
+				}
+			}
+			if (count === 0) {
+				_arr.push(item);
+			}
+		})
+		return _arr;
+	}
+
 	const checkError = () => {
 		let result = (training.name.length === 0) ||
 			(training.number.length === 0) ||
@@ -391,8 +407,9 @@ const TrainingsAdd = props => {
 														className={classes.name_select_box}
 														id="participant"
 														onChange={(event, value) => handleChangeParticipant(value ? value : [], index)}
-														options={participantList}
-														getOptionLabel={(option) => participantList && option && (option.participant_name)}
+														options={getRemainParticipantNumber()}
+														value={ item.name ? item : '' }
+														getOptionLabel={(option) => participantList && option && (`${option.name} ${option.surname} (${option.participant_number}) `)}
 														renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 													/>
 												</Grid>

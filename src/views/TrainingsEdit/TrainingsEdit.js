@@ -34,7 +34,6 @@ const TrainingsEdit = props => {
 	const [orkTeamList, setOrkTeamList] = useState([]);
 	const [serviceList, setServiceList] = useState([]);
 	const [participantList, setParticipantList] = useState([]);
-	const [participantBaseList, setParticipantBaseList] = useState([]);
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({ participant: [true] });
 	const [error_class, setErrorClass] = useState([{}]);
@@ -46,8 +45,7 @@ const TrainingsEdit = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					setParticipantBaseList(response.data.participant);
-					setParticipantList(response.data.participants_edit);
+					setParticipantList(response.data.participant);
 					setRehabitationCenterList(response.data.rehabitation_center);
 					setServiceList(response.data.service_list);
 				}
@@ -64,9 +62,9 @@ const TrainingsEdit = props => {
 					let list_participant = [];
 					let _error = {participant: []};
 					arr_participant.map((item, index) => {
-						for (let i = 0; i < participantBaseList.length; i++) {
-							if (parseInt(item) === parseInt(participantBaseList[i].id))
-								list_participant.push(participantBaseList[i]);
+						for (let i = 0; i < participantList.length; i++) {
+							if (parseInt(item) === parseInt(participantList[i].id))
+								list_participant.push(participantList[i]);
 						}
 						_error.participant.push({});
 					})
@@ -93,6 +91,22 @@ const TrainingsEdit = props => {
 				}
 			})
 	}, [serviceList]);
+
+	const getRemainParticipantNumber = () => {
+		let _arr = [];
+		participantList.map((item, index) => {
+				let count = 0;
+				for(let i = 0; i < training.participant.length; i ++) {
+						if (parseInt(item.id) === parseInt(training.participant[i].id)) {
+								count ++;
+						}
+				}
+				if (count === 0) {
+						_arr.push(item);
+				}
+		})
+		return _arr;
+	}
 
 	const handleError = () => {
 		let _error = { participant: [] }
@@ -461,9 +475,9 @@ const TrainingsEdit = props => {
 													<Autocomplete
 														className={classes.name_select_box}
 														onChange={(event, value) => handleChangeParticipant(value ? value : [], index)}
-														options={participantList}
-														value={item}
-														getOptionLabel={(option) => participantList && option && (option.name)}
+														options={getRemainParticipantNumber()}
+														value={ item.name ? item : '' }
+														getOptionLabel={(option) => participantList && option && (`${option.name} ${option.surname} (${option.participant_number}) `)}
 														renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 													/>
 												</Grid>

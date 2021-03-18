@@ -34,7 +34,7 @@ const DeleteModal = (props) => {
         <Card className={classes.paper}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              Czy na pewno chcesz usunąć ten punkt kwalifikacji?
+              Czy na pewno chcesz usunąć ten szkolenia?
             </Grid>
             <Grid item xs={6}>
               <Button variant="contained" color="secondary" className={classes.btnSave} onClick={() => {handleDelete(selectedIndex); handleClose();}}>

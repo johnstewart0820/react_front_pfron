@@ -10,7 +10,7 @@ import { DeleteModal } from './components';
 
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 
 import dashboard from '../../apis/dashboard';
 const Cockpit = props => {
@@ -146,8 +146,8 @@ const Cockpit = props => {
 												<IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
 													<EditOutlinedIcon className={classes.icon} />
 												</IconButton>
-												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleView(item.id)}>
-													<InfoOutlinedIcon className={classes.icon} />
+												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/profile/${item.id}`)}>
+													<FindInPageOutlinedIcon className={classes.icon} />
 												</IconButton>
 												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleSelectedItem(item.id)}>
 													<DeleteOutlineOutlinedIcon className={classes.icon} />
@@ -187,8 +187,8 @@ const Cockpit = props => {
 												<IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
 													<EditOutlinedIcon className={classes.icon} />
 												</IconButton>
-												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleView(item.id_candidate)}>
-													<InfoOutlinedIcon className={classes.icon} />
+												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/participants/profile/${item.id_candidate}`)}>
+													<FindInPageOutlinedIcon className={classes.icon} />
 												</IconButton>
 												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleSelectedItem(item.id_candidate)}>
 													<DeleteOutlineOutlinedIcon className={classes.icon} />

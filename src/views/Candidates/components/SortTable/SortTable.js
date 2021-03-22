@@ -40,9 +40,16 @@ const SortTable = (props) => {
     setSearchDateModified(_temp);
   }
 
+	const getZeroValue = (value) => {
+		if (value < 10) 
+			return '0' + value;
+		return value;
+	}
+
   const getDateTime = (value) => {
     let _date = new Date(value);
-    return _date.getFullYear() + '.' + (_date.getMonth() + 1) + '.' + (_date.getDate()) + ' ' + _date.getHours() + ':' + _date.getMinutes();
+		
+    return _date.getFullYear() + '.' + getZeroValue(_date.getMonth() + 1) + '.' + getZeroValue(_date.getDate()) + ' ' + getZeroValue(_date.getHours()) + ':' + getZeroValue(_date.getMinutes());
   }
 
   const getQualificationPointName = (qualification_point_id) => {

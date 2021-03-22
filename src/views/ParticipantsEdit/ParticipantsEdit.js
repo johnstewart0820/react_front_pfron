@@ -899,7 +899,7 @@ const ParticipantsEdit = props => {
 								<Grid item xs={9}>
 									<div className={classes.input_box_label} htmlFor="type">Telefon komórkowy</div>
 									<PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputStyle={{ width: '100%', borderRadius: '0px' }} />
-									<div className={classes.error_label} style={{ display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
+									<div className={classes.error_label} style={{ display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: (xx)(xxx-xxx-xxx)).</div>
 									<div className={classes.input_box_label} htmlFor="type">Telefon domowy</div>
 									<div className={classes.input_box_label} ><label htmlFor="home_phone">Telefon domowy</label></div>
 									<MaskedInput
@@ -915,7 +915,7 @@ const ParticipantsEdit = props => {
 									<div className={classes.error_label} style={{ display: error.email ? 'block' : 'none' }}>Wpisz poprawny adres e-mail.</div>
 									<div className={classes.input_box_label} htmlFor="type">Numer kontaktowy do bliskiej osoby - Telefon komórkowy</div>
 									<PhoneInput country="pl" value={family_mobile_phone} onChange={handleChangeFamilyMobilePhone} inputStyle={{ width: '100%', borderRadius: '0px' }} />
-									<div className={classes.error_label} style={{ display: error.family_mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
+									<div className={classes.error_label} style={{ display: error.family_mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: (xx)(xxx-xxx-xxx)).</div>
 									<div className={classes.input_box_label}><label  htmlFor="family_home_phone">Numer kontaktowy do bliskiej osoby - Telefon domowy</label></div>
 									<MaskedInput
 										className={clsx({ [classes.input_box]: true, [classes.error]: error.family_home_phone })}

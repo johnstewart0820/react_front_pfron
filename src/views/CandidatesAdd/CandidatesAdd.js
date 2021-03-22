@@ -769,7 +769,7 @@ const CandidatesAdd = props => {
 								<Grid item xs={9}>
 									<div className={classes.input_box_label}><label htmlFor="mobile_phone">Telefon komórkowy</label></div>
 									<PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputClass={classes.phone_input} id="mobile_phone" dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle}/>
-									<div className={classes.error_label} style={{ display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
+									<div className={classes.error_label} style={{ display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: (xx)(xxx-xxx-xxx)).</div>
 									<div className={classes.input_box_label} ><label htmlFor="home_phone">Telefon domowy</label></div>
 									<MaskedInput
 										className={clsx({ [classes.input_box]: true, [classes.error]: error.home_phone })}
@@ -784,7 +784,7 @@ const CandidatesAdd = props => {
 									<div className={classes.error_label} style={{ display: error.email ? 'block' : 'none' }}>Wpisz poprawny adres e-mail.</div>
 									<div className={classes.input_box_label} htmlFor="type">Numer kontaktowy do bliskiej osoby - Telefon komórkowy</div>
 									<PhoneInput country="pl" value={family_mobile_phone} onChange={handleChangeFamilyMobilePhone} inputClass={classes.phone_input} dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle}/>
-									<div className={classes.error_label} style={{ display: error.family_mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: xx-xxx-xx-xx).</div>
+									<div className={classes.error_label} style={{ display: error.family_mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: (xx)(xxx-xxx-xxx)).</div>
 									<div className={classes.input_box_label}><label  htmlFor="family_home_phone">Numer kontaktowy do bliskiej osoby - Telefon domowy</label></div>
 									<MaskedInput
 										className={clsx({ [classes.input_box]: true, [classes.error]: error.family_home_phone })}

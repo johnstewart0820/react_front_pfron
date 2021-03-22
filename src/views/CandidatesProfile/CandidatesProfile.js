@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import useStyles from './style';
 import {
 	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
@@ -17,6 +17,7 @@ import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { DeleteModal } from '../Candidates/components';
+import domtopdf from 'dom-to-pdf';
 
 const CandidatesProfile = props => {
 	const { children } = props;
@@ -95,9 +96,15 @@ const CandidatesProfile = props => {
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 	const [openModal, setOpenModal] = useState(false);
+  const chart = useRef(null);
 
 	const handleExportPdf = () => {
-
+		const dom = chart.current;
+    var options = {
+      filename: 'download.pdf'
+    };
+    domtopdf(dom, options, function() {
+    });
 	}
 
 	const handleHistory = () => {
@@ -284,7 +291,7 @@ const CandidatesProfile = props => {
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item xs={9}>
-						<Card className={classes.form}>
+						<Card className={classes.form} ref={chart}>
 							<Grid container spacing={3}>
 								<Grid item xs={3} className={classes.form_title}>
 									Dane kandydata

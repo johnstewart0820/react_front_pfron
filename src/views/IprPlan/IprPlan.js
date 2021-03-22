@@ -158,6 +158,17 @@ const IprPlan = props => {
 		history.push('/ipr_list');
 	}
 
+	const checkScheduleData = (scheduleData) => {
+		for (let i = 0; i < scheduleData.length; i ++) {
+			let service_list = scheduleData[i].service_list;
+			for (let j = 0; j < service_list.length; j ++) {
+				if (service_list[j].schedule.error === true || service_list[j].error_amount === true)
+					return false;
+			}
+		}
+		return true;
+	}
+
 	const handleSave = () => {
 		if (selectedItem == 0) {
 			setProgressStatus(true);
@@ -174,6 +185,10 @@ const IprPlan = props => {
 					}
 				})
 		} else {
+			if (!checkScheduleData(scheduleData)) {
+				addToast('Proszę wypełnić poprawne pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+				return;
+			}
 			setProgressStatus(true);
 			let date = dateList[selectedScheduleItem].date;
 			const format2 = "YYYY-MM-DD";

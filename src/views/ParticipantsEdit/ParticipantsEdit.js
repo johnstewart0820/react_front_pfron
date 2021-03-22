@@ -106,7 +106,7 @@ const ParticipantsEdit = props => {
 	const [openModal, setOpenModal] = useState(false);
 
 	const handleHistory = () => {
-
+		history.push(`/candidates/history/${id}`)
 	}
 
 	const handlePreview = () => {
@@ -237,7 +237,15 @@ const ParticipantsEdit = props => {
 	}, [employed_type_list]);
 
 	const handleGotoInformation = () => {
-		// history.push(`/candidates/info/step${stage}/${id}`)
+		history.push(`/candidates/info/step${stage}/${id}`)
+	}
+
+	const handleAddIpr = () => {
+		history.push('/ipr_list/create');
+	}
+
+	const handleIprList = () => {
+		history.push(`/ipr_list`);	
 	}
 
 	const handleError = () => {
@@ -1309,12 +1317,12 @@ const ParticipantsEdit = props => {
 											Indywidualny Program Rehabilitacji
                   </div>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
+											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleAddIpr}>
 												Dodaj IPR
                     </Button>
 										</Grid>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleGotoInformation}>
+											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleIprList}>
 												Zobacz listę IPR uczestnika
                     </Button>
 										</Grid>

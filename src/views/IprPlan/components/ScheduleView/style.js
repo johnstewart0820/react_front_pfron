@@ -135,9 +135,13 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.text.primary,
 		backgroundColor: theme.palette.black_white,
 		border: `1px solid ${theme.palette.text.primary}`,
-		padding: '10px 20px',
+		padding: '10px 5px',
 		width: '100%',
-		fontSize: '0.8750em'
+		fontSize: '0.8750em',
+		textAlign: 'center'
+	},
+	input_error: {
+		backgroundColor: 'pink'
 	},
 	name_select_box: {
 		'& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {

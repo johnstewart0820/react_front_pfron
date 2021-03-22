@@ -112,6 +112,7 @@ const useStyles = makeStyles((theme) => ({
 		margin: theme.spacing(2.5, 0,)
 	},
 	top_label: {
+		marginTop: theme.spacing(1),
 		marginBottom: theme.spacing(1),
 		fontSize: '0.8750em',
 	},

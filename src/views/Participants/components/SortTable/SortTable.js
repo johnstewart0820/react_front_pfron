@@ -46,11 +46,11 @@ const SortTable = (props) => {
   }
 
   const createIpr = (id) => {
-
+		history.push(`/ipr_list/create`);		
   }
 
   const showIprList = (id) => {
-
+		history.push(`/ipr_list`);		
   }
 
 	const handleClick = (id) => {

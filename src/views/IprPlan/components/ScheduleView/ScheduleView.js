@@ -11,6 +11,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './tab.css';
 import MaskedInput from 'react-text-mask';
 import ipr from '../../../../apis/ipr';
+import clsx from 'clsx';
 
 const ScheduleView = (props) => {
 	const classes = useStyles();
@@ -61,7 +62,7 @@ const ScheduleView = (props) => {
 			for (let i = 0; i < 7; i++) {
 				let default_start_date = JSON.parse(JSON.stringify(_start_date));
 				let date = moment(default_start_date).add(i, 'days');
-				if (index === 0 && parseInt(week) === 1 && date >= moment(scheduleDate)) {
+				if (index === 0 && parseInt(week) === 1 && date.diff(moment(scheduleDate), 'days') == 0) {
 					index = i;
 				}
 				_arr.push({ name: `${date.get('date')}.${date.get('month') + 1}.${date.get('year')}`, date: date, id: i });
@@ -110,6 +111,7 @@ const ScheduleView = (props) => {
 		total_time = parseInt(value.split(':')[0]) * 60 + parseInt(value.split(':')[1]) - parseInt(end_time.split(':')[0])*60 - parseInt(end_time.split(':')[1]);
 		_schedule_data[index_module].service_list[index_service].schedule.total_time = total_time * -1 / 60;
 		setScheduleData(_schedule_data);
+		checkOverlap(_schedule_data);
 	}
 
 	const handleChangeScheduleTo = (value, index_module, index_service) => {
@@ -126,7 +128,39 @@ const ScheduleView = (props) => {
 		total_time = parseInt(start_time.split(':')[0]) * 60 + parseInt(start_time.split(':')[1]) - parseInt(value.split(':')[0])*60 - parseInt(value.split(':')[1]);
 		_schedule_data[index_module].service_list[index_service].schedule.total_time = total_time * -1 / 60;
 		setScheduleData(_schedule_data);
+		checkOverlap(_schedule_data);
 	}
+
+	const checkOverlap = (_schedule_data) => {
+		// let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
+		let _arr = [];
+		for (let i = 0; i < _schedule_data.length; i ++) {
+			for (let j = 0; j < _schedule_data[i].service_list.length; j ++) {
+				if (!_schedule_data[i].service_list[j].schedule)
+					continue;
+				_arr.push({index_module: i, index_service: j, start_time: _schedule_data[i].service_list[j].schedule.start_time, end_time: _schedule_data[i].service_list[j].schedule.end_time, check: true});
+			}
+		}
+		_arr.sort((item1, item2) => {
+			if (item1.start_time < item2.start_time)
+				return -1;
+			return 1;
+		});
+		for (let i = 0; i < _arr.length - 1; i++) {
+			const currentEndTime = _arr[i].end_time;
+			const nextStartTime = _arr[i + 1].start_time;
+			let index_module = _arr[i].index_module;
+			let index_service = _arr[i].index_service;
+			if (currentEndTime > nextStartTime) {
+				_arr[i].check = false;
+				_schedule_data[index_module].service_list[index_service].schedule.error = true;
+			} else {
+				_arr[i].check = true;
+				_schedule_data[index_module].service_list[index_service].schedule.error = false;
+			}
+		}
+		setScheduleData(_schedule_data);
+	};
 
 	const handleChangeScheduleBreak = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
@@ -151,6 +185,14 @@ const ScheduleView = (props) => {
 				total_unit_amount += parseInt(_schedule_data[index_module].service_list[i].schedule ? _schedule_data[index_module].service_list[i].schedule.total_amount : 0);
 		}
 		_schedule_data[index_module].total_unit_amount = total_unit_amount;
+		if (_schedule_data[index_module].service_list[index_service].amount === null) {
+			_schedule_data[index_module].service_list[index_service].amount = 0;
+		}
+
+		if (_schedule_data[index_module].service_list[index_service].amount !== undefined && _schedule_data[index_module].service_list[index_service].current_amount + parseInt(value) > parseInt(_schedule_data[index_module].service_list[index_service].amount))
+			_schedule_data[index_module].service_list[index_service].error_amount = true;
+		else
+			_schedule_data[index_module].service_list[index_service].error_amount = false;
 		setScheduleData(_schedule_data);
 	}
 	
@@ -242,7 +284,7 @@ const ScheduleView = (props) => {
 																	<Grid container spacing={2}>
 																		<Grid item xs>
 																			<MaskedInput
-																				className={classes.input_box}
+																				className={clsx({[classes.input_box] : true, [classes.input_error] : scheduleData[index_module].service_list[index_service].schedule && scheduleData[index_module].service_list[index_service].schedule.error === true})}
 																				mask={[/\d/, /\d/, ':', /\d/, /\d/]}
 																				value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.start_time : '00:00' }
 																				defaultValue='00:00'
@@ -251,7 +293,7 @@ const ScheduleView = (props) => {
 																		</Grid>
 																		<Grid item xs>
 																			<MaskedInput
-																				className={classes.input_box}
+																				className={clsx({[classes.input_box] : true, [classes.input_error] : scheduleData[index_module].service_list[index_service].schedule && scheduleData[index_module].service_list[index_service].schedule.error === true})}
 																				mask={[/\d/, /\d/, ':', /\d/, /\d/]}
 																				defaultValue='00:00'
 																				value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.end_time : '00:00'}
@@ -273,7 +315,8 @@ const ScheduleView = (props) => {
 																		/>
 																		</Grid>
 																		<Grid item xs>
-																			<input className={classes.input_box} type="name" 
+																			<input className={clsx({[classes.input_box] : true, [classes.input_error] : scheduleData[index_module].service_list[index_service] && scheduleData[index_module].service_list[index_service].error_amount === true})} 
+																			type="name" 
 																			value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.total_amount : ''} name="name" 
 																			onChange={
 																				(e) => handleChangeTotalAmount(e.target.value, index_module, index_service)

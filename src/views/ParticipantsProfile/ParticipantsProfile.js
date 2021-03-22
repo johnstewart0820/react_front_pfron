@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import useStyles from './style';
 import {
 	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
@@ -21,10 +21,12 @@ import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { DeleteModal } from '../Candidates/components';
 import MaskedInput from 'react-text-mask';
+import domtopdf from 'dom-to-pdf';
 
 const ParticipantsProfile = props => {
 	const { children } = props;
 	const id = props.match.params.id;
+	const chart = useRef(null);
 	const { history } = props;
 	const classes = useStyles();
 	const { addToast } = useToasts()
@@ -106,11 +108,15 @@ const ParticipantsProfile = props => {
 	const [openModal, setOpenModal] = useState(false);
 
 	const handleExportPdf = () => {
-
+		const dom = chart.current;
+    var options = {
+      filename: 'download.pdf'
+    };
+    domtopdf(dom, options, function() {
+    });
 	}
-
 	const handleHistory = () => {
-
+		history.push(`/candidates/history/${id}`)
 	}
 
 	const handleDelete = () => {
@@ -237,8 +243,17 @@ const ParticipantsProfile = props => {
 	}, [employed_type_list]);
 
 	const handleGotoInformation = () => {
-		// history.push(`/candidates/info/step${stage}/${id}`)
+		history.push(`/candidates/info/step${stage}/${id}`)
 	}
+
+	const handleAddIpr = () => {
+		history.push('/ipr_list/create');
+	}
+
+	const handleIprList = () => {
+		history.push(`/ipr_list`);	
+	}
+
 	const handleBack = () => {
 		history.push('/participants');
 	}
@@ -303,7 +318,7 @@ const ParticipantsProfile = props => {
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item xs={9}>
-						<Card className={classes.form}>
+						<Card className={classes.form} ref={chart}>
 							<Grid container spacing={3}>
 								<Grid item xs={3} className={classes.form_title}>
 									Dane uczestnika
@@ -576,12 +591,12 @@ const ParticipantsProfile = props => {
 											Indywidualny Program Rehabilitacji
                   </div>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
+											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleAddIpr}>
 												Dodaj IPR
                     </Button>
 										</Grid>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleGotoInformation}>
+											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleIprList}>
 												Zobacz listę IPR uczestnika
                     </Button>
 										</Grid>

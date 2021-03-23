@@ -10,6 +10,7 @@ import {
   CandidatesAdd as CandidatesAddView,
   CandidatesEdit as CandidatesEditView,
   CandidatesProfile as CandidatesProfileView,
+	CandidatesInfoPreview as CandidatesInfoPreviewView,
 	CandidatesHistory as CandidatesHistoryView,
   CandidatesFirstStep as CandidatesFirstStepView,
   CandidatesSecondStep as CandidatesSecondStepView,
@@ -94,6 +95,13 @@ const Routes = (props) => {
         layout={MainLayout}
         title='Dane kandydata'
         path="/candidates/profile/:id"
+      />
+			<RouteWithLayout
+        component={CandidatesInfoPreviewView}
+        exact
+        layout={MainLayout}
+        title='Karta informacyjna kandydata'
+        path="/candidates/preview_info/:id"
       />
 			<RouteWithLayout
         component={CandidatesHistoryView}

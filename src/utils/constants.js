@@ -20,6 +20,7 @@ class constants {
 			'/candidates/create',
 			'/candidates/edit/*',
 			'/candidates/profile/*',
+			'/candidates/preview_info/*',
 			'/candidates/history/*',
 			'/candidates/info/step1/*',
 			'/candidates/info/step2/*',

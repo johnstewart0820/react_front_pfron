@@ -4,6 +4,7 @@ export { default as Candidates } from './Candidates';
 export { default as CandidatesEdit } from './CandidatesEdit';
 export { default as CandidatesAdd } from './CandidatesAdd';
 export { default as CandidatesProfile } from './CandidatesProfile';
+export { default as CandidatesInfoPreview } from './CandidatesInfoPreview';
 export { default as CandidatesHistory } from './CandidatesHistory';
 
 export { CandidatesFirstStep as CandidatesFirstStep } from './CandidatesInfo';

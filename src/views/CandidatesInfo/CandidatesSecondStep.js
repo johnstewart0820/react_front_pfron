@@ -57,7 +57,7 @@ const CandidatesSecondStep = props => {
   }
 
   const handlePreview = () => {
-		history.push(`/candidates/profile/${id}`);
+		history.push(`/candidates/preview_info/${id}`);
   }
 
   const handleDelete = () => {

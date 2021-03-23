@@ -127,10 +127,10 @@ const SortTable = (props) => {
               <TableCell>{item.email}</TableCell>
               <TableCell>{getActivateStatusName(item.activate_status)}</TableCell>
               <TableCell>
-                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/users/edit/${item.id}`)}>
+                <IconButton  aria-label={`Edytuj użytkownik systemu ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/users/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>
                 </IconButton>
-                <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+                <IconButton variant="outlined" aria-label={`Usuń użytkownik systemu ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                   <DeleteOutlineOutlinedIcon className={classes.icon}/>
                 </IconButton>
               </TableCell>

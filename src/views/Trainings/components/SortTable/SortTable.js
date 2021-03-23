@@ -157,10 +157,10 @@ const SortTable = (props) => {
 								<TableCell>{trainingStatusList && trainingStatusList.length > 0 && trainingStatusList[item.training_status - 1].name}</TableCell>
 								<TableCell>{item.date}</TableCell>
 								<TableCell>
-									<IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/trainings/edit/${item.id}`)}>
+									<IconButton aria-label={`Edytuj szkolenie ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/trainings/edit/${item.id}`)}>
 										<EditOutlinedIcon className={classes.icon} />
 									</IconButton>
-									<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+									<IconButton variant="outlined" aria-label={`Usuń szkolenie ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
 										<DeleteOutlineOutlinedIcon className={classes.icon} />
 									</IconButton>
 								</TableCell>

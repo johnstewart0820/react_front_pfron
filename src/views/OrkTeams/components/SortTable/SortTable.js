@@ -119,10 +119,10 @@ const SortTable = (props) => {
               <TableCell>{getRehabitationCenterStr(item.rehabitation_center)}</TableCell>
               <TableCell>{getSpecializationStr(item.specialization)}</TableCell>
               <TableCell>
-                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/ork_teams/edit/${item.id}`)}>
+                <IconButton  aria-label={`Edytuj osobę ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/ork_teams/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>
                 </IconButton>
-                <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+                <IconButton variant="outlined" aria-label={`Usuń osobę ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                   <DeleteOutlineOutlinedIcon className={classes.icon}/>
                 </IconButton>
               </TableCell>

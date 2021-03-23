@@ -6,7 +6,8 @@ import {
   Link,
   FormControlLabel,
   Checkbox,
-  CircularProgress
+  CircularProgress,
+	Typography
 } from '@material-ui/core';
 import useStyles from './style';
 import auth from '../../apis/auth';
@@ -102,6 +103,7 @@ const SignIn = props => {
             <img src="/images/logos/logo.png" alt="logo" />
           </div>
           <div className={classes.loginForm}>
+						<Typography variant={"h2"} className={classes.title}>Zaloguj się</Typography>
             <div>
               <div className={classes.input_box_label}><label for="email">Login</label></div>
               <input className={classes.input_box} type="email" value={input.email} name="email" id="email" onChange={handleChange} onKeyPress={handleKeyPress} autocomplete='off' />

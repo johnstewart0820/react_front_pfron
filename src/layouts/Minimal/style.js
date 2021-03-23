@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
   content: {
     width: '100%',
   },
+	site_title: {
+		marginBottom: theme.spacing(2),
+		color: theme.palette.color,
+		fontSize: '1.5em'
+	},
   footer: {
     width: '100%',
     justifyContent: 'center',

@@ -367,24 +367,28 @@ const Routes = (props) => {
         component={SignInView}
         exact
         layout={MinimalLayout}
+				title='Zaloguj się'
         path="/login"
       />
       <RouteWithLayout
         component={ForgotView}
         exact
         layout={MinimalLayout}
+				title='Odzyskaj hasło'
         path="/forgotpassword"
       />
       <RouteWithLayout
         component={ResetPasswordView}
         exact
         layout={MinimalLayout}
+				title='Zresetuj hasło'
         path="/reset_password"
       />
       <RouteWithLayout
         component={NotFoundView}
         exact
         layout={MinimalLayout}
+				title='Nie znaleziono'
         path="/not-found"
       />
       <Redirect to="/not-found" />

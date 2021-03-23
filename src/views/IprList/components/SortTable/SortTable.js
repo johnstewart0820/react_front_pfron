@@ -166,12 +166,12 @@ const SortTable = (props) => {
 								<TableCell>{getDate(item.created_at)}</TableCell>
 								<TableCell>{getDate(item.schedule_date)}</TableCell>
 								<TableCell>
-									<IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={
+									<IconButton aria-label={`Edytuj IPR ${item.name}`} component="span" className={classes.iconButton} onClick={
 										() => history.push(parseInt(item.ipr_type) !== 1 ? `/ipr_list/plan/edit/${item.id}` : `/ipr_list/balance/edit/${item.id}`)
 									}>
 										<EditOutlinedIcon className={classes.icon} />
 									</IconButton>
-									<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+									<IconButton variant="outlined" aria-label={`Usuń IPR ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
 										<DeleteOutlineOutlinedIcon className={classes.icon} />
 									</IconButton>
 								</TableCell>

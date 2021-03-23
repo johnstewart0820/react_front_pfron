@@ -486,7 +486,7 @@ const TrainingsEdit = props => {
 														<Grid item xs={1} />
 														:
 														<Grid item xs={1}>
-															<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDeleteParticipant(index)}>
+															<IconButton variant="outlined" aria-label="Usuń uczestnika" component="span" className={classes.iconButton} onClick={() => handleDeleteParticipant(index)}>
 																<DeleteOutlineOutlinedIcon className={classes.icon} />
 															</IconButton>
 														</Grid>
@@ -524,7 +524,7 @@ const TrainingsEdit = props => {
 														<></>
 														:
 														<Grid item xs={1} style={{ marginTop: '35px' }}>
-															<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDeleteClass(index)}>
+															<IconButton variant="outlined" aria-label="Usuń zajęcia" component="span" className={classes.iconButton} onClick={() => handleDeleteClass(index)}>
 																<DeleteOutlineOutlinedIcon className={classes.icon} />
 															</IconButton>
 														</Grid>

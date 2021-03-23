@@ -4,7 +4,7 @@ import { SiteInfoContextConsumer } from "App";
 import { makeStyles, useTheme } from '@material-ui/styles';
 import useStyles from './style';
 import {
-  Grid, Button
+  Grid, Button, Typography
 } from '@material-ui/core';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faFont, faLink, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -88,6 +88,13 @@ const Minimal = props => {
         <Grid item xs={2} className={classes.alignRight}>
           <img className={classes.logo} src="/images/logos/footer_UE.png" alt="Logo Unia Europejska Europejski Fundusz Społeczny" />
         </Grid>
+				<Grid item xs={12}>
+					<Grid container justify="center">
+						<Typography variant={"h1"} className={classes.site_title}>
+							System wspomagający monitoring projektu umożliwiającego podjęcie lub powrót do pracy
+						</Typography>
+					</Grid>
+				</Grid>
         <main className={classes.content}>{children}</main>
         <Grid container spacing={3} className={classes.footer}>
           <Grid item xs={2}>

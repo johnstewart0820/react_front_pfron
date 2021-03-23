@@ -4,14 +4,20 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(7),
+    marginTop: theme.spacing(3),
 		color: theme.palette.text.primary
   },
+
+  title: {
+		marginBottom: theme.spacing(4),
+		color: theme.palette.color,
+		fontSize: '1.4em'
+	},
 
   logoContainer: {
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: theme.spacing(12),
+    marginBottom: theme.spacing(6),
   },
   
   rememberMe: {
@@ -24,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonContainer: {
-    marginTop: theme.spacing(24),
+    marginTop: theme.spacing(17),
   },
   input_box_label: {
     marginTop: theme.spacing(6),

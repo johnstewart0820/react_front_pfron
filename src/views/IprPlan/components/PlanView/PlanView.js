@@ -121,7 +121,7 @@ const PlanView = (props) => {
 										/>
 									</Grid>
 									<Grid item xs={2} style={{display: 'flex', alignItems: 'center'}}>
-										<IconButton color="primary" aria-label="upload picture" component="span" onClick={() => handleDeletePlan(index, index_module)}>
+										<IconButton color="primary" aria-label={`Usuń plan`} component="span" onClick={() => handleDeletePlan(index, index_module)}>
 											<DeleteIcon/>
 										</IconButton>
 									</Grid>

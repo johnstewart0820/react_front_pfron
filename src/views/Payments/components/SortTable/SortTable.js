@@ -89,10 +89,10 @@ const SortTable = (props) => {
               <TableCell>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
               <TableCell>{serviceList && serviceList.length > 0 && serviceList[item.service - 1].name}</TableCell>
               <TableCell>
-                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/payments/edit/${item.id}`)}>
+                <IconButton  aria-label={`Edytuj koszt`} component="span" className={classes.iconButton} onClick={() => history.push(`/payments/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>
                 </IconButton>
-                <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+                <IconButton variant="outlined" aria-label={`Usuń koszt`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                   <DeleteOutlineOutlinedIcon className={classes.icon}/>
                 </IconButton>
               </TableCell>

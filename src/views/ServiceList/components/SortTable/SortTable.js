@@ -118,10 +118,10 @@ const SortTable = (props) => {
               <TableCell>{getModuleName(item.module)}</TableCell>
               <TableCell>{getUnitName(item.unit)}</TableCell>
               <TableCell>
-                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/service_list/edit/${item.id}`)}>
+                <IconButton  aria-label={`Edytuj Usługę ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/service_list/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>
                 </IconButton>
-                <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+                <IconButton variant="outlined" aria-label={`Usuń Usługę ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                   <DeleteOutlineOutlinedIcon className={classes.icon}/>
                 </IconButton>
               </TableCell>

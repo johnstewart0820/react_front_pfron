@@ -114,10 +114,10 @@ const SortTable = (props) => {
               <TableCell>{getQualificationPointName(item.qualification_point)}</TableCell>
               <TableCell>{getSpecialtyName(item.specialty)}</TableCell>
               <TableCell>
-                <IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/specialists/edit/${item.id}`)}>
+                <IconButton  aria-label={`Edytuj specjalistę ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/specialists/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>
                 </IconButton>
-                <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+                <IconButton variant="outlined" aria-label={`Usuń specjalistę ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                   <DeleteOutlineOutlinedIcon className={classes.icon}/>
                 </IconButton>
               </TableCell>

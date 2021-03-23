@@ -208,13 +208,13 @@ const SortTable = (props) => {
 								<TableCell onClick={() => handlePreview(item.id)}>{statusList && statusList.length > 0 && statusList[item.id_status - 1].name}</TableCell>
                 <TableCell onClick={() => handlePreview(item.id)}>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
-                  <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
+                  <IconButton aria-label={`Edytuj kandydata ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => goCandidateStep(item.id, item.stage)}>
+                  <IconButton variant="outlined" aria-label={`Pokaż informacje o kandydacie ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => goCandidateStep(item.id, item.stage)}>
                     <SpeakerNotesOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+                  <IconButton variant="outlined" aria-label={`Usuń kandydata ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
                     <DeleteOutlineOutlinedIcon className={classes.icon} />
                   </IconButton>
                 </TableCell>

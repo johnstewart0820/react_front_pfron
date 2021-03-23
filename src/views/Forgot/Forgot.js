@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import {
   Button,
   Link,
-  CircularProgress
+  CircularProgress,
+	Typography
 } from '@material-ui/core';
 import useStyles from './style';
 import auth from '../../apis/auth';
@@ -75,6 +76,7 @@ const Forgot = props => {
             <img src="/images/logos/logo.png" alt="logo" />
           </div>
           <div className={classes.loginForm}>
+						<Typography className={classes.title} variant={"h2"}>Odzyskaj hasło</Typography>
             <span>Podaj swój adres e-mail, aby odzyskać hasło</span>
             <div>
               <div className={classes.input_box_label}><label htmlFor="emailInput">E-mail</label></div>

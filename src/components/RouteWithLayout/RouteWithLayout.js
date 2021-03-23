@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const RouteWithLayout = props => {
   const { layout: Layout, title, component: Component, ...rest } = props;
+
+	useEffect(() => {
+		document.title = `${title} - PFRON`;
+	}, [title]);
 
   return (
     <Route

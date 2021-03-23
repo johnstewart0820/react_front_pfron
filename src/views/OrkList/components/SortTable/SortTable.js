@@ -65,7 +65,7 @@ const SortTable = (props) => {
 							<TableCell>{item.id}</TableCell>
 							<TableCell>{item.name}</TableCell>
 							<TableCell>
-								<IconButton  aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/ork_list/edit/${item.id}`)}>
+								<IconButton  aria-label={`Edytuj Ośrodków Rehabilitacji ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/ork_list/edit/${item.id}`)}>
 									<EditOutlinedIcon className={classes.icon}/>
 								</IconButton>
 							</TableCell>

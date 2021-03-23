@@ -217,7 +217,7 @@ const SortTable = (props) => {
 								}
 							</TableCell>
 							<TableCell>
-								<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+								<IconButton variant="outlined" aria-label={`Usuń log`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
 									<DeleteOutlineOutlinedIcon className={classes.icon} />
 								</IconButton>
 							</TableCell>

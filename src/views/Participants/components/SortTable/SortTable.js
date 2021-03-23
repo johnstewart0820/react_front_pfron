@@ -191,13 +191,13 @@ const SortTable = (props) => {
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{parseInt(item.participant_status_type) >= 1 ? (participantStatusTypeList && participantStatusTypeList.length > 0 && participantStatusTypeList[item.participant_status_type - 1].name) : ''}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
-                  <IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
+                  <IconButton aria-label={`Edytuj uczestnika ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => showIprList(item.id_candidate)}>
+                  <IconButton variant="outlined" aria-label='Pokaż listę IPR' component="span" className={classes.iconButton} onClick={() => showIprList(item.id_candidate)}>
                     <EventNoteOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => createIpr(item.id_candidate)}>
+                  <IconButton variant="outlined" aria-label='Dodaj listę IPR' component="span" className={classes.iconButton} onClick={() => createIpr(item.id_candidate)}>
                     <NoteAddOutlinedIcon className={classes.icon} />
                   </IconButton>
                 </TableCell>

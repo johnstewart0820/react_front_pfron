@@ -70,7 +70,7 @@ const Cockpit = props => {
         } else {
           if (response.code === 200) {
             addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
-			getList();
+						getList();
           }
           setProgressStatus(false);
         }
@@ -98,19 +98,19 @@ const Cockpit = props => {
 								</Grid>
 								<Grid item xs={1}></Grid>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnFull} onClick={() => history.push(`/candidates`)}>
+									<Button variant="outlined" aria-label="Pokaż listę kandydatów" color="secondary" className={classes.btnFull} onClick={() => history.push(`/candidates`)}>
 										Kandydaci
 									</Button>
 								</Grid>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnFull} onClick={() => history.push(`/participants`)}>
+									<Button variant="outlined" aria-label="Pokaż listę uczestników" color="secondary" className={classes.btnFull} onClick={() => history.push(`/participants`)}>
 										Uczestnicy
 									</Button>
 								</Grid>
 								{
 									!checkAmbassador() ?
 									<Grid item xs={6}>
-										<Button variant="outlined" color="secondary" className={classes.btnFull} onClick={() => history.push(`/ork_list`)}>
+										<Button variant="outlined" color="secondary" aria-label="Pokaż ośrodki rehabilitacyjne" className={classes.btnFull} onClick={() => history.push(`/ork_list`)}>
 											Ośrodki
 										</Button>
 									</Grid>
@@ -118,7 +118,7 @@ const Cockpit = props => {
 									<></>
 								}
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnFull} onClick={() => history.push('/payments')}>
+									<Button variant="outlined" color="secondary" aria-label="Pokaż finanse" className={classes.btnFull} onClick={() => history.push('/payments')}>
 										Finanse
 									</Button>
 								</Grid>
@@ -143,13 +143,13 @@ const Cockpit = props => {
 										</Grid>
 										<Grid item xs={6}>
 											<Grid container justify="flex-end">
-												<IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
+												<IconButton aria-label={`Edytuj kandydata ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
 													<EditOutlinedIcon className={classes.icon} />
 												</IconButton>
-												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/profile/${item.id}`)}>
+												<IconButton aria-label={`Pokaż profil kandydata ${item.name + ' ' + item.surname}`} variant="outlined" component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/profile/${item.id}`)}>
 													<FindInPageOutlinedIcon className={classes.icon} />
 												</IconButton>
-												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleSelectedItem(item.id)}>
+												<IconButton aria-label={`Usuń kandydata ${item.name + ' ' + item.surname}`} variant="outlined" component="span" className={classes.iconButton} onClick={() => handleSelectedItem(item.id)}>
 													<DeleteOutlineOutlinedIcon className={classes.icon} />
 												</IconButton>
 											</Grid>
@@ -159,7 +159,7 @@ const Cockpit = props => {
 							}
 						</div>
 						<div className={classes.table_footer}>
-							<Button variant="outlined" color="secondary" className={classes.btnOutline} onClick={() => history.push(`/candidates`)}>
+							<Button variant="outlined" aria-label="Pokaż listę kandydatów" color="secondary" className={classes.btnOutline} onClick={() => history.push(`/candidates`)}>
 								Zobacz wszystkich
 							</Button>
 						</div>
@@ -184,13 +184,13 @@ const Cockpit = props => {
 										</Grid>
 										<Grid item xs={4}>
 											<Grid container justify="flex-end">
-												<IconButton aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
+												<IconButton aria-label={`Edytuj uczestnik ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
 													<EditOutlinedIcon className={classes.icon} />
 												</IconButton>
-												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => history.push(`/participants/profile/${item.id_candidate}`)}>
+												<IconButton variant="outlined" aria-label={`Pokaż profil uczestnik ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/participants/profile/${item.id_candidate}`)}>
 													<FindInPageOutlinedIcon className={classes.icon} />
 												</IconButton>
-												<IconButton variant="outlined" aria-label="upload picture" component="span" className={classes.iconButton} onClick={() => handleSelectedItem(item.id_candidate)}>
+												<IconButton variant="outlined"aria-label={`Usuń uczestnik ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => handleSelectedItem(item.id_candidate)}>
 													<DeleteOutlineOutlinedIcon className={classes.icon} />
 												</IconButton>
 											</Grid>
@@ -200,7 +200,7 @@ const Cockpit = props => {
 							}
 						</div>
 						<div className={classes.table_footer}>
-							<Button variant="outlined" color="secondary" className={classes.btnOutline} onClick={() => history.push(`/participants`)}>
+							<Button variant="outlined" aria-label="Pokaż listę uczestników" color="secondary" className={classes.btnOutline} onClick={() => history.push(`/participants`)}>
 								Zobacz wszystkich
 							</Button>
 						</div>

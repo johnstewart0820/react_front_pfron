@@ -4,16 +4,21 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(7),
+    marginTop: theme.spacing(3),
 		color: theme.palette.text.primary
   },
 
   logoContainer: {
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: theme.spacing(12),
+    marginBottom: theme.spacing(6),
   },
-  
+  title: {
+		marginBottom: theme.spacing(5),
+		color: theme.palette.color,
+		fontSize: '1.4em'
+	},
+
   rememberMe: {
     marginTop: '30px',
     '& .MuiTypography-body1': {
@@ -24,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonContainer: {
-    marginTop: theme.spacing(12),
+    marginTop: theme.spacing(5),
   },
   input_box_label: {
     marginTop: theme.spacing(3),

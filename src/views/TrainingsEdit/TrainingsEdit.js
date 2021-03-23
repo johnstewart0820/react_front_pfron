@@ -572,8 +572,10 @@ const TrainingsEdit = props => {
 													<input className={classes.input_box} type="name" value={item.total_hour} name="name" onChange={(e) => handleChangeClassTotalHour(e.target.value, index)} />
 												</Grid>
 												<Grid item xs={12}>
+													<div className={classes.input_box_label}><label htmlFor="ork_team">Prowadzący</label></div>
 													<Autocomplete
 														multiple
+														id="ork_team"
 														className={classes.name_select_box}
 														onChange={(event, value) => handleChangeOrkTeam(value ? value : [], index)}
 														options={orkTeamList}

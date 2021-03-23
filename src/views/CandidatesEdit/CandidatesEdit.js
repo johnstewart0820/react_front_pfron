@@ -858,13 +858,13 @@ const CandidatesEdit = props => {
 									</Grid>
 									<div className={classes.input_box_label} htmlFor="type">Województwo</div>
 									<SingleSelect value={voivodeship} handleChange={(value) => handleChangeVoivodeship(value)} list={voivodeshipList} error={error.voivodeship} />
-									<div className={classes.error_label} style={{ display: error.voivodeship ? 'block' : 'none' }}>Wybierz prowincję.</div>
+									<div className={classes.error_label} style={{ display: error.voivodeship ? 'block' : 'none' }}>Wybierz prowincję</div>
 									<div className={classes.input_box_label} htmlFor="type">Powiat</div>
 									<SingleSelect value={county} handleChange={(value) => handleChangeCounty(value)} list={countyList} error={error.county} />
-									<div className={classes.error_label} style={{ display: error.county ? 'block' : 'none' }}>Wybierz województwo.</div>
+									<div className={classes.error_label} style={{ display: error.county ? 'block' : 'none' }}>Wybierz powiat</div>
 									<div className={classes.input_box_label} htmlFor="type">Gmina</div>
 									<SingleSelect value={community} handleChange={(value) => handleChangeCommunity(value)} list={communityList} error={error.community} />
-									<div className={classes.error_label} style={{ display: error.surname ? 'block' : 'none' }}>Wybierz społeczność.</div>
+									<div className={classes.error_label} style={{ display: error.community ? 'block' : 'none' }}>Wybierz gminę</div>
 								</Grid>
 							</Grid>
 							<div className={classes.divide} />

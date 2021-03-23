@@ -52,7 +52,7 @@ const IprPlan = props => {
 	const [profession, setProfession] = useState('');
 
 	const [scheduleData, setScheduleData] = useState([]);
-	const [week, setWeek] = useState(0);
+	const [week, setWeek] = useState(-1);
 	const [weeks, setWeeks] = useState([]);
 	const [status, setStatus] = useState([]);
 	const [dateList, setDateList] = useState([]);
@@ -133,7 +133,14 @@ const IprPlan = props => {
 			if (response.code === 401) {
 				history.push('/login');
 			} else {
-				setScheduleData(response.data.module);
+				let _schedule_data = response.data.module;
+				for (let i = 0; i < _schedule_data.length; i ++) {
+					for (let j = 0; j < _schedule_data[i].service_list.length; j ++) {
+						if (!_schedule_data[i].service_list[j].schedule)
+							_schedule_data[i].service_list[j].schedule = {start_time: '00:00', end_time: '00:00', break_time: '0', total_time: '0', total_amount: '0'}
+					}
+				}
+				setScheduleData(_schedule_data);
 			}
 		})
 	}

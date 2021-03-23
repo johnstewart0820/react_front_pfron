@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
 	Grid, FormControl, FormControlLabel, Radio, RadioGroup, FormLabel
 } from '@material-ui/core';
-import { SingleSelect } from 'components';
+import { SingleSelect, WeekSelect } from 'components';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import useStyles from './style';
@@ -48,12 +48,16 @@ const ScheduleView = (props) => {
 			_arr.push(item);
 		}
 		setWeeks(_arr);
-		setWeek(1);
 	}, [scheduleDate]);
 
 	useEffect(() => {
+		if (weeks.length > 0)
+			setWeek(0);
+	}, [weeks]);
+
+	useEffect(() => {
 		if (weeks.length !== 0) {
-			let _week = weeks[week - 1];
+			let _week = weeks[week];
 			let _start_date = _week.from;
 			let _to_date = _week.to;
 
@@ -62,13 +66,13 @@ const ScheduleView = (props) => {
 			for (let i = 0; i < 7; i++) {
 				let default_start_date = JSON.parse(JSON.stringify(_start_date));
 				let date = moment(default_start_date).add(i, 'days');
-				if (index === 0 && parseInt(week) === 1 && date.diff(moment(scheduleDate), 'days') == 0) {
+				if (index === 0 && parseInt(week) === 0 && date.diff(moment(scheduleDate), 'days') == 0) {
 					index = i;
 				}
 				_arr.push({ name: `${date.get('date')}.${date.get('month') + 1}.${date.get('year')}`, date: date, id: i });
 			}
 			setDateList(_arr);
-			handleGetWeekStatus(weeks[week - 1]);
+			handleGetWeekStatus(weeks[week]);
 			handleGetScheduleData(_arr[index].date);
 			setSelectedItem(index);
 		}
@@ -206,7 +210,7 @@ const ScheduleView = (props) => {
 				</Grid>
 				<Grid item xs={5}>
 					<div className={classes.top_label_content}>Wybierz tydzien</div>
-					<SingleSelect value={week} handleChange={setWeek} list={weeks} />
+					<WeekSelect value={week} handleChange={setWeek} list={weeks} />
 				</Grid>
 				<Grid item xs={4}>
 					<div className={classes.top_label_content}>Status</div>

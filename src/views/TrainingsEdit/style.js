@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
 		borderColor: theme.palette.btn_darkgray,
 		color: theme.palette.black_white,
 		width: '100%',
-		height: '100%'
 	},
 	btnBack: {
 		'& .MuiButton-label': {

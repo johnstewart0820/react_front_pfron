@@ -143,7 +143,7 @@ const TrainingsEdit = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/trainings'); }, 1000);
 					}
@@ -376,7 +376,7 @@ const TrainingsEdit = props => {
 
 	const handleSave = () => {
 		if (checkError()) {
-			addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
 			handleError();
 		} else {
 			setProgressStatus(true);
@@ -399,7 +399,7 @@ const TrainingsEdit = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/trainings'); }, 1000);
 						}

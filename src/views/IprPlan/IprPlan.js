@@ -184,7 +184,7 @@ const IprPlan = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/ipr_list'); }, 1000);
 						}
@@ -193,7 +193,7 @@ const IprPlan = props => {
 				})
 		} else {
 			if (!checkScheduleData(scheduleData)) {
-				addToast('Proszę wypełnić poprawne pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+				addToast(<label>Proszę wypełnić poprawne pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
 				return;
 			}
 			setProgressStatus(true);
@@ -205,7 +205,7 @@ const IprPlan = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 						if (response.code === 200) {
 							// setTimeout(function () { history.push('/ipr_list'); }, 1000);
 						}
@@ -223,7 +223,7 @@ const IprPlan = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/ipr_list'); }, 1000);
 					}

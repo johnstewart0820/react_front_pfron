@@ -48,13 +48,13 @@ const OrkListEdit = props => {
   const handleSave = () => {
     setFirstLogin(true);
     if (rehabitationCenterError.leader_nip_number !== true || rehabitationCenterError.leader_regon_number !== true || rehabitationCenterError.email !== true) {
-      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
       return;
     }
     let arr = JSON.parse(partnerErrors);
     for (let i = 0; i < arr.length; i ++) {
       if (arr[i].nip !== true || arr[i].regon !== true) {
-        addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+        addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
         return;
       }
     }
@@ -65,7 +65,7 @@ const OrkListEdit = props => {
       if (response.code === 401) {
         history.push('/login');
       } else {
-        addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+        addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
         if (response.code === 200) {
           setTimeout(function(){history.push('/ork_list');}, 1000);
         }

@@ -81,7 +81,7 @@ const Topbar = props => {
     >
       <div className={classes.toolbar}>
         <div className={classes.titlebar}>
-          <Button className={classes.close_drawer_icon} onClick={onMaxTopbar} aria-label="a">
+          <Button className={classes.close_drawer_icon} onClick={onMaxTopbar} aria-label={!open ? 'Rozwiń menu' : 'Zwiń menu'} title={!open ? 'Rozwiń menu' : 'Zwiń menu'}>
             <MenuIcon color="white"/>
           </Button>
         </div>

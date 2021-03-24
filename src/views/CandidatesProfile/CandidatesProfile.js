@@ -119,7 +119,7 @@ const CandidatesProfile = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/candidates'); }, 1000);
 					}

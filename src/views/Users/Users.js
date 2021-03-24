@@ -134,7 +134,7 @@ const Users = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
           }
           setProgressStatus(false);
           handleSearch();

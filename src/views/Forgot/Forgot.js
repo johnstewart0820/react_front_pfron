@@ -33,7 +33,7 @@ const Forgot = props => {
 
   const handleForgot = event => {
     if ((error && (error.email && error.email.length > 0)) || !input.email) {
-      addToast(constants.CHECK_ALL_FIELDS, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
+      addToast(<label>{constants.CHECK_ALL_FIELDS}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
     } else {
       setProgressStatus(true);
       auth
@@ -41,11 +41,11 @@ const Forgot = props => {
         .then(response => {
           if (response.code === 200) {
             setProgressStatus(false);
-            addToast(response.message, { appearance: 'success', autoDismissTimeout: 1000, autoDismiss: true })
+            addToast(<label>{response.message}</label>, { appearance: 'success', autoDismissTimeout: 1000, autoDismiss: true })
             setTimeout(function () { history.push('/login') }, 1000);
           } else {
             setProgressStatus(false);
-            addToast(response.message, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
+            addToast(<label>{response.message}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
           }
         })
     }

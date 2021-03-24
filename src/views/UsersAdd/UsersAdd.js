@@ -39,7 +39,7 @@ const UsersAdd = props => {
 
 	const handleSave = () => {
 		if (name.length === 0 || email.length === 0 || role.length === 0) {
-			addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
 		} else {
 			setProgressStatus(true);
 			let role_arr = [];
@@ -52,7 +52,7 @@ const UsersAdd = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/users'); }, 1000);
 						}

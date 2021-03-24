@@ -20,7 +20,7 @@ const Notifications = props => {
   
   return (
     <div className={classes.public}>
-      
+      <label className={classes.notification}>Brak powiadomień.</label>
     </div>
   );
 };

@@ -38,7 +38,7 @@ const PaymentsAdd = props => {
 
   const handleSave = () => {
     if (isNaN(value) || parseInt(rehabitationCenter) === 0 || parseInt(service) === 0) {
-      addToast('Proszę wypełnić wszystkie wymagane pola.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
     } else {
       setProgressStatus(true);
 
@@ -47,7 +47,7 @@ const PaymentsAdd = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          addToast(response.message, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
           if (response.code === 200) {
             setTimeout(function(){history.push('/payments');}, 1000);
           }

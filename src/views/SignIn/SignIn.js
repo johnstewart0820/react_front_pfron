@@ -38,7 +38,7 @@ const SignIn = props => {
   const handleSignIn = event => {
     setTryLogin(true);
     if ((error && ((error.email && error.email.length > 0) || (error.password && error.password.length > 0))) || !input.email || !input.password) {
-      addToast(constants.CHECK_ALL_FIELDS, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
+      addToast(<label>{constants.CHECK_ALL_FIELDS}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
     } else {
       setProgressStatus(true);
       if (checkStatus) {
@@ -53,12 +53,12 @@ const SignIn = props => {
         .then(response => {
           if (response.code === 200) {
             setProgressStatus(false);
-            addToast(response.message, { appearance: 'success', autoDismissTimeout: 1000, autoDismiss: true })
+            addToast(<label>{response.message}</label>, { appearance: 'success', autoDismissTimeout: 1000, autoDismiss: true })
             setTimeout(function () { history.push('/cockpit'); }, 1000);
 
           } else {
             setProgressStatus(false);
-            addToast(response.message, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
+            addToast(<label>{response.message}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
           }
         })
     }

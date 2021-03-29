@@ -800,13 +800,13 @@ const ParticipantsEdit = props => {
         </Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Dane uczestnika
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label for="name">Imię(Imiona)</label></div>
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} type="name" value={name} name="name" id="name" onChange={(e) => handleChangeName(e.target.value)} />
 									<div className={classes.error_label} style={{ display: error.name ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
@@ -843,10 +843,10 @@ const ParticipantsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Adres zameldowania
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={6}>
 											<div className={classes.top_label}><label htmlFor="street">Ulica</label></div>
@@ -893,10 +893,10 @@ const ParticipantsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Dane kontaktowe
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="type">Telefon komórkowy</div>
 									<PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputStyle={{ width: '100%', borderRadius: '0px' }} />
 									<div className={classes.error_label} style={{ display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: (xx)(xxx-xxx-xxx)).</div>
@@ -929,7 +929,7 @@ const ParticipantsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} >
+								<Grid item md={3} xs={12}>
 									<div className={classes.form_title}>
 										Adres korespondencyjny
                 </div>
@@ -937,7 +937,7 @@ const ParticipantsEdit = props => {
 										(wypełnić jeśli inny niż adres zameldowania)
                 </div>
 								</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={6}>
 											<div className={classes.top_label} ><label htmlFor="second_street">Ulica</label></div>
@@ -970,10 +970,10 @@ const ParticipantsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Wykształcenie
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<FormControl component="fieldset" error={error.education}>
 										<RadioGroup aria-label="gender" name="education" value={education} onChange={handleChangeEducation}>
 											{
@@ -1001,10 +1001,10 @@ const ParticipantsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Tryb pobytu
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Ze względów logistycznych (brak możliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji</div>
 									<FormControl component="fieldset" error={error.stay_status}>
 										<RadioGroup aria-label="gender" name="education" value={stay_status} onChange={handleChangeStayStatus} row>
@@ -1049,7 +1049,7 @@ const ParticipantsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} >
+								<Grid item md={3} xs={12}>
 									<div className={classes.form_title}>
 										Status na rynku pracy
                 </div>
@@ -1057,7 +1057,7 @@ const ParticipantsEdit = props => {
 										(proszę zazaczyć właściwy)
                 </div>
 								</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Jestem zatrudniony</div>
 									<FormControl component="fieldset" error={error.employed_status}>
 										<RadioGroup aria-label="gender" name="employed_status" value={employed_status} onChange={handleChangeEmployedStatus} row>
@@ -1215,10 +1215,10 @@ const ParticipantsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3} className={classes.form_title}>
-								<Grid item xs={3} >
+								<Grid item md={3} xs={12}>
 									Inne
               </Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia</div>
 									<FormControl component="fieldset" error={error.ethnic_minority_status}>
 										<RadioGroup aria-label="gender" name="unemployed_status" value={ethnic_minority_status} onChange={handleChangeEthnicMinorityStatus} row>
@@ -1277,7 +1277,7 @@ const ParticipantsEdit = props => {
 							</Grid>
 						</Card>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item md={3} xs={12}>
 						<Grid container spacing={3}>
 							<Grid item xs={12}>
 								<Card className={classes.form}>
@@ -1288,7 +1288,7 @@ const ParticipantsEdit = props => {
 										<Grid item xs={6}>
 											<div className={classes.input_box_label_left}>
 												Numer uczestnika
-					</div>
+											</div>
 										</Grid>
 										<Grid item xs={6}>
 											<div className={classes.input_box_label_left}>
@@ -1298,7 +1298,7 @@ const ParticipantsEdit = props => {
 										<Grid item xs={6}>
 											<div className={classes.input_box_label_left}>
 												ORK
-					</div>
+											</div>
 										</Grid>
 										<Grid item xs={6}>
 											<div className={classes.input_box_label_left}>
@@ -1307,7 +1307,7 @@ const ParticipantsEdit = props => {
 										</Grid>
 										<div className={classes.form_title_right}>
 											Karty informacyjne
-                  </div>
+										</div>
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
 												Zobacz kartę informacyjną
@@ -1315,7 +1315,7 @@ const ParticipantsEdit = props => {
 										</Grid>
 										<div className={classes.form_title_right}>
 											Indywidualny Program Rehabilitacji
-                  </div>
+										</div>
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleAddIpr}>
 												Dodaj IPR
@@ -1324,7 +1324,7 @@ const ParticipantsEdit = props => {
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleIprList}>
 												Zobacz listę IPR uczestnika
-                    </Button>
+                    	</Button>
 										</Grid>
 									</Grid>
 								</Card>

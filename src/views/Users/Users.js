@@ -147,8 +147,8 @@ const Users = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <div>
-          <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate} style={{marginRight: '20px'}}>
+        <div className={classes.button_list}>
+          <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
             <AddIcon style={{marginRight: '20px'}}/>
             Dodaj użytkownika
           </Button>

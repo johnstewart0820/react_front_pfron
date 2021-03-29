@@ -116,7 +116,7 @@ const SortTable = (props) => {
 		<Table>
 			<TableHead>
 				<TableRow>
-					<TableCell>
+					<TableCell className={classes.cell_removable}>
 						<TableSortLabel
 							active={sortBy === 0}
 							direction={sortOrder}
@@ -138,7 +138,7 @@ const SortTable = (props) => {
 							</label>
 						</TableSortLabel>
 					</TableCell>
-					<TableCell>
+					<TableCell className={classes.cell_removable}>
 						<TableSortLabel
 							active={sortBy === 2}
 							direction={sortOrder}
@@ -178,9 +178,9 @@ const SortTable = (props) => {
 			</TableHead>
 			<TableBody>
 				<TableRow>
-					<TableCell><input className={classes.input_box} type="text" id="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+					<TableCell className={classes.cell_removable}><input className={classes.input_box} type="text" id="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
 					<TableCell><input className={classes.input_box} type="text" id="user" value={searchUserName} name="searchUserName" onChange={(e) => setSearchUserName(e.target.value)} /></TableCell>
-					<TableCell><SingleSelect value={searchRole} handleChange={setSearchRole} list={roleList} /> </TableCell>
+					<TableCell className={classes.cell_removable}><SingleSelect value={searchRole} handleChange={setSearchRole} list={roleList} /> </TableCell>
 					<TableCell><KeyboardDatePicker
 						className={classes.date_picker}
 						id="created_at"
@@ -206,9 +206,9 @@ const SortTable = (props) => {
 				{rows.map((item, indx) => {
 					return (
 						<TableRow key={indx} className={classes.root}>
-							<TableCell>{item.id}</TableCell>
+							<TableCell className={classes.cell_removable}>{item.id}</TableCell>
 							<TableCell>{item.user ? item.user.name : ''}</TableCell>
-							<TableCell>{item.role ? item.role.name : ''}</TableCell>
+							<TableCell className={classes.cell_removable}>{item.role ? item.role.name : ''}</TableCell>
 							<TableCell>{DateTime.fromISO(item.created_at).toFormat('dd.MM.yyyy hh:mm')}</TableCell>
 							<TableCell>
 								<div>{item.event} {modelName(item.auditable_type)}</div>

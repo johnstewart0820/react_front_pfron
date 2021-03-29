@@ -108,7 +108,7 @@ const SortTable = (props) => {
 								</label>
             </TableSortLabel>
             </TableCell>
-            <TableCell>
+            <TableCell className={classes.cell_removable}>
               <TableSortLabel
                 active={sortBy === 3}
                 direction={sortOrder}
@@ -117,7 +117,7 @@ const SortTable = (props) => {
                 Punkt kwalifikacyjny
             </TableSortLabel>
             </TableCell>
-            <TableCell>
+            <TableCell className={classes.cell_removable}>
               <TableSortLabel
                 active={sortBy === 4}
                 direction={sortOrder}
@@ -126,7 +126,7 @@ const SortTable = (props) => {
                 Etap rekutacji
             </TableSortLabel>
             </TableCell>
-						<TableCell>
+						<TableCell className={classes.cell_removable}>
               <TableSortLabel
                 active={sortBy === 5}
                 direction={sortOrder}
@@ -135,7 +135,7 @@ const SortTable = (props) => {
                 Status
 						</TableSortLabel>
             </TableCell>
-            <TableCell>
+            <TableCell className={classes.cell_removable}>
               <TableSortLabel
                 active={sortBy === 6}
                 direction={sortOrder}
@@ -158,10 +158,10 @@ const SortTable = (props) => {
             <TableCell><input className={classes.input_box} type="id" value={searchId} name="searchId" id="id_candidate" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchName} name="searchId" id="candidate_firstname" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchSurname} name="searchId" id="candidate_lastname" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
-            <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /></TableCell>
-            <TableCell><SingleSelect value={searchStage} handleChange={setSearchStage} list={stageList} /></TableCell>
-						<TableCell><SingleSelect value={searchStatus} handleChange={setSearchStatus} list={statusList} /></TableCell>
-            <TableCell>
+            <TableCell className={classes.cell_removable}><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /></TableCell>
+            <TableCell className={classes.cell_removable}><SingleSelect value={searchStage} handleChange={setSearchStage} list={stageList} /></TableCell>
+						<TableCell className={classes.cell_removable}><SingleSelect value={searchStatus} handleChange={setSearchStatus} list={statusList} /></TableCell>
+            <TableCell className={classes.cell_removable}>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <KeyboardDatePicker
@@ -203,10 +203,10 @@ const SortTable = (props) => {
                 <TableCell onClick={() => handlePreview(item.id)}>{item.id}</TableCell>
                 <TableCell onClick={() => handlePreview(item.id)}>{item.name}</TableCell>
                 <TableCell onClick={() => handlePreview(item.id)}>{item.surname}</TableCell>
-                <TableCell onClick={() => handlePreview(item.id)}>{getQualificationPointName(item.qualification_point)}</TableCell>
-                <TableCell onClick={() => handlePreview(item.id)}>{stageList && stageList.length > 0 && stageList[item.stage - 1].name}</TableCell>
-								<TableCell onClick={() => handlePreview(item.id)}>{statusList && statusList.length > 0 && statusList[item.id_status - 1].name}</TableCell>
-                <TableCell onClick={() => handlePreview(item.id)}>{getDateTime(item.updated_at)}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)} className={classes.cell_removable}>{getQualificationPointName(item.qualification_point)}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)} className={classes.cell_removable}>{stageList && stageList.length > 0 && stageList[item.stage - 1].name}</TableCell>
+								<TableCell onClick={() => handlePreview(item.id)} className={classes.cell_removable}>{statusList && statusList.length > 0 && statusList[item.id_status - 1].name}</TableCell>
+                <TableCell onClick={() => handlePreview(item.id)} className={classes.cell_removable}>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
                   <IconButton aria-label={`Edytuj kandydata ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/candidates/edit/${item.id}`)}>
                     <EditOutlinedIcon className={classes.icon} />

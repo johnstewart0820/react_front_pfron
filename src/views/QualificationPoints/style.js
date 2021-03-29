@@ -41,15 +41,28 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2.5, 0,)
     },
     rowsBlock: {
-           color: theme.palette.text.primary,
+				color: theme.palette.text.primary,
         display: 'flex',
         alignItems: 'center',
         fontFamily: 'roboto',
-        fontSize: '0.9375em'
+        fontSize: '0.9375em',
+				[theme.breakpoints.down('xs')]: {
+					marginTop: theme.spacing(2),
+				},
+				[theme.breakpoints.up('sm')]: {
+					display: 'flex',
+					justifyContent: 'space-between',
+					marginTop: theme.spacing(0),
+				},				
     },
     filter: {
-        display: 'flex',
-        justifyContent: 'space-between'
+				[theme.breakpoints.down('xs')]: {
+					display: 'block',
+				},
+				[theme.breakpoints.up('sm')]: {
+					display: 'flex',
+					justifyContent: 'space-between',
+				},
     },
     table: {
         margin: theme.spacing(2.5, 0),

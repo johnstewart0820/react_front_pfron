@@ -48,7 +48,7 @@ const SortTable = (props) => {
 							</label>
             </TableSortLabel>
           </TableCell>
-          <TableCell>
+          <TableCell className={classes.cell_removable}>
             <TableSortLabel
               active={sortBy === 3}
               direction={sortOrder}
@@ -77,7 +77,7 @@ const SortTable = (props) => {
         <TableRow>
           <TableCell><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
           <TableCell><input className={classes.input_box} type="name" value={searchValue} id="value" name="searchId" onChange={(e) => setSearchValue(e.target.value)} /></TableCell>
-          <TableCell><SingleSelect value={searchRehabitationCenter} handleChange={setSearchRehabitationCenter} list={rehabitationCenterList} /> </TableCell>
+          <TableCell className={classes.cell_removable}><SingleSelect value={searchRehabitationCenter} handleChange={setSearchRehabitationCenter} list={rehabitationCenterList} /> </TableCell>
           <TableCell><SingleSelect value={searchService} handleChange={setSearchService} list={serviceList} /></TableCell>
           <TableCell></TableCell>
         </TableRow>
@@ -86,7 +86,7 @@ const SortTable = (props) => {
             <TableRow key={indx} className={classes.root}>
               <TableCell>{item.id}</TableCell>
               <TableCell>{item.value}</TableCell>
-              <TableCell>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
+              <TableCell className={classes.cell_removable}>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
               <TableCell>{serviceList && serviceList.length > 0 && serviceList[item.service - 1].name}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj koszt`} component="span" className={classes.iconButton} onClick={() => history.push(`/payments/edit/${item.id}`)}>

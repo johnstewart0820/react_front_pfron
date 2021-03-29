@@ -168,7 +168,7 @@ const PlanView = (props) => {
 						</Grid>
 						<Grid item xs={12}>
 							<Grid container spacing={2}>
-								<Grid item xs={4}>
+								<Grid item md={4} xs={12}>
 									<div className={classes.top_label}><label htmlFor="start_date">Data rozpoczęcia</label></div>
 									<KeyboardDatePicker
 										disableToolbar
@@ -184,7 +184,7 @@ const PlanView = (props) => {
 										}}
 									/>
 								</Grid>
-								<Grid item xs={6}>
+								<Grid item md={6} xs={12}>
 									<div className={classes.top_label}><label htmlFor="ork_person">Osoba realizująca (Rehabilitant powadzacy)</label></div>
 									<Autocomplete
 										disabled={service.disable_status}
@@ -197,7 +197,7 @@ const PlanView = (props) => {
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 									/>
 								</Grid>
-								<Grid item xs={2}>
+								<Grid item md={2} xs={12}>
 									<div className={classes.top_label}><label htmlFor="room_number">Sala</label></div>
 									<input className={classes.input_box} type="name" value={service.room_number} id="room_number" name="name" onChange={(e) => handleChangeRoomNumber(e.target.value, index, index_module)} disabled={service.disable_status}/>
 								</Grid>
@@ -230,7 +230,7 @@ const PlanView = (props) => {
 		{
 			moduleList.map((module, index) => (
 				<>
-					<Grid item xs={3} className={classes.form_title}>
+					<Grid item md={3} xs={12} className={classes.form_title}>
 						<div>
 							Procedury/Usługi
 						</div>
@@ -238,7 +238,7 @@ const PlanView = (props) => {
 							{module.name}
 						</div>
 					</Grid>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 					{
 						renderService(module, index)
 					}

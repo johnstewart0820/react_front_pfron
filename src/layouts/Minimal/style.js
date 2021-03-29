@@ -20,17 +20,41 @@ const useStyles = makeStyles((theme) => ({
 	site_title: {
 		marginBottom: theme.spacing(2),
 		color: theme.palette.color,
-		fontSize: '1.5em'
+		fontSize: '1.1em',
+		textAlign: 'center',
+		lineHeight: '1.1em'
+	},
+	wcag_controller: {
+		[theme.breakpoints.down('xs')]: {
+      display: 'none'
+    },
+		[theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
+    [theme.breakpoints.up('md')]: {
+			display: 'block'
+    },
 	},
   footer: {
     width: '100%',
     justifyContent: 'center',
-    paddingLeft: theme.spacing(20),
-    paddingRight: theme.spacing(20),
+
     lineHeight: '1em',
     fontSize: '0.6875em',
     textAlign: 'center',
-    marginTop: theme.spacing(11)
+    marginTop: theme.spacing(11),
+		[theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(4),
+			paddingRight: theme.spacing(4),
+    },
+		[theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(4),
+			paddingRight: theme.spacing(4),
+    },
+    [theme.breakpoints.up('md')]: {
+			paddingLeft: theme.spacing(20),
+			paddingRight: theme.spacing(20),
+    },
   },
 	helper: {
 		color: theme.palette.text.primary,

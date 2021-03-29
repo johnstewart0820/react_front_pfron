@@ -147,13 +147,13 @@ const QualificationPointsEdit = props => {
         </Button>
       </div>
       <Grid container spacing={3} className={classes.formBlock}>
-        <Grid item xs={9}>
+        <Grid item md={9} xs={12}>
           <Card className={classes.form}>
             <Grid container spacing={3}>
-              <Grid item xs={3} className={classes.form_title}>
+              <Grid item md={3} xs={12} className={classes.form_title}>
                 Dane podstawowe
               </Grid>
-              <Grid item xs={9}>
+              <Grid item md={9} xs={12}>
                 <div className={classes.top_label}><label  htmlFor="name">Nazwa punktu</label></div>
                 <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Typ punktu</div>
@@ -173,7 +173,7 @@ const QualificationPointsEdit = props => {
             </Grid>
           </Card>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item md={3} xs={12}>
           <Card className={classes.form}>
             <Grid container spacing={3}>
               <Grid item xs={6}>

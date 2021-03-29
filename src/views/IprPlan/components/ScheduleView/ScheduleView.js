@@ -203,16 +203,16 @@ const ScheduleView = (props) => {
 	return (
 		<>
 			<Grid container spacing={3} className={classes.form}>
-				<Grid item xs={3}>
+				<Grid item md={3} xs={12}>
 					<div className={classes.form_title}>
 						Tydzien
 					</div>
 				</Grid>
-				<Grid item xs={5}>
+				<Grid item md={5} xs={12}>
 					<div className={classes.top_label_content}>Wybierz tydzien</div>
 					<WeekSelect value={week} handleChange={setWeek} list={weeks} />
 				</Grid>
-				<Grid item xs={4}>
+				<Grid item md={4} xs={12}>
 					<div className={classes.top_label_content}>Status</div>
 					<SingleSelect value={status} handleChange={setStatus} list={statusList} />
 				</Grid>
@@ -222,7 +222,7 @@ const ScheduleView = (props) => {
 					{
 						dateList.map((item, index) => (
 							<Tab style={{ width: '14%' }} disabled={index > 4 || moment(item.date) < moment(scheduleDate) || moment(item.date) > moment()}>
-								<div style={{ display: 'block', paddingTop: '10px' }}>
+								<div style={{ display: 'block', paddingTop: '10px', fontSize: '10px' }}>
 									<div>
 										{_date_arr[item.id]}
 									</div>
@@ -241,7 +241,7 @@ const ScheduleView = (props) => {
 								{
 									scheduleData.map((module, index_module) => (
 										<>
-											<Grid item xs={3} className={classes.form_title} >
+											<Grid item md={3} xs={12} className={classes.form_title} >
 												<div>
 													Procedury
 												</div>
@@ -249,27 +249,24 @@ const ScheduleView = (props) => {
 													{module.name}
 												</div>
 											</Grid>
-											<Grid item xs={9}>
+											<Grid item md={9} xs={12}>
 												<Grid container spacing={2}>
 													{
 														index_module == 0 ?
 														<>
-														<Grid item xs={5}/>
-														<Grid item xs={7}>
-															<Grid container spacing={2} style={{alignItems: 'end'}}>
+														<Grid item xs={4}/>
+														<Grid item xs={8}>
+															<Grid container spacing={2} style={{alignItems: 'end', wordBreak: 'break-all'}}>
 																<Grid item xs>od</Grid>
 																<Grid item xs>do</Grid>
 																<Grid item xs>
-																	przerwy
-																	<div>(w min)</div>
+																	przerwy (w min)
 																</Grid>
 																<Grid item xs>
-																	łącznie
-																	<div>(w godz)</div>
+																	łącznie (w godz)
 																</Grid>
 																<Grid item xs>
-																	łącznie
-																	<div>(w jednostce)</div>
+																	łącznie (w jednostce)
 																</Grid>
 															</Grid>
 														</Grid>
@@ -281,10 +278,10 @@ const ScheduleView = (props) => {
 														{
 														module.service_list.map((service, index_service) => (
 															<>
-																<Grid item xs={5}>
+																<Grid item xs={4}>
 																	{service.name}
 																</Grid>
-																<Grid item xs={7}>
+																<Grid item xs={8}>
 																	<Grid container spacing={2}>
 																		<Grid item xs>
 																			<MaskedInput
@@ -335,7 +332,7 @@ const ScheduleView = (props) => {
 												</Grid>
 											</Grid>
 											<Grid container spacing={0} style={{display: 'flex', justifyContent:'flex-end', padding: '15px'}}>
-												<Grid item xs={3} className={classes.sum_title}>
+												<Grid item sm={3} xs={6} className={classes.sum_title}>
 													<div>
 														łącznie (w danym module)
 													</div>

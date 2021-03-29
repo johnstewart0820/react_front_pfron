@@ -4,7 +4,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(3),
 		color: theme.palette.text.primary
   },
 
@@ -14,9 +13,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(6),
   },
   title: {
-		marginBottom: theme.spacing(5),
+		// marginBottom: theme.spacing(5),
 		color: theme.palette.color,
-		fontSize: '1.4em'
+		fontSize: '1.2em',
 	},
 
   rememberMe: {

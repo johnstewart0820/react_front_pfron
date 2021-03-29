@@ -99,7 +99,21 @@ height: '100%',
         color: theme.palette.btn_gray,
         borderColor: theme.palette.btn_gray,
 				marginLeft: theme.spacing(2),
+				[theme.breakpoints.up('xs')]: {
+					marginBottom: theme.spacing(1),
+				},
+				[theme.breakpoints.up('md')]: {
+					marginBottom: theme.spacing(0),
+				},
     },
+		button_list: {
+			[theme.breakpoints.up('xs')]: {
+				display: 'grid',
+			},
+			[theme.breakpoints.up('md')]: {
+				display: 'flex',
+			},
+		},
     divide: {
         backgroundColor: 'lightgray',
         height: '1px',

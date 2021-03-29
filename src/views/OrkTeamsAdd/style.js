@@ -43,11 +43,17 @@ height: '100%',
           borderColor: theme.palette.btn_gray,
           color: theme.palette.black_white
         },
-        padding: theme.spacing(0.5, 6),
+        
         borderRadius: '0px',
         fontWeight: '300',
         color: theme.palette.btn_gray,
-        borderColor: theme.palette.btn_gray
+        borderColor: theme.palette.btn_gray,
+				[theme.breakpoints.down('xs')]: {
+					padding: theme.spacing(0.5, 3),
+				},
+				[theme.breakpoints.up('sm')]: {
+					padding: theme.spacing(0.5, 6),
+				},
     },
     divide: {
         backgroundColor: 'lightgray',

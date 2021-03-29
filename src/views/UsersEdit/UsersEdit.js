@@ -109,13 +109,13 @@ const UsersEdit = props => {
         </Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Uźytkownik
-              </Grid>
-								<Grid item xs={9}>
+								</Grid>
+								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>
 									<input className={classes.input_box} type="name" id="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
 									<div className={classes.input_box_label}><label htmlFor="email">E-mail</label></div>
@@ -145,7 +145,7 @@ const UsersEdit = props => {
 							</Grid>
 						</Card>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item md={3} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={6}>

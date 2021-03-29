@@ -221,7 +221,7 @@ const IprBalance = props => {
 				</Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={12} className={classes.form_title} >
@@ -298,7 +298,7 @@ const IprBalance = props => {
 						</Card>
 						<div className={classes.second_form}>
 							<Card className={classes.form}>
-								<Grid container spacing={3}>
+								<Grid container spacing={1}>
 									<Grid item xs={3}/>
 									<Grid item xs={6}>
 										<Grid container spacing={2}>

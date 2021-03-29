@@ -114,6 +114,17 @@ height: '100%',
 	date_picker: {
 		marginTop: theme.spacing(1),
 	},
+	button_list: {
+		[theme.breakpoints.down('xs')]: {
+			display: 'grid',
+		},
+		[theme.breakpoints.up('sm')]: {
+			display: 'grid',
+		},
+		[theme.breakpoints.up('md')]: {
+			display: 'flex',
+		},
+	},
 	btnBack: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
@@ -129,7 +140,16 @@ height: '100%',
 		fontWeight: '300',
 		color: theme.palette.btn_gray,
 		borderColor: theme.palette.btn_gray,
-		marginLeft: theme.spacing(2)
+		marginLeft: theme.spacing(2),
+		[theme.breakpoints.down('xs')]: {
+			marginBottom: theme.spacing(1),
+		},
+		[theme.breakpoints.up('sm')]: {
+			marginBottom: theme.spacing(1),
+		},
+		[theme.breakpoints.up('md')]: {
+			marginBottom: theme.spacing(0),
+		},
 	},
 	divide: {
 		backgroundColor: 'lightgray',

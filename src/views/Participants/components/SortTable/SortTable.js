@@ -102,7 +102,7 @@ const SortTable = (props) => {
 								</label>
             </TableSortLabel>
             </TableCell>
-            <TableCell>
+            <TableCell className={classes.cell_removable}>
               <TableSortLabel
                 active={sortBy === 3}
                 direction={sortOrder}
@@ -111,7 +111,7 @@ const SortTable = (props) => {
                 Ośrodek
             </TableSortLabel>
             </TableCell>
-            <TableCell>
+            <TableCell className={classes.cell_removable}>
               <TableSortLabel
                 active={sortBy === 4}
                 direction={sortOrder}
@@ -120,7 +120,7 @@ const SortTable = (props) => {
                 Status
             </TableSortLabel>
             </TableCell>
-            <TableCell>
+            <TableCell className={classes.cell_removable}>
               <TableSortLabel
                 active={sortBy === 5}
                 direction={sortOrder}
@@ -143,9 +143,9 @@ const SortTable = (props) => {
             <TableCell><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchName} id="firstname" name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
             <TableCell><input className={classes.input_box} type="name" value={searchSurname} id="lastname" name="searchId" onChange={(e) => setSearchSurname(e.target.value)} /></TableCell>
-            <TableCell><SingleSelect value={searchRehabitationCenter} handleChange={setSearchRehabitationCenter} list={rehabitationCenterList} /></TableCell>
-            <TableCell><SingleSelect value={searchParticipantStatusType} handleChange={setSearchParticipantStatusType} list={participantStatusTypeList} /></TableCell>
-            <TableCell>
+            <TableCell className={classes.cell_removable}><SingleSelect value={searchRehabitationCenter} handleChange={setSearchRehabitationCenter} list={rehabitationCenterList} /></TableCell>
+            <TableCell className={classes.cell_removable}><SingleSelect value={searchParticipantStatusType} handleChange={setSearchParticipantStatusType} list={participantStatusTypeList} /></TableCell>
+            <TableCell className={classes.cell_removable}>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <KeyboardDatePicker
@@ -187,9 +187,9 @@ const SortTable = (props) => {
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{item.id_candidate}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{item.name}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{item.surname}</TableCell>
-                <TableCell onClick={() => handleClick(item.id_candidate)}>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
-                <TableCell onClick={() => handleClick(item.id_candidate)}>{parseInt(item.participant_status_type) >= 1 ? (participantStatusTypeList && participantStatusTypeList.length > 0 && participantStatusTypeList[item.participant_status_type - 1].name) : ''}</TableCell>
-                <TableCell onClick={() => handleClick(item.id_candidate)}>{getDateTime(item.updated_at)}</TableCell>
+                <TableCell onClick={() => handleClick(item.id_candidate)} className={classes.cell_removable}>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
+                <TableCell onClick={() => handleClick(item.id_candidate)} className={classes.cell_removable}>{parseInt(item.participant_status_type) >= 1 ? (participantStatusTypeList && participantStatusTypeList.length > 0 && participantStatusTypeList[item.participant_status_type - 1].name) : ''}</TableCell>
+                <TableCell onClick={() => handleClick(item.id_candidate)} className={classes.cell_removable}>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
                   <IconButton aria-label={`Edytuj uczestnika ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
                     <EditOutlinedIcon className={classes.icon} />

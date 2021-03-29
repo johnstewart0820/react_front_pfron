@@ -202,7 +202,7 @@ const CandidatesInfoPreview = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<div>
+					<div className={classes.button_list}>
 						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleEdit}>
 							Edytuj kartę informacyjną
 						</Button>
@@ -212,13 +212,13 @@ const CandidatesInfoPreview = props => {
 					</div>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Card className={classes.form} ref={chart}>
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Dane kandydata
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Imię(Imiona)</div></Grid>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{name}</div></Grid>
@@ -243,10 +243,10 @@ const CandidatesInfoPreview = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Decyzje
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Rekomendacja lekarza</div></Grid>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{doctor_recommendation === 1 ? 'TAK' : doctor_recommendation === 2 ? 'NIE' : 'NIE MOŻNA STWIERDZIĆ'}</div></Grid>
@@ -283,10 +283,10 @@ const CandidatesInfoPreview = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Decyzja komisji centralnej
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Decyzja komisji centralnej</div></Grid>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{decision_central_commision === 1 ? 'TAK' : decision_central_commision === 2 ? 'NIE' : ''}</div></Grid>
@@ -303,10 +303,10 @@ const CandidatesInfoPreview = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Skierowanie do ORK
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Data skierowania</div></Grid>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{getDateStr(date_referal)}</div></Grid>
@@ -335,7 +335,7 @@ const CandidatesInfoPreview = props => {
 							</Grid>
 						</Card>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item md={3} xs={12}>
 						<Grid container spacing={3}>
 							<Grid item xs={12}>
 								<Card className={classes.form}>

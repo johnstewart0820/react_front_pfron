@@ -46,10 +46,10 @@ const SecondStepView = (props) => {
   return (
 	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
-      <Grid item xs={3} className={classes.form_title}>
+      <Grid item md={3} xs={12} className={classes.form_title}>
         Dane kandydata
       </Grid>
-      <Grid item xs={9}>
+      <Grid item md={9} xs={12}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <FormControl component="fieldset">

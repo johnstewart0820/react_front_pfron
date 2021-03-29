@@ -134,13 +134,13 @@ const IprAdd = props => {
         			</Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Dane IPR
-              					</Grid>
-								<Grid item xs={9}>
+								</Grid>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={3}>
 										<Grid item xs={5}>
 											<div className={classes.top_label}><label htmlFor="number">Numer uczestnika</label></div>
@@ -222,13 +222,13 @@ const IprAdd = props => {
 							</Grid>
 						</Card>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item md={3} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
 									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
 										Zapisz
-                					</Button>
+									</Button>
 								</Grid>
 							</Grid>
 						</Card>

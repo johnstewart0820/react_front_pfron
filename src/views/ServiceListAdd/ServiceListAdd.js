@@ -137,13 +137,13 @@ const ServiceListAdd = props => {
         </Button>
       </div>
       <Grid container spacing={3} className={classes.formBlock}>
-        <Grid item xs={9}>
+        <Grid item md={9} xs={12}>
           <Card className={classes.form}>
             <Grid container spacing={3}>
-              <Grid item xs={3} className={classes.form_title}>
+              <Grid item md={3} xs={12} className={classes.form_title}>
                 Dane podstawowe
               </Grid>
-              <Grid item xs={9}>
+              <Grid item md={9} xs={12}>
                 <Grid container spacing={1}>
                   <Grid item xs={3}>
                     <div className={classes.top_label}><label htmlFor="number">Numer</label></div>
@@ -164,15 +164,15 @@ const ServiceListAdd = props => {
 									<Grid item xs={12}>
 										<div className={classes.label}>Minimalny zakres usługi</div>
 									</Grid>
-                  <Grid item xs={3}>
+                  <Grid item md={3} xs={12}>
                     <div className={classes.input_box_label}><label htmlFor="amount_usage">Liczba</label></div>
                     <input className={classes.input_box} type="name" id="amount_usage" value={amount_usage} name="name" onChange={(e) => handleChangeAmountUsage(e.target.value)} />
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item md={5} xs={12}>
                     <div className={classes.input_box_label}>Jednostka</div>
                     <SingleSelect value={unit} handleChange={handleChangeUnit} list={unitList} error={error.unit}/>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item md={4} xs={12}>
                     <div className={classes.input_box_label}><label htmlFor="amount_takes">Czas trwania (w minutach)</label></div>
                     <input className={classes.input_box} type="name" value={amount_takes} id="amount_takes" name="name" onChange={(e) => handleChangeAmountTakes(e.target.value)} />
                   </Grid>
@@ -203,7 +203,7 @@ const ServiceListAdd = props => {
             </Grid>
           </Card>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item md={3} xs={12}>
           <Card className={classes.form}>
             <Grid container spacing={3}>
               <Grid item xs={12}>

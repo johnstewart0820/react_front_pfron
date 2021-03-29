@@ -258,7 +258,7 @@ const IprPlan = props => {
 				</Button>
 			</div>
 			<Grid container spacing={3} className={classes.formBlock}>
-				<Grid item xs={9}>
+				<Grid item md={9} xs={12}>
 					<Card className={classes.form}>
 						<Grid container spacing={3}>
 							<Grid item xs={12} className={classes.form_title} >
@@ -366,7 +366,7 @@ const IprPlan = props => {
 					</div>
 					
 				</Grid>
-				<Grid item xs={3}>
+				<Grid item md={3} xs={12}>
 					<Card className={classes.form}>
 						<Grid container spacing={3}>
 							<Grid item xs={4}>

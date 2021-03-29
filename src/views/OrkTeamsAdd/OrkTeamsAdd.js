@@ -123,13 +123,13 @@ const OrkTeamsAdd = props => {
         </Button>
       </div>
       <Grid container spacing={3} className={classes.formBlock}>
-        <Grid item xs={9}>
+        <Grid item md={9} xs={12}>
           <Card className={classes.form}>
             <Grid container spacing={3}>
-              <Grid item xs={3} className={classes.form_title}>
+              <Grid item md={3} xs={12} className={classes.form_title}>
                 Dane podstawowe
               </Grid>
-              <Grid item xs={9}>
+              <Grid item md={9} xs={12}>
                 <div className={classes.top_label}><label htmlFor="name">Tytuł, imię i nazwisko osoby w zespole</label></div>
                 <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} type="name" value={name} id="name" name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label}><label htmlFor="rehabitationCenter">Wybierz ORK</label></div>
@@ -182,7 +182,7 @@ const OrkTeamsAdd = props => {
             </Grid>
           </Card>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item md={3} xs={12}>
           <Card className={classes.form}>
             <Grid container spacing={3}>
               <Grid item xs={12}>

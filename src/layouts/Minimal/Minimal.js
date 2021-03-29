@@ -46,37 +46,45 @@ const Minimal = props => {
     { (props) => (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        <Grid item xs={2}>
+        <Grid item xs={4} sm={4} md={2}>
           <img className={classes.logo} src="/images/logos/footer_FE.png" alt="Logo Fundusze Europejskie Wiedza Edukacja Rozwój"/>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={4} sm={4} md={2}>
           <img className={classes.logo} src="/images/logos/footer_RP.png" alt="Logo Rzeczpospolita Polska"/>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={0} sm={0} md={6} className={classes.wcag_controller}>
 					<Grid container justify='center'>
-						<Grid item xs={8}>
+						<Grid item>
 							<Button title="Wczytaj domyślny rozmiar tekstu"	onClick={(e) => changeFontSize('normal')}>
 								<div className={classes.helper} name="normal">
 										<FontAwesomeIcon icon={faFont} size="2x"/>
 								</div>
 							</Button>
+						</Grid>
+						<Grid item>
 							<Button title="Pomniejsz tekst na stronie" onClick={(e) => changeFontSize('less')}>
 								<div className={classes.helper} name="minus">
 										<FontAwesomeIcon icon={faFont} size="2x"/>
 										<FontAwesomeIcon icon={faMinus} size="1x"/>
 								</div>
 							</Button>
+						</Grid>
+						<Grid item>
 							<Button title="Powiększ tekst na stronie" onClick={(e) => changeFontSize('more')}>
 								<div className={classes.helper} name="plus">
 									<FontAwesomeIcon icon={faFont} size="2x" />
 									<FontAwesomeIcon icon={faPlus} size="1x" />
 								</div>
 							</Button>
+						</Grid>
+						<Grid item>
 							<Button title={!contrastStatus ? "Wyłącz tryb wysokokontrastowy": "Włącz tryb wysokokontrastowy"} onClick={(e) => toggleContrast(e, props.toggleContrast)}>
 								<div className={classes.helper}>
 										<FontAwesomeIcon icon={faEye} size="2x"/>
 								</div>
 							</Button>
+						</Grid>
+						<Grid item>
 							<Button title={!underlineStatus ? "Wyłącz podkreślenie linków" : "Włącz podkreślenie linków"}  onClick={(e) => toggleUnderlineLinks(e)}>
 								<div className={classes.helper}>
 										<FontAwesomeIcon icon={faLink} size="2x"/>
@@ -85,7 +93,7 @@ const Minimal = props => {
 						</Grid>
 					</Grid>
         </Grid>
-        <Grid item xs={2} className={classes.alignRight}>
+        <Grid item xs={4} sm={4} md={2} className={classes.alignRight}>
           <img className={classes.logo} src="/images/logos/footer_UE.png" alt="Logo Unia Europejska Europejski Fundusz Społeczny" />
         </Grid>
 				<Grid item xs={12}>
@@ -97,13 +105,13 @@ const Minimal = props => {
 				</Grid>
         <main className={classes.content}>{children}</main>
         <Grid container spacing={3} className={classes.footer}>
-          <Grid item xs={2}>
+          <Grid item md={2} sm={4} xs={4}>
             <img className={classes.logo} src="/images/logos/footer_pfron.png" alt="Logo Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych" />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item md={2} sm={4} xs={4}>
             <img className={classes.logo} src="/images/logos/footer_zus.png" alt="Logo Zakład Ubezpieczeń Społecznych" />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item md={2} sm={4} xs={4}>
             <img className={classes.logo} src="/images/logos/footer_ciop.png" alt="Logo Centralny Instytut Ochrony Pracy" />
           </Grid>
           <Grid item xs={12}>

@@ -69,6 +69,17 @@ const useStyles = makeStyles((theme) => ({
 	date_picker: {
 		marginTop: theme.spacing(1),
 	},
+	button_list: {
+		[theme.breakpoints.down('xs')]: {
+			display: 'grid',
+		},
+		[theme.breakpoints.up('sm')]: {
+			display: 'grid',
+		},
+		[theme.breakpoints.up('md')]: {
+			display: 'flex',
+		},
+	},
 	btnBack: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
@@ -83,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: '0px',
 		fontWeight: '300',
 		color: theme.palette.btn_gray,
-		borderColor: theme.palette.btn_gray
+		borderColor: theme.palette.btn_gray,
 	},
 	button: {
 		color: 'black'
@@ -103,7 +114,16 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: '0px',
 		fontWeight: '300',
 		color: theme.palette.btn_gray,
-		borderColor: theme.palette.btn_gray
+		borderColor: theme.palette.btn_gray,
+		[theme.breakpoints.down('xs')]: {
+			marginBottom: theme.spacing(1),
+		},
+		[theme.breakpoints.up('sm')]: {
+			marginBottom: theme.spacing(1),
+		},
+		[theme.breakpoints.up('md')]: {
+			marginBottom: theme.spacing(0),
+		},
 	},
 	divide: {
 		backgroundColor: 'lightgray',

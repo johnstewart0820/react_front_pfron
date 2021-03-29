@@ -129,13 +129,13 @@ const Profile = props => {
         </Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Uźytkownik
-              </Grid>
-								<Grid item xs={9}>
+								</Grid>
+								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>
 									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
 									<div className={classes.input_box_label}><label htmlFor="email">E-mail</label></div>
@@ -163,10 +163,10 @@ const Profile = props => {
 									/>
 								</Grid>
 								<div className={classes.divide} />
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Zmiana hasła
-              </Grid>
-								<Grid item xs={9}>
+								</Grid>
+								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="password">Obecne hasło</label></div>
 									<input className={classes.input_box} type="password" id="password" value={password} name="name" onChange={(e) => setPassword(e.target.value)} />
 									<div className={classes.input_box_label}><label htmlFor="new_password">Nowe hasło</label></div>
@@ -177,7 +177,7 @@ const Profile = props => {
 							</Grid>
 						</Card>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item md={3} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>

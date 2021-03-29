@@ -30,14 +30,14 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: '500',
 	},
 	service: {
-		fontSize: '0.8750em',
+		fontSize: '0.75em',
 	},
 	form_service_title: {
-		marginTop: theme.spacing(2)
+		marginTop: theme.spacing(1)
 	},
-	form_service_title_end: {
-		marginTop: theme.spacing(5.5)
-	},
+	// form_service_title_end: {
+	// 	marginTop: theme.spacing(0)
+	// },
 	btnSave: {
 height: '100%',
 		'& .MuiButton-label': {

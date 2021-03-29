@@ -368,13 +368,13 @@ const TrainingsAdd = props => {
         			</Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Dane podstawowe
-              					</Grid>
-								<Grid item xs={9}>
+								</Grid>
+								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa</label></div>
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} id="name" type="name" value={training.name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
 									<div className={classes.input_box_label}><label htmlFor="number">Numer szkolenia</label></div>
@@ -387,8 +387,8 @@ const TrainingsAdd = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} />
-								<Grid item xs={9}>
+								<Grid item md={3} xs={0} />
+								<Grid item md={9} xs={12}>
 									<div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
 										<div className={classes.top_label}>
 											Uczestnicy
@@ -442,8 +442,8 @@ const TrainingsAdd = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>Harmonogram</Grid>
-								<Grid item xs={6}>
+								<Grid item md={3} xs={12} className={classes.form_title}>Harmonogram</Grid>
+								<Grid item md={6} xs={12}>
 									{
 										training_class.map((item, index) => (
 											<Grid container spacing={2}>
@@ -529,7 +529,7 @@ const TrainingsAdd = props => {
 										))
 									}
 								</Grid>
-								<Grid item xs={3}>
+								<Grid item md={3} xs={12}>
 									<div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
 										<Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExportClass}>
 											Eksportuj harmonogram do XLS
@@ -544,7 +544,7 @@ const TrainingsAdd = props => {
 							</Button>
 						</div>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item md={3} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={12}>

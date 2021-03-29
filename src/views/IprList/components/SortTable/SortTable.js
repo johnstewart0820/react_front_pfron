@@ -78,7 +78,7 @@ const SortTable = (props) => {
 								</label>
             </TableSortLabel>
 						</TableCell>
-						<TableCell>
+						<TableCell className={classes.cell_removable}>
 							<TableSortLabel
 								active={sortBy === 3}
 								direction={sortOrder}
@@ -89,7 +89,7 @@ const SortTable = (props) => {
 								</label>
             </TableSortLabel>
 						</TableCell>
-						<TableCell>
+						<TableCell className={classes.cell_removable}>
 							<TableSortLabel
 								active={sortBy === 4}
 								direction={sortOrder}
@@ -100,7 +100,7 @@ const SortTable = (props) => {
 								</label>
             </TableSortLabel>
 						</TableCell>
-						<TableCell>
+						<TableCell className={classes.cell_removable}>
 							<TableSortLabel
 								active={sortBy === 5}
 								direction={sortOrder}
@@ -123,8 +123,8 @@ const SortTable = (props) => {
 						<TableCell><input className={classes.input_box} type="id" id="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
 						<TableCell><input className={classes.input_box} type="name" id="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
 						<TableCell><SingleSelect value={searchIprType} handleChange={setSearchIprType} list={iprTypeList} /> </TableCell>
-						<TableCell><input className={classes.input_box} id="number" type="name" value={searchNumber} name="searchId" onChange={(e) => setSearchNumber(e.target.value)} /></TableCell>
-						<TableCell>
+						<TableCell className={classes.cell_removable}><input className={classes.input_box} id="number" type="name" value={searchNumber} name="searchId" onChange={(e) => setSearchNumber(e.target.value)} /></TableCell>
+						<TableCell className={classes.cell_removable}>
 							<KeyboardDatePicker
 								disableToolbar
 								variant="inline"
@@ -139,7 +139,7 @@ const SortTable = (props) => {
 								className={classes.date_picker}
 							/>
 						</TableCell>
-						<TableCell>
+						<TableCell className={classes.cell_removable}>
 							<KeyboardDatePicker
 								disableToolbar
 								variant="inline"
@@ -162,9 +162,9 @@ const SortTable = (props) => {
 								<TableCell>{item.id}</TableCell>
 								<TableCell>{item.name}</TableCell>
 								<TableCell>{iprTypeList && iprTypeList.length > 0 && iprTypeList[item.ipr_type - 1].name}</TableCell>
-								<TableCell>{item.number}</TableCell>
-								<TableCell>{getDate(item.created_at)}</TableCell>
-								<TableCell>{getDate(item.schedule_date)}</TableCell>
+								<TableCell className={classes.cell_removable}>{item.number}</TableCell>
+								<TableCell className={classes.cell_removable}>{getDate(item.created_at)}</TableCell>
+								<TableCell className={classes.cell_removable}>{getDate(item.schedule_date)}</TableCell>
 								<TableCell>
 									<IconButton aria-label={`Edytuj IPR ${item.name}`} component="span" className={classes.iconButton} onClick={
 										() => history.push(parseInt(item.ipr_type) !== 1 ? `/ipr_list/plan/edit/${item.id}` : `/ipr_list/balance/edit/${item.id}`)

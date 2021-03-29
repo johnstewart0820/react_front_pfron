@@ -107,7 +107,7 @@ const SortTable = (props) => {
 								Zaakceptowane
             </TableSortLabel>
 						</TableCell>
-						<TableCell>
+						<TableCell className={classes.cell_removable}>
 							<TableSortLabel
 								active={sortBy === 4}
 								direction={sortOrder}
@@ -131,7 +131,7 @@ const SortTable = (props) => {
 						<TableCell><input className={classes.input_box} type="name" id="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
 						<TableCell><SingleSelect value={searchParticipant} handleChange={setSearchParticipant} list={participantList} /> </TableCell>
 						<TableCell><SingleSelect value={searchTrainingStatus} handleChange={setSearchTrainingStatus} list={trainingStatusList} /></TableCell>
-						<TableCell>
+						<TableCell className={classes.cell_removable}>
 							<KeyboardDatePicker
 								disableToolbar
 								id="date"
@@ -155,7 +155,7 @@ const SortTable = (props) => {
 								<TableCell>{item.name}</TableCell>
 								<TableCell>{getParticipantStr(item.participant)}</TableCell>
 								<TableCell>{trainingStatusList && trainingStatusList.length > 0 && trainingStatusList[item.training_status - 1].name}</TableCell>
-								<TableCell>{item.date}</TableCell>
+								<TableCell className={classes.cell_removable}>{item.date}</TableCell>
 								<TableCell>
 									<IconButton aria-label={`Edytuj szkolenie ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/trainings/edit/${item.id}`)}>
 										<EditOutlinedIcon className={classes.icon} />

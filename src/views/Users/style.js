@@ -17,7 +17,22 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: '300',
         backgroundColor: theme.palette.btn_gray,
         color: theme.palette.black_white,
+				[theme.breakpoints.up('xs')]: {
+					marginRight: '0px',
+					marginBottom: theme.spacing(1)
+				},
+				[theme.breakpoints.up('md')]: {
+					marginRight: '20px',
+				},
     },
+		button_list: {
+			[theme.breakpoints.up('xs')]: {
+				display: 'grid',
+			},
+			[theme.breakpoints.up('md')]: {
+				display: 'flex',
+			},
+		},
     btnExport: {
         '& .MuiButton-label': {
           textTransform: 'none',
@@ -32,7 +47,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0px',
         fontWeight: '300',
         color: theme.palette.pink,
-        borderColor: theme.palette.pink
+        borderColor: theme.palette.pink,
+				height: '100%'
     },
     divide: {
         backgroundColor: 'lightgray',

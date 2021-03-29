@@ -198,21 +198,21 @@ const OrkListEdit = props => {
         </Button>
         </div>
         <Grid container spacing={3} className={classes.formBlock}>
-          <Grid item xs={9}>
+          <Grid item md={9} xs={12}>
             <Card className={classes.form}>
               <Grid container spacing={3}>
-                <Grid item xs={3} className={classes.form_title}>
+                <Grid item md={3} xs={12} className={classes.form_title}>
                   Dane podstawowe
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item md={9} xs={12}>
                   <div className={classes.top_label} htmlFor="name">Nazwa ORK</div>
                   <div className={classes.name}>{rehabitationCenter.name}</div>
                 </Grid>
                 <div className={classes.divide} />
-                <Grid item xs={3} className={classes.form_title}>
+                <Grid item md={3} xs={12} className={classes.form_title}>
                   Kwartały
               </Grid>
-              <Grid item xs={9}>
+              <Grid item md={9} xs={12}>
                 <Grid container spacing={2}>
                   {
                     JSON.parse(quaterList).map((item, index) => (
@@ -282,10 +282,10 @@ const OrkListEdit = props => {
                 </Grid>
               </Grid>
               <div className={classes.divide}/>
-              <Grid item xs={3} className={classes.form_title}>
+              <Grid item md={3} xs={12} className={classes.form_title}>
                 Dane o liderze
               </Grid>
-              <Grid item xs={9}>
+              <Grid item md={9} xs={12}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <div className={classes.top_label} ><label htmlFor="leader_name">Nazwa podmiotu</label></div>
@@ -308,10 +308,10 @@ const OrkListEdit = props => {
                 </Grid>
               </Grid>
               <div className={classes.divide}/>
-              <Grid item xs={3} className={classes.form_title}>
+              <Grid item md={3} xs={12} className={classes.form_title}>
                 Partnerstwo
               </Grid>
-              <Grid item xs={9}>
+              <Grid item md={9} xs={12}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <div className={classes.top_label}><label htmlFor="partner_count">Liczba partnerów</label></div>
@@ -341,10 +341,10 @@ const OrkListEdit = props => {
                 </Grid>
               </Grid>
               <div className={classes.divide}/>
-              <Grid item xs={3} className={classes.form_title}>
+              <Grid item md={3} xs={12} className={classes.form_title}>
                 Osoba do kontaku (odpowiedzialna za zbieranie danych)
               </Grid>
-              <Grid item xs={9}>
+              <Grid item md={9} xs={12}>
                 <Grid container spacing={2}>
                   <Grid item xs={7}>
                     <div className={classes.top_label}><label  htmlFor="contact_person">Imię i nazwiko</label></div>
@@ -368,7 +368,7 @@ const OrkListEdit = props => {
               </Grid>
             </Card>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item md={3} xs={12}>
             <Card className={classes.form}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>

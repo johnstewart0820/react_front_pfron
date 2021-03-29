@@ -23,6 +23,17 @@ const useStyles = makeStyles(theme => ({
           color: theme.palette.btn_darkgray
       }
     },
+		cell_removable: {
+			[theme.breakpoints.down('xs')]: {
+				display: 'none',
+			},
+			[theme.breakpoints.up('sm')]: {
+				display: 'none',
+			},
+			[theme.breakpoints.up('md')]: {
+				display: 'table-cell',
+			},
+		},
 		date_picker: {
 			'& svg': {
 				fill: theme.palette.text.secondary

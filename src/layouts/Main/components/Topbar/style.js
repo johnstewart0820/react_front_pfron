@@ -62,7 +62,12 @@ const useStyles = makeStyles(theme => ({
       display: 'flex'
     },
 		controllerArea: {
-      display: 'flex',
+			[theme.breakpoints.down('xs')]: {
+        display: 'none',
+      },
+      [theme.breakpoints.up('sm')]: {
+        display: 'flex',
+      },
     },
 		helper: {
       color: theme.palette.topbar_color,

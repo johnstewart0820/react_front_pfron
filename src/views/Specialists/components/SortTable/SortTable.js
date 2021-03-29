@@ -82,7 +82,7 @@ const SortTable = (props) => {
               Punkt kwalifikacyjny
             </TableSortLabel>
           </TableCell>
-          <TableCell>
+          <TableCell  className={classes.cell_removable}>
             <TableSortLabel
               active={sortBy === 3}
               direction={sortOrder}
@@ -103,7 +103,7 @@ const SortTable = (props) => {
           <TableCell><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
           <TableCell><input className={classes.input_box} type="name" value={searchName} id="name" name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchQualificationPoint} handleChange={setSearchQualificationPoint} list={qualificationPointList} /> </TableCell>
-          <TableCell><SingleSelect value={searchSpecialty} handleChange={setSearchSpecialty} list={specialtyList} /></TableCell>
+          <TableCell  className={classes.cell_removable}><SingleSelect value={searchSpecialty} handleChange={setSearchSpecialty} list={specialtyList} /></TableCell>
           <TableCell></TableCell>
         </TableRow>
         {rows.map((item, indx) => {
@@ -112,7 +112,7 @@ const SortTable = (props) => {
               <TableCell>{item.id}</TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>{getQualificationPointName(item.qualification_point)}</TableCell>
-              <TableCell>{getSpecialtyName(item.specialty)}</TableCell>
+              <TableCell  className={classes.cell_removable}>{getSpecialtyName(item.specialty)}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj specjalistę ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/specialists/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

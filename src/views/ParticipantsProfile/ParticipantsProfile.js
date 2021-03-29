@@ -307,7 +307,7 @@ const ParticipantsProfile = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<div>
+					<div className={classes.button_list}>
 						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleEdit}>
 							Edytuj kandydata
 						</Button>
@@ -317,13 +317,13 @@ const ParticipantsProfile = props => {
 					</div>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Card className={classes.form} ref={chart}>
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Dane uczestnika
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Imię(Imiona)</div></Grid>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{name}</div></Grid>
@@ -348,10 +348,10 @@ const ParticipantsProfile = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Adres zameldowania
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{`${street} ${house_number}/${apartment_number}`}</div></Grid>
 									</Grid>
@@ -377,10 +377,10 @@ const ParticipantsProfile = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Dane kontaktowe
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Telefon komórkowy</div></Grid>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{`+${mobile_phone}`}</div></Grid>
@@ -397,10 +397,10 @@ const ParticipantsProfile = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Wykształcenie
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">{educationList.length > 0 && educationList[education - 1].name}</div></Grid>
 									</Grid>
@@ -418,10 +418,10 @@ const ParticipantsProfile = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Tryb pobytu
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Ze względów logistycznych (brak możliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji</div></Grid>
 									</Grid>
@@ -450,7 +450,7 @@ const ParticipantsProfile = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} >
+								<Grid item md={3} xs={12}>
 									<div className={classes.form_title}>
 										Status na rynku pracy
                		</div>
@@ -458,7 +458,7 @@ const ParticipantsProfile = props => {
 										(proszę zazaczyć właściwy)
                 	</div>
 								</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									{
 										employed_status === 1 ?
 											<>
@@ -507,10 +507,10 @@ const ParticipantsProfile = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item xs={3} className={classes.form_title}>
+								<Grid item md={3} xs={12} className={classes.form_title}>
 									Inne
               	</Grid>
-								<Grid item xs={9}>
+								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia</div></Grid>
 									</Grid>
@@ -551,18 +551,18 @@ const ParticipantsProfile = props => {
 							</Grid>
 						</Card>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item md={3} xs={12}>
 						<Grid container spacing={3}>
 							<Grid item xs={12}>
 								<Card className={classes.form}>
 									<Grid container spacing={2}>
 										<div className={classes.form_title_right}>
 											Informacje o uczestniku
-                  </div>
+										</div>
 										<Grid item xs={6}>
 											<div className={classes.input_box_label_left}>
 												Numer uczestnika
-					</div>
+											</div>
 										</Grid>
 										<Grid item xs={6}>
 											<div className={classes.input_box_label_left}>

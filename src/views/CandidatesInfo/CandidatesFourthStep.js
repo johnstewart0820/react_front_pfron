@@ -186,7 +186,7 @@ const CandidatesFourthStep = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<div style={{ display: 'flex' }}>
+					<div className={classes.button_list}>
 						<Button variant="outlined" color="secondary" className={classes.btnProfile} onClick={handleProfile}>
 							Wróć do edycji profilu
           </Button>
@@ -196,7 +196,7 @@ const CandidatesFourthStep = props => {
 					</div>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
-					<Grid item xs={9}>
+					<Grid item md={9} xs={12}>
 						<Tabs defaultIndex={3}>
 							<TabList>
 								<Tab disabled><Link to={`#`} className={classes.button}>ETAP 1</Link></Tab>
@@ -230,7 +230,7 @@ const CandidatesFourthStep = props => {
 							</TabPanel>
 						</Tabs>
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item md={3} xs={12}>
 						<Grid container spacing={3}>
 							<Grid item xs={12}>
 								<Card className={classes.form}>

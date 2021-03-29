@@ -51,7 +51,7 @@ const SortTable = (props) => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>
+          <TableCell className={classes.cell_removable}>
             <TableSortLabel
               active={sortBy === 0}
               direction={sortOrder}
@@ -93,7 +93,7 @@ const SortTable = (props) => {
 							</label>
             </TableSortLabel>
           </TableCell>
-          <TableCell>
+          <TableCell className={classes.cell_removable}>
             <TableSortLabel
               active={sortBy === 4}
               direction={sortOrder}
@@ -111,21 +111,21 @@ const SortTable = (props) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <TableCell><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
+          <TableCell className={classes.cell_removable}><input className={classes.input_box} type="id" value={searchId} id="id" name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
           <TableCell><input className={classes.input_box} type="name" value={searchName} id="name" name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
           <TableCell><SingleSelect value={searchRole} handleChange={setSearchRole} list={roleList} /> </TableCell>
           <TableCell><input className={classes.input_box} type="name" value={searchEmail} id="email" name="searchEmail" onChange={(e) => setSearchEmail(e.target.value)} /></TableCell>
-          <TableCell><SingleSelect value={searchActivateStatus} handleChange={setSearchActivateStatus} list={activateStatusList} /></TableCell>
+          <TableCell className={classes.cell_removable}><SingleSelect value={searchActivateStatus} handleChange={setSearchActivateStatus} list={activateStatusList} /></TableCell>
           <TableCell></TableCell>
         </TableRow>
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell>{item.id}</TableCell>
+              <TableCell className={classes.cell_removable}>{item.id}</TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>{getRoleName(item.id_role)}</TableCell>
               <TableCell>{item.email}</TableCell>
-              <TableCell>{getActivateStatusName(item.activate_status)}</TableCell>
+              <TableCell className={classes.cell_removable}>{getActivateStatusName(item.activate_status)}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj użytkownik systemu ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/users/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

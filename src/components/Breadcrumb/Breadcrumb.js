@@ -6,7 +6,9 @@ import { Typography, Link, Breadcrumbs } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
 	breadcrumb: {
     color: theme.palette.sidebar_title_color,
-		fontFamily: 'roboto'
+		fontFamily: 'roboto',
+		display: 'flex',
+		alignItems: 'center'
 	},
   link: {
     color: theme.palette.green,

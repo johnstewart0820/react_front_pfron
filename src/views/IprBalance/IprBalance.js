@@ -31,7 +31,7 @@ const IprBalance = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast } = useToasts()
+	const { addToast, removeAllToasts } = useToasts()
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Bilans realizacji IPR' }];
 	const [show_status, setShowStatus] = useState(false);
 	const [participant_number, setParticipantNumber] = useState('');
@@ -146,13 +146,14 @@ const IprBalance = props => {
 	}
 
 	const handleSave = () => {
+     removeAllToasts();
 		setProgressStatus(true);
 		ipr.updateBalance(dataList, id)
 			.then(response => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/ipr_list'); }, 1000);
 					}
@@ -162,6 +163,7 @@ const IprBalance = props => {
 	}
 
 	const handleDelete = () => {
+    removeAllToasts();
 		setProgressStatus(true);
 		ipr
 			.delete(id)
@@ -169,7 +171,7 @@ const IprBalance = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/ipr_list'); }, 1000);
 					}

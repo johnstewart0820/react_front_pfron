@@ -27,7 +27,7 @@ const OrkList = props => {
   const classes = useStyles();
   const breadcrumbs = [{active: true, href: '/', label: 'Finanse'}, {active: false, label: 'Lista Ośrodków Rehabilitacji Kompleksowej'}];
   const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
     handleSearch();
   }, []);

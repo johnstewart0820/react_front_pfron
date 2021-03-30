@@ -12,7 +12,7 @@ import clsx from 'clsx';
 const SpecialistsAdd = props => {
   const { history } = props;
   const classes = useStyles();
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   const breadcrumbs = [{ active: true, label: 'Specjaliści', href: '/specialists' }, { active: false, label: 'Dodaj specjalistę' }];
   const [name, setName] = useState('');
   const [qualification, setQualification] = useState(0);
@@ -73,8 +73,10 @@ const SpecialistsAdd = props => {
   }
 
   const handleSave = () => {
+     removeAllToasts();
+       removeAllToasts();
     if (checkError()) {
-      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
       handleError();
     } else {
       setProgressStatus(true);
@@ -84,7 +86,7 @@ const SpecialistsAdd = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           if (response.code === 200) {
             setTimeout(function(){history.push('/specialists');}, 1000);
           }

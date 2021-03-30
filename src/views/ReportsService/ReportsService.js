@@ -13,7 +13,7 @@ import clsx from 'clsx';
 const ReportsService = props => {
   const { history } = props;
   const classes = useStyles();
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   const breadcrumbs = [{ active: true, label: 'Finanse', href: '/reports_service' }, { active: true, label: 'Raporty', href: '#' }, {active: false, label: 'Zestawienie zrealizowanych usług'}];
   const [name, setName] = useState('');
   const [rehabitationCenter, setRehabitationCenter] = useState(0);
@@ -63,7 +63,7 @@ const ReportsService = props => {
 
   const handleGenerate = () => {
     if (checkError()) {
-      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
       handleError();
     } else {
       setProgressStatus(true);

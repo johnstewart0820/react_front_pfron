@@ -11,7 +11,7 @@ const PaymentsAdd = props => {
   const { children } = props;
   const { history } = props;
   const classes = useStyles();
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   const breadcrumbs = [{ active: true, label: 'Finanse', href: '/' },{ active: true, label: 'Zdefiniowane koszty usług', href: '/payments' }, { active: false, label: 'Dodaj koszt' }];
   const [value, setValue] = useState('');
   const [rehabitationCenter, setRehabitationCenter] = useState(0);
@@ -37,8 +37,10 @@ const PaymentsAdd = props => {
   }
 
   const handleSave = () => {
+     removeAllToasts();
+       removeAllToasts();
     if (isNaN(value) || parseInt(rehabitationCenter) === 0 || parseInt(service) === 0) {
-      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
     } else {
       setProgressStatus(true);
 
@@ -47,7 +49,7 @@ const PaymentsAdd = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           if (response.code === 200) {
             setTimeout(function(){history.push('/payments');}, 1000);
           }

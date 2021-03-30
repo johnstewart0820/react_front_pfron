@@ -33,7 +33,7 @@ const Participants = props => {
   const classes = useStyles();
   const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/'}, {active: false, label: 'Lista uczestników'}];
   const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
     participant.getInfo()
       .then(response => {

@@ -14,7 +14,7 @@ const UsersEdit = props => {
 	const { history } = props;
 	const id = props.match.params.id;
 	const classes = useStyles();
-	const { addToast } = useToasts()
+	const { addToast, removeAllToasts } = useToasts()
 	const breadcrumbs = [{ active: true, href: '/', label: 'Ustawienia systemowe' }, { active: true, href: '/users', label: 'Użytkownicy systemu' }, { active: false, label: 'Dodawanie użytkownika' }];
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -58,8 +58,9 @@ const UsersEdit = props => {
 	}
 
 	const handleSave = () => {
+     removeAllToasts();
 		if (name.length === 0 || email.length === 0 || parseInt(role) === 0) {
-			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
 		} else {
 			setProgressStatus(true);
 			let role_arr = [];
@@ -71,7 +72,7 @@ const UsersEdit = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/users'); }, 1000);
 						}
@@ -82,6 +83,7 @@ const UsersEdit = props => {
 	}
 
 	const handleDelete = () => {
+    removeAllToasts();
 		setProgressStatus(true);
 		users
 			.delete(id)
@@ -89,7 +91,7 @@ const UsersEdit = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/users'); }, 1000);
 					}

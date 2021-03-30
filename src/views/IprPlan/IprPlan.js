@@ -33,7 +33,7 @@ const IprPlan = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast } = useToasts()
+	const { addToast, removeAllToasts } = useToasts()
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Plan realizacji IPR' }];
 	const [show_status, setShowStatus] = useState(false);
 	const [moduleList, setModuleList] = useState([]);
@@ -177,6 +177,7 @@ const IprPlan = props => {
 	}
 
 	const handleSave = () => {
+     removeAllToasts();
 		if (selectedItem == 0) {
 			setProgressStatus(true);
 			ipr.updatePlan(moduleList, id)
@@ -184,7 +185,7 @@ const IprPlan = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/ipr_list'); }, 1000);
 						}
@@ -193,7 +194,7 @@ const IprPlan = props => {
 				})
 		} else {
 			if (!checkScheduleData(scheduleData)) {
-				addToast(<label>Proszę wypełnić poprawne pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+				addToast(<label>Proszę wypełnić poprawne pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
 				return;
 			}
 			setProgressStatus(true);
@@ -205,7 +206,7 @@ const IprPlan = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 						if (response.code === 200) {
 							// setTimeout(function () { history.push('/ipr_list'); }, 1000);
 						}
@@ -216,6 +217,7 @@ const IprPlan = props => {
 	}
 
 	const handleDelete = () => {
+    removeAllToasts();
 		setProgressStatus(true);
 		ipr
 			.delete(id)
@@ -223,7 +225,7 @@ const IprPlan = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/ipr_list'); }, 1000);
 					}

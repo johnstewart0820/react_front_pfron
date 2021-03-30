@@ -30,7 +30,7 @@ const Specialists = props => {
   const classes = useStyles();
   const breadcrumbs = [{active: false, label: 'Lista specjalistów'}];
   const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   
   useEffect(() => {
     specialist.getInfo()
@@ -91,6 +91,7 @@ const Specialists = props => {
   }
 
   const handleDelete = () => {
+    removeAllToasts();
     setProgressStatus(true);
     specialist
       .delete(selectedItem)
@@ -99,7 +100,7 @@ const Specialists = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           }
           setProgressStatus(false);
           handleSearch();

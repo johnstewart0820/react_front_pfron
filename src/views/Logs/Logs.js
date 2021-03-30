@@ -60,7 +60,7 @@ const Logs = props => {
   const classes = useStyles();
   const breadcrumbs = [{active: true, href: '/users', label: 'Ustawienia systemowe'}, {active: false, label: 'Log zdarzeń'}];
   const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
     audit.getInfo()
       .then(response => {
@@ -161,6 +161,7 @@ const Logs = props => {
   }
 
   const handleDelete = () => {
+    removeAllToasts();
     setProgressStatus(true);
     audit
       .delete(selectedItem)
@@ -169,7 +170,7 @@ const Logs = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           }
           setProgressStatus(false);
           handleSearch();

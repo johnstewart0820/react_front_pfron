@@ -36,7 +36,7 @@ const Candidates = props => {
 	const classes = useStyles();
 	const breadcrumbs = [{ active: false, label: 'Kandydaci' }];
 	const [progressStatus, setProgressStatus] = useState(false);
-	const { addToast } = useToasts()
+	const { addToast, removeAllToasts } = useToasts()
 	useEffect(() => {
 		candidate.getInfo()
 			.then(response => {
@@ -122,6 +122,7 @@ const Candidates = props => {
 	}
 
 	const handleDelete = () => {
+    removeAllToasts();
 		setProgressStatus(true);
 		candidate
 			.delete(selectedItem)
@@ -130,7 +131,7 @@ const Candidates = props => {
 					history.push('/login');
 				} else {
 					if (response.code === 200) {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 					}
 					setProgressStatus(false);
 					handleSearch();

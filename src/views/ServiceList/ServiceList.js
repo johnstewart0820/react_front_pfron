@@ -33,7 +33,7 @@ const ServiceList = props => {
   const classes = useStyles();
   const breadcrumbs = [{active: true, href: '/', label: 'Usługi'}, {active: false, label: 'Lista dostępnych usług'}];
   const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   
   useEffect(() => {
     service_list.getInfo()
@@ -94,6 +94,7 @@ const ServiceList = props => {
   }
 
   const handleDelete = () => {
+    removeAllToasts();
     setProgressStatus(true);
     service_list
       .delete(selectedItem)
@@ -102,7 +103,7 @@ const ServiceList = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           }
           setProgressStatus(false);
           handleSearch();

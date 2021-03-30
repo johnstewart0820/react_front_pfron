@@ -31,7 +31,7 @@ const OrkTeams = props => {
   const classes = useStyles();
   const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/'}, {active: false, label: 'Zespół ORK'}];
   const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
     ork_team.getInfo()
       .then(response => {
@@ -138,6 +138,7 @@ const OrkTeams = props => {
   }
 
   const handleDelete = () => {
+    removeAllToasts();
     setProgressStatus(true);
     ork_team
       .delete(selectedItem)
@@ -146,7 +147,7 @@ const OrkTeams = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           }
           setProgressStatus(false);
           handleSearch();

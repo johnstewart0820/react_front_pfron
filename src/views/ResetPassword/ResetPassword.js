@@ -20,7 +20,7 @@ const ResetPassword = props => {
   let query = useQuery();
   let token = query.get("token");
   const classes = useStyles();
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   const [input, setInput] = useState({});
   const [error, setError] = useState({});
   const [progressStatus, setProgressStatus] = useState(false);

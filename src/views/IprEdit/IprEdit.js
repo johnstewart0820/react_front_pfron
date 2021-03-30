@@ -26,7 +26,7 @@ const IprEdit = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast } = useToasts()
+	const { addToast, removeAllToasts } = useToasts()
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Dodaj IPR' }];
 	const [participant_number, setParticipantNumber] = useState('');
 	const [participant_name, setParticipantName] = useState('');
@@ -125,8 +125,9 @@ const IprEdit = props => {
 	}
 
 	const handleSave = () => {
+     removeAllToasts();
 		if (checkError()) {
-			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
 			handleError();
 		} else {
 			setProgressStatus(true);
@@ -136,7 +137,7 @@ const IprEdit = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/ipr_list'); }, 1000);
 						}
@@ -147,6 +148,7 @@ const IprEdit = props => {
 	}
 
 	const handleDelete = () => {
+    removeAllToasts();
 		setProgressStatus(true);
 		ipr
 			.delete(id)
@@ -154,7 +156,7 @@ const IprEdit = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true })
+					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/ipr_list'); }, 1000);
 					}

@@ -12,7 +12,7 @@ import { setPropTypes } from 'recompose';
 const ServiceListAdd = props => {
   const { history } = props;
   const classes = useStyles();
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   const breadcrumbs = [{active: true, href: '/', label: 'Usługi'}, {active: true, label: 'Lista dostępnych usług', href: '/service_list'}, {active:false, label: 'Dodaj Usługę'}];
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
@@ -106,8 +106,10 @@ const ServiceListAdd = props => {
   }
 
   const handleSave = () => {
+     removeAllToasts();
+       removeAllToasts();
     if (checkError()) {
-      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
       handleError();
     } else {
       setProgressStatus(true);
@@ -117,7 +119,7 @@ const ServiceListAdd = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           if (response.code === 200) {
             setTimeout(function(){history.push('/service_list');}, 1000);
           }

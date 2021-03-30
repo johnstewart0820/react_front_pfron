@@ -17,7 +17,7 @@ const Forgot = props => {
 
   const classes = useStyles();
 
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   const [input, setInput] = useState({});
   const [error, setError] = useState({});
   const [progressStatus, setProgressStatus] = useState(false);

@@ -19,7 +19,7 @@ const SignIn = props => {
   const { history } = props;
 
   const classes = useStyles();
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   const [checkStatus, setCheckStatus] = useState(false);
   const [input, setInput] = useState({});
   const [error, setError] = useState({});
@@ -37,8 +37,9 @@ const SignIn = props => {
   };
   const handleSignIn = event => {
     setTryLogin(true);
+		removeAllToasts();
     if ((error && ((error.email && error.email.length > 0) || (error.password && error.password.length > 0))) || !input.email || !input.password) {
-      addToast(<label>{constants.CHECK_ALL_FIELDS}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
+      addToast(<label>{constants.CHECK_ALL_FIELDS}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: false })
     } else {
       setProgressStatus(true);
       if (checkStatus) {

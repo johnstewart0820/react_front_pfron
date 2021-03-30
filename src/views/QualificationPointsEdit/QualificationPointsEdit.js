@@ -17,7 +17,7 @@ const QualificationPointsEdit = props => {
   const { history } = props;
   const id = props.match.params.id;
   const classes = useStyles();
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   const breadcrumbs = [{ active: true, label: 'Punkty kwalifikacyjne', href: '/qualification_points' }, { active: false, label: 'Dodaj Punkt' }];
   const [name, setName] = useState('');
   const [type, setType] = useState(0);
@@ -92,8 +92,10 @@ const QualificationPointsEdit = props => {
   }
 
   const handleSave = () => {
+     removeAllToasts();
+       removeAllToasts();
     if (checkError()) {
-      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: true })
+      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
       handleError();
     } else {
       setProgressStatus(true);
@@ -107,7 +109,7 @@ const QualificationPointsEdit = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           if (response.code === 200) {
             setTimeout(function(){history.push('/qualification_points');}, 1000);
           }
@@ -118,6 +120,7 @@ const QualificationPointsEdit = props => {
   }
 
   const handleDelete = () => {
+    removeAllToasts();
     setProgressStatus(true);
     qualification
       .delete(id)
@@ -125,7 +128,7 @@ const QualificationPointsEdit = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: true})
+          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
           if (response.code === 200) {
             setTimeout(function(){history.push('/qualification_points');}, 1000);
           }

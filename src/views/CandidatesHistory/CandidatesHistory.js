@@ -29,7 +29,7 @@ const CandidatesHistory = props => {
   const classes = useStyles();
   const breadcrumbs = [{active: true, label: 'Kandydaci', href: '/candidates'}, {active: false, label: 'Historia modyfikacji'}];
   const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast } = useToasts()
+  const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
     candidate.getHistoryInfo(id)
       .then(response => {

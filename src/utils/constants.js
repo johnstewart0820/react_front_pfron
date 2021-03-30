@@ -67,7 +67,11 @@ class constants {
 			'/payments/create',
 			'/payments/edit/*',
 
-			'/reports',
+			'/reports_service',
+			'/reports_financial',
+			'/reports_participant',
+			'/reports_center',
+			'/reports_performance',
 
 			'/users',
 			'/users/create',
@@ -127,7 +131,11 @@ class constants {
 			'/payments/create',
 			'/payments/edit/*',
 
-			'/reports',
+			'/reports_service',
+			'/reports_financial',
+			'/reports_participant',
+			'/reports_center',
+			'/reports_performance',
 
 			'/profile',
 		],

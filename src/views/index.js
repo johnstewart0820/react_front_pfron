@@ -51,7 +51,11 @@ export { default as Payments } from './Payments';
 export { default as PaymentsAdd } from './PaymentsAdd';
 export { default as PaymentsEdit } from './PaymentsEdit';
 
-export { default as Reports } from './Reports';
+export { default as ReportsService } from './ReportsService';
+export { default as ReportsFinancial } from './ReportsFinancial';
+export { default as ReportsParticipant } from './ReportsParticipant';
+export { default as ReportsCenter } from './ReportsCenter';
+export { default as ReportsPerformance } from './ReportsPerformance';
 
 export { default as Users } from './Users';
 export { default as UsersAdd } from './UsersAdd';

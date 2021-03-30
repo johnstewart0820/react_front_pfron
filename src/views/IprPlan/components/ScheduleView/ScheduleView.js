@@ -52,12 +52,13 @@ const ScheduleView = (props) => {
 
 	useEffect(() => {
 		if (weeks.length > 0)
-			setWeek(0);
+			setWeek(1);
 	}, [weeks]);
 
 	useEffect(() => {
+		// console.log(weeks, week);
 		if (weeks.length !== 0) {
-			let _week = weeks[week];
+			let _week = weeks[week - 1];
 			let _start_date = _week.from;
 			let _to_date = _week.to;
 
@@ -66,13 +67,13 @@ const ScheduleView = (props) => {
 			for (let i = 0; i < 7; i++) {
 				let default_start_date = JSON.parse(JSON.stringify(_start_date));
 				let date = moment(default_start_date).add(i, 'days');
-				if (index === 0 && parseInt(week) === 0 && date.diff(moment(scheduleDate), 'days') == 0) {
+				if (index === 0 && parseInt(week) === 1 && date.diff(moment(scheduleDate), 'days') == 0) {
 					index = i;
 				}
 				_arr.push({ name: `${date.get('date')}.${date.get('month') + 1}.${date.get('year')}`, date: date, id: i });
 			}
 			setDateList(_arr);
-			handleGetWeekStatus(weeks[week]);
+			handleGetWeekStatus(weeks[week - 1]);
 			handleGetScheduleData(_arr[index].date);
 			setSelectedItem(index);
 		}

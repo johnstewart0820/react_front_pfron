@@ -45,7 +45,11 @@ import {
   Payments as PaymentsView,
   PaymentsAdd as PaymentsAddView,
   PaymentsEdit as PaymentsEditView,
-  Reports as ReportsView,
+  ReportsService as ReportsServiceView,
+	ReportsFinancial as ReportsFinancialView,
+	ReportsParticipant as ReportsParticipantView,
+	ReportsCenter as ReportsCenterView,
+	ReportsPerformance as ReportsPerformanceView,
   Users as UsersView,
   UsersAdd as UsersAddView,
   UsersEdit as UsersEditView,
@@ -333,11 +337,39 @@ const Routes = (props) => {
         path="/payments/edit/:id"
       />
       <RouteWithLayout
-        component={ReportsView}
+        component={ReportsServiceView}
         exact
         layout={MainLayout}
-        title='Raporty'
-        path="/reports"
+        title='Zestawienie zrealizowanych usług'
+        path="/reports_service"
+      />
+			<RouteWithLayout
+        component={ReportsFinancialView}
+        exact
+        layout={MainLayout}
+        title='Raport finansowy'
+        path="/reports_financial"
+      />
+			<RouteWithLayout
+        component={ReportsParticipantView}
+        exact
+        layout={MainLayout}
+        title='Raport sprawozdawczy z rekrutacji uczestników'
+        path="/reports_participant"
+      />
+			<RouteWithLayout
+        component={ReportsCenterView}
+        exact
+        layout={MainLayout}
+        title='Raport sprawozdawczy z działalności ośrodka'
+        path="/reports_center"
+      />
+			<RouteWithLayout
+        component={ReportsPerformanceView}
+        exact
+        layout={MainLayout}
+        title='Nadwykonania'
+        path="/reports_performance"
       />
       <RouteWithLayout
         component={UsersView}

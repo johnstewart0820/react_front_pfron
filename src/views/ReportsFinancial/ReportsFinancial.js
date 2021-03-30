@@ -7,7 +7,7 @@ import {
   Button
 } from '@material-ui/core';
 
-const Reports = props => {
+const ReportsFinancial = props => {
   const { children } = props;
 
   const { history } = props;
@@ -25,4 +25,4 @@ const Reports = props => {
   );
 };
 
-export default Reports;
+export default ReportsFinancial;

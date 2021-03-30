@@ -104,8 +104,28 @@ const Sidebar = props => {
 			},
 			{
 				title: 'Raporty',
-				href: '/reports',
-				icon: <RaportyIcon/>
+				href: '#',
+				icon: <RaportyIcon/>,
+				sub: [{
+					title: 'Zestawienie zrealizowanych usług',
+					href: '/reports_service',
+				},
+				{
+					title: 'Raport finansowy',
+					href: '/reports_financial',
+				},
+				{
+					title: 'Raport sprawozdawczy z rekrutacji uczestników',
+					href: '/reports_participant',
+				},
+				{
+					title: 'Raport sprawozdawczy z działalności ośrodka',
+					href: '/reports_center',
+				},
+				{
+					title: 'Nadwykonania',
+					href: '/reports_performance',
+				}]
 			},
 			{
 				label: 'USTAWIENIA SYSTEMOWE'
@@ -235,6 +255,7 @@ const Sidebar = props => {
 				<SidebarNav
 					className={classes.nav}
 					pages={pages}
+					history={history}
 				/>
 			</div>
 		</Drawer>

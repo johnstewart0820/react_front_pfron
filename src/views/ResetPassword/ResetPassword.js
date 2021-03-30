@@ -33,7 +33,7 @@ const ResetPassword = props => {
 
   const handleResetPassword = event => {
     if ((error && ((error.password && error.password.length > 0) || (error.reset_password && error.reset_password.length > 0))) || !input.password || !input.reset_password) {
-      addToast(<label>{constants.CHECK_ALL_FIELDS}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
+      addToast(<label>{constants.CHECK_ALL_FIELDS}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: false })
     } else {
       setProgressStatus(true);
       auth
@@ -46,7 +46,7 @@ const ResetPassword = props => {
             // history.push('/login');
           } else {
             setProgressStatus(false);
-            addToast(<label>{response.message}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: true })
+            addToast(<label>{response.message}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: false })
           }
         })
     }

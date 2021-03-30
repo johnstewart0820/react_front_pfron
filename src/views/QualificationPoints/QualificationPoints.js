@@ -159,7 +159,7 @@ const QualificationPoints = props => {
       <div className={classes.filter}>
         <Breadcrumb list={breadcrumbs}/>
         <div className={classes.rowsBlock}>
-          <div>Pokaz:</div>
+          <div>Pokaż:</div>
           <SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
           <div>pozycji</div>
         </div>

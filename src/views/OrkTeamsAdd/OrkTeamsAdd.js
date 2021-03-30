@@ -18,7 +18,7 @@ const OrkTeamsAdd = props => {
   const { history } = props;
   const classes = useStyles();
   const { addToast, removeAllToasts } = useToasts()
-  const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/' }, { active: true, label: 'Zespół ORK', href: '/ork_teams' }, { active: false, label: 'Dodaj osobę' }];
+  const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/ork_teams' }, { active: true, label: 'Zespół ORK', href: '/ork_teams' }, { active: false, label: 'Dodaj osobę' }];
   const [name, setName] = useState('');
   const [rehabitationCenter, setRehabitationCenter] = useState([]);
   const [rehabitationCenterList, setRehabitationCenterList] = useState([]);

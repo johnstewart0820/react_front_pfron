@@ -29,7 +29,7 @@ const OrkTeams = props => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/'}, {active: false, label: 'Zespół ORK'}];
+  const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/ork_teams'}, {active: false, label: 'Zespół ORK'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
@@ -172,7 +172,7 @@ const OrkTeams = props => {
       <div className={classes.filter}>
         <Breadcrumb list={breadcrumbs}/>
         <div className={classes.rowsBlock}>
-          <div>Pokaz:</div>
+          <div>Pokaż:</div>
           <SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
           <div>pozycji</div>
         </div>

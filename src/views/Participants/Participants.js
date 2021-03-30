@@ -31,7 +31,7 @@ const Participants = props => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/'}, {active: false, label: 'Lista uczestników'}];
+  const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/participants'}, {active: false, label: 'Lista uczestników'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
@@ -115,7 +115,7 @@ const Participants = props => {
       <div className={classes.filter}>
         <Breadcrumb list={breadcrumbs}/>
         <div className={classes.rowsBlock}>
-          <div>Pokaz:</div>
+          <div>Pokaż:</div>
           <SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
           <div>pozycji</div>
         </div>

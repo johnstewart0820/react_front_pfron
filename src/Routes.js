@@ -58,7 +58,8 @@ import {
   SignIn as SignInView,
   Forgot as ForgotView,
   ResetPassword as ResetPasswordView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
+	DeclarationAccessibility as DeclarationAccessibilityView
 } from './views';
 
 const Routes = (props) => {
@@ -434,6 +435,13 @@ const Routes = (props) => {
         layout={MinimalLayout}
 				title='Nie znaleziono'
         path="/not-found"
+      />
+			<RouteWithLayout
+        component={DeclarationAccessibilityView}
+        exact
+        layout={MinimalLayout}
+				title='Deklaracja dostępności'
+        path="/declaration_accessibility"
       />
       <Redirect to="/not-found" />
     </Switch>

@@ -31,7 +31,7 @@ const ServiceList = props => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: true, href: '/', label: 'Usługi'}, {active: false, label: 'Lista dostępnych usług'}];
+  const breadcrumbs = [{active: true, href: '/service_list', label: 'Usługi'}, {active: false, label: 'Lista dostępnych usług'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast, removeAllToasts } = useToasts()
   
@@ -146,7 +146,7 @@ const ServiceList = props => {
       <div className={classes.filter}>
         <Breadcrumb list={breadcrumbs}/>
         <div className={classes.rowsBlock}>
-          <div>Pokaz:</div>
+          <div>Pokaż:</div>
           <SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
           <div>pozycji</div>
         </div>

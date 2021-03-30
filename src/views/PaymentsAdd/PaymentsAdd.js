@@ -12,7 +12,7 @@ const PaymentsAdd = props => {
   const { history } = props;
   const classes = useStyles();
   const { addToast, removeAllToasts } = useToasts()
-  const breadcrumbs = [{ active: true, label: 'Finanse', href: '/' },{ active: true, label: 'Zdefiniowane koszty usług', href: '/payments' }, { active: false, label: 'Dodaj koszt' }];
+  const breadcrumbs = [{ active: true, label: 'Finanse', href: '/payments' },{ active: true, label: 'Zdefiniowane koszty usług', href: '/payments' }, { active: false, label: 'Dodaj koszt' }];
   const [value, setValue] = useState('');
   const [rehabitationCenter, setRehabitationCenter] = useState(0);
   const [rehabitationCenterList, setRehabitationCenterList] = useState([]);

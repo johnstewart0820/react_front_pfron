@@ -22,9 +22,12 @@ const SingleSelect = (props) => {
         }}
       >
         {
-          list.map((item, index) => 
-            <option key={index} value={item}>{item}</option>
-          )
+          list.map((item, index) => (
+						<>
+						<label for={item}>Ilość pozycji na stronie</label>
+            <option id={item} key={index} value={item}>{item}</option>
+						</>
+					))
         }
       </Select>
     </FormControl>

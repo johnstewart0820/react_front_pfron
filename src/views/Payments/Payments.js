@@ -29,7 +29,7 @@ const Payments = props => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: true, href: '/', label: 'Finanse'}, {active: false, label: 'Zdefiniowane koszty usług'}];
+  const breadcrumbs = [{active: true, href: '/payments', label: 'Finanse'}, {active: false, label: 'Zdefiniowane koszty usług'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
@@ -143,7 +143,7 @@ const Payments = props => {
       <div className={classes.filter}>
         <Breadcrumb list={breadcrumbs}/>
         <div className={classes.rowsBlock}>
-          <div>Pokaz:</div>
+          <div>Pokaż:</div>
           <SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
           <div>pozycji</div>
         </div>

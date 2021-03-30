@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
   content: {
     width: '100%',
   },
+	wcag_footer: {
+		fontSize: '1.4em',
+		color: theme.palette.text.primary,
+		textTransform: 'initial',
+		fontFamily: 'roboto'
+	},
 	site_title: {
 		marginBottom: theme.spacing(2),
 		color: theme.palette.color,

@@ -15,7 +15,7 @@ const UsersEdit = props => {
 	const id = props.match.params.id;
 	const classes = useStyles();
 	const { addToast, removeAllToasts } = useToasts()
-	const breadcrumbs = [{ active: true, href: '/', label: 'Ustawienia systemowe' }, { active: true, href: '/users', label: 'Użytkownicy systemu' }, { active: false, label: 'Dodawanie użytkownika' }];
+	const breadcrumbs = [{ active: true, href: '/users', label: 'Ustawienia systemowe' }, { active: true, href: '/users', label: 'Użytkownicy systemu' }, { active: false, label: 'Dodawanie użytkownika' }];
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [role, setRole] = useState([]);

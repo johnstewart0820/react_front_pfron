@@ -8,9 +8,11 @@ import {
 } from '@material-ui/core';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faFont, faLink, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from 'react-router';
 
 const Minimal = props => {
   const { children } = props;
+	const history = useHistory();
   const theme = useTheme();
   const classes = useStyles(theme);
 	const [underlineStatus, setUnderlineStatus] = useState(false);
@@ -39,6 +41,10 @@ const Minimal = props => {
 		e.preventDefault(); 
 		handle();
 		setContrastStatus(!contrastStatus);
+	}
+
+	const handleWcagPage = () => {
+		history.push('/declaration_accessibility');
 	}
 
   return (
@@ -105,6 +111,11 @@ const Minimal = props => {
 				</Grid>
         <main className={classes.content}>{children}</main>
         <Grid container spacing={3} className={classes.footer}>
+					<Grid item xs={12}>
+						<Button className={classes.wcag_footer} onClick={handleWcagPage}>
+							Deklaracja dostępności
+						</Button>
+					</Grid>
           <Grid item md={2} sm={4} xs={4}>
             <img className={classes.logo} src="/images/logos/footer_pfron.png" alt="Logo Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych" />
           </Grid>

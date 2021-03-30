@@ -25,7 +25,7 @@ const OrkList = props => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
-  const breadcrumbs = [{active: true, href: '/', label: 'Finanse'}, {active: false, label: 'Lista Ośrodków Rehabilitacji Kompleksowej'}];
+  const breadcrumbs = [{active: true, href: '/ork_list', label: 'Finanse'}, {active: false, label: 'Lista Ośrodków Rehabilitacji Kompleksowej'}];
   const [progressStatus, setProgressStatus] = useState(false);
   const { addToast, removeAllToasts } = useToasts()
   useEffect(() => {
@@ -90,7 +90,7 @@ const OrkList = props => {
       <div className={classes.filter}>
         <Breadcrumb list={breadcrumbs}/>
         <div className={classes.rowsBlock}>
-          <div>Pokaz:</div>
+          <div>Pokaż:</div>
           <SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
           <div>pozycji</div>
         </div>

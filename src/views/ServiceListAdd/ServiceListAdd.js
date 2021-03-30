@@ -13,7 +13,7 @@ const ServiceListAdd = props => {
   const { history } = props;
   const classes = useStyles();
   const { addToast, removeAllToasts } = useToasts()
-  const breadcrumbs = [{active: true, href: '/', label: 'Usługi'}, {active: true, label: 'Lista dostępnych usług', href: '/service_list'}, {active:false, label: 'Dodaj Usługę'}];
+  const breadcrumbs = [{active: true, href: '/service_list', label: 'Usługi'}, {active: true, label: 'Lista dostępnych usług', href: '/service_list'}, {active:false, label: 'Dodaj Usługę'}];
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
   const [module, setModule] = useState(0);

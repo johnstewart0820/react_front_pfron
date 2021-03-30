@@ -68,3 +68,4 @@ export { default as SignIn } from './SignIn';
 export { default as Forgot } from './Forgot';
 export { default as ResetPassword } from './ResetPassword';
 export { default as NotFound } from './NotFound';
+export { default as DeclarationAccessibility } from './DeclarationAccessibility';

@@ -226,7 +226,7 @@ const OrkListEdit = props => {
                           <Grid item xs={6}>
                             <div className={classes.title}>
 															<label htmlFor={`start_date${index}`}>
-																Data rozpocęcia
+																Data rozpoczęcia
 															</label>
                           	</div>
                             <Grid item xs={12}>
@@ -349,7 +349,7 @@ const OrkListEdit = props => {
               <Grid item md={9} xs={12}>
                 <Grid container spacing={2}>
                   <Grid item xs={7}>
-                    <div className={classes.top_label}><label  htmlFor="contact_person">Imię i nazwiko</label></div>
+                    <div className={classes.top_label}><label  htmlFor="contact_person">Imię i nazwisko</label></div>
                     <input className={classes.input_box} type="text" value={rehabitationCenter.contact} name="contact" id="contact_person" onChange={handleChange} />
                   </Grid>
                   <Grid item xs={5}>

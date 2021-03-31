@@ -208,7 +208,7 @@ const CandidatesInfoPreview = props => {
 							Edytuj kartę informacyjną
 						</Button>
 						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-							Wróć do listy kandydatow
+							Wróć do listy kandydatów
 						</Button>
 					</div>
 				</div>

@@ -774,7 +774,7 @@ const CandidatesEdit = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy kandydatow
+						Wróć do listy kandydatów
         	</Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
@@ -1261,11 +1261,11 @@ const CandidatesEdit = props => {
 									<Grid container spacing={2}>
 										<div className={classes.form_title}>
 											Karty informacyjne
-                  </div>
+                  	</div>
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
-												Załóż kartę informacyjną
-                    </Button>
+												{parseInt(stage) === 1 && parseInt(status) == 1 ? 'Załóż kartę informacyjną' : 'Zobacz kartę informacyjną'}
+                    	</Button>
 										</Grid>
 									</Grid>
 								</Card>

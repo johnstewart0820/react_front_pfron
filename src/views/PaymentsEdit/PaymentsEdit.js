@@ -110,7 +110,7 @@ const PaymentsEdit = props => {
                 Dane podstawowe
               </Grid>
               <Grid item md={9} xs={12}>
-                <div className={classes.top_label}><label htmlFor="value">Wysokość kosztu</label></div>
+                <div className={classes.top_label}><label htmlFor="value">Cena jednostkowa</label></div>
                 <input className={classes.input_box} type="name" value={value} id="value" name="name" onChange={(e) => setValue(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Wybierz ORK</div>
                 <SingleSelect value={rehabitationCenter} handleChange={setRehabitationCenter} list={rehabitationCenterList} />

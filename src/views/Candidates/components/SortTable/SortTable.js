@@ -123,7 +123,7 @@ const SortTable = (props) => {
                 direction={sortOrder}
                 onClick={() => requestSort(4)}
               >
-                Etap rekutacji
+                Etap rekrutacji
             </TableSortLabel>
             </TableCell>
 						<TableCell className={classes.cell_removable}>

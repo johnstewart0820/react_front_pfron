@@ -16,7 +16,7 @@ export const modelPropertyLabel = (modelName, property) => {
 			name:               'Imię kandydata',
 			surname:            'Nazwisko kandydata',
 			qualificationPoint: 'Punkt kwalifikacyjny',
-			stage:              'Etap rekutacji',
+			stage:              'Etap rekrutacji',
 		},
 		'App\\Models\\OrkList': {
 			name:                'Nazwa ośrodka',
@@ -28,7 +28,7 @@ export const modelPropertyLabel = (modelName, property) => {
 		},
 		'App\\Models\\Payment': {
 			name:                'Nazwa kosztu',
-			value:               'Wysokość',
+			value:               'Cena jednostkowa',
 			rehabitation_center: 'Koszt dla ORK',
 			service:             'Usługa',
 		},

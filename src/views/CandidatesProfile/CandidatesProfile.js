@@ -286,7 +286,7 @@ const CandidatesProfile = props => {
 							Edytuj kandydata
 						</Button>
 						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-							Wróć do listy kandydatow
+							Wróć do listy kandydatów
 						</Button>
 					</div>
 				</div>
@@ -535,7 +535,7 @@ const CandidatesProfile = props => {
                   </div>
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
-												Załóż kartę informacyjną
+												{parseInt(stage) === 1 && parseInt(status) == 1 ? 'Załóż kartę informacyjną' : 'Zobacz kartę informacyjną'}
                     </Button>
 										</Grid>
 									</Grid>

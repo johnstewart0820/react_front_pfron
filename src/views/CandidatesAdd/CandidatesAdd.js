@@ -667,7 +667,7 @@ const CandidatesAdd = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy kandydatow
+						Wróć do listy kandydatów
         </Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>

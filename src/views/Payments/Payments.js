@@ -93,7 +93,7 @@ const Payments = props => {
     }
     
     EXCEL.outPut({
-      header: ['ID', 'Wysokość', 'Koszt dla ORK', 'Usługa'],
+      header: ['ID', 'Cena jednostkowa', 'Koszt dla ORK', 'Usługa'],
       data: export_data,
       name: 'download'
     })

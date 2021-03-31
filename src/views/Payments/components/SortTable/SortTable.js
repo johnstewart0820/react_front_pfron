@@ -44,7 +44,7 @@ const SortTable = (props) => {
               onClick={() => requestSort(2)}
             >
 							<label htmlFor="value">
-              Wysokość
+              Cena jednostkowa
 							</label>
             </TableSortLabel>
           </TableCell>

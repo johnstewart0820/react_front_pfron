@@ -16,7 +16,7 @@ import clsx from 'clsx';
 const ScheduleView = (props) => {
 	const classes = useStyles();
 	const { scheduleDate, handleGetScheduleData, scheduleData, setScheduleData, week, setWeek, weeks, setWeeks, status, setStatus, dateList, setDateList, selectedItem, setSelectedItem, id, history } = props;
-	const [statusList, setStatusList] = useState([{ id: 1, name: 'Zaakceptowany' }, { id: 2, name: 'Niezaakpceptowany' }]);
+	const [statusList, setStatusList] = useState([{ id: 1, name: 'Planowany' }, { id: 2, name: 'Zrealizowany' }]);
 
 	const _date_arr = [
 		'PONIEDZIAŁEK',

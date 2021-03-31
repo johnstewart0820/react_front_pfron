@@ -94,7 +94,7 @@ const Cockpit = props => {
 										<Grid item md={1} sm={0} xs={0} className={classes.title_block}></Grid>
 										<Grid item md={10} sm={12} xs={12}>
 											<div className={classes.title}>
-												Wypracowanie i pilotazowe wdrozenie modelu kompleksowej rehabilitacji umozliwiajacej podjecje lub powrot do pracy
+												Wypracowanie i pilotażowe wdrożenie modelu kompleksowej rehabilitacji umożliwiającej podjęcie lub powrót do pracy
 											</div>
 										</Grid>
 										<Grid item md={1} sm={0} xs={0} className={classes.title_block}></Grid>

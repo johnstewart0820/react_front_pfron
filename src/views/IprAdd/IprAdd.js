@@ -203,7 +203,7 @@ const IprAdd = props => {
 											/>
 										</Grid>
 										<Grid item xs={12}>
-											<div className={classes.top_label}><label htmlFor="profession">Wybrany zawod</label></div>
+											<div className={classes.top_label}><label htmlFor="profession">Wybrany zawód</label></div>
 											<input className={classes.input_box} type="name" value={profession} id="profession" name="name" onChange={(e) => handleChangeProfession(e.target.value)} />
 										</Grid>
 									</Grid>

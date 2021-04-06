@@ -288,7 +288,7 @@ const IprBalance = props => {
 													/>
 												</Grid>
 												<Grid item xs={12}>
-													<div className={classes.top_label}><label htmlFor="profession">Wybrany zawod</label></div>
+													<div className={classes.top_label}><label htmlFor="profession">Wybrany zawód</label></div>
 													<input className={classes.input_box} type="name" value={profession} name="name" id="profession" disabled={true} />
 												</Grid>
 											</Grid>
@@ -306,7 +306,7 @@ const IprBalance = props => {
 										<Grid container spacing={2}>
 											<Grid item xs={4} className={classes.service}>
 												<div style={{display: 'flex', justifyContent: 'center'}}>
-													Okres probny
+													Okres próbny
 												</div>
 												<Grid container spacing={3} className={classes.form_service_title}>
 													<Grid item xs={6}>
@@ -385,7 +385,7 @@ const IprBalance = props => {
 															<Grid item xs={3}>
 																<input className={classes.input_box} type="name" value={item.balance.amount} name="name" id="value_balance" onChange={(e) => handleChangeBalanceAmount(e.target.value, index_module, index_service)}/>
 															</Grid>
-															<Grid item xs={4} className={classes.service}>Uwagi dotyczace realizacji wsparcia (zmiany, odstepstwa od IPR, powody opoznien realizacji ...)</Grid>
+															<Grid item xs={4} className={classes.service}>Uwagi dotyczące realizacji wsparcia (zmiany, odstępstwa od IPR, powody opóźnień realizacji...)</Grid>
 															<Grid item xs={8}>
 																<input className={classes.input_box} aria-label="remark" type="name" value={item.balance.remarks} name="name" onChange={(e) => handleChangeBalanceRemark(e.target.value, index_module, index_service)}/>
 															</Grid>

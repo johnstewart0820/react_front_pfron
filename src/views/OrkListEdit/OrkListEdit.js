@@ -344,7 +344,7 @@ const OrkListEdit = props => {
               </Grid>
               <div className={classes.divide}/>
               <Grid item md={3} xs={12} className={classes.form_title}>
-                Osoba do kontaku (odpowiedzialna za zbieranie danych)
+								Osoba do kontaktu (odpowiedzialna za zbieranie danych)
               </Grid>
               <Grid item md={9} xs={12}>
                 <Grid container spacing={2}>

@@ -185,7 +185,7 @@ const PlanView = (props) => {
 									/>
 								</Grid>
 								<Grid item md={6} xs={12}>
-									<div className={classes.top_label}><label htmlFor="ork_person">Osoba realizująca (Rehabilitant powadzacy)</label></div>
+									<div className={classes.top_label}><label htmlFor="ork_person">Osoba realizująca</label></div>
 									<Autocomplete
 										disabled={service.disable_status}
 										id="ork_person"

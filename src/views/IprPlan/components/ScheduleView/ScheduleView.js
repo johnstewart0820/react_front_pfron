@@ -42,7 +42,7 @@ const ScheduleView = (props) => {
 				id: i + 1,
 				from: s_date,
 				to: f_date,
-				name: `tydzien ${i + 1} | 
+				name: `tydzień ${i + 1} | 
 			${s_date.get('date')}.${s_date.get('month') + 1}.${s_date.get('year')}-${f_date.get('date')}.${f_date.get('month') + 1}.${f_date.get('year')}`
 			}
 			_arr.push(item);
@@ -206,11 +206,11 @@ const ScheduleView = (props) => {
 			<Grid container spacing={3} className={classes.form}>
 				<Grid item md={3} xs={12}>
 					<div className={classes.form_title}>
-						Tydzien
+						Tydzień
 					</div>
 				</Grid>
 				<Grid item md={5} xs={12}>
-					<div className={classes.top_label_content}>Wybierz tydzien</div>
+					<div className={classes.top_label_content}>Wybierz tydzień</div>
 					<WeekSelect value={week} handleChange={setWeek} list={weeks} />
 				</Grid>
 				<Grid item md={4} xs={12}>

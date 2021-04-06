@@ -403,7 +403,7 @@ const CandidatesProfile = props => {
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{stay_status === 1 ? "TAK" : "NIE"}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Jestem jedynym opiekunem prawnym dzieci, które musza przebywać ze mną</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">Jestem jedynym opiekunem prawnym dzieci, które muszą przebywać ze mną</div></Grid>
 									</Grid>
 									{
 										children_applicable ?
@@ -429,7 +429,7 @@ const CandidatesProfile = props => {
 										Status na rynku pracy
                		</div>
 									<div className={classes.form_title_small}>
-										(proszę zazaczyć właściwy)
+										(proszę zaznaczyć właściwy)
                 	</div>
 								</Grid>
 								<Grid item md={9} xs={12}>

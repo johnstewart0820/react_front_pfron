@@ -131,7 +131,7 @@ const Sidebar = props => {
 				label: 'USTAWIENIA SYSTEMOWE'
 			},
 			{
-				title: 'Uźytkownicy systemu',
+				title: 'Użytkownicy systemu',
 				href: '/users',
 				icon: <UzytkownicyIcon/>
 			},

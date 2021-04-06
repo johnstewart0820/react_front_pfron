@@ -128,7 +128,7 @@ const Logs = props => {
       const role = data[i].role;
       const item = {};
       item['ID']         = data[i].id;
-      item['Uźytkownik'] = user ? user.name : '';
+      item['Użytkownik'] = user ? user.name : '';
       item['Rola']       = role ? role.name : '';
       item['Data']       = DateTime.fromISO(data[i].date).toFormat('dd.MM.yyyy hh:mm');
       item['Czynność']   = data[i].event;

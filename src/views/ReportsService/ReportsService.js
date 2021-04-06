@@ -155,16 +155,7 @@ const ReportsService = props => {
 		header.push({value : 'Cena brutto (H x (1+J))', style: {font: {bold: true, sz: "8"}, alignment: {wrapText: true, vertical: "top"}}});
 		total_data[0].columns = column;
 		total_data[0].data.push(header);
-		// [
-		// 	{ value: "H1", style: { font: { sz: "24", bold: true } } },
-		// 	{ value: "Bold", style: { font: { bold: true } } },
-		// 	{
-		// 		value: "Red",
-		// 		style: {
-		// 			fill: { patternType: "solid", fgColor: { rgb: "FFFF0000" } },
-		// 		},
-		// 	},
-		// ],
+		
 		let sub_header = [
 			{value : 'A', style: {font: {bold: true}, alignment: {wrapText: true, vertical: "top"}}},
 			{value : 'B', style: {font: {bold: true}, alignment: {wrapText: true, vertical: "top"}}},
@@ -187,7 +178,7 @@ const ReportsService = props => {
 			for (let i = 0; i < module.length; i ++) {
 				let item = [];
 				item.push('');
-				item.push({value : romic_number[i] +'. ' + module[i].name, style: {font: {bold: true}}});
+				item.push({value : romic_number[i] +'. ' + module[i].name, style: {font: {bold: true}, alignment: {wrapText: true}}});
 				total_data[0].data.push(item);
 				let service_list = module[i].service_lists;
 				for (let j = 0; j < service_list.length; j ++) {

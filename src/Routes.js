@@ -386,13 +386,13 @@ const Routes = (props) => {
       <RouteWithLayout
         component={UsersAddView}
         layout={MainLayout}
-        title='Dodawanie Uźytkownika'
+        title='Dodawanie Użytkownika'
         path="/users/create"
       />
       <RouteWithLayout
         component={UsersEditView}
         layout={MainLayout}
-        title='Dodawanie Uźytkownika'
+        title='Dodawanie Użytkownika'
         path="/users/edit/:id"
       />
       <RouteWithLayout

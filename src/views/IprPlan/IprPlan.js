@@ -323,7 +323,7 @@ const IprPlan = props => {
 										/>
 									</Grid>
 									<Grid item xs={12}>
-										<div className={classes.top_label} htmlFor="name">Wybrany zawod</div>
+										<div className={classes.top_label} htmlFor="name">Wybrany zawód</div>
 										<input className={classes.input_box} type="name" value={profession} name="name" disabled={true}/>
 									</Grid>
 								</Grid>

@@ -107,7 +107,7 @@ const UsersEdit = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy uźytkowników
+						Wróć do listy użytkowników
         </Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
@@ -115,7 +115,7 @@ const UsersEdit = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
-									Uźytkownik
+									Użytkownik
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>

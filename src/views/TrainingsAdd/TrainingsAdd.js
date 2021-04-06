@@ -258,7 +258,7 @@ const TrainingsAdd = props => {
 		}
 
 		EXCEL.outPut({
-			header: ['Nazwa zajec', 'Data zajec', 'Godzina rozpoczecia', 'Godzina zakonczenia', 'Czas przerw(w minutach)', 'Czas trwania(w godzinach)'],
+			header: ['Nazwa zajęć', 'Data zajęć', 'Godzina rozpoczęcia', 'Godzina zakończenia', 'Czas przerw(w minutach)', 'Czas trwania(w godzinach)'],
 			data: export_data,
 			name: 'download'
 		})
@@ -365,7 +365,7 @@ const TrainingsAdd = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy szkolen
+						Wróć do listy szkoleń
         			</Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
@@ -382,7 +382,7 @@ const TrainingsAdd = props => {
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.number })} id="number" type="name" value={training.number} name="name" onChange={(e) => handleChangeNumber(e.target.value)} />
 									<div className={classes.input_box_label} htmlFor="type">ORK</div>
 									<SingleSelect value={training.rehabitation_center} handleChange={(value) => handleChangeRehabitationCenter(value)} list={rehabitationCenterList} error={error.rehabitation_center} />
-									<div className={classes.input_box_label} htmlFor="type">Usługa, do ktorej jest przypisane szkolenie</div>
+									<div className={classes.input_box_label} htmlFor="type">Usługa, do której jest przypisane szkolenie</div>
 									<SingleSelect value={training.service} handleChange={(value) => handleChangeService(value)} list={serviceList} error={error.service} />
 								</Grid>
 							</Grid>
@@ -395,7 +395,7 @@ const TrainingsAdd = props => {
 											Uczestnicy
 										</div>
 										<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleExportParticipants}>
-											Eksportuj liste do XLS
+											Eksportuj listę do XLS
 										</Button>
 									</div>
 									{
@@ -449,7 +449,7 @@ const TrainingsAdd = props => {
 										training_class.map((item, index) => (
 											<Grid container spacing={2}>
 												<Grid item xs={index == 0 && training_class.length === 1 ? 12 : 11}>
-													<div className={classes.input_box_label}><label htmlFor="class_name">Nazwa zajec</label></div>
+													<div className={classes.input_box_label}><label htmlFor="class_name">Nazwa zajęć</label></div>
 													<input className={clsx({ [classes.input_box]: true, [classes.error]: error_class[index].name })} id="class_name" type="name" value={item.name} name="name" onChange={(e) => handleChangeClassName(e.target.value, index)} />
 												</Grid>
 												{
@@ -463,7 +463,7 @@ const TrainingsAdd = props => {
 														</Grid>
 												}
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}><label htmlFor="class_date">Data zajec</label></div>
+													<div className={classes.input_box_label}><label htmlFor="class_date">Data zajęć</label></div>
 													<KeyboardDatePicker
 														disableToolbar
 														variant="inline"
@@ -479,7 +479,7 @@ const TrainingsAdd = props => {
 													/>
 												</Grid>
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}><label htmlFor="start_hour">Godzina rozpoczecia</label></div>
+													<div className={classes.input_box_label}><label htmlFor="start_hour">Godzina rozpoczęcia</label></div>
 													<MaskedInput
 														className={classes.input_box}
 														id="start_hour"
@@ -489,7 +489,7 @@ const TrainingsAdd = props => {
 													/>
 												</Grid>
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}><label htmlFor="end_hour">Godzina zakonczenia</label></div>
+													<div className={classes.input_box_label}><label htmlFor="end_hour">Godzina zakończenia</label></div>
 													<MaskedInput
 														className={classes.input_box}
 														id="end_hour"
@@ -541,7 +541,7 @@ const TrainingsAdd = props => {
 						</Card>
 						<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
 							<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleCreateClass}>
-								Dodaj kolejne zajecia
+								Dodaj kolejne zajęcia
 							</Button>
 						</div>
 					</Grid>

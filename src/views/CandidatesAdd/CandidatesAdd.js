@@ -892,7 +892,7 @@ const CandidatesAdd = props => {
 														onChange={() => handleChangeChildrenApplicable(!children_applicable)}
 													/>
 												}
-												label='Jestem jedynym opiekunem prawnym dzieci, które musza przebywać ze mną'
+												label='Jestem jedynym opiekunem prawnym dzieci, które muszą przebywać ze mną'
 											/>
 										</FormControl>
 									</div>
@@ -924,7 +924,7 @@ const CandidatesAdd = props => {
 										Status na rynku pracy
                 </div>
 									<div className={classes.form_title_small}>
-										(proszę zazaczyć właściwy)
+										(proszę zaznaczyć właściwy)
                 </div>
 								</Grid>
 								<Grid item md={9} xs={12}>

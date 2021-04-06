@@ -342,7 +342,7 @@ const TrainingsEdit = props => {
 		}
 
 		EXCEL.outPut({
-			header: ['Nazwa zajec', 'Data zajec', 'Godzina rozpoczecia', 'Godzina zakonczenia', 'Czas przerw(w minutach)', 'Czas trwania(w godzinach)'],
+			header: ['Nazwa zajęć', 'Data zajęć', 'Godzina rozpoczęcia', 'Godzina zakończenia', 'Czas przerw(w minutach)', 'Czas trwania(w godzinach)'],
 			data: export_data,
 			name: 'download'
 		})
@@ -434,7 +434,7 @@ const TrainingsEdit = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy szkolen
+						Wróć do listy szkoleń
         			</Button>
 				</div>
 				<Grid container spacing={3} className={classes.formBlock}>
@@ -451,7 +451,7 @@ const TrainingsEdit = props => {
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.number })} type="name" value={training.number} name="name" onChange={(e) => handleChangeNumber(e.target.value)} />
 									<div className={classes.input_box_label} htmlFor="type">ORK</div>
 									<SingleSelect value={training.rehabitation_center} handleChange={(value) => handleChangeRehabitationCenter(value)} list={rehabitationCenterList} error={error.rehabitation_center} />
-									<div className={classes.input_box_label} htmlFor="type">Usługa, do ktorej jest przypisane szkolenie</div>
+									<div className={classes.input_box_label} htmlFor="type">Usługa, do której jest przypisane szkolenie</div>
 									<SingleSelect value={training.service} handleChange={(value) => handleChangeService(value)} list={serviceList} error={error.service} />
 								</Grid>
 							</Grid>
@@ -464,7 +464,7 @@ const TrainingsEdit = props => {
 											Uczestnicy
 										</div>
 										<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleExportParticipants}>
-											Eksportuj liste do XLS
+											Eksportuj listę do XLS
 										</Button>
 									</div>
 									{
@@ -518,7 +518,7 @@ const TrainingsEdit = props => {
 										training_class.map((item, index) => (
 											<Grid container spacing={2}>
 												<Grid item xs={index == 0 && training_class.length === 1 ? 12 : 11}>
-													<div className={classes.input_box_label}>Nazwa zajec</div>
+													<div className={classes.input_box_label}>Nazwa zajęć</div>
 													<input className={classes.input_box} type="name" value={item.name} name="name" onChange={(e) => handleChangeClassName(e.target.value, index)} />
 												</Grid>
 												{
@@ -532,7 +532,7 @@ const TrainingsEdit = props => {
 														</Grid>
 												}
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}>Data zajec</div>
+													<div className={classes.input_box_label}>Data zajęć</div>
 													<KeyboardDatePicker
 														disableToolbar
 														variant="inline"
@@ -548,7 +548,7 @@ const TrainingsEdit = props => {
 													/>
 												</Grid>
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}>Godzina rozpoczecia</div>
+													<div className={classes.input_box_label}>Godzina rozpoczęcia</div>
 													<MaskedInput
 														className={classes.input_box}
 														mask={[/\d/, /\d/, ':', /\d/, /\d/]}
@@ -557,7 +557,7 @@ const TrainingsEdit = props => {
 													/>
 												</Grid>
 												<Grid item xs={4}>
-													<div className={classes.input_box_label}>Godzina zakonczenia</div>
+													<div className={classes.input_box_label}>Godzina zakończenia</div>
 													<MaskedInput
 														className={classes.input_box}
 														mask={[/\d/, /\d/, ':', /\d/, /\d/]}
@@ -609,7 +609,7 @@ const TrainingsEdit = props => {
 						</Card>
 						<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
 							<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleCreateClass}>
-								Dodaj kolejne zajecia
+								Dodaj kolejne zajęcia
 							</Button>
 						</div>
 					</Grid>

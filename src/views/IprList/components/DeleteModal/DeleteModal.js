@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
+import { Alert } from 'components';
 
 const DeleteModal = (props) => {
   const { openModal, handleClose, handleDelete, selectedIndex } = props;

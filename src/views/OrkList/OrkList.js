@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Button, Card, CircularProgress
 } from '@material-ui/core';
@@ -8,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import rehabitation_center from '../../apis/rehabitation-center';
-import { useToasts } from 'react-toast-notifications'
+
 import EXCEL from 'js-export-xlsx';
 
 const OrkList = props => {
@@ -26,8 +27,11 @@ const OrkList = props => {
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
   const breadcrumbs = [{active: true, href: '/ork_list', label: 'Finanse'}, {active: false, label: 'Lista Ośrodków Rehabilitacji Kompleksowej'}];
-  const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast, removeAllToasts } = useToasts()
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
+  
   useEffect(() => {
     handleSearch();
   }, []);
@@ -95,6 +99,12 @@ const OrkList = props => {
           <div>pozycji</div>
         </div>
       </div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
       <Card className={classes.table}>
         <SortTable
           rows={data}

@@ -11,7 +11,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import './assets/scss/index.scss';
 import validators from './common/validators';
 import Routes from './Routes';
-import { ToastProvider } from 'react-toast-notifications';
 import AppContainer from './AppContainer';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { pl } from 'date-fns/locale'
@@ -39,7 +38,6 @@ export default class App extends Component {
 	render() {
 		return (
 			<MuiPickersUtilsProvider utils={LuxonUtils} locale={pl}>
-				<ToastProvider>
 					<SiteInfoContext.Provider value={{
 						...this.state,
 						toggleContrast: this.toggleContrast
@@ -52,7 +50,6 @@ export default class App extends Component {
 							</Router>
 						</ThemeProvider>
 					</SiteInfoContext.Provider>
-				</ToastProvider>
 			</MuiPickersUtilsProvider>
 		);
 	}

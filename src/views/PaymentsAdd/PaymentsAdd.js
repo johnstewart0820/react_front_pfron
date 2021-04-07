@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Button, Grid, Card, TextField, CircularProgress
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 import { Breadcrumb, SingleSelect } from 'components';
 import payment from '../../apis/payment';
 
@@ -11,14 +12,17 @@ const PaymentsAdd = props => {
   const { children } = props;
   const { history } = props;
   const classes = useStyles();
-  const { addToast, removeAllToasts } = useToasts()
+  
   const breadcrumbs = [{ active: true, label: 'Finanse', href: '/payments' },{ active: true, label: 'Zdefiniowane koszty usług', href: '/payments' }, { active: false, label: 'Dodaj koszt' }];
   const [value, setValue] = useState('');
   const [rehabitationCenter, setRehabitationCenter] = useState(0);
   const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
   const [service, setService] = useState(0);
   const [serviceList, setServiceList] = useState([]);
-  const [progressStatus, setProgressStatus] = useState(false);
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 
   useEffect(() => {
     payment.getInfo()
@@ -37,10 +41,12 @@ const PaymentsAdd = props => {
   }
 
   const handleSave = () => {
-     removeAllToasts();
-       removeAllToasts();
+     
+       
     if (isNaN(value) || parseInt(rehabitationCenter) === 0 || parseInt(service) === 0) {
-      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+      			setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
     } else {
       setProgressStatus(true);
 
@@ -49,7 +55,9 @@ const PaymentsAdd = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
+          				setHasAlert(true);
+				setMessage(response.message);
+				setIsSuccess(response.code === 200);
           if (response.code === 200) {
             setTimeout(function(){history.push('/payments');}, 1000);
           }
@@ -64,10 +72,15 @@ const PaymentsAdd = props => {
     <div className={classes.public}>
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />
-        <Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-          Wróć do listy punktów
+        <Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>          Wróć do listy punktów
         </Button>
       </div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
       <Grid container spacing={3} className={classes.formBlock}>
         <Grid item md={9} xs={12}>
           <Card className={classes.form}>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, TextField, CircularProgress
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 import { Autocomplete } from '@material-ui/lab';
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
@@ -31,7 +32,7 @@ const IprBalance = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
+	
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Bilans realizacji IPR' }];
 	const [show_status, setShowStatus] = useState(false);
 	const [participant_number, setParticipantNumber] = useState('');
@@ -53,7 +54,10 @@ const IprBalance = props => {
 	const [sumPlanBasic, setSumPlanBasic] = useState(0);
 	const [sumScheduleBasic, setSumScheduleBasic] = useState(0);
 	const [sumBalance, setSumBalance] = useState(0);
-	const [progressStatus, setProgressStatus] = useState(false);
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
 	useEffect(() => {
@@ -146,14 +150,16 @@ const IprBalance = props => {
 	}
 
 	const handleSave = () => {
-     removeAllToasts();
+     
 		setProgressStatus(true);
 		ipr.updateBalance(dataList, id)
 			.then(response => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+					setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/ipr_list'); }, 1000);
 					}
@@ -163,7 +169,7 @@ const IprBalance = props => {
 	}
 
 	const handleDelete = () => {
-    removeAllToasts();
+    
 		setProgressStatus(true);
 		ipr
 			.delete(id)
@@ -171,7 +177,9 @@ const IprBalance = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+					setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/ipr_list'); }, 1000);
 					}
@@ -218,10 +226,15 @@ const IprBalance = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy IPR
+					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy IPR
 				</Button>
 				</div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>

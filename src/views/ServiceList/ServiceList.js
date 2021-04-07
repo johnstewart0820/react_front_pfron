@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Button, Card, CircularProgress
 } from '@material-ui/core';
@@ -8,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import service_list from '../../apis/service-list';
-import { useToasts } from 'react-toast-notifications'
+
 import EXCEL from 'js-export-xlsx';
 
 const ServiceList = props => {
@@ -32,8 +33,11 @@ const ServiceList = props => {
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
   const breadcrumbs = [{active: true, href: '/service_list', label: 'Usługi'}, {active: false, label: 'Lista dostępnych usług'}];
-  const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast, removeAllToasts } = useToasts()
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
+  
   
   useEffect(() => {
     service_list.getInfo()
@@ -94,7 +98,7 @@ const ServiceList = props => {
   }
 
   const handleDelete = () => {
-    removeAllToasts();
+    
     setProgressStatus(true);
     service_list
       .delete(selectedItem)
@@ -103,7 +107,9 @@ const ServiceList = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
+setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
           }
           setProgressStatus(false);
           handleSearch();
@@ -134,7 +140,7 @@ const ServiceList = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
+        <Button variant="contained" color="secondary" id="main" className={classes.btnCreate} onClick={handleCreate}>
           <AddIcon style={{marginRight: '20px'}}/>
           Dodaj Usługę
         </Button>
@@ -151,6 +157,12 @@ const ServiceList = props => {
           <div>pozycji</div>
         </div>
       </div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
       <Card className={classes.table}>
         <SortTable
           rows={data}

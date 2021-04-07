@@ -6,6 +6,7 @@ import { SingleSelect, WeekSelect } from 'components';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import useStyles from './style';
+import { Alert } from 'components';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './tab.css';
@@ -194,7 +195,8 @@ const ScheduleView = (props) => {
 			_schedule_data[index_module].service_list[index_service].amount = 0;
 		}
 
-		if (_schedule_data[index_module].service_list[index_service].amount !== undefined && _schedule_data[index_module].service_list[index_service].current_amount + parseInt(value) > parseInt(_schedule_data[index_module].service_list[index_service].amount))
+		if (_schedule_data[index_module].service_list[index_service].amount !== undefined 
+			&& (_schedule_data[index_module].service_list[index_service].current_amount ? _schedule_data[index_module].service_list[index_service].current_amount : 0) + parseInt(value) > parseInt(_schedule_data[index_module].service_list[index_service].amount))
 			_schedule_data[index_module].service_list[index_service].error_amount = true;
 		else
 			_schedule_data[index_module].service_list[index_service].error_amount = false;
@@ -257,7 +259,7 @@ const ScheduleView = (props) => {
 														<>
 														<Grid item xs={4}/>
 														<Grid item xs={8}>
-															<Grid container spacing={2} style={{alignItems: 'end', wordBreak: 'break-all'}}>
+															<Grid container spacing={2} style={{alignItems: 'end', wordBreak: 'break-all', fontSize: '0.7em'}}>
 																<Grid item xs>od</Grid>
 																<Grid item xs>do</Grid>
 																<Grid item xs>
@@ -279,7 +281,7 @@ const ScheduleView = (props) => {
 														{
 														module.service_list.map((service, index_service) => (
 															<>
-																<Grid item xs={4}>
+																<Grid item xs={4} style={{fontSize: '0.7em'}}>
 																	{service.name}
 																</Grid>
 																<Grid item xs={8}>

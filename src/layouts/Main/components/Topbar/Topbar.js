@@ -7,6 +7,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyles from './style';
+import { Alert } from 'components';
 import { useHistory } from "react-router-dom";
 import storage from '../../../../utils/storage';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Button, Card, CircularProgress
 } from '@material-ui/core';
@@ -8,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import candidate from '../../apis/candidate';
-import { useToasts } from 'react-toast-notifications'
+
 import EXCEL from 'js-export-xlsx';
 
 const CandidatesHistory = props => {
@@ -28,8 +29,11 @@ const CandidatesHistory = props => {
 	const [userList, setUserList] = useState('');
   const classes = useStyles();
   const breadcrumbs = [{active: true, label: 'Kandydaci', href: '/candidates'}, {active: false, label: 'Historia modyfikacji'}];
-  const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast, removeAllToasts } = useToasts()
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
+  
   useEffect(() => {
     candidate.getHistoryInfo(id)
       .then(response => {
@@ -130,6 +134,12 @@ const CandidatesHistory = props => {
           <div>pozycji</div>
         </div>
       </div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
       <Card className={classes.table}>
         <SortTable
           rows={data}

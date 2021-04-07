@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Card
 } from '@material-ui/core';
@@ -8,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import ipr from '../../apis/ipr';
-import { useToasts } from 'react-toast-notifications'
+
 import EXCEL from 'js-export-xlsx';
 
 const IprList = props => {
@@ -30,8 +31,11 @@ const IprList = props => {
 	const [selectedItem, setSelectedItem] = useState(-1);
 	const classes = useStyles();
 	const breadcrumbs = [{ active: true, href: '/participants', label: 'Uczestnicy' }, { active: false, label: 'Indywidualne Programy Rehabilitacji poszczególnych uczestników ' }];
-	const [progressStatus, setProgressStatus] = useState(false);
-	const { addToast, removeAllToasts } = useToasts()
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
+	
 	useEffect(() => {
 		ipr.getInfo()
 			.then(response => {
@@ -110,7 +114,7 @@ const IprList = props => {
 	}
 
 	const handleDelete = () => {
-    removeAllToasts();
+    
 		setProgressStatus(true);
 		ipr
 			.delete(selectedItem)
@@ -119,7 +123,9 @@ const IprList = props => {
 					history.push('/login');
 				} else {
 					if (response.code === 200) {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 					}
 					setProgressStatus(false);
 					handleSearch();
@@ -131,7 +137,7 @@ const IprList = props => {
 	return (
 		<div className={classes.public}>
 			<div className={classes.controlBlock}>
-				<Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
+				<Button variant="contained" color="secondary" id="main" className={classes.btnCreate} onClick={handleCreate}>
 					<AddIcon style={{ marginRight: '20px' }} />
           Dodaj IPR
         </Button>
@@ -148,6 +154,12 @@ const IprList = props => {
 					<div>pozycji</div>
 				</div>
 			</div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 			<Card className={classes.table}>
 				<SortTable
 					rows={data}

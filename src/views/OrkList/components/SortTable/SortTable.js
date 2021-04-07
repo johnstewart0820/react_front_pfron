@@ -11,6 +11,7 @@ import {
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
+import { Alert } from 'components';
 import { modelPropertyLabel } from 'utils/modelFormatting';
 
 const SortTable = (props) => {

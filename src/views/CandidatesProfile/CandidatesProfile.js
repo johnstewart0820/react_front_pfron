@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import candidate from '../../apis/candidate';
@@ -24,7 +25,7 @@ const CandidatesProfile = props => {
 	const id = props.match.params.id;
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
+	
 	const breadcrumbs = [{ active: true, label: 'Kandydaci', href: '/candidates' }, { active: false, label: 'Dodaj kandydata' }];
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
@@ -93,7 +94,10 @@ const CandidatesProfile = props => {
 	const [house_hold_status, setHouseHoldStatus] = useState(2);
 	const [house_hold_adult_status, setHouseHoldAdultStatus] = useState(2);
 	const [uncomfortable_status, setUncomfortableStatus] = useState(2);
-	const [progressStatus, setProgressStatus] = useState(false);
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 	const [openModal, setOpenModal] = useState(false);
   const chart = useRef(null);
@@ -112,7 +116,7 @@ const CandidatesProfile = props => {
 	}
 
 	const handleDelete = () => {
-    removeAllToasts();
+    
 		setProgressStatus(true);
 		candidate
 			.delete(id)
@@ -120,7 +124,9 @@ const CandidatesProfile = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+					setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/candidates'); }, 1000);
 					}
@@ -285,11 +291,16 @@ const CandidatesProfile = props => {
 						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleEdit}>
 							Edytuj kandydata
 						</Button>
-						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-							Wróć do listy kandydatów
+						<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>							Wróć do listy kandydatów
 						</Button>
 					</div>
 				</div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form} ref={chart}>

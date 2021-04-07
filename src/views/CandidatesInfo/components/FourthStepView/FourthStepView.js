@@ -12,6 +12,7 @@ import ReactQuill, {Quill} from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
+import { Alert } from 'components';
 
 const FourthStepView = (props) => {
   const classes = useStyles();

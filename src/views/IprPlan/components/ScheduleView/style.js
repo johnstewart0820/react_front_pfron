@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	sum_title: {
 		marginTop: 'auto',
-		marginBottom: 'auto'
+		marginBottom: 'auto',
+		fontSize: '0.7em'
 	},
 	form_title: {
 		fontWeight: '500'
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 		height: '100%',
 		'& .MuiButton-label': {
 			textTransform: 'none',
-			fontSize: '0.8750em',
+			fontSize: '0.7em',
 		},
 		'&:hover': {
 			backgroundColor: theme.palette.btn_darkgray,
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 	btnOption: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
-			fontSize: '0.8750em',
+			fontSize: '0.7em',
 		},
 		'&:hover': {
 			backgroundColor: theme.palette.btn_gray,
@@ -88,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
 	btnBack: {
 		'& .MuiButton-label': {
 			textTransform: 'none',
-			fontSize: '0.8750em',
+			fontSize: '0.7em',
 		},
 		'&:hover': {
 			backgroundColor: theme.palette.btn_gray,
@@ -109,23 +110,23 @@ const useStyles = makeStyles((theme) => ({
 	},
 	top_label: {
 		fontWeight: '500',
-		fontSize: '0.8750em',
+		fontSize: '0.7em',
 	},
 	top_label_content: {
-		fontSize: '0.8750em',
+		fontSize: '0.7em',
 		marginBottom: theme.spacing(1)
 	},
 	label_content: {
-		fontSize: '0.8750em',
+		fontSize: '0.7em',
 		marginBottom: theme.spacing(1)
 	},
 	input_box_label: {
 		marginTop: theme.spacing(2),
 		marginBottom: theme.spacing(1),
-		fontSize: '0.8750em',
+		fontSize: '0.7em',
 	},
 	small_title: {
-		fontSize: '0.8125em',
+		fontSize: '0.7em',
 		marginTop: theme.spacing(0.5)
 	},
 	input_box: {
@@ -137,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
 		border: `1px solid ${theme.palette.text.primary}`,
 		padding: '10px 5px',
 		width: '100%',
-		fontSize: '0.8750em',
+		fontSize: '0.7em',
 		textAlign: 'center'
 	},
 	input_error: {

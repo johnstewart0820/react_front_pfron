@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SiteInfoContextConsumer } from "App";
 import { makeStyles, useTheme } from '@material-ui/styles';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Grid, Button, Typography
 } from '@material-ui/core';
@@ -17,6 +18,7 @@ const Minimal = props => {
   const classes = useStyles(theme);
 	const [underlineStatus, setUnderlineStatus] = useState(false);
 	const [contrastStatus, setContrastStatus] = useState(false);
+
 	const changeFontSize = type => {
 
     let
@@ -107,7 +109,7 @@ const Minimal = props => {
 						<Typography variant={"h1"} className={classes.site_title}>
 							System wspomagający monitoring projektu umożliwiającego podjęcie lub powrót do pracy
 						</Typography>
-					</Grid>
+					</Grid>					
 				</Grid>
         <main className={classes.content}>{children}</main>
         <Grid container spacing={3} className={classes.footer}>

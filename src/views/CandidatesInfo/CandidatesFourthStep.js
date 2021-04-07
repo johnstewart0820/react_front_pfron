@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 import { Link } from 'react-router-dom';
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import candidate from '../../apis/candidate';
@@ -26,7 +27,7 @@ const CandidatesFourthStep = props => {
 	const id = props.match.params.id;
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
+	
 	const breadcrumbs = [{ active: true, label: 'Kandydaci', href: '/candidates' }, { active: false, label: 'Karta informacyjna' }];
 	const [stage, setStage] = useState(0);
 	const [stageList, setStageList] = useState([]);
@@ -41,7 +42,10 @@ const CandidatesFourthStep = props => {
 	const [typeToStayList, setTypeToStayList] = useState([{ id: 1, name: 'Stacjonarny' }, { id: 2, name: 'Niestacjonarny' }])
 	const [type_to_stay, setTypeToStay] = useState(0);
 	const [participant_remark, setParticipantRemark] = useState('');
-	const [progressStatus, setProgressStatus] = useState(false);
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 	const [openModal, setOpenModal] = useState(false);
 	const theme = useTheme();
@@ -55,7 +59,7 @@ const CandidatesFourthStep = props => {
 	}
 
 	const handleDelete = () => {
-    removeAllToasts();
+    
 		setProgressStatus(true);
 		candidate
 			.delete(id)
@@ -63,7 +67,9 @@ const CandidatesFourthStep = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+					setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/candidates'); }, 1000);
 					}
@@ -119,9 +125,11 @@ const CandidatesFourthStep = props => {
 	}
 
 	const handleSave = () => {
-     removeAllToasts();
+     
 		if (checkError()) {
-			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+						setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
 			handleError();
 		} else {
 			setProgressStatus(true);
@@ -133,7 +141,9 @@ const CandidatesFourthStep = props => {
 						if (response.code === 401) {
 							history.push('/login');
 						} else {
-							addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+							setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 							if (response.code === 200) {
 								setTimeout(function () { history.push('/candidates'); }, 1000);
 							}
@@ -148,7 +158,9 @@ const CandidatesFourthStep = props => {
 						if (response.code === 401) {
 							history.push('/login');
 						} else {
-							addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+							setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 							if (response.code === 200) {
 								setTimeout(function () { history.push('/candidates'); }, 1000);
 							}
@@ -192,11 +204,16 @@ const CandidatesFourthStep = props => {
 						<Button variant="outlined" color="secondary" className={classes.btnProfile} onClick={handleProfile}>
 							Wróć do edycji profilu
           </Button>
-						<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-							Wróć do listy kandydatów
+						<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>							Wróć do listy kandydatów
           </Button>
 					</div>
 				</div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item md={9} xs={12}>
 						<Tabs defaultIndex={3}>

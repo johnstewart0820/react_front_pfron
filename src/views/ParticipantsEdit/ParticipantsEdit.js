@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import candidate from '../../apis/candidate';
@@ -27,7 +28,7 @@ const ParticipantsEdit = props => {
 	const id = props.match.params.id;
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
+	
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: false, label: 'Dodaj uczestnicy' }];
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
@@ -101,7 +102,10 @@ const ParticipantsEdit = props => {
 	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
 	const [participant_status_type, setParticipantStatusType] = useState(0);
 	const [participantStatusTypeList, setParticipantStatusTypeList] = useState([]);
-	const [progressStatus, setProgressStatus] = useState(false);
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 	const [openModal, setOpenModal] = useState(false);
 
@@ -114,7 +118,7 @@ const ParticipantsEdit = props => {
 	}
 
 	const handleDelete = () => {
-    removeAllToasts();
+    
 		setProgressStatus(true);
 		candidate
 			.delete(id)
@@ -122,7 +126,9 @@ const ParticipantsEdit = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+					setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/participants'); }, 1000);
 					}
@@ -371,9 +377,11 @@ const ParticipantsEdit = props => {
 	}
 
 	const handleSave = () => {
-     removeAllToasts();
+     
 		if (checkError()) {
-			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+						setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
 			handleError();
 		} else {
 			setProgressStatus(true);
@@ -392,7 +400,9 @@ const ParticipantsEdit = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/participants'); }, 1000);
 						}
@@ -797,10 +807,15 @@ const ParticipantsEdit = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy uczestników
+					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy uczestników
         </Button>
 				</div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>

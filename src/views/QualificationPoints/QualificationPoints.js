@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Button, Card
 } from '@material-ui/core';
@@ -8,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import qualification from '../../apis/qualification';
-import { useToasts } from 'react-toast-notifications'
+
 import EXCEL from 'js-export-xlsx';
 
 const QualificationPoints = props => {
@@ -29,8 +30,11 @@ const QualificationPoints = props => {
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
   const breadcrumbs = [{active: false, label: 'Punkty kwalifikacyjne'}];
-  const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast, removeAllToasts } = useToasts()
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
+  
   useEffect(() => {
     qualification.getInfo()
       .then(response => {
@@ -126,7 +130,7 @@ const QualificationPoints = props => {
   }
 
   const handleDelete = () => {
-    removeAllToasts();
+    
     setProgressStatus(true);
     qualification
       .delete(selectedItem)
@@ -135,7 +139,9 @@ const QualificationPoints = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
+setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
           }
           setProgressStatus(false);
           handleSearch();
@@ -147,7 +153,7 @@ const QualificationPoints = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
+        <Button variant="contained" color="secondary" id="main" className={classes.btnCreate} onClick={handleCreate}>
           <AddIcon style={{marginRight: '20px'}}/>
           Dodaj punkt
         </Button>
@@ -164,6 +170,12 @@ const QualificationPoints = props => {
           <div>pozycji</div>
         </div>
       </div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
       <Card className={classes.table}>
         <SortTable
           rows={data}

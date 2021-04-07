@@ -23,6 +23,7 @@ import storage from '../../../../utils/storage';
 import { SidebarNav } from './components';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
+import { Alert } from 'components';
 
 const Sidebar = props => {
 	const { open, variant, history, onClose, className, ...rest } = props;

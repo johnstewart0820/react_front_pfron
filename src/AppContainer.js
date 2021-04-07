@@ -2,13 +2,19 @@ import React from "react";
 import { withRouter } from "react-router";
 import auth from './apis/auth';
 import constants from './utils/constants';
+import SkipLinks from 'skip-links'
 
 class AppContainer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { role: 0 };
+		this.login_links = [
+			{title: 'Przejdź do logowania', to: 'main' },
+		];
+		this.links = [
+			{title: 'Przejdź do treści', to: 'main'},
+		];
 	}
-
 	checkValidity() {
 		if (constants.unauthenticated_url.indexOf(this.props.location.pathname) !== -1) {
 			this.setState({ role: 1 });
@@ -58,7 +64,11 @@ class AppContainer extends React.Component {
 		}
 	}
 	render() {
-		return this.state.role !== 0 ? <>{React.cloneElement(this.props.children, { role: this.state.role })}</> : <></>;
+		return this.state.role !== 0 ? 
+		<>
+			<SkipLinks links={this.props.location.pathname === '/login' ? this.login_links : this.links}/>{React.cloneElement(this.props.children, { role: this.state.role })}
+		</> 
+		: <></>;
 	}
 }
 

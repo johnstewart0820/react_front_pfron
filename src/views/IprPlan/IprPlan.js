@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {Link} from 'react-router-dom';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, TextField, CircularProgress
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 import { Autocomplete } from '@material-ui/lab';
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
@@ -22,7 +23,7 @@ import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 import ExpandLessOutlinedIcon from '@material-ui/icons/ExpandLessOutlined';
-
+import domtopdf from 'dom-to-pdf';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './tab.css';
 
@@ -33,7 +34,7 @@ const IprPlan = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
+	
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Plan realizacji IPR' }];
 	const [show_status, setShowStatus] = useState(false);
 	const [moduleList, setModuleList] = useState([]);
@@ -57,8 +58,12 @@ const IprPlan = props => {
 	const [status, setStatus] = useState([]);
 	const [dateList, setDateList] = useState([]);
 	const [selectedScheduleItem, setSelectedScheduleItem] = useState(0);
-
-	const [progressStatus, setProgressStatus] = useState(false);
+  const plan_ref = useRef(null);
+	const schedule_ref = useRef(null);
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
 	useEffect(() => {
@@ -177,7 +182,7 @@ const IprPlan = props => {
 	}
 
 	const handleSave = () => {
-     removeAllToasts();
+     
 		if (selectedItem == 0) {
 			setProgressStatus(true);
 			ipr.updatePlan(moduleList, id)
@@ -185,7 +190,9 @@ const IprPlan = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/ipr_list'); }, 1000);
 						}
@@ -194,7 +201,9 @@ const IprPlan = props => {
 				})
 		} else {
 			if (!checkScheduleData(scheduleData)) {
-				addToast(<label>Proszę wypełnić poprawne pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+				setHasAlert(true);
+				setMessage('Proszę wypełnić poprawne pola.');
+				setIsSuccess(false);
 				return;
 			}
 			setProgressStatus(true);
@@ -206,7 +215,9 @@ const IprPlan = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							// setTimeout(function () { history.push('/ipr_list'); }, 1000);
 						}
@@ -217,7 +228,7 @@ const IprPlan = props => {
 	}
 
 	const handleDelete = () => {
-    removeAllToasts();
+    
 		setProgressStatus(true);
 		ipr
 			.delete(id)
@@ -225,7 +236,9 @@ const IprPlan = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+					setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/ipr_list'); }, 1000);
 					}
@@ -239,7 +252,14 @@ const IprPlan = props => {
 	}
 
 	const handleExportPdf = () => {
-
+		const plan_dom = plan_ref.current;
+		const schedule_dom = schedule_ref.current;
+    var options = {
+      filename: 'download.pdf',
+    };
+		
+    domtopdf(selectedItem === 0 ? plan_dom : schedule_dom, options, function() {
+    });
 	}
 
 	const toggleView = () => {
@@ -255,10 +275,15 @@ const IprPlan = props => {
 		<div className={classes.public}>
 			<div className={classes.controlBlock}>
 				<Breadcrumb list={breadcrumbs} />
-				<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-					Wróć do listy IPR
+				<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>					Wróć do listy IPR
 				</Button>
 			</div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 			<Grid container spacing={3} className={classes.formBlock}>
 				<Grid item md={9} xs={12}>
 					<Card className={classes.form}>
@@ -340,29 +365,33 @@ const IprPlan = props => {
 								<Tab style={{width: '50%'}}>HARMONOGRAMY TYGODNIOWE</Tab>
 							</TabList>
 							<TabPanel>
-								<PlanView
-									moduleList={moduleList}
-									setModuleList={setModuleList}
-								/>
+								<div ref={plan_ref}>
+									<PlanView
+										moduleList={moduleList}
+										setModuleList={setModuleList}
+									/>
+								</div>
 							</TabPanel>
 							<TabPanel>
-								<ScheduleView
-									scheduleDate={schedule_date}
-									scheduleData={scheduleData}
-									setScheduleData={setScheduleData}
-									handleGetScheduleData={handleGetScheduleData}
-									week={week}
-									setWeek={setWeek}
-									weeks={weeks}
-									setWeeks={setWeeks}
-									status={status}
-									setStatus={setStatus}
-									dateList={dateList}
-									setDateList={setDateList}
-									selectedItem={selectedScheduleItem}
-									setSelectedItem={setSelectedScheduleItem}
-									id={id}
-								/>
+								<div ref={schedule_ref}>
+									<ScheduleView
+										scheduleDate={schedule_date}
+										scheduleData={scheduleData}
+										setScheduleData={setScheduleData}
+										handleGetScheduleData={handleGetScheduleData}
+										week={week}
+										setWeek={setWeek}
+										weeks={weeks}
+										setWeeks={setWeeks}
+										status={status}
+										setStatus={setStatus}
+										dateList={dateList}
+										setDateList={setDateList}
+										selectedItem={selectedScheduleItem}
+										setSelectedItem={setSelectedScheduleItem}
+										id={id}
+									/>
+								</div>
 							</TabPanel>
 						</Tabs>
 					</div>

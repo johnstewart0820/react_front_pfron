@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import candidate from '../../apis/candidate';
@@ -20,9 +21,9 @@ import { useTheme } from '@material-ui/styles';
 const CandidatesAdd = props => {
 	const { children } = props;
 	const { history } = props;
+
 	const theme = useTheme();
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
 	const breadcrumbs = [{ active: true, label: 'Kandydaci', href: '/candidates' }, { active: false, label: 'Dodaj kandydata' }];
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
@@ -87,6 +88,9 @@ const CandidatesAdd = props => {
 	const [house_hold_status, setHouseHoldStatus] = useState(0);
 	const [house_hold_adult_status, setHouseHoldAdultStatus] = useState(0);
 	const [uncomfortable_status, setUncomfortableStatus] = useState(0);
+	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
@@ -235,9 +239,10 @@ const CandidatesAdd = props => {
 	}
 
 	const handleSave = () => {
-     removeAllToasts();
 		if (checkError()) {
-			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+			setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
 			handleError();
 		} else {
 			setProgressStatus(true);
@@ -256,7 +261,9 @@ const CandidatesAdd = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/candidates'); }, 1000);
 						}
@@ -666,10 +673,15 @@ const CandidatesAdd = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy kandydatów
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy kandydatów
         </Button>
 				</div>
+				<Alert
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item xs={12} md={9}>
 						<Card className={classes.form}>
@@ -769,7 +781,7 @@ const CandidatesAdd = props => {
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label}><label htmlFor="mobile_phone">Telefon komórkowy</label></div>
-									<PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputClass={classes.phone_input} id="mobile_phone" dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle}/>
+									<PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputClass={classes.phone_input} id="mobile_phone" dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle} />
 									<div className={classes.error_label} style={{ display: error.mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: (xx)(xxx-xxx-xxx)).</div>
 									<div className={classes.input_box_label} ><label htmlFor="home_phone">Telefon domowy</label></div>
 									<MaskedInput
@@ -784,9 +796,9 @@ const CandidatesAdd = props => {
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.email })} type="name" value={email} name="name" id="email" onChange={(e) => handleChangeEmail(e.target.value)} />
 									<div className={classes.error_label} style={{ display: error.email ? 'block' : 'none' }}>Wpisz poprawny adres e-mail.</div>
 									<div className={classes.input_box_label} htmlFor="type">Numer kontaktowy do bliskiej osoby - Telefon komórkowy</div>
-									<PhoneInput country="pl" value={family_mobile_phone} onChange={handleChangeFamilyMobilePhone} inputClass={classes.phone_input} dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle}/>
+									<PhoneInput country="pl" value={family_mobile_phone} onChange={handleChangeFamilyMobilePhone} inputClass={classes.phone_input} dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle} />
 									<div className={classes.error_label} style={{ display: error.family_mobile_phone ? 'block' : 'none' }}>Wpisz poprawny telefon (typ: (xx)(xxx-xxx-xxx)).</div>
-									<div className={classes.input_box_label}><label  htmlFor="family_home_phone">Numer kontaktowy do bliskiej osoby - Telefon domowy</label></div>
+									<div className={classes.input_box_label}><label htmlFor="family_home_phone">Numer kontaktowy do bliskiej osoby - Telefon domowy</label></div>
 									<MaskedInput
 										className={clsx({ [classes.input_box]: true, [classes.error]: error.family_home_phone })}
 										mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}

@@ -7,8 +7,9 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import useStyles from './style';
+import { Alert } from 'components';
 import auth from '../../apis/auth';
-import { useToasts } from 'react-toast-notifications';
+
 import { useLocation } from "react-router-dom";
 import constants from '../../utils/constants';
 
@@ -20,10 +21,13 @@ const ResetPassword = props => {
   let query = useQuery();
   let token = query.get("token");
   const classes = useStyles();
-  const { addToast, removeAllToasts } = useToasts()
   const [input, setInput] = useState({});
   const [error, setError] = useState({});
-  const [progressStatus, setProgressStatus] = useState(false);
+
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 
   const handleChange = event => {
     let arr = JSON.parse(JSON.stringify(input));
@@ -33,7 +37,9 @@ const ResetPassword = props => {
 
   const handleResetPassword = event => {
     if ((error && ((error.password && error.password.length > 0) || (error.reset_password && error.reset_password.length > 0))) || !input.password || !input.reset_password) {
-      addToast(<label>{constants.CHECK_ALL_FIELDS}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: false })
+      setHasAlert(true);
+			setMessage(constants.CHECK_ALL_FIELDS);
+			setIsSuccess(false);
     } else {
       setProgressStatus(true);
       auth
@@ -41,12 +47,16 @@ const ResetPassword = props => {
         .then(response => {
           if (response.code === 200) {
             setProgressStatus(false);
-            addToast(<label>{response.message}</label>, { appearance: 'success', autoDismissTimeout: 1000, autoDismiss: true })
+						setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(true);
             setTimeout(function () { history.push('/login') }, 1000);
             // history.push('/login');
           } else {
             setProgressStatus(false);
-            addToast(<label>{response.message}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: false })
+            setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(false);
           }
         })
     }
@@ -85,6 +95,12 @@ const ResetPassword = props => {
           </div>
           <div className={classes.loginForm}>
             <span>Ustaw nowe hasło</span>
+						<Alert 
+							hasAlert={hasAlert}
+							setHasAlert={setHasAlert}
+							isSuccess={isSuccess}
+							message={message}
+						/>
             <div>
               <div className={classes.input_box_label} htmlFor="passwordInput">Hasło</div>
               <input className={classes.input_box} type="password" value={input.password} name="password" placeholder="Hasło" onChange={handleChange} onKeyPress={handleKeyPress} />

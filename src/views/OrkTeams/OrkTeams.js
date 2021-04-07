@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Button, Card, CircularProgress
 } from '@material-ui/core';
@@ -8,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import ork_team from '../../apis/ork-team';
-import { useToasts } from 'react-toast-notifications'
+
 import EXCEL from 'js-export-xlsx';
 
 const OrkTeams = props => {
@@ -30,8 +31,11 @@ const OrkTeams = props => {
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
   const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/ork_teams'}, {active: false, label: 'Zespół ORK'}];
-  const [progressStatus, setProgressStatus] = useState(false);
-  const { addToast, removeAllToasts } = useToasts()
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
+  
   useEffect(() => {
     ork_team.getInfo()
       .then(response => {
@@ -138,7 +142,7 @@ const OrkTeams = props => {
   }
 
   const handleDelete = () => {
-    removeAllToasts();
+    
     setProgressStatus(true);
     ork_team
       .delete(selectedItem)
@@ -147,7 +151,9 @@ const OrkTeams = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
+setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
           }
           setProgressStatus(false);
           handleSearch();
@@ -160,7 +166,7 @@ const OrkTeams = props => {
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
-        <Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleCreate}>
+        <Button variant="contained" color="secondary" id="main" className={classes.btnCreate} onClick={handleCreate}>
           <AddIcon style={{marginRight: '20px'}}/>
           Dodaj osobę
         </Button>
@@ -177,6 +183,12 @@ const OrkTeams = props => {
           <div>pozycji</div>
         </div>
       </div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
       <Card className={classes.table}>
         <SortTable
           rows={data}

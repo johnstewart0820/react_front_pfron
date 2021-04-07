@@ -10,21 +10,23 @@ import {
 	Typography
 } from '@material-ui/core';
 import useStyles from './style';
+import { Alert } from 'components';
 import auth from '../../apis/auth';
 import storage from 'utils/storage';
-import { useToasts } from 'react-toast-notifications';
 import constants from '../../utils/constants';
 
 const SignIn = props => {
   const { history } = props;
-
   const classes = useStyles();
-  const { addToast, removeAllToasts } = useToasts()
   const [checkStatus, setCheckStatus] = useState(false);
   const [input, setInput] = useState({});
   const [error, setError] = useState({});
-  const [progressStatus, setProgressStatus] = useState(false);
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
   const [tryLogin, setTryLogin] = useState(false);
+
 
   const handleChange = event => {
     let arr = JSON.parse(JSON.stringify(input));
@@ -37,9 +39,10 @@ const SignIn = props => {
   };
   const handleSignIn = event => {
     setTryLogin(true);
-		removeAllToasts();
     if ((error && ((error.email && error.email.length > 0) || (error.password && error.password.length > 0))) || !input.email || !input.password) {
-      addToast(<label>{constants.CHECK_ALL_FIELDS}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: false })
+			setHasAlert(true);
+			setMessage(constants.CHECK_ALL_FIELDS);
+			setIsSuccess(false);
     } else {
       setProgressStatus(true);
       if (checkStatus) {
@@ -54,12 +57,16 @@ const SignIn = props => {
         .then(response => {
           if (response.code === 200) {
             setProgressStatus(false);
-            addToast(<label>{response.message}</label>, { appearance: 'success', autoDismissTimeout: 1000, autoDismiss: true })
+						setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(true);
             setTimeout(function () { history.push('/cockpit'); }, 1000);
 
           } else {
             setProgressStatus(false);
-            addToast(<label>{response.message}</label>, { appearance: 'error', autoDismissTimeout: 5000, autoDismiss: false })
+						setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(false);
           }
         })
     }
@@ -105,9 +112,15 @@ const SignIn = props => {
           </div>
           <div className={classes.loginForm}>
 						<Typography variant={"h2"} className={classes.title}>Zaloguj się</Typography>
+						<Alert 
+							hasAlert={hasAlert}
+							setHasAlert={setHasAlert}
+							isSuccess={isSuccess}
+							message={message}
+						/>
             <div>
               <div className={classes.input_box_label}><label for="email">Login</label></div>
-              <input className={classes.input_box} type="email" value={input.email} name="email" id="email" onChange={handleChange} onKeyPress={handleKeyPress} autocomplete='off' />
+              <input className={classes.input_box} type="email" value={input.email} name="email" id="main" onChange={handleChange} onKeyPress={handleKeyPress} autocomplete='off' />
               <div className={classes.error_log}>{tryLogin && error["email"] && error["email"].length > 0 && error.email}</div>
               <div className={classes.input_box_label}><label htmlFor="password">Hasło</label></div>
               <input className={classes.input_box} type="password" value={input.password} label="password" name="password" id="password" onChange={handleChange} onKeyPress={handleKeyPress} />

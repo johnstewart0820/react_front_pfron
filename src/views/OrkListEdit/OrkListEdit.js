@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Button, Grid, Card, CircularProgress, IconButton
 } from '@material-ui/core';
@@ -8,7 +9,7 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { pl } from 'date-fns/locale';
-import { useToasts } from 'react-toast-notifications'
+
 
 import { Breadcrumb } from 'components';
 import rehabitation_center from '../../apis/rehabitation-center';
@@ -19,7 +20,7 @@ const OrkListEdit = props => {
   const { history } = props;
   const id = props.match.params.id;
   const classes = useStyles();
-  const { addToast, removeAllToasts } = useToasts()
+  
   const breadcrumbs = [{ active: true, label: 'Finanse', href: '/ork_list' }, { active: true, label: 'Lista Ośrodków Rehabilitacji Kompleksowej', href: '/ork_list' }, { active: false, label: 'Dodaj ośrodek' }];
   const [rehabitationCenter, setRehabitationCenter] = useState({});
   const [quaterList, setQuaterList] = useState('[]');
@@ -27,7 +28,10 @@ const OrkListEdit = props => {
   const [partnerErrors, setPartnerErrors] = useState('[]');
   const [rehabitationCenterError, setRehabitationCenterError] = useState({});
   const [firstLogin, setFirstLogin] = useState(false);
-  const [progressStatus, setProgressStatus] = useState(false);
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
   useEffect(() => {
     rehabitation_center.get(id)
       .then(response => {
@@ -46,17 +50,21 @@ const OrkListEdit = props => {
   }
 
   const handleSave = () => {
-     removeAllToasts();
-       removeAllToasts();
+     
+       
     setFirstLogin(true);
     if (rehabitationCenterError.leader_nip_number !== true || rehabitationCenterError.leader_regon_number !== true || rehabitationCenterError.email !== true) {
-      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+      			setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
       return;
     }
     let arr = JSON.parse(partnerErrors);
     for (let i = 0; i < arr.length; i ++) {
       if (arr[i].nip !== true || arr[i].regon !== true) {
-        addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+        			setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
         return;
       }
     }
@@ -67,7 +75,9 @@ const OrkListEdit = props => {
       if (response.code === 401) {
         history.push('/login');
       } else {
-        addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
+				setHasAlert(true);
+				setMessage(response.message);
+				setIsSuccess(response.code === 200);
         if (response.code === 200) {
           setTimeout(function(){history.push('/ork_list');}, 1000);
         }
@@ -195,10 +205,15 @@ const OrkListEdit = props => {
       <div className={classes.public}>
         <div className={classes.controlBlock}>
           <Breadcrumb list={breadcrumbs} />
-          <Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-            Wróć do listy ośrodków
+          <Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>            Wróć do listy ośrodków
         </Button>
         </div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
         <Grid container spacing={3} className={classes.formBlock}>
           <Grid item md={9} xs={12}>
             <Card className={classes.form}>

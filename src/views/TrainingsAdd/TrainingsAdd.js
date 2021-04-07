@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, TextField, CircularProgress, IconButton, TextareaAutosize
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 import { Autocomplete } from '@material-ui/lab';
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
@@ -22,7 +23,7 @@ import EXCEL from 'js-export-xlsx';
 const TrainingsAdd = props => {
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
+	
 	const breadcrumbs = [{ active: true, label: 'Uslugi', href: '/service_list' }, { active: true, label: 'Szkolenia', href: '/trainings' }, { active: false, label: 'Dodaj szkolenie' }];
 	const [training, setTraining] = useState({ name: '', number: '', rehabitation_center: 0, service: 0, participant: [{}], comment: '', training_status: 0 });
 	const [training_class, setTrainingClass] = useState([{ name: '', date: null, start_hour: '', end_hour: '', break_amount: '', total_hour: '', ork_team: [] }]);
@@ -31,7 +32,10 @@ const TrainingsAdd = props => {
 	const [orkTeamList, setOrkTeamList] = useState([]);
 	const [serviceList, setServiceList] = useState([]);
 	const [participantList, setParticipantList] = useState([]);
-	const [progressStatus, setProgressStatus] = useState(false);
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({ participant: [true] });
 	const [error_class, setErrorClass] = useState([{}]);
 
@@ -307,9 +311,11 @@ const TrainingsAdd = props => {
 	}
 
 	const handleSave = () => {
-     removeAllToasts();
+     
 		if (checkError()) {
-			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+						setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
 			handleError();
 		} else {
 			setProgressStatus(true);
@@ -332,7 +338,9 @@ const TrainingsAdd = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/trainings'); }, 1000);
 						}
@@ -364,10 +372,15 @@ const TrainingsAdd = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy szkoleń
+					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy szkoleń
         			</Button>
 				</div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>

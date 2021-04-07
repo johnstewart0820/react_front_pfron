@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, CircularProgress, IconButton
 } from '@material-ui/core';
 
-import { useToasts } from 'react-toast-notifications'
+
 import { Breadcrumb } from 'components';
 import { DeleteModal } from './components';
 
@@ -13,10 +14,10 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 
 import dashboard from '../../apis/dashboard';
+
 const Cockpit = props => {
 	const { history } = props;
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
 	const breadcrumbs = [{ active: false, label: 'Kokpit' }];
 
 	const [candidateList, setCandidateList] = useState([]);
@@ -24,7 +25,10 @@ const Cockpit = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(-1);
 
-	const [progressStatus, setProgressStatus] = useState(false);
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 
 	useEffect(() => {
 		getList();
@@ -61,7 +65,6 @@ const Cockpit = props => {
 	}
 
 	const handleDelete = () => {
-    removeAllToasts();
 		setProgressStatus(true);
 		dashboard
 			.delete(selectedItem)
@@ -70,7 +73,9 @@ const Cockpit = props => {
 					history.push('/login');
 				} else {
 					if (response.code === 200) {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						getList();
 					}
 					setProgressStatus(false);
@@ -84,6 +89,12 @@ const Cockpit = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 				</div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item xs={12}>
 						<Card className={classes.form}>
@@ -101,7 +112,7 @@ const Cockpit = props => {
 									</Grid>
 									<Grid container spacing={3}>
 										<Grid item md={6} xs={12}>
-											<Button variant="outlined" aria-label="Pokaż listę kandydatów" color="secondary" className={classes.btnFull} onClick={() => history.push(`/candidates`)}>
+											<Button variant="outlined" aria-label="Pokaż listę kandydatów" color="secondary" id="main" className={classes.btnFull} onClick={() => history.push(`/candidates`)}>
 												Kandydaci
 											</Button>
 										</Grid>

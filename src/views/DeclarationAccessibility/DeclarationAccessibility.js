@@ -46,8 +46,7 @@ const DeclarationAccessibility = () => {
   return (
     <div className={classes.root}>
 			<Grid container justify="flex-end">
-				<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-					Wróć
+				<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>					Wróć
         </Button>
 			</Grid>
       <Grid

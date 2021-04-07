@@ -4,6 +4,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import useStyles from './style';
+import { Alert } from 'components';
 
 const SearchInput = props => {
   const { className, onChange, style, ...rest } = props;

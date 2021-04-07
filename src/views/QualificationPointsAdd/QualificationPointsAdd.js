@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
   Button, Grid, Card, TextField, CircularProgress
 } from '@material-ui/core';
-import { useToasts } from 'react-toast-notifications'
+
 import { Autocomplete } from '@material-ui/lab';
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
@@ -13,14 +14,17 @@ import clsx from 'clsx';
 const QualificationPointsAdd = props => {
   const { history } = props;
   const classes = useStyles();
-  const { addToast, removeAllToasts } = useToasts()
+  
   const breadcrumbs = [{ active: true, label: 'Punkty kwalifikacyjne', href: '/qualification_points' }, { active: false, label: 'Dodaj Punkt' }];
   const [name, setName] = useState('');
   const [type, setType] = useState(0);
   const [typeList, setTypeList] = useState([]);
   const [ambassador, setAmbassador] = useState([]);
   const [ambassadorList, setAmbassadorList] = useState([]);
-  const [progressStatus, setProgressStatus] = useState(false);
+  	const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
   const [error, setError] = useState({});
 
   useEffect(() => {
@@ -65,10 +69,12 @@ const QualificationPointsAdd = props => {
   }
 
   const handleSave = () => {
-     removeAllToasts();
-       removeAllToasts();
+     
+       
     if (checkError()) {
-      addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+      			setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
       handleError();
     } else {
       setProgressStatus(true);
@@ -82,7 +88,9 @@ const QualificationPointsAdd = props => {
         if (response.code === 401) {
           history.push('/login');
         } else {
-          addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
+          				setHasAlert(true);
+				setMessage(response.message);
+				setIsSuccess(response.code === 200);
           if (response.code === 200) {
             setTimeout(function(){history.push('/qualification_points');}, 1000);
           }
@@ -97,10 +105,15 @@ const QualificationPointsAdd = props => {
     <div className={classes.public}>
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />
-        <Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-          Wróć do listy punktów
+        <Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>          Wróć do listy punktów
         </Button>
       </div>
+			<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
       <Grid container spacing={3} className={classes.formBlock}>
         <Grid item md={9} xs={12}>
           <Card className={classes.form}>

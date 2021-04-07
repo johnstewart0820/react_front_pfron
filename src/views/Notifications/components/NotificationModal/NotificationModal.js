@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { withRouter, useHistory } from 'react-router-dom';
 import useStyles from './style';
+import { Alert } from 'components';
 
 const NotificationModal = (props) => {
   const { openModal, handleClose, notification } = props;

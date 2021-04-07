@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useToasts } from 'react-toast-notifications'
+
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import users from '../../apis/users';
@@ -15,7 +16,7 @@ const Profile = props => {
 	const { history } = props;
 	const id = props.match.params.id;
 	const classes = useStyles();
-	const { addToast, removeAllToasts } = useToasts()
+	
 	const breadcrumbs = [{ active: true, href: '/users', label: 'Użytkownicy systemu' }, { active: false, label: 'Edytuj profil' }];
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -25,7 +26,10 @@ const Profile = props => {
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const [roleList, setRoleList] = useState([]);
 	const [activateStatus, setActivateStatus] = useState(false);
-	const [progressStatus, setProgressStatus] = useState(false);
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
 
 	useEffect(() => {
 		users.getInfo()
@@ -62,15 +66,22 @@ const Profile = props => {
 	}
 
 	const handleSave = () => {
-     removeAllToasts();
+     
 		if (name.length === 0 || email.length === 0 || role.length === 0) {
-			addToast(<label>Proszę wypełnić wszystkie wymagane pola.</label>, { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+			setHasAlert(true);
+			setMessage('Proszę wypełnić wszystkie wymagane pola.');
+			setIsSuccess(false);
 		} else if (password.length > 0 || newPassword.length > 0 || repeatPassword.length > 0) {
 			if (password.length === 0 || newPassword.length === 0 || repeatPassword.length === 0 || (newPassword !== repeatPassword)) {
-				addToast('Wprowadź poprawne pola hasła.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+				setHasAlert(true);
+				setMessage('Wprowadź poprawne pola hasła.');
+				setIsSuccess(false);
 			} else {
-				if (password.length < 6 || newPassword.length < 6)
-					addToast('Wprowadź poprawne pola hasła.', { appearance: 'error', autoDismissTimeout: 3000, autoDismiss: false })
+				if (password.length < 6 || newPassword.length < 6) {
+					setHasAlert(true);
+					setMessage('Wprowadź poprawne pola hasła.');
+					setIsSuccess(false);
+				}
 				else {
 					setProgressStatus(true);
 					let role_arr = [];
@@ -82,7 +93,9 @@ const Profile = props => {
 							if (response.code === 401) {
 								history.push('/login');
 							} else {
-								addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+								setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 								setProgressStatus(false);
 							}
 						})
@@ -95,7 +108,9 @@ const Profile = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 						setProgressStatus(false);
 					}
 				})
@@ -103,7 +118,7 @@ const Profile = props => {
 	}
 
 	const handleDelete = () => {
-    removeAllToasts();
+    
 		setProgressStatus(true);
 		users
 			.delete(id)
@@ -111,7 +126,9 @@ const Profile = props => {
 				if (response.code === 401) {
 					history.push('/login');
 				} else {
-					addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+					setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 					if (response.code === 200) {
 						setTimeout(function () { history.push('/users'); }, 1000);
 					}
@@ -126,10 +143,15 @@ const Profile = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" className={classes.btnBack} onClick={handleBack}>
-						Wróć do listy użytkowników
+					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
         </Button>
 				</div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Grid container spacing={3} className={classes.formBlock}>
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>

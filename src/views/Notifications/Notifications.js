@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './style';
+import { Alert } from 'components';
 import {
 	Button, Card, CircularProgress
 } from '@material-ui/core';
@@ -8,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal, NotificationModal } from './components';
 import notification from '../../apis/notification';
-import { useToasts } from 'react-toast-notifications'
+
 import EXCEL from 'js-export-xlsx';
 
 const Notifications = props => {
@@ -31,8 +32,11 @@ const Notifications = props => {
 
 	const classes = useStyles();
 	const breadcrumbs = [{ active: true, label: 'Usługi', href: '/service_list' }, { active: false, label: 'Powiadomienia' }];
-	const [progressStatus, setProgressStatus] = useState(false);
-	const { addToast, removeAllToasts } = useToasts()
+		const [hasAlert, setHasAlert] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [message, setMessage] = useState('');
+        const [progressStatus, setProgressStatus] = useState(false);
+	
 
 	useEffect(() => {
 		handleSearch();
@@ -102,7 +106,9 @@ const Notifications = props => {
 					history.push('/login');
 				} else {
 					if (response.code === 200) {
-						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						setHasAlert(true);
+					setMessage(response.message);
+					setIsSuccess(response.code === 200);
 						let _data = JSON.parse(JSON.stringify(data));
 						for (let i = 0; i < _data.length; i ++) {
 							if (parseInt(_data[i].id) === parseInt(id)) {
@@ -134,7 +140,7 @@ const Notifications = props => {
   }
 
   const handleDelete = () => {
-    removeAllToasts();
+    
     setProgressStatus(true);
     notification
       .delete(selectedItem)
@@ -143,7 +149,9 @@ const Notifications = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
+setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
           }
           setProgressStatus(false);
           handleSearch();
@@ -173,6 +181,12 @@ const Notifications = props => {
 						<div>pozycji</div>
 					</div>
 				</div>
+				<Alert 
+					hasAlert={hasAlert}
+					setHasAlert={setHasAlert}
+					isSuccess={isSuccess}
+					message={message}
+				/>
 				<Card className={classes.table}>
 					<SortTable
 						rows={data}

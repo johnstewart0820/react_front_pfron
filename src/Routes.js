@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Redirect } from 'react-router-dom';
-import { useToasts } from 'react-toast-notifications'
+
 import { RouteWithLayout } from './components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
@@ -63,10 +63,6 @@ import {
 } from './views';
 
 const Routes = (props) => {
-	const { addToast, removeAllToasts } = useToasts()
-	useEffect(() => {
-		removeAllToasts();
-	}, [window.location.pathname]);
   return (
     <Switch>
       <Redirect exact from="/" to="/login"/>

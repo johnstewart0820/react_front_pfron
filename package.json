@@ -73,6 +73,7 @@
     "react-toastify": "^6.2.0",
     "recharts": "^2.0.2",
     "recompose": "^0.30.0",
+    "skip-links": "^1.0.2",
     "underscore": "^1.9.1",
     "uuid": "^3.3.2",
     "validate.js": "^0.13.1",

@@ -1,28 +1,229 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import {
-  CircularProgress,
-  Grid,
-  Card,
-  Button
+	Button, Card, CircularProgress
 } from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
+import AddIcon from '@material-ui/icons/Add';
+import { Breadcrumb } from 'components';
+import { SortTable, SingleSelect, DeleteModal, NotificationModal } from './components';
+import notification from '../../apis/notification';
+import { useToasts } from 'react-toast-notifications'
+import EXCEL from 'js-export-xlsx';
 
 const Notifications = props => {
-  const { children } = props;
+	const { children } = props;
+	const { history } = props;
+	const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
+	const [countList, setCountList] = useState([25, 50, 100]);
+	const [selectedCount, setSelectedCount] = useState(25);
+	const [page, setPage] = useState(1);
+	const [data, setData] = useState([]);
+	const [total, setTotal] = useState(0);
+	const [searchTitle, setSearchTitle] = useState('');
+	const [searchDateModified, setSearchDateModified] = useState(null);
 
-  const { history } = props;
+	const [openModal, setOpenModal] = useState(false);
+	const [selectedItem, setSelectedItem] = useState(-1);
 
-  const classes = useStyles();
-  
-  useEffect(() => {
-    
-  }, []);
-  
-  return (
-    <div className={classes.public}>
-      <label className={classes.notification}>Brak powiadomień.</label>
-    </div>
-  );
+	const [openNotificationModal, setOpenNotificationModal] = useState(false);
+	const [selectedNotification, setSelectedNotification] = useState(-1);
+
+	const classes = useStyles();
+	const breadcrumbs = [{ active: true, label: 'Usługi', href: '/service_list' }, { active: false, label: 'Powiadomienia' }];
+	const [progressStatus, setProgressStatus] = useState(false);
+	const { addToast, removeAllToasts } = useToasts()
+
+	useEffect(() => {
+		handleSearch();
+	}, []);
+
+	useEffect(() => {
+		handleSearch();
+	}, [sortOption, page]);
+
+	useEffect(() => {
+		handleSearch();
+		setPage(1);
+	}, [selectedCount, searchTitle, searchDateModified]);
+
+	const requestSort = (pSortBy) => {
+		var sortOrder = "asc";
+		if (pSortBy === sortOption.sortBy) {
+			sortOrder = (sortOption.sortOrder === "asc" ? "desc" : "asc");
+		}
+		setSortOption({ sortBy: pSortBy, sortOrder: sortOrder })
+	}
+
+	const handleSearch = () => {
+		notification
+			.getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchTitle, searchDateModified)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						setData(response.data.notifications);
+						setTotal(response.data.count);
+					}
+				}
+			})
+	}
+
+	const handleExport = () => {
+		let export_data = [];
+		for (let i = 0; i < data.length; i++) {
+			let item = [];
+			item.push(data[i].id);
+			item.push(data[i].title);
+			let date = new Date(data[i].updated_at);
+			item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+			item.push(data[i].activate_status === 1 ? 'TAK' : 'NIE');
+			export_data.push(item);
+		}
+		EXCEL.outPut({
+			header: ['ID', 'Temat', 'Data', 'Akceptacja'],
+			data: export_data,
+			name: 'download'
+		})
+	}
+
+	const handleSelectedItem = (id) => {
+		setSelectedItem(id);
+		setOpenModal(true);
+	}
+
+	const handleSetState = (id) => {
+		setProgressStatus(true);
+		notification
+			.update_status(id)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false })
+						let _data = JSON.parse(JSON.stringify(data));
+						for (let i = 0; i < _data.length; i ++) {
+							if (parseInt(_data[i].id) === parseInt(id)) {
+								_data[i].activate_status = 1;
+							}
+						}
+						setData(_data);
+					}
+					setProgressStatus(false);
+				}
+			})
+	}
+
+	const handleSetting = (id) => {
+
+	}
+
+	const handleClick = (item) => {
+		setOpenNotificationModal(true);
+		setSelectedNotification(item);
+	}
+
+	const handleCloseNotification = () => {
+		setOpenNotificationModal(false);
+	}
+
+	const handleCloseModal = () => {
+    setOpenModal(false);
+  }
+
+  const handleDelete = () => {
+    removeAllToasts();
+    setProgressStatus(true);
+    notification
+      .delete(selectedItem)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+            addToast(<label>{response.message}</label>, { appearance: response.code === 200 ? 'success' : 'error', autoDismissTimeout: response.code === 200 ? 1000 : 3000, autoDismiss: response.code === 200 ? true : false})
+          }
+          setProgressStatus(false);
+          handleSearch();
+          setPage(1);
+        }
+      })
+      
+  }
+
+	return (
+		<>
+			<div className={classes.public}>
+				<div className={classes.controlBlock}>
+					<Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleSetting}>
+						Ustawienia powiadomień
+					</Button>
+					<Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
+						Eksport listy do XLS
+        </Button>
+				</div>
+				<div className={classes.divide} />
+				<div className={classes.filter}>
+					<Breadcrumb list={breadcrumbs} />
+					<div className={classes.rowsBlock}>
+						<div>Pokaż:</div>
+						<SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
+						<div>pozycji</div>
+					</div>
+				</div>
+				<Card className={classes.table}>
+					<SortTable
+						rows={data}
+						requestSort={requestSort}
+						sortOrder={sortOption.sortOrder}
+						sortBy={sortOption.sortBy}
+						total={total}
+						page={page}
+						selectedCount={selectedCount}
+						searchTitle={searchTitle}
+						setSearchTitle={setSearchTitle}
+						searchDateModified={searchDateModified}
+						setSearchDateModified={setSearchDateModified}
+						handleSetState={handleSetState}
+						handleClick={handleClick}
+						handleDelete={handleSelectedItem}
+					/>
+					<div className={classes.pagination}>
+						<Pagination
+							className={classes.pagenation_class}
+							count={total % selectedCount == 0 ? total / selectedCount : parseInt(total / selectedCount) + 1}
+							onChange={(e, page) => { setPage(page) }}
+							page={page}
+							showFirstButton
+							showLastButton />
+					</div>
+				</Card>
+			</div>
+			<DeleteModal
+        openModal={openModal}
+        handleClose={handleCloseModal}
+        handleDelete={handleDelete}
+        selectedIndex={selectedItem}
+      />
+			<NotificationModal
+        openModal={openNotificationModal}
+        handleClose={handleCloseNotification}
+				notification={selectedNotification}
+      />
+			{
+				progressStatus ?
+					<>
+						<div className={classes.progressContainer}>
+							<CircularProgress className={classes.progress} />
+						</div>
+					</>
+					:
+					<></>
+			}
+		</>
+	);
 };
 
 export default Notifications;

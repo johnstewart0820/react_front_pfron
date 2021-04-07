@@ -115,7 +115,7 @@ height: '100%',
     progressContainer: {
       position: 'absolute',
       top: '50%',
-      width: 'calc(100% - 600px)',
+      width: '100%',
       display: 'flex',
       justifyContent: 'center',
     },

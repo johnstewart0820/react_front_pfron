@@ -188,7 +188,7 @@ const SortTable = (props) => {
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{item.id_candidate}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{item.name}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{item.surname}</TableCell>
-                <TableCell onClick={() => handleClick(item.id_candidate)} className={classes.cell_removable}>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
+                <TableCell onClick={() => handleClick(item.id_candidate)} className={classes.cell_removable}>{rehabitationCenterList && rehabitationCenterList.length > 0 && item.rehabitation_center > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)} className={classes.cell_removable}>{parseInt(item.participant_status_type) >= 1 ? (participantStatusTypeList && participantStatusTypeList.length > 0 && participantStatusTypeList[item.participant_status_type - 1].name) : ''}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)} className={classes.cell_removable}>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>

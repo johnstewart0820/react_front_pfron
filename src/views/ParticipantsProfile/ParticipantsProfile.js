@@ -414,7 +414,7 @@ const ParticipantsProfile = props => {
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
-										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">{educationList.length > 0 && educationList[education - 1].name}</div></Grid>
+										<Grid item xs={12}><div className={classes.top_label_header} htmlFor="name">{educationList.length > 0 && parseInt(education) > 0 && educationList[education - 1].name}</div></Grid>
 									</Grid>
 									{
 										education === 10 ?

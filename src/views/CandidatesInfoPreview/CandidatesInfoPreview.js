@@ -245,7 +245,7 @@ const CandidatesInfoPreview = props => {
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Płeć</div></Grid>
-										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{parseInt(gender) === 1 ? 'Kobieta' : parseInt(gender) === 2 ? 'Męźczyzna' : ''}</div></Grid>
+										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{parseInt(gender) === 1 ? 'Kobieta' : parseInt(gender) === 2 ? 'mężczyzna' : ''}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
 										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Punkt kwalifikacyjny</div></Grid>
@@ -332,7 +332,7 @@ const CandidatesInfoPreview = props => {
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{participant_number}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>
-										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Data wejscia do ORK</div></Grid>
+										<Grid item xs={4}><div className={classes.top_label_header} htmlFor="name">Data wejścia do ORK</div></Grid>
 										<Grid item xs={4}><div className={classes.top_label} htmlFor="name">{getDateStr(date_rehabitation_center)}</div></Grid>
 									</Grid>
 									<Grid container spacing={2}>

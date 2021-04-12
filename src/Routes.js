@@ -376,7 +376,7 @@ const Routes = (props) => {
         component={UsersView}
         exact
         layout={MainLayout}
-        title='Uźytkownicy systemu'
+        title='Użytkownicy systemu'
         path="/users"
       />
       <RouteWithLayout

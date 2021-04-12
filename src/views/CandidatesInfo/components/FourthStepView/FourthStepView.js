@@ -70,7 +70,7 @@ const FourthStepView = (props) => {
             <input className={classes.input_box} type="name" value={participant_number} name="name" onChange={(e) => setParticipantNumber(e.target.value)} />
           </Grid>
           <Grid item xs={4}>
-            <div className={classes.label_content}>Data wejscia do ORK</div>
+            <div className={classes.label_content}>Data wejścia do ORK</div>
             <KeyboardDatePicker
               disableToolbar
               className={classes.date_picker}

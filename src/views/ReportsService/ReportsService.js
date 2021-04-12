@@ -5,15 +5,10 @@ import {
 	Button, Grid, Card, CircularProgress, TextField
 } from '@material-ui/core';
 
-
+import XLSX from "xlsx-style-tw";
 import { Breadcrumb, SingleSelect } from 'components';
 import report from '../../apis/report';
 import { Autocomplete } from '@material-ui/lab';
-
-import ReactExport from 'react-export-excel';
-
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
 const ReportsService = props => {
 	const { history } = props;
@@ -73,9 +68,7 @@ const ReportsService = props => {
 	}, [participant]);
 
 	useEffect(() => {
-		if (result != null) {
-			document.getElementById('export').click();
-		}
+
 	}, [result]);
 
 	const handleError = () => {
@@ -134,17 +127,16 @@ const ReportsService = props => {
 
 	const handleExport = (data) => {
 		let romic_number = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
-		let export_data = [];
 		let total_sum = ['', ''];
 		let header = [
-			{ value: 'Lp.', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } },
-			{ value: 'Działanie', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } }
+			'Lp.',
+			'Działanie'
 		];
-		let total_data = [{ columns: [], data: [] }];
+		let total_data = { cols: [], data: [] };
 		let column = ['', ''];
 		for (let i = 0; i < data.length; i++) {
 			column.push('');
-			header.push({ value: data[i].participant_number, style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } });
+			header.push(data[i].participant_number);
 		}
 		column.push('');
 		column.push('');
@@ -153,44 +145,52 @@ const ReportsService = props => {
 		column.push('');
 		column.push('');
 		column.push('');
-		header.push({ value: 'Liczba Uczestników w okresie sprawozdawczym', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } });
-		header.push({ value: 'Jednostka', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } });
-		header.push({ value: 'Liczba zrealizowanych jednostek na jednego Uczestnika (średnio)', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } });
-		header.push({ value: 'Liczba zrealizowanych jednostek w okresie 8.12.19-07.03.2020 (C x E)', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } });
-		header.push({ value: 'Stawka jednostkowa netto (PLN)', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } });
-		header.push({ value: 'Cena netto (F x G)', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } });
-		header.push({ value: 'Cena brutto (H x (1+J))', style: { font: { bold: true, sz: "8" }, alignment: { wrapText: true, vertical: "top" } } });
-		total_data[0].columns = column;
-		total_data[0].data.push(header);
+		header.push( 'Liczba Uczestników w okresie sprawozdawczym');
+		header.push('Jednostka');
+		header.push('Liczba zrealizowanych jednostek na jednego Uczestnika (średnio)');
+		header.push('Liczba zrealizowanych jednostek w okresie 8.12.19-07.03.2020 (C x E)');
+		header.push('Stawka jednostkowa netto (PLN)');
+		header.push('Cena netto (F x G)');
+		header.push('Cena brutto (H x (1+J))');
+		total_data.cols = column;
+		total_data.data.push(header);
 
 		let sub_header = [
-			{ value: 'A', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } },
-			{ value: 'B', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } },
+			'A',
+			'B',
 		];
 		for (let i = 0; i < data.length; i++) {
 			sub_header.push('');
 		}
-		sub_header.push({ value: 'C', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } });
-		sub_header.push({ value: 'D', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } });
-		sub_header.push({ value: 'E', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } });
-		sub_header.push({ value: 'F', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } });
-		sub_header.push({ value: 'G', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } });
-		sub_header.push({ value: 'H', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } });
-		sub_header.push({ value: 'I', style: { font: { bold: true }, alignment: { wrapText: true, vertical: "top" } } });
+		sub_header.push('C');
+		sub_header.push('D');
+		sub_header.push('E');
+		sub_header.push('F');
+		sub_header.push('G');
+		sub_header.push('H');
+		sub_header.push('I');
 
-		total_data[0].data.push(sub_header);
+		total_data.data.push(sub_header);
 		let index = 0;
+		let module_index = 3;
+		let arr = [];
+		let total_price = 0;
 		if (data.length > 0) {
 			let module = data[0].module;
 			for (let i = 0; i < module.length; i++) {
 				let item = [];
 				item.push('');
-				item.push({ value: romic_number[i] + '. ' + module[i].name, style: { font: { bold: true }, alignment: { wrapText: true } } });
-				total_data[0].data.push(item);
+				item.push(romic_number[i] + '. ' + module[i].name);
+				for (let j = 0; j < data.length + 7; j ++) {
+					item.push('');
+				}
+				total_data.data.push(item);
 				let service_list = module[i].service_lists;
+				arr.push(module_index);
+				module_index ++;
 				for (let j = 0; j < service_list.length; j++) {
 					let item = [];
-					item.push({ value: ++index + '' });
+					item.push(++index);
 					item.push(service_list[j].name);
 					let count = 0;
 					let sum = 0;
@@ -206,67 +206,157 @@ const ReportsService = props => {
 							total_sum[2 + data.length] = 0;
 						total_sum[2 + data.length] += value;
 
-						item.push(value === 0 ? { value: '' } : {
-							value: value + '',
-							style: {
-								fill: { patternType: "solid", fgColor: { rgb: "FF0000FF" } },
-							},
-						});
+						item.push(value === 0 ? '' : value + 'xxx');
 						if (value !== 0)
 							count++;
 						sum += value;
 					}
 					let average = sum / data.length;
 
-					item.push({ value: count === 0 ? 'nd' : count + '' });
-					item.push({ value: data[0].module[i].service_lists[j].unit_name });
-					item.push({ value: average === 0 ? 'nd' : average.toFixed(2) });
-					item.push({
-						value: sum === 0 ? 'nd' : sum.toFixed(2), style: {
-							fill: { patternType: "solid", fgColor: { rgb: "FFFFFF00" } },
-						},
-					});
+					item.push(count === 0 ? 'nd' : count + '' );
+					item.push(data[0].module[i].service_lists[j].unit_name );
+					item.push(average === 0 ? 'nd' : average.toFixed(2) );
+					item.push(
+						sum === 0 ? 'nd' : sum.toFixed(2));
 
 					let cost = data[0].module[i].service_lists[j].cost;
-					item.push({ value: parseFloat(cost).toFixed(2) });
+					item.push(parseFloat(cost).toFixed(2));
 					let sum_value = (cost * sum);
+					total_price += sum_value;
 					if (!total_sum[5 + data.length])
 						total_sum[5 + data.length] = 0;
 					total_sum[5 + data.length] += parseFloat(sum);
-					item.push({ value: sum_value === 0 ? 'nd' : sum_value.toFixed(2) });
-					item.push({ value: sum_value === 0 ? 'nd' : sum_value.toFixed(2) });
-					total_data[0].data.push(item);
+					item.push(sum_value === 0 ? 'nd' : sum_value.toFixed(2));
+					item.push(sum_value === 0 ? 'nd' : sum_value.toFixed(2));
+					total_data.data.push(item);
+					module_index ++;
 				}
 			}
 		}
 		// export_data.push(total_sum);
 		let item = [];
-		item.push({
-			value: '', style: {
-				fill: { patternType: "solid", fgColor: { rgb: "FFB8CCD4" } }
-			}
-		});
-		item.push({
-			value: 'VIII. ŁĄCZNIE W KWARTALE', style: {
-				font: { bold: true },
-				fill: { patternType: "solid", fgColor: { rgb: "FFB8CCD4" } }
-			}
-		})
-		for (let i = 1; i < data.length + 8; i++) {
-			item.push({
-				value: '', style: {
-					fill: { patternType: "solid", fgColor: { rgb: "FFB8CCD4" } }
-				}
-			});
+		item.push('');
+		item.push('VIII. ŁĄCZNIE W KWARTALE')
+		for (let i = 1; i < data.length + 7; i++) {
+			item.push('');
 		}
-		total_data[0].data.push(item);
+		item.push(total_price);
+		total_data.data.push(item);
 		let item_last = [];
 		for (let i = 0; i < total_sum.length; i++) {
-			item_last.push({ value: total_sum[i] === undefined ? '' : total_sum[i] + '' });
+			item_last.push(total_sum[i] === undefined ? '' : total_sum[i] + '' );
 		}
-		total_data[0].data.push(item_last);
-		setResult(total_data);
-
+		total_data.data.push(item_last);
+		const ws = XLSX.utils.aoa_to_sheet(total_data.data);
+		var wscols = [
+			{wch:6,alignment: {
+				wrapText: '1', // any truthy value here
+			},},
+			{wch:120, alignment: {
+				wrapText: '1', // any truthy value here
+			},},
+		];
+		for (let i = 0; i <= data.length; i++) {
+			wscols.push({wch: 10});
+		}
+		wscols.push({wch: 30});
+		wscols.push({wch: 20});
+		wscols.push({wch: 20});
+		wscols.push({wch: 20});
+		wscols.push({wch: 20});
+		wscols.push({wch: 20});
+		ws['!cols']	= wscols;
+		ws["!rows"] = [ // just demo, should use for-loop
+			{ hpx: 120, },
+			
+		]
+		arr.push(module_index);
+		for (const key in ws) {
+			// first row
+			if (key == '!ref')
+					break;
+			if(key.replace(/[^0-9]/ig, '') === '1' || key.replace(/[^0-9]/ig, '') === '2') {
+				ws[key].s = {
+					alignment: {
+						wrapText: '1', // any truthy value here
+					},
+					font: {
+						sz: 12, // font size
+						bold: true // bold
+					},
+					border: {
+						// underscore
+						bottom: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						left: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						right: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						top: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+					},
+					fill: {
+						fgColor: { rgb: 'FFB8CCD4' } // Add background color
+					},
+				}
+			}
+			for (let i = 0; i < arr.length; i ++) {
+				if (arr[i] === parseInt(key.replace(/[^0-9]/ig, ''))) {
+					ws[key].s = {
+						alignment: {
+							wrapText: '1', // any truthy value here
+						},
+						font: {
+							sz: 12, // font size
+							bold: true // bold
+						},
+						border: {
+							// underscore
+							bottom: {
+								style: 'thin',
+								color: 'FF000000'
+							},
+							left: {
+								style: 'thin',
+								color: 'FF000000'
+							},
+							right: {
+								style: 'thin',
+								color: 'FF000000'
+							},
+							top: {
+								style: 'thin',
+								color: 'FF000000'
+							},
+						},
+						fill: {
+							fgColor: { rgb: 'D8E4B2' } // Add background color
+						},
+					}
+				}
+			}
+			console.log(ws[key].v);
+			if (ws[key].v.toString().endsWith('xxx')) {
+				ws[key].s = {
+					fill: {
+						fgColor: { rgb: '0000FF' } // Add background color
+					},
+				}
+				ws[key].v = ws[key].v.split('xxx')[0]
+			}
+		}
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+    /* generate XLSX file and send to client */
+    XLSX.writeFile(wb, `${name}.xlsx`);
 	}
 
 	return (
@@ -354,10 +444,7 @@ const ReportsService = props => {
 								<Grid item xs={12}>
 									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleGenerate}>
 										Generuj raport
-                </Button>
-									<ExcelFile element={<button id="export" style={{ display: 'none' }}>Download Data With Styles</button>}>
-										<ExcelSheet dataSet={result} name="Organization" />
-									</ExcelFile>
+                	</Button>
 								</Grid>
 							</Grid>
 						</Card>

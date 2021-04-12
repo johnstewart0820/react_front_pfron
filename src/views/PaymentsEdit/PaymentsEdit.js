@@ -108,7 +108,7 @@ const PaymentsEdit = props => {
     <div className={classes.public}>
       <div className={classes.controlBlock}>
         <Breadcrumb list={breadcrumbs} />
-        <Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>          Wróć do listy punktów
+        <Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>          Wróć do listy kosztów
         </Button>
       </div>
 			<Alert 

@@ -126,7 +126,7 @@ const ReportsPerformance = props => {
                 Dane podstawowe
               </Grid>
               <Grid item md={9} xs={12}>
-                <div className={classes.top_label} ><label htmlFor="name">Tytuł, imię, i nazwisko specjalisty</label></div>
+                <div className={classes.top_label} ><label htmlFor="name">Tytuł, imię i nazwisko specjalisty</label></div>
                 <input className={clsx({[classes.input_box] : true, [classes.error] : error.name})} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
                 <div className={classes.input_box_label} htmlFor="type">Wybierz punkt kwalifikacyjny</div>
                 <SingleSelect value={qualification} handleChange={(value) => handleChangeQualification(value)} list={qualificationList} error={error.qualification}/>

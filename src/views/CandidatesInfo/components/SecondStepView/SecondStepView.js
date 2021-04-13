@@ -61,94 +61,87 @@ const SecondStepView = (props) => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          {
-            admission === 1 ?
-            <>
-              <Grid item xs={12}>
-                <FormControl component="fieldset">
-                  <FormLabel>Rekomendacja lekarza</FormLabel>
-                  <RadioGroup aria-label="gender" name="education" value={doctor_recommendation} onChange={(e) => setDoctorRecommendation(parseInt(e.target.value))} row>
-                    <FormControlLabel value={1} control={<Radio />} label='TAK' />
-                    <FormControlLabel value={2} control={<Radio />} label='NIE' />
-                    <FormControlLabel value={3} control={<Radio />} label='NIE MOŻNA STWIERDZIĆ' />
-                  </RadioGroup>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <div className={classes.label_content}>Orzeczenie o kwalifikacji z dnia</div>
-                <KeyboardDatePicker
-                  disableToolbar
-                  className={classes.date_picker}
-                  variant="inline"
-                  format="dd.MM.yyyy"
-                  margin="normal"
-                  id="date-picker-inline"
-                  value={doctor_date}
-                  onChange={(value) => setDoctorDate(handleDate(value))}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              </Grid>
-              
-              <Grid item xs={12}>
-                <div className={classes.label_content} htmlFor="name">Imię i nazwisko lekarza</div>
-                <SingleSelect value={doctor} handleChange={setDoctor} list={doctorList}/>
-              </Grid>
-              <Grid item xs={12}>
-                <div className={classes.label_content}>Uwagi od lekarza</div>
-                <ReactQuill 
-                  onChange={setDoctorRemark}
-                  value={doctor_remark}
-                  className={classes.qlClass}
-                />
-              </Grid>
+					<>
+						<Grid item xs={12}>
+							<FormControl component="fieldset">
+								<FormLabel>Rekomendacja lekarza</FormLabel>
+								<RadioGroup aria-label="gender" name="education" value={doctor_recommendation} onChange={(e) => setDoctorRecommendation(parseInt(e.target.value))} row>
+									<FormControlLabel value={1} control={<Radio />} label='TAK' />
+									<FormControlLabel value={2} control={<Radio />} label='NIE' />
+									<FormControlLabel value={3} control={<Radio />} label='NIE MOŻNA STWIERDZIĆ' />
+								</RadioGroup>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12}>
+							<div className={classes.label_content}>Orzeczenie o kwalifikacji z dnia</div>
+							<KeyboardDatePicker
+								disableToolbar
+								className={classes.date_picker}
+								variant="inline"
+								format="dd.MM.yyyy"
+								margin="normal"
+								id="date-picker-inline"
+								value={doctor_date}
+								onChange={(value) => setDoctorDate(handleDate(value))}
+								KeyboardButtonProps={{
+									'aria-label': 'change date',
+								}}
+							/>
+						</Grid>
+						
+						<Grid item xs={12}>
+							<div className={classes.label_content} htmlFor="name">Imię i nazwisko lekarza</div>
+							<SingleSelect value={doctor} handleChange={setDoctor} list={doctorList}/>
+						</Grid>
+						<Grid item xs={12}>
+							<div className={classes.label_content}>Uwagi od lekarza</div>
+							<ReactQuill 
+								onChange={setDoctorRemark}
+								value={doctor_remark}
+								className={classes.qlClass}
+							/>
+						</Grid>
 
-              <Grid item xs={12}>
-                <FormControl component="fieldset">
-                  <FormLabel>Rekomendacja psychologa</FormLabel>
-                  <RadioGroup aria-label="gender" name="education" value={psycology_recommendation} onChange={(e) => setPsycologyRecommendation(parseInt(e.target.value))} row>
-                    <FormControlLabel value={1} control={<Radio />} label='TAK' />
-                    <FormControlLabel value={2} control={<Radio />} label='NIE' />
-                    <FormControlLabel value={3} control={<Radio />} label='NIE MOŻNA STWIERDZIĆ' />
-                  </RadioGroup>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <div className={classes.label_content}>Orzeczenie o kwalifikacji z dnia</div>
-                <KeyboardDatePicker
-                  disableToolbar
-                  className={classes.date_picker}
-                  variant="inline"
-                  format="dd.MM.yyyy"
-                  margin="normal"
-                  id="date-picker-inline"
-                  value={psycology_date}
-                  onChange={(value) => setPsycologyDate(handleDate(value))}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              </Grid>
-              
-              <Grid item xs={12}>
-                <div className={classes.label_content} htmlFor="name">Imię i nazwisko psychologa</div>
-                <SingleSelect value={psycology} handleChange={setPsycology} list={psycologyList}/>
-              </Grid>
-              <Grid item xs={12}>
-                <div className={classes.label_content}>Uwagi od psychologa</div>
-                <ReactQuill 
-                  onChange={setPsycologyRemark}
-                  value={psycology_remark}
-                  className={classes.qlClass}
-                />
-              </Grid>
-            </>
-            :
-            <></>
-          }
-          
-          
+						<Grid item xs={12}>
+							<FormControl component="fieldset">
+								<FormLabel>Rekomendacja psychologa</FormLabel>
+								<RadioGroup aria-label="gender" name="education" value={psycology_recommendation} onChange={(e) => setPsycologyRecommendation(parseInt(e.target.value))} row>
+									<FormControlLabel value={1} control={<Radio />} label='TAK' />
+									<FormControlLabel value={2} control={<Radio />} label='NIE' />
+									<FormControlLabel value={3} control={<Radio />} label='NIE MOŻNA STWIERDZIĆ' />
+								</RadioGroup>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12}>
+							<div className={classes.label_content}>Orzeczenie o kwalifikacji z dnia</div>
+							<KeyboardDatePicker
+								disableToolbar
+								className={classes.date_picker}
+								variant="inline"
+								format="dd.MM.yyyy"
+								margin="normal"
+								id="date-picker-inline"
+								value={psycology_date}
+								onChange={(value) => setPsycologyDate(handleDate(value))}
+								KeyboardButtonProps={{
+									'aria-label': 'change date',
+								}}
+							/>
+						</Grid>
+						
+						<Grid item xs={12}>
+							<div className={classes.label_content} htmlFor="name">Imię i nazwisko psychologa</div>
+							<SingleSelect value={psycology} handleChange={setPsycology} list={psycologyList}/>
+						</Grid>
+						<Grid item xs={12}>
+							<div className={classes.label_content}>Uwagi od psychologa</div>
+							<ReactQuill 
+								onChange={setPsycologyRemark}
+								value={psycology_remark}
+								className={classes.qlClass}
+							/>
+						</Grid>
+					</>
         </Grid>
       </Grid>
     </Grid>

@@ -43,6 +43,7 @@ export { default as TrainingsAdd } from './TrainingsAdd';
 export { default as TrainingsEdit } from './TrainingsEdit';
 
 export { default as Notifications } from './Notifications';
+export { default as NotificationSetting } from './NotificationSetting';
 
 export { default as OrkList } from './OrkList';
 export { default as OrkListEdit } from './OrkListEdit';

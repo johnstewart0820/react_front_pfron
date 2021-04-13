@@ -88,6 +88,8 @@ const useStyles = makeStyles(theme => ({
 		fontFamily: 'roboto',
 		fontSize: '14px',
 		cursor: 'pointer',
+		display: 'flex',
+		alignItems: 'center'
 	},
 	title: {
 		fontWeight: '500',

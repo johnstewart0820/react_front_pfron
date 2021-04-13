@@ -40,6 +40,7 @@ import {
   TrainingsAdd as TrainingsAddView,
   TrainingsEdit as TrainingsEditView,
   Notifications as NotificationsView,
+	NotificationSetting as NotificationSettingView,
   OrkList as OrkListView,
   OrkListEdit as OrkListEditView,
   Payments as PaymentsView,
@@ -302,6 +303,13 @@ const Routes = (props) => {
         layout={MainLayout}
         title='Powiadomienia'
         path="/notifications"
+      />
+			<RouteWithLayout
+        component={NotificationSettingView}
+        exact
+        layout={MainLayout}
+        title='Ustawienia Powiadomień'
+        path="/notification_setting"
       />
       <RouteWithLayout
         component={OrkListView}

@@ -32,11 +32,11 @@ const Notifications = props => {
 
 	const classes = useStyles();
 	const breadcrumbs = [{ active: true, label: 'Usługi', href: '/service_list' }, { active: false, label: 'Powiadomienia' }];
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
-	
+	const [progressStatus, setProgressStatus] = useState(false);
+
 
 	useEffect(() => {
 		handleSearch();
@@ -107,10 +107,10 @@ const Notifications = props => {
 				} else {
 					if (response.code === 200) {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						let _data = JSON.parse(JSON.stringify(data));
-						for (let i = 0; i < _data.length; i ++) {
+						for (let i = 0; i < _data.length; i++) {
 							if (parseInt(_data[i].id) === parseInt(id)) {
 								_data[i].activate_status = 1;
 							}
@@ -123,7 +123,7 @@ const Notifications = props => {
 	}
 
 	const handleSetting = (id) => {
-
+		history.push('/notification_setting');
 	}
 
 	const handleClick = (item) => {
@@ -136,30 +136,30 @@ const Notifications = props => {
 	}
 
 	const handleCloseModal = () => {
-    setOpenModal(false);
-  }
+		setOpenModal(false);
+	}
 
-  const handleDelete = () => {
-    
-    setProgressStatus(true);
-    notification
-      .delete(selectedItem)
-      .then(response => {
-        if (response.code === 401) {
-          history.push('/login');
-        } else {
-          if (response.code === 200) {
-setHasAlert(true);
+	const handleDelete = () => {
+
+		setProgressStatus(true);
+		notification
+			.delete(selectedItem)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						setHasAlert(true);
 						setMessage(response.message);
 						setIsSuccess(response.code === 200);
-          }
-          setProgressStatus(false);
-          handleSearch();
-          setPage(1);
-        }
-      })
-      
-  }
+					}
+					setProgressStatus(false);
+					handleSearch();
+					setPage(1);
+				}
+			})
+
+	}
 
 	return (
 		<>
@@ -181,7 +181,7 @@ setHasAlert(true);
 						<div>pozycji</div>
 					</div>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -216,16 +216,16 @@ setHasAlert(true);
 				</Card>
 			</div>
 			<DeleteModal
-        openModal={openModal}
-        handleClose={handleCloseModal}
-        handleDelete={handleDelete}
-        selectedIndex={selectedItem}
-      />
+				openModal={openModal}
+				handleClose={handleCloseModal}
+				handleDelete={handleDelete}
+				selectedIndex={selectedItem}
+			/>
 			<NotificationModal
-        openModal={openNotificationModal}
-        handleClose={handleCloseNotification}
+				openModal={openNotificationModal}
+				handleClose={handleCloseNotification}
 				notification={selectedNotification}
-      />
+			/>
 			{
 				progressStatus ?
 					<>

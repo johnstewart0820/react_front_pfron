@@ -272,6 +272,7 @@ class constants {
 			'/trainings/edit/*',
 
 			'/notifications',
+			'/notification_setting',
 
 			'/ork_list',
 			'/ork_list/create',

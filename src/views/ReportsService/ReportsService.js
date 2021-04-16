@@ -48,7 +48,14 @@ const ReportsService = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						setQuaterList(response.data.quater);
+						let quater_list = response.data.quater;
+						quater_list = quater_list.map((item, index) => {
+							item.start_date = `Kwartał ${index + 1} (${item.start_date})`;
+							item.end_date = `Kwartał ${index + 1} (${item.end_date})`;
+							return item;
+						})
+						console.log(quater_list);
+						setQuaterList(quater_list);
 					}
 				})
 		}
@@ -61,7 +68,13 @@ const ReportsService = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						setQuaterList(response.data.quater);
+						let quater_list = response.data.quater;
+						quater_list = quater_list.map((item, index) => {
+							item.start_date = `Kwartał ${index + 1} (${item.start_date})`;
+							item.end_date = `Kwartał ${index + 1} (${item.end_date})`;
+							return item;
+						})
+						setQuaterList(quater_list);
 					}
 				})
 		}
@@ -105,15 +118,14 @@ const ReportsService = props => {
 	}
 
 	const handleGenerate = () => {
-
-		if (participant === null && parseInt(rehabitationCenter) === 0) {
+		if ((participant === null && parseInt(rehabitationCenter) === 0) || !quater.id) {
 			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 		}
 		else {
 			setProgressStatus(true);
-			report.getServiceData(rehabitationCenter, participant === null ? 0 : participant.id)
+			report.getServiceData(rehabitationCenter, participant === null ? 0 : participant.id, quater.id)
 				.then(response => {
 					if (response.code === 401) {
 						history.push('/login');
@@ -343,7 +355,6 @@ const ReportsService = props => {
 					}
 				}
 			}
-			console.log(ws[key].v);
 			if (ws[key].v.toString().endsWith('xxx')) {
 				ws[key].s = {
 					fill: {

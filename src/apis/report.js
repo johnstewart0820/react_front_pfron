@@ -39,13 +39,14 @@ class Report {
 					return error;
 			})
 	}
-	getServiceData = (rehabitation_center, participant) => {
+	getServiceData = (rehabitation_center, participant, quater) => {
 		return axios
 		.get(`${process.env.REACT_APP_BACKEND_URL}/report/service_data`, {
 				headers: authHeader(storage.getStorage('token')),
 				params: {
 					rehabitation_center: rehabitation_center,
-					participant: participant
+					participant: participant,
+					quater: quater
 				}
 		})
 		.then(response => {

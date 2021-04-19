@@ -23,7 +23,7 @@ import EXCEL from 'js-export-xlsx';
 const TrainingsAdd = props => {
 	const { history } = props;
 	const classes = useStyles();
-	
+
 	const breadcrumbs = [{ active: true, label: 'Usługi', href: '/service_list' }, { active: true, label: 'Szkolenia', href: '/trainings' }, { active: false, label: 'Dodaj szkolenie' }];
 	const [training, setTraining] = useState({ name: '', number: '', rehabitation_center: 0, service: 0, participant: [{}], comment: '', training_status: 0 });
 	const [training_class, setTrainingClass] = useState([{ name: '', date: null, start_hour: '', end_hour: '', break_amount: '', total_hour: '', ork_team: [] }]);
@@ -32,10 +32,10 @@ const TrainingsAdd = props => {
 	const [orkTeamList, setOrkTeamList] = useState([]);
 	const [serviceList, setServiceList] = useState([]);
 	const [participantList, setParticipantList] = useState([]);
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({ participant: [true] });
 	const [error_class, setErrorClass] = useState([{}]);
 
@@ -272,9 +272,9 @@ const TrainingsAdd = props => {
 		let _arr = [];
 		participantList.map((item, index) => {
 			let count = 0;
-			for(let i = 0; i < training.participant.length; i ++) {
+			for (let i = 0; i < training.participant.length; i++) {
 				if (parseInt(item.id) === parseInt(training.participant[i].id)) {
-					count ++;
+					count++;
 				}
 			}
 			if (count === 0) {
@@ -311,9 +311,9 @@ const TrainingsAdd = props => {
 	}
 
 	const handleSave = () => {
-     
+
 		if (checkError()) {
-						setHasAlert(true);
+			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 			handleError();
@@ -339,8 +339,8 @@ const TrainingsAdd = props => {
 						history.push('/login');
 					} else {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/trainings'); }, 1000);
 						}
@@ -372,10 +372,10 @@ const TrainingsAdd = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy szkoleń
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy szkoleń
         			</Button>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -422,7 +422,7 @@ const TrainingsAdd = props => {
 														id="participant"
 														onChange={(event, value) => handleChangeParticipant(value ? value : [], index)}
 														options={getRemainParticipantNumber()}
-														value={ item.name ? item : '' }
+														value={item.name ? item : ''}
 														getOptionLabel={(option) => participantList && option && (`${option.name} ${option.surname} (${option.participant_number}) `)}
 														renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 													/>

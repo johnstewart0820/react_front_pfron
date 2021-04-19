@@ -71,6 +71,10 @@ const Topbar = props => {
 		setContrastStatus(!contrastStatus);
 	}
 
+	const handleProfile = () => {
+		history.push('/profile');
+	}
+
   return (
 		<SiteInfoContextConsumer>
     { (props) => (
@@ -144,6 +148,7 @@ const Topbar = props => {
 							open={avatarOpen}
 							onClose={handleClose}
 						>
+							<MenuItem onClick={handleProfile}>Edytuj profil</MenuItem>
 							<MenuItem onClick={handleLogout}>Wyloguj</MenuItem>
 						</Menu>
 					</div>

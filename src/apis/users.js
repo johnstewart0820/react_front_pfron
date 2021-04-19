@@ -79,12 +79,13 @@ class Users {
         })
     }
 
-    create = (name, email, id_role, activate_status) => {
+    create = (name, email, id_role, id_qualification_point, activate_status) => {
         return axios
         .post(`${process.env.REACT_APP_BACKEND_URL}/users`, {
             name: name,
             email: email,
             id_role: id_role,
+						id_qualification_point: id_qualification_point,
             activate_status: activate_status
         }, {
             headers: authHeader(storage.getStorage('token'))
@@ -121,12 +122,13 @@ class Users {
         })
     }
 
-    update = (name, email, id_role, activate_status, id) => {
+    update = (name, email, id_role, id_qualification_point, activate_status, id) => {
         return axios
         .put(`${process.env.REACT_APP_BACKEND_URL}/users`, {
             name: name,
             email: email,
             id_role: id_role,
+						id_qualification_point: id_qualification_point,
             activate_status: activate_status,
             id: id
         }, {

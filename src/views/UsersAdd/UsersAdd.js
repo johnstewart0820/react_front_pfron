@@ -14,17 +14,19 @@ const UsersAdd = props => {
 	const { children } = props;
 	const { history } = props;
 	const classes = useStyles();
-	
+
 	const breadcrumbs = [{ active: true, href: '/users', label: 'Ustawienia systemowe' }, { active: true, href: '/users', label: 'Użytkownicy systemu' }, { active: false, label: 'Dodawanie użytkownika' }];
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [role, setRole] = useState([]);
 	const [roleList, setRoleList] = useState([]);
+	const [qualification_point, setQualificationPoint] = useState([]);
+	const [qualificationPointList, setQualificationPointList] = useState([]);
 	const [activateStatus, setActivateStatus] = useState(false);
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 
 	useEffect(() => {
 		users.getInfo()
@@ -33,6 +35,7 @@ const UsersAdd = props => {
 					history.push('/login');
 				} else {
 					setRoleList(response.data.role);
+					setQualificationPointList(response.data.qualification_point);
 				}
 			})
 	}, []);
@@ -42,9 +45,8 @@ const UsersAdd = props => {
 	}
 
 	const handleSave = () => {
-     
 		if (name.length === 0 || email.length === 0 || role.length === 0) {
-						setHasAlert(true);
+			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 		} else {
@@ -54,14 +56,16 @@ const UsersAdd = props => {
 				role_arr.push(item.id);
 			})
 
-			users.create(name, email, role_arr, activateStatus)
+			let qualification_point_arr = qualification_point.map((item, index) => { return item.id });
+
+			users.create(name, email, role_arr, qualification_point_arr, activateStatus)
 				.then(response => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/users'); }, 1000);
 						}
@@ -71,15 +75,21 @@ const UsersAdd = props => {
 		}
 	}
 
+	useEffect(() => {
+		if (!role.some(e => e.id === 3)) {
+			setQualificationPoint([]);
+		}
+	}, [role]);
+
 	return (
 		<>
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
         </Button>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -108,6 +118,25 @@ const UsersAdd = props => {
 										getOptionLabel={(option) => roleList && option && option.name}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 									/>
+									{
+										role.some(e => e.id === 3) ?
+											<>
+												<div className={classes.input_box_label}><label htmlFor="role">Punkt kwalifikacyjny</label></div>
+												<Autocomplete
+													multiple
+													id="qualification_point"
+													className={classes.name_select_box}
+													onChange={(event, value) => setQualificationPoint(value ? value : [])}
+													value={qualification_point}
+													options={qualificationPointList}
+													getOptionLabel={(option) => roleList && option && option.name}
+													renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+												/>
+											</>
+											:
+											<></>
+									}
+
 									<FormControlLabel
 										className={classes.rememberMe}
 										control={

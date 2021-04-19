@@ -33,10 +33,10 @@ const Users = props => {
   const [selectedItem, setSelectedItem] = useState(-1);
   const classes = useStyles();
   const breadcrumbs = [{active: true, href: '/users', label: 'Ustawienia systemowe'}, {active: false, label: 'Użytkownicy systemu'}];
-  	const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
   
   useEffect(() => {
     users.getInfo()

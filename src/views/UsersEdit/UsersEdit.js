@@ -15,17 +15,19 @@ const UsersEdit = props => {
 	const { history } = props;
 	const id = props.match.params.id;
 	const classes = useStyles();
-	
+
 	const breadcrumbs = [{ active: true, href: '/users', label: 'Ustawienia systemowe' }, { active: true, href: '/users', label: 'Użytkownicy systemu' }, { active: false, label: 'Dodawanie użytkownika' }];
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [role, setRole] = useState([]);
 	const [roleList, setRoleList] = useState([]);
 	const [activateStatus, setActivateStatus] = useState(false);
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [qualification_point, setQualificationPoint] = useState([]);
+	const [qualificationPointList, setQualificationPointList] = useState([]);
+	const [progressStatus, setProgressStatus] = useState(false);
 
 	useEffect(() => {
 		users.getInfo()
@@ -34,6 +36,7 @@ const UsersEdit = props => {
 					history.push('/login');
 				} else {
 					setRoleList(response.data.role);
+					setQualificationPointList(response.data.qualification_point);
 				}
 			})
 	}, []);
@@ -46,25 +49,35 @@ const UsersEdit = props => {
 				} else {
 					setName(response.data.user.name);
 					setEmail(response.data.user.email);
+					setQualificationPoint(response.data.qualification_point)
 					setActivateStatus(response.data.user.activate_status === '1' ? true : false);
 					let id_role_arr = response.data.user.id_role.split(',');
 					let role_arr = [];
-					for (let i = 0; i < id_role_arr.length; i++) {
-						role_arr.push(roleList[id_role_arr[i] - 1]);
+					if (roleList.length > 0 && id_role_arr.length > 0) {
+						for (let i = 0; i < id_role_arr.length; i++) {
+							role_arr.push(roleList[parseInt(id_role_arr[i]) - 1]);
+						}
 					}
+					
 					setRole(role_arr);
 				}
 			})
 	}, [roleList]);
+
+	useEffect(() => {
+		if (role.length != 0 && !role.some(e => e.id === 3)) {
+			setQualificationPoint([]);
+		}
+	}, [role]);
 
 	const handleBack = () => {
 		history.push('/users');
 	}
 
 	const handleSave = () => {
-     
+
 		if (name.length === 0 || email.length === 0 || parseInt(role) === 0) {
-						setHasAlert(true);
+			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 		} else {
@@ -73,14 +86,17 @@ const UsersEdit = props => {
 			role.map((item, index) => {
 				role_arr.push(item.id);
 			})
-			users.update(name, email, role_arr, activateStatus, id)
+
+			let qualification_point_arr = qualification_point.map((item, index) => { return item.id });
+
+			users.update(name, email, role_arr, qualification_point_arr, activateStatus, id)
 				.then(response => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/users'); }, 1000);
 						}
@@ -91,7 +107,7 @@ const UsersEdit = props => {
 	}
 
 	const handleDelete = () => {
-    
+
 		setProgressStatus(true);
 		users
 			.delete(id)
@@ -116,10 +132,10 @@ const UsersEdit = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
         </Button>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -148,6 +164,24 @@ const UsersEdit = props => {
 										getOptionLabel={(option) => roleList && option && option.name}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 									/>
+									{console.log(qualification_point),
+										role.length != 0 && role.some(e => e.id === 3) ?
+											<>
+												<div className={classes.input_box_label}><label htmlFor="role">Punkt kwalifikacyjny</label></div>
+												<Autocomplete
+													multiple
+													id="qualification_point"
+													className={classes.name_select_box}
+													onChange={(event, value) => setQualificationPoint(value ? value : [])}
+													value={qualification_point}
+													options={qualificationPointList}
+													getOptionLabel={(option) => roleList && option && option.name}
+													renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+												/>
+											</>
+											:
+											<></>
+									}
 									<FormControlLabel
 										className={classes.rememberMe}
 										control={

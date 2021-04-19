@@ -38,7 +38,25 @@ class Participant {
         }).catch(error => {
             return error;
         })
-	}
+		}
+
+		getTotalList = (id) => {
+			return axios
+			.get(`${process.env.REACT_APP_BACKEND_URL}/participant/total`, {
+					headers: authHeader(storage.getStorage('token')),
+			})
+			.then(response => {
+					if (response.data.code === 401) {
+							storage.removeStorage('token');
+							storage.removeStorage('role');
+							return response.data;
+					} else if (response.data.code === 200) {
+							return response.data;
+					}
+			}).catch(error => {
+					return error;
+			})
+		}
     
     getListByOption = (sort_column, sort_order, count, page, searchId, searchName, searchSurname, searchRehabitationCenter, searchParticipantStatusType, searchDateModified) => {
         return axios

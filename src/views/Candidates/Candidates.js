@@ -19,6 +19,11 @@ const Candidates = props => {
 	const [selectedCount, setSelectedCount] = useState(25);
 	const [page, setPage] = useState(1);
 	const [data, setData] = useState([]);
+	const [totalCandidateList, setTotalCandidateList] = useState([]);
+	const [educationList, setEducationList] = useState([]);
+	const [voivodeshipList, setVoivodeshipList] = useState([]);
+	const [communityList, setCommunityList] = useState([]);
+	const [countyList, setCountyList] = useState([]);
 	const [total, setTotal] = useState(0);
 	const [searchId, setSearchId] = useState('');
 	const [searchName, setSearchName] = useState('');
@@ -49,6 +54,18 @@ const Candidates = props => {
 					setStageList(response.data.stage);
 					setQualificationPointList(response.data.qualification_point);
 					setStatusList(response.data.status);
+				}
+			})
+		candidate.getTotalList()
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					setTotalCandidateList(response.data.candidates);
+					setEducationList(response.data.educations);
+					setVoivodeshipList(response.data.voivodeships);
+					setCommunityList(response.data.communities);
+					setCountyList(response.data.counties);
 				}
 			})
 		handleSearch();
@@ -88,6 +105,109 @@ const Candidates = props => {
 
 	const handleCreate = () => {
 		history.push('/candidates/create');
+	}
+
+	const handleExportSL = () => {
+		let export_data = [];
+
+		totalCandidateList.map((data, index) => {
+			let item = [];
+			item.push('POWR.02.06.00-00-0057/17-01');
+			item.push('PAŃSTWOWY FUNDUSZ REHABILITACJI OSÓB NIEPEŁNOSPRAWNYCH');
+			item.push('Wypracowanie i pilotażowe wdrożenie modelu kompleksowej rehabilitacji umożliwiającej podjęcie lub powrót do pracy ');
+			item.push('1/1/2018');
+			item.push('12/31/2023');
+			item.push('-');
+			for(let j = 0; j < 24; j ++)
+				item.push('');
+			item.push('Polska');
+			item.push('indywidualny');
+			item.push('');
+			item.push(data.name);
+			item.push(data.surname);
+			item.push(data.person_id);
+			item.push('Nie');
+			item.push(parseInt(data.gender) === 1 ? 'mężczyzna' : 'kobieta')
+			item.push(parseInt(data.education) === 0 ? '' : educationList[parseInt(data.education) - 1])
+			item.push(parseInt(data.voivodeship) === 0 ? '' : voivodeshipList[parseInt(data.voivodeship) - 1])
+			item.push(parseInt(data.county) === 0 ? '' : countyList[parseInt(data.county) - 1])
+			item.push(parseInt(data.community) === 0 ? '' : communityList[parseInt(data.community) - 1])
+			item.push(data.city);
+			item.push(data.street);
+			item.push(data.house_number);
+			item.push(data.apartment_number);
+			item.push(data.post_code);
+			item.push('');
+			item.push(data.mobile_phone === '48' ? '' : data.mobile_phone);
+			item.push(data.email);
+			item.push(data.doctor_date);
+			item.push(data.admission === '2' ? data.doctor_date : '');
+			let employed_status = data.employed_status;
+			let passive_person_status = data.passive_person_status;
+			let have_unemployed_person_status = data.have_unemployed_person_status;
+			let seek_work_status = data.seek_work_status;
+			let unemployed_status = data.unemployed_status;
+			let long_term_employed_status = data.long_term_employed_status;
+			let res = '';
+			if (employed_status === '1') {
+				res = 'osoba pracująca';
+			}
+			if (passive_person_status === '1') {
+				res = 'osoba bierna zawodowo';
+			}
+			if (have_unemployed_person_status === '1' || seek_work_status === '1') {
+				res = 'osoba bezrobotna zarejestrowana w ewidencji urzędów pracy';
+			}
+			if (unemployed_status === '1' && have_unemployed_person_status != '1' && seek_work_status != '1') {
+				res = 'osoba bezrobotna niezarejestrowana w ewidencji urzędów pracy';
+			}
+			
+			item.push(res);
+			
+			if (long_term_employed_status === '1') {
+				item.push('osoba długotrwale bezrobotna')
+			} else {
+				item.push('inne');
+			}
+
+			item.push(data.occupation);
+			item.push(data.employed_in);
+			item.push(data.decision_central_commision === '2' ? 'inne' : '');
+			item.push(data.decision_central_commision === '2' ? 'nie dotyczy' : '');
+			item.push(data.decision_central_commision === '2' ? 'osoba nie otrzymała żadnej oferty' : '');
+			item.push(data.decision_central_commision === '2' ? 'Tak' : '');
+
+			for (let j = 0; j < 7; j ++)
+				item.push('');
+
+			let arr = ['Tak', 'Nie', 'Odmowa podania informacji'];
+
+			item.push(data.ethnic_minority_status ? arr[parseInt(data.ethnic_minority_status) - 1] : '');
+			item.push(data.homeless_person_status ? arr[parseInt(data.homeless_person_status) - 1] : '');
+			item.push(data.disabled_person_status === '1' ? 'Tak' : 'Nie')
+			item.push(data.uncomfortable_status ? arr[parseInt(data.uncomfortable_status) - 1] : '');
+			item.push('');
+
+			export_data.push(item);
+		}) 
+		EXCEL.outPut({
+			header: ['Numer umowy/ decyzji /aneksu', 'Nazwa beneficjenta', 'Tytuł projektu', 'Okres realizacji projektu od', 'Okres realizacji projektu do',
+			'Wniosek za okres', 'Kraj', 'Nazwa instytucji', 'NIP', 'Brak NIP', 'Typ instytucji', 'w tym', 'Województwo', 'Powiat', 'Gmina',
+			'Miejscowość', 'Ulica', 'Nr budynku', 'Nr lokalu', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)', 'Telefon kontaktowy', 'Adres e-mail',
+			'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Czy wsparciem zostali objęci pracownicy instytucji', 
+			'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu', 
+		  'Kraj', 'Rodzaj uczestnika', 'Nazwa instytucji', 'Imię', 'Nazwisko', 'Pesel', 'Brak PESEL', 'Płeć', 'Wiek w chwili przystąpienia do projektu', 'Wykształcenie',
+		  'Województwo', 'Powiat', 'Gmina', 'Miejscowość', 'Ulica', 'Nr budynku', 'Nr budynku', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)',
+			'Telefon kontaktowy', 'Adres e-mail', 'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Status osoby na rynku pracy w chwili przystąpienia do projektu',
+			'W tym', 'Wykonywany zawód', 'Zatrudniony w:', 'Sytuacja (1) osoby w momencie zakończenia udziału w projekcie', 'Sytuacja (2) osoby w momencie zakończenia udziału w projekcie',
+			'Inne rezultaty dotyczące osób młodych (dotyczy IZM)', 'Zakończenie udziału osoby w projekcie zgodnie z zaplanowaną dla niej ścieżką uczestnictwa',
+			'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu', 'Data założenia działalności gospodarczej',
+			'Kwota środków przyznanych na założenie działalności gospodarczej', 'PKD założonej działalności gospodarczej', 'Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia',
+			'Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań', 'Osoba z niepełnosprawnościami', 'Osoba w innej niekorzystnej sytuacji społecznej',
+			'Planowana data zakończenia edukacji w placówce edukacyjnej, w której skorzystano ze wsparcia'],
+			data: export_data,
+			name: 'SL'
+		})
 	}
 
 	const handleExport = () => {
@@ -152,9 +272,14 @@ const Candidates = props => {
 					<AddIcon style={{ marginRight: '20px' }} />
           Dodaj kandydata
         </Button>
-				<Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
-					Eksport listy do XLS
-        </Button>
+				<div>
+					<Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExportSL}>
+						Eksport listy do SL
+					</Button>
+					<Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
+						Eksport listy do XLS
+					</Button>
+				</div>
 			</div>
 			<div className={classes.divide} />
 			<div className={classes.filter}>

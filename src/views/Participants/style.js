@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0px',
         fontWeight: '300',
         color: theme.palette.pink,
-        borderColor: theme.palette.pink
+        borderColor: theme.palette.pink,
+				marginLeft: '20px'
     },
     divide: {
         backgroundColor: 'lightgray',

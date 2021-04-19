@@ -16,11 +16,13 @@ import {
 } from '@material-ui/pickers';
 import { pl } from 'date-fns/locale';
 import DateFnsUtils from '@date-io/date-fns';
+import { useLocation } from "react-router-dom";
 
 const IprAdd = props => {
+	const location = useLocation();
 	const { history } = props;
 	const classes = useStyles();
-	
+	const searchKey = location.state ? location.state.searchKey : null;
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Dodaj IPR' }];
 	const [participant_number, setParticipantNumber] = useState('');
 	const [participant_name, setParticipantName] = useState('');
@@ -33,10 +35,10 @@ const IprAdd = props => {
 	const [ork_person, setOrkPerson] = useState(null);
 	const [orkPersonList, setOrkPersonList] = useState([]);
 	const [profession, setProfession] = useState('');
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
 	useEffect(() => {
@@ -61,7 +63,20 @@ const IprAdd = props => {
 					setOrkPersonList(response.data.ork_person);
 				}
 			})
-	}, [participant]);
+	}, [participant])
+	
+	useEffect(() => {
+		if (searchKey) {
+			let participant_obj = {};
+			participantList.map((item, index) => {
+				if (item.participant_number === searchKey)
+				participant_obj = item;
+			})
+			setParticipantNumber(participant_obj);
+			setParticipantName(participant_obj);
+			setParticipant(participant_obj.id);
+		}
+	}, [participantList]);
 
 	const handleError = () => {
 		let _error = {}
@@ -109,7 +124,7 @@ const IprAdd = props => {
 	const handleSave = () => {
      
 		if (checkError()) {
-						setHasAlert(true);
+			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 			handleError();

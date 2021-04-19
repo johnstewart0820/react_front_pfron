@@ -111,38 +111,40 @@ const Cockpit = props => {
 										<Grid item md={1} sm={0} xs={0} className={classes.title_block}></Grid>
 									</Grid>
 									<Grid container spacing={3}>
-										<Grid item md={6} xs={12}>
+										<Grid item md={checkAmbassador() ? 12 : 6} xs={12}>
 											<Button variant="outlined" aria-label="Pokaż listę kandydatów" color="secondary" id="main" className={classes.btnFull} onClick={() => history.push(`/candidates`)}>
 												Kandydaci
 											</Button>
 										</Grid>
-										<Grid item md={6} xs={12}>
-											<Button variant="outlined" aria-label="Pokaż listę uczestników" color="secondary" className={classes.btnFull} onClick={() => history.push(`/participants`)}>
-												Uczestnicy
-											</Button>
-										</Grid>
 										{
 											!checkAmbassador() ?
+												<>
+												<Grid item md={6} xs={12}>
+													<Button variant="outlined" aria-label="Pokaż listę uczestników" color="secondary" className={classes.btnFull} onClick={() => history.push(`/participants`)}>
+														Uczestnicy
+													</Button>
+												</Grid>
 												<Grid item md={6} xs={12}>
 													<Button variant="outlined" color="secondary" aria-label="Pokaż ośrodki rehabilitacyjne" className={classes.btnFull} onClick={() => history.push(`/ork_list`)}>
 														Ośrodki
 													</Button>
 												</Grid>
+												<Grid item md={6} xs={12}>
+													<Button variant="outlined" color="secondary" aria-label="Pokaż finanse" className={classes.btnFull} onClick={() => history.push('/payments')}>
+														Finanse
+													</Button>
+												</Grid>
+												</>
 												:
 												<></>
 										}
-										<Grid item md={6} xs={12}>
-											<Button variant="outlined" color="secondary" aria-label="Pokaż finanse" className={classes.btnFull} onClick={() => history.push('/payments')}>
-												Finanse
-											</Button>
-										</Grid>
 									</Grid>
 								</Grid>
 								<Grid md={2} sm={1} xs={0} className={classes.margin_block}></Grid>
 							</Grid>
 						</Card>
 					</Grid>
-					<Grid item md={5} xs={12}>
+					<Grid item md={checkAmbassador() ? 12 : 5} xs={12}>
 						<Card className={classes.table}>
 							<div className={classes.table_header}>
 								Ostatnio dodani kandydaci
@@ -180,7 +182,9 @@ const Cockpit = props => {
 							</div>
 						</Card>
 					</Grid>
-					<Grid item md={7} xs={12}>
+					{
+						!checkAmbassador() ?
+						<Grid item md={7} xs={12}>
 						<Card className={classes.table}>
 							<div className={classes.table_header}>
 								Ostatnio zakwalifikowani uczestnicy
@@ -221,6 +225,10 @@ const Cockpit = props => {
 							</div>
 						</Card>
 					</Grid>
+					:
+					<></>
+					}
+					
 				</Grid>
 			</div>
 			{

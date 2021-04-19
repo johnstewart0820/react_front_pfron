@@ -21,24 +21,25 @@ import AddIcon from '@material-ui/icons/Add';
 import EXCEL from 'js-export-xlsx';
 import { DeleteModal } from '../Trainings/components';
 import DeleteIcon from '@material-ui/icons/Delete';
+import storage from 'utils/storage';
 
 const TrainingsEdit = props => {
 	const { history } = props;
 	const id = props.match.params.id;
 	const classes = useStyles();
-	
+
 	const breadcrumbs = [{ active: true, label: 'Usługi', href: '/service_list' }, { active: true, label: 'Szkolenia', href: '/trainings' }, { active: false, label: 'Dodaj szkolenie' }];
-	const [training, setTraining] = useState({ name: '', number: '', rehabitation_center: 0, service: 0, participant: [{}], comment: '', training_status: 0 });
+	const [training, setTraining] = useState({ name: '', number: '', rehabitation_center: 0, service: 0, participant: [{}], comment: '', training_status: 2 });
 	const [training_class, setTrainingClass] = useState([{ name: '', date: null, start_hour: '', end_hour: '', break_amount: '', total_hour: '', ork_team: [] }]);
 	const [trainingStatusList, setTrainingStatusList] = useState([{ id: 1, name: 'TAK' }, { id: 2, name: 'NIE' }]);
 	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
 	const [orkTeamList, setOrkTeamList] = useState([]);
 	const [serviceList, setServiceList] = useState([]);
 	const [participantList, setParticipantList] = useState([]);
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({ participant: [true] });
 	const [error_class, setErrorClass] = useState([{}]);
 	const [openModal, setOpenModal] = useState(false);
@@ -64,7 +65,7 @@ const TrainingsEdit = props => {
 				} else {
 					let arr_participant = response.data.training.participant.split(',');
 					let list_participant = [];
-					let _error = {participant: []};
+					let _error = { participant: [] };
 					arr_participant.map((item, index) => {
 						for (let i = 0; i < participantList.length; i++) {
 							if (parseInt(item) === parseInt(participantList[i].id))
@@ -77,7 +78,7 @@ const TrainingsEdit = props => {
 					response.data.training.comment = '';
 					setTraining(response.data.training);
 					let _error_class = [];
-					for (let j = 0; j < response.data.training_class.length; j ++) {
+					for (let j = 0; j < response.data.training_class.length; j++) {
 						let list = response.data.training_class[j].ork_team ? response.data.training_class[j].ork_team.split(',') : [];
 						let ork_team_list = [];
 						response.data.ork_team.map((item, index) => {
@@ -99,15 +100,15 @@ const TrainingsEdit = props => {
 	const getRemainParticipantNumber = () => {
 		let _arr = [];
 		participantList.map((item, index) => {
-				let count = 0;
-				for(let i = 0; i < training.participant.length; i ++) {
-						if (parseInt(item.id) === parseInt(training.participant[i].id)) {
-								count ++;
-						}
+			let count = 0;
+			for (let i = 0; i < training.participant.length; i++) {
+				if (parseInt(item.id) === parseInt(training.participant[i].id)) {
+					count++;
 				}
-				if (count === 0) {
-						_arr.push(item);
-				}
+			}
+			if (count === 0) {
+				_arr.push(item);
+			}
 		})
 		return _arr;
 	}
@@ -140,7 +141,7 @@ const TrainingsEdit = props => {
 	};
 
 	const handleDelete = () => {
-    
+
 		setProgressStatus(true);
 		training_api
 			.delete(id)
@@ -382,9 +383,9 @@ const TrainingsEdit = props => {
 	}
 
 	const handleSave = () => {
-     
+
 		if (checkError()) {
-						setHasAlert(true);
+			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 			handleError();
@@ -410,8 +411,8 @@ const TrainingsEdit = props => {
 						history.push('/login');
 					} else {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/trainings'); }, 1000);
 						}
@@ -443,10 +444,10 @@ const TrainingsEdit = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy szkoleń
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy szkoleń
         			</Button>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -472,7 +473,7 @@ const TrainingsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={0}/>
+								<Grid item md={3} xs={0} />
 								<Grid item md={9} xs={12}>
 									<div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
 										<div className={classes.top_label}>
@@ -493,7 +494,7 @@ const TrainingsEdit = props => {
 														className={classes.name_select_box}
 														onChange={(event, value) => handleChangeParticipant(value ? value : [], index)}
 														options={getRemainParticipantNumber()}
-														value={ item.name ? item : '' }
+														value={item.name ? item : ''}
 														getOptionLabel={(option) => participantList && option && (`${option.name} ${option.surname} (${option.participant_number}) `)}
 														renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 													/>
@@ -632,14 +633,21 @@ const TrainingsEdit = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
-									<div className={classes.top_label}>Zaakceptowane</div>
-									<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
+									{
+										storage.getStorage('role').includes(1) ?
+										<>
+											<div className={classes.top_label}>Zaakceptowane</div>
+											<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
+										</>
+										:
+										<></>
+									}
 									<div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji (max 100 znaków)</div>
 									<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 									<Grid container spacing={2}>
 										<Grid item xs={6}>
 											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
-												<DeleteIcon/>
+												<DeleteIcon />
 											</Button>
 										</Grid>
 										<Grid item xs={6}>

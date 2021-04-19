@@ -19,13 +19,14 @@ import { pl } from 'date-fns/locale'
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import AddIcon from '@material-ui/icons/Add';
 import EXCEL from 'js-export-xlsx';
+import storage from 'utils/storage';
 
 const TrainingsAdd = props => {
 	const { history } = props;
 	const classes = useStyles();
 
 	const breadcrumbs = [{ active: true, label: 'Usługi', href: '/service_list' }, { active: true, label: 'Szkolenia', href: '/trainings' }, { active: false, label: 'Dodaj szkolenie' }];
-	const [training, setTraining] = useState({ name: '', number: '', rehabitation_center: 0, service: 0, participant: [{}], comment: '', training_status: 0 });
+	const [training, setTraining] = useState({ name: '', number: '', rehabitation_center: 0, service: 0, participant: [{}], comment: '', training_status: 2 });
 	const [training_class, setTrainingClass] = useState([{ name: '', date: null, start_hour: '', end_hour: '', break_amount: '', total_hour: '', ork_team: [] }]);
 	const [trainingStatusList, setTrainingStatusList] = useState([{ id: 1, name: 'TAK' }, { id: 2, name: 'NIE' }]);
 	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
@@ -562,13 +563,20 @@ const TrainingsAdd = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
-									<div className={classes.top_label}>Zaakceptowane</div>
-									<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
+									{
+										storage.getStorage('role').includes(1) ?
+										<>
+											<div className={classes.top_label}>Zaakceptowane</div>
+											<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
+										</>
+										:
+										<></>
+									}
 									<div className={classes.input_box_label} htmlFor="name"><label htmlFor="comment">Komentarz dotyczący edycji (max 100 znaków)</label></div>
 									<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} id="comment" value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
 										Zapisz
-               						</Button>
+									</Button>
 								</Grid>
 							</Grid>
 						</Card>

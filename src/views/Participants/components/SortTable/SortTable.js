@@ -53,12 +53,17 @@ const SortTable = (props) => {
     return _date.getFullYear() + '.' + getZeroValue(_date.getMonth() + 1) + '.' + getZeroValue(_date.getDate()) + ' ' + getZeroValue(_date.getHours()) + ':' + getZeroValue(_date.getMinutes());
   }
 
-  const createIpr = (id) => {
-		history.push(`/ipr_list/create`);		
+  const createIpr = (participant_number) => {
+		history.push({
+			pathname: `/ipr_list/create`,
+			state: { searchKey: participant_number }
+		});
   }
 
-  const showIprList = (id) => {
-		history.push(`/ipr_list`);		
+  const showIprList = (name) => {
+		history.push({
+			pathname: '/ipr_list',
+			state: { searchName: name }});
   }
 
 	const handleClick = (id) => {
@@ -195,10 +200,10 @@ const SortTable = (props) => {
                   <IconButton aria-label={`Edytuj uczestnika ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label='Pokaż listę IPR' component="span" className={classes.iconButton} onClick={() => showIprList(item.id_candidate)}>
+                  <IconButton variant="outlined" aria-label='Pokaż listę IPR' component="span" className={classes.iconButton} onClick={() => showIprList(`${item.name} ${item.surname}`)}>
                     <EventNoteOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label='Dodaj listę IPR' component="span" className={classes.iconButton} onClick={() => createIpr(item.id_candidate)}>
+                  <IconButton variant="outlined" aria-label='Dodaj listę IPR' component="span" className={classes.iconButton} onClick={() => createIpr(item.participant_number)}>
                     <NoteAddOutlinedIcon className={classes.icon} />
                   </IconButton>
                 </TableCell>

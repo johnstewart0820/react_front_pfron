@@ -16,6 +16,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ork_team from '../../apis/ork-team';
 import clsx from 'clsx';
 import {DeleteModal} from '../OrkTeams/components';
+import storage from 'utils/storage';
 
 const OrkTeamsEdit = props => {
   const { history } = props;
@@ -232,6 +233,8 @@ const OrkTeamsEdit = props => {
                   getOptionLabel={(option) => specializationList && option && option.name + (option.module_type ? (' (' + option.module_type + ')') : '')}
                   renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.specialization}/>}
                 />
+								{storage.getStorage('role').includes('1') ?
+								<>
                 <div className={classes.input_box_label}>Zaakceptowany</div>
                 <FormControl component="fieldset">
                   <RadioGroup aria-label="is_accepted" name="is_accepted" value={is_accepted === 1 || is_accepted === 'true' ? 'true' : 'false'} onChange={(e) => setIsAccepted(e.target.value)} row>
@@ -258,6 +261,10 @@ const OrkTeamsEdit = props => {
                 :
                   <></>
                 }
+								</>
+								:
+								<></>
+							}
               </Grid>
             </Grid>
           </Card>

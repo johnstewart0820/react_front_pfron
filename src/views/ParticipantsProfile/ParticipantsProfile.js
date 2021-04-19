@@ -253,12 +253,17 @@ const ParticipantsProfile = props => {
 		history.push(`/candidates/info/step${stage}/${id}`)
 	}
 
-	const handleAddIpr = () => {
-		history.push('/ipr_list/create');
+	const handleAddIpr = (participant_number) => {
+		history.push({
+			pathname: `/ipr_list/create`,
+			state: { searchKey: participant_number }
+		});
 	}
 
-	const handleIprList = () => {
-		history.push(`/ipr_list`);	
+	const handleIprList = (name) => {
+		history.push({
+			pathname: '/ipr_list',
+			state: { searchName: name }});
 	}
 
 	const handleBack = () => {
@@ -603,12 +608,12 @@ const ParticipantsProfile = props => {
 											Indywidualny Program Rehabilitacji
                   </div>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleAddIpr}>
+											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={() => handleAddIpr(participant_number)}>
 												Dodaj IPR
                     </Button>
 										</Grid>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={handleIprList}>
+											<Button variant="outlined" color="secondary" className={classes.btnIprList} onClick={() => handleIprList(`${name} ${surname}`)}>
 												Zobacz listę IPR uczestnika
                     </Button>
 										</Grid>

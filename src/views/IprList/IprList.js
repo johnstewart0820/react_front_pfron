@@ -9,10 +9,13 @@ import AddIcon from '@material-ui/icons/Add';
 import { Breadcrumb } from 'components';
 import { SortTable, SingleSelect, DeleteModal } from './components';
 import ipr from '../../apis/ipr';
+import { useLocation } from "react-router-dom";
 
 import EXCEL from 'js-export-xlsx';
 
 const IprList = props => {
+	const location = useLocation();
+
 	const { history } = props;
 	const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
 	const [countList, setCountList] = useState([25, 50, 100]);
@@ -21,7 +24,7 @@ const IprList = props => {
 	const [data, setData] = useState([]);
 	const [total, setTotal] = useState(0);
 	const [searchId, setSearchId] = useState('');
-	const [searchName, setSearchName] = useState('');
+	const [searchName, setSearchName] = useState(location.state ? location.state.searchName : '');
 	const [searchIprType, setSearchIprType] = useState(0);
 	const [iprTypeList, setIprTypeList] = useState([]);
 	const [searchNumber, setSearchNumber] = useState('');
@@ -31,10 +34,10 @@ const IprList = props => {
 	const [selectedItem, setSelectedItem] = useState(-1);
 	const classes = useStyles();
 	const breadcrumbs = [{ active: true, href: '/participants', label: 'Uczestnicy' }, { active: false, label: 'Indywidualne Programy Rehabilitacji poszczególnych uczestników ' }];
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 	
 	useEffect(() => {
 		ipr.getInfo()

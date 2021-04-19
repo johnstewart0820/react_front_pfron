@@ -20,7 +20,8 @@ const ReportsFinancial = props => {
 	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
 	const [participant, setParticipant] = useState(null);
 	const [participantList, setParticipantList] = useState([]);
-	const [quater, setQuater] = useState([]);
+	const [quater_from, setQuaterFrom] = useState([]);
+	const [quater_to, setQuaterTo] = useState([]);
 	const [quaterList, setQuaterList] = useState([]);
 	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
@@ -104,10 +105,16 @@ const ReportsFinancial = props => {
 		setParticipant(value);
 	}
 
-	const handleChangeQuater = (value) => {
-		setQuater(value);
+	const handleChangeQuaterFrom = (value) => {
+		setQuaterFrom(value);
 		let _error = JSON.parse(JSON.stringify(error));
 		_error.quater_from = (value === null);
+		setError(_error);
+	}
+
+	const handleChangeQuaterTo = (value) => {
+		setQuaterTo(value);
+		let _error = JSON.parse(JSON.stringify(error));
 		_error.quater_to = (value === null);
 		setError(_error);
 	}
@@ -117,14 +124,14 @@ const ReportsFinancial = props => {
 	}
 
 	const handleGenerate = () => {
-		if ((participant === null && parseInt(rehabitationCenter) === 0) || !quater.id) {
+		if ((participant === null && parseInt(rehabitationCenter) === 0) || !quater_from.id || !quater_to.id) {
 			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 		}
 		else {
 			setProgressStatus(true);
-			report.getServiceData(rehabitationCenter, participant === null ? 0 : participant.id, quater.id)
+			report.getServiceData(rehabitationCenter, participant === null ? 0 : participant.id, quater_from.id, quater_to.id)
 				.then(response => {
 					if (response.code === 401) {
 						history.push('/login');
@@ -427,8 +434,8 @@ const ReportsFinancial = props => {
 											<Autocomplete
 												className={classes.name_select_box}
 												id="quater_from"
-												onChange={(event, value) => handleChangeQuater(value)}
-												value={quater}
+												onChange={(event, value) => handleChangeQuaterFrom(value)}
+												value={quater_from}
 												options={quaterList}
 												getOptionLabel={(option) => participantList && option && option.start_date}
 												renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
@@ -439,8 +446,8 @@ const ReportsFinancial = props => {
 											<Autocomplete
 												className={classes.name_select_box}
 												id="quater_to"
-												onChange={(event, value) => handleChangeQuater(value)}
-												value={quater}
+												onChange={(event, value) => handleChangeQuaterTo(value)}
+												value={quater_to}
 												options={quaterList}
 												getOptionLabel={(option) => participantList && option && option.end_date}
 												renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}

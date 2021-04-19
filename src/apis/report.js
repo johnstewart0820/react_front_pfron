@@ -39,14 +39,15 @@ class Report {
 					return error;
 			})
 	}
-	getServiceData = (rehabitation_center, participant, quater) => {
+	getServiceData = (rehabitation_center, participant, quater_from, quater_to) => {
 		return axios
 		.get(`${process.env.REACT_APP_BACKEND_URL}/report/service_data`, {
 				headers: authHeader(storage.getStorage('token')),
 				params: {
 					rehabitation_center: rehabitation_center,
 					participant: participant,
-					quater: quater
+					quater_from: quater_from,
+					quater_to: quater_to,
 				}
 		})
 		.then(response => {
@@ -61,13 +62,14 @@ class Report {
 				return error;
 		})
 	}
-	getRecruitmentData = (rehabitation_center, quater) => {
+	getRecruitmentData = (rehabitation_center, quater_from, quater_to) => {
 		return axios
 		.get(`${process.env.REACT_APP_BACKEND_URL}/report/recruitment_data`, {
 				headers: authHeader(storage.getStorage('token')),
 				params: {
 					rehabitation_center: rehabitation_center,
-					quater: quater
+					quater_from: quater_from,
+					quater_to: quater_to,
 				}
 		})
 		.then(response => {

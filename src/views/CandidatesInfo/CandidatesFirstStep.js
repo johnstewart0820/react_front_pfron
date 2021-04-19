@@ -193,10 +193,10 @@ const CandidatesFirstStep = props => {
 					<Grid item md={9} xs={12}>
 						<Tabs defaultIndex={0}>
 							<TabList>
-								<Tab><Link to={`#`} className={classes.button}>ETAP 1</Link></Tab>
-								<Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 2</Link></Tab>
-								<Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 3</Link></Tab>
-								<Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 4</Link></Tab>
+								<Tab disabled><Link to={`/candidates/info/step${1}/${id}`} className={classes.button}>ETAP 1</Link></Tab>
+								<Tab disabled><Link to={stage < 2 ? '#' : `/candidates/info/step${2}/${id}`} className={classes.button} disabled>ETAP 2</Link></Tab>
+								<Tab disabled><Link to={stage < 3 ? '#' : `/candidates/info/step${3}/${id}`} className={classes.button} disabled>ETAP 3</Link></Tab>
+								<Tab disabled><Link to={stage < 4 ? '#' : `/candidates/info/step${4}/${id}`} className={classes.button} disabled>ETAP 4</Link></Tab>
 							</TabList>
 							<TabPanel style={{ backgroundColor: theme.palette.black_white }}>
 								<FirstStepView
@@ -207,7 +207,8 @@ const CandidatesFirstStep = props => {
 									setQualificationPoint={handleChangeQualificationPoint}
 									qualificationPointList={qualificationPointList}
 									gender={gender}
-									setGender={setGender} />
+									setGender={setGender} 
+									stage={stage} />
 							</TabPanel>
 							<TabPanel>
 							</TabPanel>

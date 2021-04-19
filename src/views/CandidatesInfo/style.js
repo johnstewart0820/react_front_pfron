@@ -97,7 +97,12 @@ const useStyles = makeStyles((theme) => ({
 		borderColor: theme.palette.btn_gray,
 	},
 	button: {
-		color: 'black'
+		color: 'black',
+		width: '100%',
+		height: '100%',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	btnProfile: {
 		'& .MuiButton-label': {

@@ -203,10 +203,10 @@ const CandidatesThirdStep = props => {
 					<Grid item md={9} xs={12}>
 						<Tabs defaultIndex={2}>
 							<TabList>
-								<Tab disabled><Link to={`#`} className={classes.button}>ETAP 1</Link></Tab>
-								<Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 2</Link></Tab>
-								<Tab><Link to={`#`} className={classes.button} disabled>ETAP 3</Link></Tab>
-								<Tab disabled><Link to={`#`} className={classes.button} disabled>ETAP 4</Link></Tab>
+								<Tab disabled><Link to={`/candidates/info/step${1}/${id}`} className={classes.button}>ETAP 1</Link></Tab>
+								<Tab disabled><Link to={stage < 2 ? '#' : `/candidates/info/step${2}/${id}`} className={classes.button} disabled>ETAP 2</Link></Tab>
+								<Tab disabled><Link to={stage < 3 ? '#' : `/candidates/info/step${3}/${id}`} className={classes.button} disabled>ETAP 3</Link></Tab>
+								<Tab disabled><Link to={stage < 4 ? '#' : `/candidates/info/step${4}/${id}`} className={classes.button} disabled>ETAP 4</Link></Tab>
 							</TabList>
 							<TabPanel>
 							</TabPanel>
@@ -220,6 +220,7 @@ const CandidatesThirdStep = props => {
 									setDateCentralCommision={setDateCentralCommision}
 									general_remark={general_remark}
 									setGeneralRemark={setGeneralRemark}
+									stage={stage}
 								/>
 							</TabPanel>
 							<TabPanel>

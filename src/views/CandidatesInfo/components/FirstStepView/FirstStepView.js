@@ -11,10 +11,16 @@ const FirstStepView = (props) => {
   const classes = useStyles();
   const { name, surname, person_id, 
     qualification_point, setQualificationPoint, qualificationPointList,
-    gender, setGender, history } = props;
+    gender, setGender, stage, history } = props;
   
   return (
     <Grid container spacing={3} className={classes.form}>
+			{
+				stage != 1 ?
+				<div className={classes.wrapper}/>
+				:
+				<></>
+			}
       <Grid item md={3} xs={12} className={classes.form_title}>
         Dane kandydata
       </Grid>

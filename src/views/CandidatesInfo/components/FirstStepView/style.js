@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
 	form_title: {
 		fontWeight: '500'
 	},
+	wrapper: {
+		position: 'absolute',
+		width: '70%',
+		height: '500px',
+		zIndex: 1000
+	},
 	textArea: {
 		backgroundColor: theme.palette.black_white,
 		color: theme.palette.text.primary,

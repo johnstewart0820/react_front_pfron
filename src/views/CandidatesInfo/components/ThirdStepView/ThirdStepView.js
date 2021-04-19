@@ -23,6 +23,7 @@ const ThirdStepView = (props) => {
     setDateCentralCommision,
     general_remark,
     setGeneralRemark,
+		stage,
     history } = props;
 
     const handleDate = (value) => {
@@ -33,6 +34,12 @@ const ThirdStepView = (props) => {
   return (
 	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
+			{
+				stage != 3 ?
+				<div className={classes.wrapper}/>
+				:
+				<></>
+			}
       <Grid item md={3} xs={12} className={classes.form_title}>
         Decyzja komisji
       </Grid>

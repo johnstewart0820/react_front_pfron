@@ -37,6 +37,7 @@ const SecondStepView = (props) => {
     setPsycologyRemark, 
     doctorList,
     psycologyList,
+		stage,
     history } = props;
   
     const handleDate = (value) => {
@@ -47,6 +48,12 @@ const SecondStepView = (props) => {
   return (
 	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
+			{
+				stage != 2 ?
+				<div className={classes.wrapper}/>
+				:
+				<></>
+			}
       <Grid item md={3} xs={12} className={classes.form_title}>
         Dane kandydata
       </Grid>

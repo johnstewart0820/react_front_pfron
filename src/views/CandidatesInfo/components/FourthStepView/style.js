@@ -30,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		padding: theme.spacing(2)
 	},
+	wrapper: {
+		position: 'absolute',
+		width: '70%',
+		height: '500px',
+		zIndex: 1000
+	},
 	btnSave: {
 		height: '100%',
 		'& .MuiButton-label': {

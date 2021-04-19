@@ -30,7 +30,8 @@ const FourthStepView = (props) => {
     type_to_stay,
     setTypeToStay,
     participant_remark,
-    setParticipantRemark
+    setParticipantRemark,
+		stage
   } = props;
   const handleDate = (value) => {
     let _date = new Date(value);
@@ -40,6 +41,12 @@ const FourthStepView = (props) => {
   return (
 	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
+			{
+				stage != 4 ?
+				<div className={classes.wrapper}/>
+				:
+				<></>
+			}
       <Grid item md={3} xs={12} className={classes.form_title}>
         Przypisanie do ORK
       </Grid>

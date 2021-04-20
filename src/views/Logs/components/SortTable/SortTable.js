@@ -107,9 +107,39 @@ const SortTable = (props) => {
 	const formatChange = (type, property, from, to) => {
 		const formatter = modelPropertyFormatter(type, property);
 		const formattedName = modelPropertyLabel(type, property);
-		const formattedFrom = formatter(from);
-		const formattedTo = formatter(to);
-		return formattedName ? <div><b>{formattedName}</b>{from !== null ? <> from <u>{formattedFrom}</u> to</> : <>: </>} <u>{formattedTo}</u></div> : null;
+		let formattedFrom = formatter(from);
+		let formattedTo = formatter(to);
+
+		if (formattedName === 'Rola') {
+			let arr_from = [];
+			let arr_to = [];
+			if (formattedFrom)
+				arr_from = formattedFrom.split(',');
+			if (formattedTo)
+				arr_to = formattedTo.split(',');
+			let str_arr_from = [];
+			let str_arr_to = [];
+			arr_from.map((item, index) => {
+				if (item === '1')
+					str_arr_from.push('Administrator')
+				if (item === '2')
+					str_arr_from.push('Pracownik biura projektu')
+				if (item === '3')
+					str_arr_from.push('Ambasador');
+			})
+			arr_to.map((item, index) => {
+				if (item === '1')
+					str_arr_to.push('Administrator')
+				if (item === '2')
+					str_arr_to.push('Pracownik biura projektu')
+				if (item === '3')
+					str_arr_to.push('Ambasador');
+			})
+
+			formattedFrom = str_arr_from.join(', ');
+			formattedTo = str_arr_to.join(', ');
+		}
+		return formattedName ? <div><b>{formattedName}</b>{from !== null ? <> od <u>{formattedFrom}</u> do</> : <>: </>} <u>{formattedTo}</u></div> : null;
 	}
 
 
@@ -212,7 +242,7 @@ const SortTable = (props) => {
 							<TableCell className={classes.cell_removable}>{item.role ? item.role.name : ''}</TableCell>
 							<TableCell>{DateTime.fromISO(item.created_at).toFormat('dd.MM.yyyy hh:mm')}</TableCell>
 							<TableCell>
-								<div>{item.event} {modelName(item.auditable_type)}</div>
+								<div>{item.event === 'created' ? 'Utworzony' : 'Zaktualizowany'} {(modelName(item.auditable_type)).toLowerCase()}</div>
 								{(item.event === 'updated' || item.event === 'created') &&
 									Object.entries(item.changes).map(([name, [from, to]]) => formatChange(item.auditable_type, name, from, to))
 								}

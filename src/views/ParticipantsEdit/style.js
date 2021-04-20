@@ -51,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
     error: {
       border: '0.5px solid red',
     },
+		error_label: {
+			color: 'red',
+			fontSize: '0.75em',
+			marginTop: '5px'
+		},
     btnOption: {
       '& .MuiButton-label': {
         textTransform: 'none',

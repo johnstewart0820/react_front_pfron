@@ -424,7 +424,7 @@ const TrainingsAdd = props => {
 														onChange={(event, value) => handleChangeParticipant(value ? value : [], index)}
 														options={getRemainParticipantNumber()}
 														value={item.name ? item : ''}
-														getOptionLabel={(option) => participantList && option && (`${option.name} ${option.surname} (${option.participant_number}) `)}
+														getOptionLabel={(option) => participantList && option && (`${option.name} (${option.participant_number}) `)}
 														renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 													/>
 												</Grid>

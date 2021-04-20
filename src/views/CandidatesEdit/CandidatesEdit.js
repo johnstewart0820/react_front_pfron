@@ -165,7 +165,7 @@ const CandidatesEdit = props => {
 					setName(response.data.candidate.name ? response.data.candidate.name : '');
 					setSurname(response.data.candidate.surname ? response.data.candidate.surname : '');
 					setPersonId(response.data.candidate.person_id ? response.data.candidate.person_id : '');
-					setDateOfBirth(response.data.candidate.date_of_birth ? response.data.candidate.date_of_birth : '');
+					setDateOfBirth(response.data.candidate.date_of_birth);
 					setPlaceOfBirth(response.data.candidate.place_of_birth ? response.data.candidate.place_of_birth : '');
 					setStreet(response.data.candidate.street ? response.data.candidate.street : '');
 					setHouseNumber(response.data.candidate.house_number ? response.data.candidate.house_number : '');
@@ -208,7 +208,7 @@ const CandidatesEdit = props => {
 					setEveningStudentStatus(response.data.candidate.evening_student_status ? parseInt(response.data.candidate.evening_student_status) : 0);
 					setDisabledPersonStatus(response.data.candidate.disabled_person_status ? parseInt(response.data.candidate.disabled_person_status) : 0);
 					setNumberCertificate(response.data.candidate.number_certificate ? response.data.candidate.number_certificate : '');
-					setDateOfCertificate(response.data.candidate.date_of_certificate ? response.data.candidate.date_of_certificate : '');
+					setDateOfCertificate(response.data.candidate.date_of_certificate);
 					setLevelCertificate(response.data.candidate.level_certificate ? response.data.candidate.level_certificate : '');
 					setCodeCertificate(response.data.candidate.code_certificate ? response.data.candidate.code_certificate : '');
 					setNecessaryCertificate(response.data.candidate.necessary_certificate ? response.data.candidate.necessary_certificate : 0);

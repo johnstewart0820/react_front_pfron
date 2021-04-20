@@ -1,6 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 import storage from '../utils/storage';
+import moment from 'moment';
 class Ipr {
 	getInfo = () => {
 		return axios
@@ -44,8 +45,8 @@ class Ipr {
 	getWeekStatus = (from, to, id) => {
 		return axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/ipr/week_status`, {
-				from: from,
-				to: to,
+				from: moment(from).format('YYYY-MM-DD'),
+				to: moment(to).format('YYYY-MM-DD'),
 				id: id,
 			}, {
 				headers: authHeader(storage.getStorage('token')),

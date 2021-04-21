@@ -614,7 +614,7 @@ const ParticipantsProfile = props => {
 											Karty informacyjne
                   </div>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
+											<Button label="Zobacz kartę informacyjną kandydata" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
 												Zobacz kartę informacyjną
                     </Button>
 										</Grid>

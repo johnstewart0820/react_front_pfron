@@ -47,7 +47,7 @@ const FirstStepView = (props) => {
           <Grid item xs={12}>
             <FormControl component="fieldset">
               <FormLabel>Płeć</FormLabel>
-              <RadioGroup aria-label="gender" name="education" value={gender} onChange={(e) => setGender(parseInt(e.target.value))} row>
+              <RadioGroup aria-label="Płeć" name="education" value={gender} onChange={(e) => setGender(parseInt(e.target.value))} row>
                 <FormControlLabel value={1} control={<Radio />} label='kobieta' />
                 <FormControlLabel value={2} control={<Radio />} label='mężczyzna' />
               </RadioGroup>

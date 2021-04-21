@@ -72,7 +72,7 @@ const SecondStepView = (props) => {
 						<Grid item xs={12}>
 							<FormControl component="fieldset">
 								<FormLabel>Rekomendacja lekarza</FormLabel>
-								<RadioGroup aria-label="gender" name="education" value={doctor_recommendation} onChange={(e) => setDoctorRecommendation(parseInt(e.target.value))} row>
+								<RadioGroup aria-label="Rekomendacja lekarza" name="education" value={doctor_recommendation} onChange={(e) => setDoctorRecommendation(parseInt(e.target.value))} row>
 									<FormControlLabel value={1} control={<Radio />} label='TAK' />
 									<FormControlLabel value={2} control={<Radio />} label='NIE' />
 									<FormControlLabel value={3} control={<Radio />} label='NIE MOŻNA STWIERDZIĆ' />
@@ -115,7 +115,7 @@ const SecondStepView = (props) => {
 						<Grid item xs={12}>
 							<FormControl component="fieldset">
 								<FormLabel>Rekomendacja psychologa</FormLabel>
-								<RadioGroup aria-label="gender" name="education" value={psycology_recommendation} onChange={(e) => setPsycologyRecommendation(parseInt(e.target.value))} row>
+								<RadioGroup aria-label="Rekomendacja psychologa" name="education" value={psycology_recommendation} onChange={(e) => setPsycologyRecommendation(parseInt(e.target.value))} row>
 									<FormControlLabel value={1} control={<Radio />} label='TAK' />
 									<FormControlLabel value={2} control={<Radio />} label='NIE' />
 									<FormControlLabel value={3} control={<Radio />} label='NIE MOŻNA STWIERDZIĆ' />

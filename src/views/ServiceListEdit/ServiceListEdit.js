@@ -16,7 +16,7 @@ const ServiceListEdit = props => {
 	const { history } = props;
 	const classes = useStyles();
 	
-	const breadcrumbs = [{ active: true, href: '/service_list', label: 'Usługi' }, { active: true, label: 'Lista dostępnych usług', href: '/service_list' }, { active: false, label: 'Dodaj Usługę' }];
+	const breadcrumbs = [{ active: true, href: '/service_list', label: 'Usługi' }, { active: true, label: 'Lista dostępnych usług', href: '/service_list' }, { active: false, label: 'Edytuj Usługę' }];
 	const [number, setNumber] = useState('');
 	const [name, setName] = useState('');
 	const [module, setModule] = useState(0);

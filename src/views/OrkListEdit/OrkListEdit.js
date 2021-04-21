@@ -21,7 +21,7 @@ const OrkListEdit = props => {
 	const id = props.match.params.id;
 	const classes = useStyles();
 
-	const breadcrumbs = [{ active: true, label: 'Finanse', href: '/ork_list' }, { active: true, label: 'Lista Ośrodków Rehabilitacji Kompleksowej', href: '/ork_list' }, { active: false, label: 'Dodaj ośrodek' }];
+	const breadcrumbs = [{ active: true, label: 'Finanse', href: '/ork_list' }, { active: true, label: 'Lista Ośrodków Rehabilitacji Kompleksowej', href: '/ork_list' }, { active: false, label: 'Edytuj ośrodek' }];
 	const [rehabitationCenter, setRehabitationCenter] = useState({});
 	const [quaterList, setQuaterList] = useState('[]');
 	const [partners, setPartners] = useState('[]');

@@ -561,7 +561,7 @@ const CandidatesProfile = props => {
 										</Typography>
                   </div>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
+										<Button aria-label={parseInt(stage) === 1 && parseInt(status) == 1 ? 'Dodaj kartę informacyjną kandydata' : 'Zobacz kartę informacyjną kandydata'} variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
 												{parseInt(stage) === 1 && parseInt(status) == 1 ? 'Załóż kartę informacyjną' : 'Zobacz kartę informacyjną'}
                     </Button>
 										</Grid>

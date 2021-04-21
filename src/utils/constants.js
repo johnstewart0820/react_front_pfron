@@ -14,6 +14,15 @@ class constants {
 				<meta name="keywords" content="wcag deklaracja">
 				<meta http-equiv="X-Ua-Compatible" content="IE=edge">
 				<style>
+						body {
+								margin: 5vh 10vw;
+								font-family: Calibri, sans-serif;
+						}
+		
+						a {
+								text-decoration: underline;
+						}
+		
 						.sr-only {
 								position: absolute;
 								width: 1px;
@@ -39,43 +48,12 @@ class constants {
 				<h2>Status pod względem zgodności z ustawą</h2>
 				<p><span id="a11y-status">Strona internetowa jest <strong>częściowo zgodna</strong> z ustawą o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:</span></p>
 				<ol>
-						<li>zamieszczone na stronie publikacje w formie plików PDF nie są dostępne cyfrowo w całości,</li>
-						<li>część z opublikowanych zdjęć nie posiada opisu alternatywnego,</li>
-						<li>niektóre filmy nie posiadają napisów dla osób głuchych,</li>
-						<li>część plików nie jest dostępnych cyfrowo,</li>
-						<li>na niektórych stronach brak odpowiedniej struktury nagłówkowej artykułów,</li>
-						<li>na niektórych stronach elementy wejściowe nie posiadają określonego przeznaczenia,</li>
-						<li>do zaznaczania niektórych treści użyto jedynie wyróżnienia kolorem,</li>
+						<li>zamieszczone na stronie publikacje w formie plików PDF mogą nie być dostępne cyfrowo w całości,</li>
 						<li>niektóre elementy tekstowe nie mają możliwości zmiany rozmiaru czcionki,</li>
-						<li>brak możliwości zmiany odstępów między wyrazami lub liniami tekstu,</li>
-						<li>niektóre informacje przedstawiono jedynie w formie graficznej,</li>
-						<li>niektóre elementy tekstowe przedstawiono w formie grafiki,</li>
-						<li>na niektórych stronach brak możliwości zatrzymania lub ukrycia animowanych części interfejsu.</li>
-				</ol>
-				<h4>Wyłączenia:</h4>
-				<ol>
-						<li>mapy są wyłączone z obowiązku zapewniania dostępności,</li>
-						<li>filmy zostały opublikowane przed wejściem w życie ustawy o dostępności cyfrowej.</li>
+						<li>brak możliwości zmiany odstępów między wyrazami lub liniami tekstu.</li>
 				</ol>
 				<p>Oświadczenie sporządzono dnia: <span id="a11y-data-sporzadzenie">2021-03-24</span>. Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot zewnętrzny.</p>
 		
-				<h3>Treści niedostępne</h3>
-				<ul>
-						<li>brak wysokiego kontrastu tekstu do tła,</li>
-						<li>brak tekstów alternatywnych dla obrazów,</li>
-						<li>zamieszczone na stronie publikacje w formie plików PDF nie są dostępne cyfrowo w całości,</li>
-						<li>część z opublikowanych zdjęć nie posiada opisu alternatywnego,</li>
-						<li>niektóre filmy nie posiadają napisów dla osób głuchych,</li>
-						<li>część plików nie jest dostępnych cyfrowo,</li>
-						<li>na niektórych stronach brak odpowiedniej struktury nagłówkowej artykułów,</li>
-						<li>na niektórych stronach elementy wejściowe nie posiadają określonego przeznaczenia,</li>
-						<li>do zaznaczania niektórych treści użyto jedynie wyróżnienia kolorem,</li>
-						<li>niektóre elementy tekstowe nie mają możliwości zmiany rozmiaru czcionki,</li>
-						<li>brak możliwości zmiany odstępów między wyrazami lub liniami tekstu,</li>
-						<li>niektóre informacje przedstawiono jedynie w formie graficznej,</li>
-						<li>niektóre elementy tekstowe przedstawiono w formie grafiki,</li>
-						<li>na niektórych stronach brak możliwości zatrzymania lub ukrycia animowanych części interfejsu.</li>
-				</ul>
 				<h3 id="a11y-kontakt">Informacje zwrotne i dane kontaktowe</h3>
 				<p>Za rozpatrywanie uwag i wniosków odpowiada:</p>
 				<ul>

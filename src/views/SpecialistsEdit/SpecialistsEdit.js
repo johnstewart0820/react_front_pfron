@@ -17,7 +17,7 @@ const SpecialistsEdit = props => {
   const id = props.match.params.id;
   const classes = useStyles();
   
-  const breadcrumbs = [{ active: true, label: 'Specjaliści', href: '/specialists' }, { active: false, label: 'Dodaj specjalistę' }];
+  const breadcrumbs = [{ active: true, label: 'Specjaliści', href: '/specialists' }, { active: false, label: 'Edytuj specjalistę' }];
   const [name, setName] = useState('');
   const [qualification, setQualification] = useState(0);
   const [qualificationList, setQualificationList] = useState([]);

@@ -92,7 +92,7 @@ const Routes = (props) => {
         component={CandidatesEditView}
         exact
         layout={MainLayout}
-        title='Kandydaci'
+        title='Edytuj kandydata'
         path="/candidates/edit/:id"
       />
 	  	<RouteWithLayout
@@ -160,7 +160,7 @@ const Routes = (props) => {
       <RouteWithLayout
         component={QualificationPointsEditView}
         layout={MainLayout}
-        title='Dodawanie punktu kwalifikacyjnego'
+        title='Edytowanie punktu kwalifikacyjnego'
         path="/qualification_points/edit/:id"
       />
       <RouteWithLayout
@@ -179,7 +179,7 @@ const Routes = (props) => {
       <RouteWithLayout
         component={SpecialistsEditView}
         layout={MainLayout}
-        title='Dodawanie specjalisty'
+        title='Edytowanie specjalisty'
         path="/specialists/edit/:id"
       />
 	  <RouteWithLayout
@@ -193,7 +193,7 @@ const Routes = (props) => {
         component={ParticipantsEditView}
         exact
         layout={MainLayout}
-        title='Edycja uczestnika'
+        title='Edytowanie uczestnika'
         path="/participants/edit/:id"
       />
 			<RouteWithLayout
@@ -219,7 +219,7 @@ const Routes = (props) => {
       <RouteWithLayout
         component={OrkTeamsEditView}
         layout={MainLayout}
-        title='Dodawanie osoby do zespołu ORK'
+        title='Edytowanie osoby do zespołu ORK'
         path="/ork_teams/edit/:id"
       />
       <RouteWithLayout
@@ -273,7 +273,7 @@ const Routes = (props) => {
       <RouteWithLayout
         component={ServiceListEditView}
         layout={MainLayout}
-        title='Dodawanie usługi'
+        title='Edytowanie usługi'
         path="/service_list/edit/:id"
       />
       <RouteWithLayout
@@ -287,14 +287,14 @@ const Routes = (props) => {
         component={TrainingsAddView}
         exact
         layout={MainLayout}
-        title='Szkolenia'
+        title='Dodawanie Szkolenia'
         path="/trainings/create"
       />
 	  <RouteWithLayout
         component={TrainingsEditView}
         exact
         layout={MainLayout}
-        title='Szkolenia'
+        title='Edytowanie Szkolenia'
         path="/trainings/edit/:id"
       />
       <RouteWithLayout
@@ -342,7 +342,7 @@ const Routes = (props) => {
         component={PaymentsEditView}
         exact
         layout={MainLayout}
-        title='Dodaj koszt'
+        title='Edytuj koszt'
         path="/payments/edit/:id"
       />
       <RouteWithLayout
@@ -396,7 +396,7 @@ const Routes = (props) => {
       <RouteWithLayout
         component={UsersEditView}
         layout={MainLayout}
-        title='Dodawanie Użytkownika'
+        title='Edytowanie Użytkownika'
         path="/users/edit/:id"
       />
       <RouteWithLayout

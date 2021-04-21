@@ -28,7 +28,7 @@ const CandidatesEdit = props => {
 	const { history } = props;
 	const classes = useStyles();
 
-	const breadcrumbs = [{ active: true, label: 'Kandydaci', href: '/candidates' }, { active: false, label: 'Dodaj kandydata' }];
+	const breadcrumbs = [{ active: true, label: 'Kandydaci', href: '/candidates' }, { active: false, label: 'Edytuj kandydata' }];
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
 	const [person_id, setPersonId] = useState('');
@@ -977,7 +977,7 @@ const CandidatesEdit = props => {
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<FormControl component="fieldset" error={error.education}>
-										<RadioGroup aria-label="gender" name="education" value={education} onChange={handleChangeEducation}>
+										<RadioGroup aria-label="Wykształcenie" name="education" value={education} onChange={handleChangeEducation}>
 											{
 												educationList.map((item, index) => (
 													<FormControlLabel value={item.id} control={<Radio />} label={item.name} />
@@ -1011,7 +1011,7 @@ const CandidatesEdit = props => {
 								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Ze względów logistycznych (brak możliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji</div>
 									<FormControl component="fieldset" error={error.stay_status}>
-										<RadioGroup aria-label="gender" name="education" value={stay_status} onChange={handleChangeStayStatus} row>
+										<RadioGroup aria-label="Ze względów logistycznych (brak możliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji" name="education" value={stay_status} onChange={handleChangeStayStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1066,7 +1066,7 @@ const CandidatesEdit = props => {
 								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Jestem zatrudniony</div>
 									<FormControl component="fieldset" error={error.employed_status}>
-										<RadioGroup aria-label="gender" name="employed_status" value={employed_status} onChange={handleChangeEmployedStatus} row>
+										<RadioGroup aria-label="Jestem zatrudniony" name="employed_status" value={employed_status} onChange={handleChangeEmployedStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1103,7 +1103,7 @@ const CandidatesEdit = props => {
 									}
 									<div className={classes.input_box_label} htmlFor="name">Jestem osobą bezrobotną</div>
 									<FormControl component="fieldset" error={error.unemployed_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={unemployed_status} onChange={handleChangeUnemployedStatus} row>
+										<RadioGroup aria-label="Jestem osobą bezrobotną" name="unemployed_status" value={unemployed_status} onChange={handleChangeUnemployedStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1111,7 +1111,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.unemployed_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Jestem zarejestrowany/a w PUP i posiadam status osoby bezrobotnej</div>
 									<FormControl component="fieldset" error={error.have_unemployed_person_status}>
-										<RadioGroup aria-label="gender" name="have_unemployed_person_status" value={have_unemployed_person_status} onChange={handleChangeHaveUnemployedPersonStatus} row>
+										<RadioGroup aria-label="Jestem zarejestrowany/a w PUP i posiadam status osoby bezrobotnej" name="have_unemployed_person_status" value={have_unemployed_person_status} onChange={handleChangeHaveUnemployedPersonStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1130,7 +1130,7 @@ const CandidatesEdit = props => {
 
 									<div className={classes.input_box_label} htmlFor="name">Jestem osobą długotrwale bezrobotną</div>
 									<FormControl component="fieldset" error={error.long_term_employed_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={long_term_employed_status} onChange={handleChangeLongTermEmployedStatus} row>
+										<RadioGroup aria-label="Jestem osobą długotrwale bezrobotną" name="unemployed_status" value={long_term_employed_status} onChange={handleChangeLongTermEmployedStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1138,7 +1138,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.long_term_employed_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Jestem zarejestrowany/a w PUP jako osoba poszukująca pracy</div>
 									<FormControl component="fieldset" error={error.seek_work_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={seek_work_status} onChange={handleChangeSeekWorkStatus} row>
+										<RadioGroup aria-label="Jestem zarejestrowany/a w PUP jako osoba poszukująca pracy" name="unemployed_status" value={seek_work_status} onChange={handleChangeSeekWorkStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1146,7 +1146,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.seek_work_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Jestem osobą bierną zawodowo</div>
 									<FormControl component="fieldset" error={error.passive_person_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={passive_person_status} onChange={handleChangePassivePersonStatus} row>
+										<RadioGroup aria-label="Jestem osobą bierną zawodowo" name="unemployed_status" value={passive_person_status} onChange={handleChangePassivePersonStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1154,7 +1154,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.passive_person_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Jestem uczniem /studentem uczącym się w systemie dziennym</div>
 									<FormControl component="fieldset" error={error.full_time_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={full_time_status} onChange={handleChangeFullTimeStatus} row>
+										<RadioGroup aria-label="Jestem uczniem /studentem uczącym się w systemie dziennym" name="unemployed_status" value={full_time_status} onChange={handleChangeFullTimeStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1162,7 +1162,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.full_time_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Jestem osobą kształcąca się w systemie wieczorowym/pozaszkolnym</div>
 									<FormControl component="fieldset" error={error.evening_student_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={evening_student_status} onChange={handleChangeEveningStudentStatus} row>
+										<RadioGroup aria-label="Jestem osobą kształcąca się w systemie wieczorowym/pozaszkolnym" name="unemployed_status" value={evening_student_status} onChange={handleChangeEveningStudentStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1170,7 +1170,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.evening_student_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Jestem osobą niepełnosprawną i posiadam orzeczenie</div>
 									<FormControl component="fieldset" error={error.disabled_person_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={disabled_person_status} onChange={handleChangeDisabledPersonStatus} row>
+										<RadioGroup aria-label="Jestem osobą niepełnosprawną i posiadam orzeczenie" name="unemployed_status" value={disabled_person_status} onChange={handleChangeDisabledPersonStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 										</RadioGroup>
@@ -1231,7 +1231,7 @@ const CandidatesEdit = props => {
 								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia</div>
 									<FormControl component="fieldset" error={error.ethnic_minority_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={ethnic_minority_status} onChange={handleChangeEthnicMinorityStatus} row>
+										<RadioGroup aria-label="Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia" name="unemployed_status" value={ethnic_minority_status} onChange={handleChangeEthnicMinorityStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 											<FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
@@ -1240,7 +1240,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.ethnic_minority_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań</div>
 									<FormControl component="fieldset" error={error.homeless_person_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={homeless_person_status} onChange={handleChangeHomelessPersonStatus} row>
+										<RadioGroup aria-label="Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań" name="unemployed_status" value={homeless_person_status} onChange={handleChangeHomelessPersonStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 											<FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
@@ -1249,7 +1249,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.homeless_person_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Osoba przebywająca w gospodarstwie domowym bez osób pracujących</div>
 									<FormControl component="fieldset" error={error.stay_house_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={stay_house_status} onChange={handleChangeStayHouseStatus} row>
+										<RadioGroup aria-label="Osoba przebywająca w gospodarstwie domowym bez osób pracujących" name="unemployed_status" value={stay_house_status} onChange={handleChangeStayHouseStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 											<FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
@@ -1258,7 +1258,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.stay_house_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">w tym: w gospodarstwie domowym z dziećmi pozostającymi na utrzymaniu</div>
 									<FormControl component="fieldset" error={error.house_hold_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={house_hold_status} onChange={handleChangeHouseHoldStatus} row>
+										<RadioGroup aria-label="w tym: w gospodarstwie domowym z dziećmi pozostającymi na utrzymaniu" name="unemployed_status" value={house_hold_status} onChange={handleChangeHouseHoldStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 											<FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
@@ -1267,7 +1267,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.house_hold_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Osoba żyjąca w gospodarstwie składającym się z jednej osoby dorosłej i dzieci pozostających na utrzymaniu</div>
 									<FormControl component="fieldset" error={error.house_hold_adult_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={house_hold_adult_status} onChange={handleChangeHouseHoldAdultStatus} row>
+										<RadioGroup aria-label="Osoba żyjąca w gospodarstwie składającym się z jednej osoby dorosłej i dzieci pozostających na utrzymaniu" name="unemployed_status" value={house_hold_adult_status} onChange={handleChangeHouseHoldAdultStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 											<FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
@@ -1276,7 +1276,7 @@ const CandidatesEdit = props => {
 									<div className={classes.error_label} style={{ display: error.house_hold_adult_status ? 'block' : 'none' }}>Wybierz co najmniej jedną opcję.</div>
 									<div className={classes.input_box_label} htmlFor="name">Osoba w innej niekorzystnej sytuacji społecznej </div>
 									<FormControl component="fieldset" error={error.uncomfortable_status}>
-										<RadioGroup aria-label="gender" name="unemployed_status" value={uncomfortable_status} onChange={handleChangeUncomfortableStatus} row>
+										<RadioGroup aria-label="Osoba w innej niekorzystnej sytuacji społecznej " name="unemployed_status" value={uncomfortable_status} onChange={handleChangeUncomfortableStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
 											<FormControlLabel value={2} control={<Radio />} label="Nie" />
 											<FormControlLabel value={3} control={<Radio />} label="ODMOWA INFORMACJI" />
@@ -1296,7 +1296,7 @@ const CandidatesEdit = props => {
 											Karty informacyjne
                   	</Typography>
 										<Grid item xs={12}>
-											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
+											<Button aria-label={parseInt(stage) === 1 && parseInt(status) == 1 ? 'Dodaj kartę informacyjną kandydata' : 'Zobacz kartę informacyjną kandydata'} variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
 												{parseInt(stage) === 1 && parseInt(status) == 1 ? 'Załóż kartę informacyjną' : 'Zobacz kartę informacyjną'}
                     	</Button>
 										</Grid>

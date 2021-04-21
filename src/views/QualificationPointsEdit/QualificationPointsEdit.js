@@ -19,7 +19,7 @@ const QualificationPointsEdit = props => {
   const id = props.match.params.id;
   const classes = useStyles();
   
-  const breadcrumbs = [{ active: true, label: 'Punkty kwalifikacyjne', href: '/qualification_points' }, { active: false, label: 'Dodaj Punkt' }];
+  const breadcrumbs = [{ active: true, label: 'Punkty kwalifikacyjne', href: '/qualification_points' }, { active: false, label: 'Edytuj Punkt' }];
   const [name, setName] = useState('');
   const [type, setType] = useState(0);
   const [typeList, setTypeList] = useState([]);

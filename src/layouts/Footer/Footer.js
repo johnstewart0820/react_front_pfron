@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     margin: '0px'
   },
 	wcag_footer: {
-		fontSize: '1.4em',
 		color: theme.palette.text.primary,
 		textTransform: 'initial',
 		fontFamily: 'roboto',

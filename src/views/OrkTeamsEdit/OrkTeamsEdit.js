@@ -23,7 +23,7 @@ const OrkTeamsEdit = props => {
   const classes = useStyles();
   
   const id = props.match.params.id;
-  const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/ork_teams' }, { active: true, label: 'Zespół ORK', href: '/ork_teams' }, { active: false, label: 'Dodaj osobę' }];
+  const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/ork_teams' }, { active: true, label: 'Zespół ORK', href: '/ork_teams' }, { active: false, label: 'Edytuj osobę' }];
   const [name, setName] = useState('');
   const [rehabitationCenter, setRehabitationCenter] = useState([]);
   const [rehabitationCenterList, setRehabitationCenterList] = useState([]);

@@ -278,12 +278,14 @@ const IprBalance = props => {
 														id="date"
 														variant="inline"
 														format="dd.MM.yyyy"
+                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={schedule_date}
 														onChange={setScheduleDate}
+														aria-label="Data wypełnienia"
 														KeyboardButtonProps={{
-															'aria-label': 'change date',
+															'aria-label': 'Zmień datę',
 														}}
 													/>
 												</Grid>
@@ -445,7 +447,7 @@ const IprBalance = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
+									<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
 										<DeleteIcon />
 									</Button>
 								</Grid>

@@ -17,8 +17,6 @@ const Topbar = props => {
   const { className, title, onSidebarOpen, onSidebarClose, openSidebar, ...rest } = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const [avatarOpen, setAvatarOpen] = useState(Boolean(anchorEl));
-	const [underlineStatus, setUnderlineStatus] = useState(false);
-	const [contrastStatus, setContrastStatus] = useState(false);
   const classes = useStyles();
   let history = useHistory();
 
@@ -59,16 +57,15 @@ const Topbar = props => {
     body.style.fontSize = fontSize;
   }
 
-  const toggleUnderlineLinks = e => {
+  const toggleUnderlineLinks = (e, handle) => {
     e.preventDefault();
     document.body.classList.toggle("links-underline");
-		setUnderlineStatus(!underlineStatus);
+		handle();
   }
 
 	const toggleContrast = (e, handle) => {
 		e.preventDefault(); 
 		handle();
-		setContrastStatus(!contrastStatus);
 	}
 
 	const handleProfile = () => {
@@ -111,13 +108,13 @@ const Topbar = props => {
 							</div>
 						</Button>
 						<div className={classes.vertical_separator}/>
-						<Button title={!contrastStatus ? "Wyłącz tryb wysokokontrastowy": "Włącz tryb wysokokontrastowy"} onClick={(e) => toggleContrast(e, props.toggleContrast)}>
+						<Button title={props.is_contrast ? "Wyłącz tryb wysokokontrastowy": "Włącz tryb wysokokontrastowy"} onClick={(e) => toggleContrast(e, props.toggleContrast)}>
 							<div className={classes.helper}>
 									<FontAwesomeIcon icon={faEye} size="2x"/>
 							</div>
 						</Button>
 						<div className={classes.vertical_separator}/>
-						<Button title={!underlineStatus ? "Wyłącz podkreślenie linków" : "Włącz podkreślenie linków"}  onClick={(e) => toggleUnderlineLinks(e)}>
+						<Button title={props.is_underline ? "Wyłącz podkreślenie linków" : "Włącz podkreślenie linków"}  onClick={(e) => toggleUnderlineLinks(e, props.toggleUnderline)}>
 							<div className={classes.helper}>
 									<FontAwesomeIcon icon={faLink} size="2x"/>
 							</div>
@@ -148,8 +145,8 @@ const Topbar = props => {
 							open={avatarOpen}
 							onClose={handleClose}
 						>
-							<MenuItem onClick={handleProfile}>Edytuj profil</MenuItem>
-							<MenuItem onClick={handleLogout}>Wyloguj</MenuItem>
+							<MenuItem onClick={handleProfile} aria-label="Konto użytkownika: naciśnij Enter dwukrotnie, aby się wylogować">Edytuj profil</MenuItem>
+							<MenuItem onClick={handleLogout} aria-label="Konto użytkownika: naciśnij Enter dwukrotnie, aby się wylogować">Wyloguj</MenuItem>
 						</Menu>
 					</div>
 				</div>

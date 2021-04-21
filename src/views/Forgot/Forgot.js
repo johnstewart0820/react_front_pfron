@@ -82,7 +82,7 @@ const Forgot = props => {
 			<div className={classes.root}>
 				<div className={classes.mainContainer}>
 					<div className={classes.logoContainer}>
-						<img src="/images/logos/logo.png" alt="logo" />
+						<img src="/images/logos/logo.png" alt="Logo Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych" />
 					</div>
 					<div className={classes.loginForm}>
 						<Typography className={classes.title} variant={"h2"}>Odzyskaj hasło</Typography>
@@ -94,8 +94,8 @@ const Forgot = props => {
 						/>
 						<span>Podaj swój adres e-mail, aby odzyskać hasło</span>
 						<div>
-							<div className={classes.input_box_label}><label htmlFor="emailInput">E-mail</label></div>
-							<input className={classes.input_box} type="email" value={input.email} name="email" id="main" onChange={handleChange} onKeyPress={handleKeyPress} />
+							<div className={classes.input_box_label}><label htmlFor="email">E-mail</label></div>
+							<input className={classes.input_box} type="email" value={input.email} name="email" id="email" onChange={handleChange} onKeyPress={handleKeyPress} />
 							<div className={classes.error_log}>{error["email"] && error["email"].length > 0 && error.email}</div>
 						</div>
 						<div className={classes.buttonContainer}>
@@ -103,7 +103,7 @@ const Forgot = props => {
 								Wyślij
               </Button>
 							<Link to="/login" component={RouterLink} className={classes.btnBack}>
-								Powróc do poprzedniej strony
+								Powróć do poprzedniej strony
               </Link>
 						</div>
 					</div>

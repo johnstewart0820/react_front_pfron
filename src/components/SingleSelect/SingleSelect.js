@@ -21,8 +21,9 @@ const SingleSelect = (props) => {
           // id: 'outlined-age-native-simple',
         }}
         className={classes.input_box}
+				aria-label="Wybierz opcję"
       >
-        <option aria-label="None" value={0}>Wybierz opcję</option>
+        <option aria-label="Wybierz opcję" value={0}>Wybierz opcję</option>
         {
           list.map((item, index) => 
             <option key={index} value={item.id}>{item.name}</option>

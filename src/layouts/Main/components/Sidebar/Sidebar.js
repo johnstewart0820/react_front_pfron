@@ -271,7 +271,7 @@ const Sidebar = props => {
 				className={clsx(classes.root, className)}
 			>
 				<div className={classes.logoBlock}>
-					<img src="/images/logos/logo.png" className={classes.main_logo} alt="Main Logo"/>
+					<img src="/images/logos/logo.png" className={classes.main_logo} aria-hidden="true" alt="Logo Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych"/>
 				</div>
 				<SidebarNav
 					className={classes.nav}

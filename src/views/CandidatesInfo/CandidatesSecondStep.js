@@ -283,17 +283,17 @@ const CandidatesSecondStep = props => {
 											<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 											<Grid container spacing={2}>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleHistory}>
+													<Button aria-label="Historia modyfikacji"  variant="outlined" color="secondary" className={classes.btnOption} onClick={handleHistory}>
 														<HistoryOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
+													<Button aria-label="Podgląd"  variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
 														<FindInPageOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
+													<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
 														<DeleteIcon />
 													</Button>
 												</Grid>

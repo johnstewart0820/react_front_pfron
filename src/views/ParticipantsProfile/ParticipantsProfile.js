@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
+	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox, Typography
 } from '@material-ui/core';
 
 
@@ -338,7 +338,9 @@ const ParticipantsProfile = props => {
 						<Card className={classes.form} ref={chart}>
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
+								<Typography variant="h2" className={classes.form_title}>
 									Dane uczestnika
+								</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -366,7 +368,9 @@ const ParticipantsProfile = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
+								<Typography variant="h2" className={classes.form_title}>
 									Adres zameldowania
+								</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -395,7 +399,9 @@ const ParticipantsProfile = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
+								<Typography variant="h2" className={classes.form_title}>
 									Dane kontaktowe
+								</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -415,7 +421,9 @@ const ParticipantsProfile = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
+								<Typography variant="h2" className={classes.form_title}>
 									Wykształcenie
+								</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -436,7 +444,9 @@ const ParticipantsProfile = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
+								<Typography variant="h2" className={classes.form_title}>
 									Tryb pobytu
+								</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -468,12 +478,14 @@ const ParticipantsProfile = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12}>
+								<Typography variant="h2" className={classes.form_title}>
 									<div className={classes.form_title}>
 										Status na rynku pracy
                		</div>
 									<div className={classes.form_title_small}>
 										(proszę zaznaczyć właściwy)
                 	</div>
+								</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									{
@@ -525,7 +537,9 @@ const ParticipantsProfile = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
+								<Typography variant="h2" className={classes.form_title}>
 									Inne
+								</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -626,17 +640,17 @@ const ParticipantsProfile = props => {
 										<Grid item xs={12}>
 											<Grid container spacing={2}>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnControl} onClick={handleExportPdf}>
+													<Button aria-label="Pobierz PDF" variant="outlined" color="secondary" className={classes.btnControl} onClick={handleExportPdf}>
 														<PictureAsPdfOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnControl} onClick={handleHistory}>
+													<Button aria-label="Historia modyfikacji" variant="outlined" color="secondary" className={classes.btnControl} onClick={handleHistory}>
 														<HistoryOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnControl} onClick={handleDelete}>
+													<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnControl} onClick={handleDelete}>
 														<DeleteIcon />
 													</Button>
 												</Grid>

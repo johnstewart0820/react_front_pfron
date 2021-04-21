@@ -251,12 +251,14 @@ const OrkListEdit = props => {
 																	disableToolbar
 																	variant="inline"
 																	format="dd.MM.yyyy"
+                    							placeholder="Format wprowadzania daty DD.MM.RRRR"
 																	margin="normal"
 																	id={`start_date${index}`}
 																	value={item.start_date}
 																	onChange={(e) => handleDateChange(e, index, "from")}
+																	aria-label="data rozpoczęcia tego kwartału"
 																	KeyboardButtonProps={{
-																		'aria-label': 'change date',
+																		'aria-label': 'Zmień datę',
 																	}}
 																/>
 															</Grid>
@@ -273,12 +275,14 @@ const OrkListEdit = props => {
 																	disableToolbar
 																	variant="inline"
 																	format="dd.MM.yyyy"
+                    							placeholder="Format wprowadzania daty DD.MM.RRRR"
 																	margin="normal"
 																	id={`end_date${index}`}
 																	value={item.end_date}
 																	onChange={(e) => handleDateChange(e, index, "to")}
+																	aria-label="data zakończenia tego kwartału"
 																	KeyboardButtonProps={{
-																		'aria-label': 'change date',
+																		'aria-label': 'Zmień datę',
 																	}}
 																/>
 															</Grid>

@@ -100,7 +100,7 @@ const CandidatesThirdStep = props => {
 					setStage(response.data.candidate.stage);
 					setStatus(response.data.candidate.status);
 					setDecisionCentralCommision(parseInt(response.data.candidate_info.decision_central_commision));
-					setDateCentralCommision(response.data.candidate_info.date_central_commision);
+					setDateCentralCommision(response.data.candidate_info.date_central_commision === '0000-00-00' ? null : response.data.candidate_info.date_central_commision);
 					setGeneralRemark(response.data.candidate_info.general_remark ? response.data.candidate_info.general_remark : '');
 				}
 				setProgressStatus(false);
@@ -241,17 +241,17 @@ const CandidatesThirdStep = props => {
 											<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 											<Grid container spacing={2}>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleHistory}>
+													<Button aria-label="Historia modyfikacji"  variant="outlined" color="secondary" className={classes.btnOption} onClick={handleHistory}>
 														<HistoryOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
+													<Button aria-label="Podgląd"  variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
 														<FindInPageOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
+													<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
 														<DeleteIcon />
 													</Button>
 												</Grid>

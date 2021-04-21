@@ -2,9 +2,9 @@ import { colors } from '@material-ui/core';
 
 const white = '#FFFFFF';
 const black = '#000000';
-const pink = '#ff6b66';
+const pink = '#B30600';
 const gray = '#44545e';
-const green= '#4db249';
+const green= '#2E6228';
 const color = '#454648';
 const btn_gray = '#727E91';
 const pink_disable = '#a02000';

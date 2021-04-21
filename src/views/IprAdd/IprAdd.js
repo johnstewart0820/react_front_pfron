@@ -209,12 +209,14 @@ const IprAdd = props => {
 												disableToolbar
 												variant="inline"
 												format="dd.MM.yyyy"
+                    		placeholder="Format wprowadzania daty DD.MM.RRRR"
 												margin="normal"
 												id="date"
 												value={schedule_date}
 												onChange={setScheduleDate}
+												aria-label="Data wypełnienia"
 												KeyboardButtonProps={{
-													'aria-label': 'change date',
+													'aria-label': 'Zmień datę',
 												}}
 											/>
 										</Grid>

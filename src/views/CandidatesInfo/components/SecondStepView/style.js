@@ -158,17 +158,7 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.pink
 	},
 	qlClass: {
-		'& .ql-container': {
-			background: 'white',
-			height: '150px',
-			overflow: 'auto'
-		},
-		'& .ql-editor': {
-			whiteSpace: 'normal !important'
-		},
-		'& .ql-tooltip': {
-			left: '10px !important'
-		}
+		width: '100%'
 	},
 }));
 

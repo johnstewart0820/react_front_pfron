@@ -64,19 +64,22 @@ const ThirdStepView = (props) => {
                   className={classes.date_picker}
                   variant="inline"
                   format="dd.MM.yyyy"
+                    placeholder="Format wprowadzania daty DD.MM.RRRR"
                   margin="normal"
                   id="date-picker-inline"
                   value={date_central_commision}
                   onChange={(value) => setDateCentralCommision(handleDate(value))}
+									aria-label="Data wydania decyzji"
                   KeyboardButtonProps={{
-                    'aria-label': 'change date',
+                    'aria-label': 'Zmień datę',
                   }}
                 />
               </Grid>
             
               <Grid item xs={12}>
                 <div className={classes.label_content}>Uwagi ogólne</div>
-                <ReactQuill 
+								<textArea
+									rows={6}
                   onChange={setGeneralRemark}
                   value={general_remark}
                   className={classes.qlClass}

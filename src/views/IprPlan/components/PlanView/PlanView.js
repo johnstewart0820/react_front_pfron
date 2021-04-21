@@ -159,7 +159,7 @@ const PlanView = (props) => {
 							<Grid container spacing={2}>
 								<Grid item xs={2}>
 									<div className={classes.top_label}><label htmlFor="amount">Wymiar</label></div>
-									<input aria-lebel="a" className={classes.input_box} type="name" value={service.amount} name="name" id="amount" onChange={(e) => handleChangeAmount(e.target.value, index, index_module)} disabled={service.disable_status}/>
+									<input aria-label="a" className={classes.input_box} type="name" value={service.amount} name="name" id="amount" onChange={(e) => handleChangeAmount(e.target.value, index, index_module)} disabled={service.disable_status}/>
 								</Grid>
 								<Grid item xs={10}>
 									<div className={classes.top_label} htmlFor="name">Jednostka</div>
@@ -177,11 +177,13 @@ const PlanView = (props) => {
 										id="start_date"
 										variant="inline"
 										format="dd.MM.yyyy"
+                    placeholder="Format wprowadzania daty DD.MM.RRRR"
 										margin="normal"
 										value={service.start_date}
 										onChange={(value) => handleChangeStartDate(value, index, index_module)}
+										aria-label="Data rozpoczęcia"
 										KeyboardButtonProps={{
-										'aria-label': 'change date',
+										'aria-label': 'Zmień datę',
 										}}
 									/>
 								</Grid>

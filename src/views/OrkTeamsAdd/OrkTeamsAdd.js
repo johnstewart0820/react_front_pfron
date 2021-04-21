@@ -185,12 +185,14 @@ const OrkTeamsAdd = props => {
 													disableToolbar
 													variant="inline"
 													format="dd.MM.yyyy"
+                    			placeholder="Format wprowadzania daty DD.MM.RRRR"
 													margin="normal"
 													id="date-picker-inline"
 													value={date_of_acceptance}
 													onChange={(e) => handleChangeDate(e)}
+													aria-label="Data akceptacji"
 													KeyboardButtonProps={{
-														'aria-label': 'change date',
+														'aria-label': 'Zmień datę',
 													}}
 												/>
 											</>

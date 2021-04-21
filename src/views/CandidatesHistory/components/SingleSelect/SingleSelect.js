@@ -22,12 +22,12 @@ const SingleSelect = (props) => {
           name: 'age',
           id: 'outlined-age-native-simple',
         }}
+				aria-label={`${value} wyświetleń rekordów na stronie`}
       >
         {
           list.map((item, index) => (
 						<>
-						<label for={item}>Ilość pozycji na stronie</label>
-            <option id={item} key={index} value={item}>{item}</option>
+            <option aria-label={`${item} wyświetleń rekordów na stronie`} id={item} key={index} value={item}>{item}</option>
 						</>
 					))
         }

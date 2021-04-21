@@ -328,12 +328,14 @@ const IprPlan = props => {
 														disabled={true}
 														variant="inline"
 														format="dd.MM.yyyy"
+                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={schedule_date}
 														onChange={setScheduleDate}
+														aria-label="Data wypełnienia"
 														KeyboardButtonProps={{
-															'aria-label': 'change date',
+															'aria-label': 'Zmień datę',
 														}}
 													/>
 												</Grid>
@@ -403,17 +405,17 @@ const IprPlan = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={4}>
-									<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
+									<Button aria-label="Pobierz PDF" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
 										<PictureAsPdfOutlinedIcon />
 									</Button>
 								</Grid>
 								<Grid item xs={4}>
-									<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
+									<Button aria-label="Podgląd"  variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
 										<FindInPageOutlinedIcon />
 									</Button>
 								</Grid>
 								<Grid item xs={4}>
-									<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
+									<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
 										<DeleteIcon />
 									</Button>
 								</Grid>

@@ -41,6 +41,14 @@ const useStyles = makeStyles((theme) => ({
 			display: 'block'
     },
 	},
+	wcag_controller_bottom: {
+		[theme.breakpoints.down('sm')]: {
+      display: 'block'
+    },
+    [theme.breakpoints.up('md')]: {
+			display: 'none'
+    },
+	},
   footer: {
     width: '100%',
     justifyContent: 'center',
@@ -62,14 +70,6 @@ const useStyles = makeStyles((theme) => ({
 			paddingRight: theme.spacing(20),
     },
   },
-	helper: {
-		color: theme.palette.text.primary,
-		fontSize: '8px',
-		margin: theme.spacing(0, 2.5),
-		display: 'flex',
-		alignItems: 'center',
-		cursor: 'pointer'
-	},
 }));
 
 export default useStyles;

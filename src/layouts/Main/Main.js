@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     position: 'relative',
-    height: 'calc(100vh - 160px)',
+    height: 'calc(100vh - 200px)',
     overflow: 'scroll',
 		backgroundColor: theme.palette.background.default
   },

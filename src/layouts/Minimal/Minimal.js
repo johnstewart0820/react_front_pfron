@@ -3,21 +3,19 @@ import PropTypes from 'prop-types';
 import { SiteInfoContextConsumer } from "App";
 import { makeStyles, useTheme } from '@material-ui/styles';
 import useStyles from './style';
-import { Alert } from 'components';
+import {WcagControl} from './components';
 import {
   Grid, Button, Typography
 } from '@material-ui/core';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faFont, faLink, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+
 import { useHistory } from 'react-router';
+import constants from '../../utils/constants';
 
 const Minimal = props => {
   const { children } = props;
 	const history = useHistory();
   const theme = useTheme();
   const classes = useStyles(theme);
-	const [underlineStatus, setUnderlineStatus] = useState(false);
-	const [contrastStatus, setContrastStatus] = useState(false);
 
 	const changeFontSize = type => {
 
@@ -33,20 +31,21 @@ const Minimal = props => {
     body.style.fontSize = fontSize;
   }
 
-  const toggleUnderlineLinks = e => {
+  const toggleUnderlineLinks = (e, handle) => {
     e.preventDefault();
     document.body.classList.toggle("links-underline");
-		setUnderlineStatus(!underlineStatus);
+		handle();
   }
 
 	const toggleContrast = (e, handle) => {
 		e.preventDefault(); 
 		handle();
-		setContrastStatus(!contrastStatus);
 	}
 
 	const handleWcagPage = () => {
-		history.push('/declaration_accessibility');
+		var newWindow = window.open();
+		newWindow.document.write(constants.DECLARATION_DATA);
+		newWindow.document.title = "Strona zostanie otwarta w nowym oknie przeglądarki";
 	}
 
   return (
@@ -61,49 +60,26 @@ const Minimal = props => {
           <img className={classes.logo} src="/images/logos/footer_RP.png" alt="Logo Rzeczpospolita Polska"/>
         </Grid>
         <Grid item xs={0} sm={0} md={6} className={classes.wcag_controller}>
-					<Grid container justify='center'>
-						<Grid item>
-							<Button title="Wczytaj domyślny rozmiar tekstu"	onClick={(e) => changeFontSize('normal')}>
-								<div className={classes.helper} name="normal">
-										<FontAwesomeIcon icon={faFont} size="2x"/>
-								</div>
-							</Button>
-						</Grid>
-						<Grid item>
-							<Button title="Pomniejsz tekst na stronie" onClick={(e) => changeFontSize('less')}>
-								<div className={classes.helper} name="minus">
-										<FontAwesomeIcon icon={faFont} size="2x"/>
-										<FontAwesomeIcon icon={faMinus} size="1x"/>
-								</div>
-							</Button>
-						</Grid>
-						<Grid item>
-							<Button title="Powiększ tekst na stronie" onClick={(e) => changeFontSize('more')}>
-								<div className={classes.helper} name="plus">
-									<FontAwesomeIcon icon={faFont} size="2x" />
-									<FontAwesomeIcon icon={faPlus} size="1x" />
-								</div>
-							</Button>
-						</Grid>
-						<Grid item>
-							<Button title={!contrastStatus ? "Wyłącz tryb wysokokontrastowy": "Włącz tryb wysokokontrastowy"} onClick={(e) => toggleContrast(e, props.toggleContrast)}>
-								<div className={classes.helper}>
-										<FontAwesomeIcon icon={faEye} size="2x"/>
-								</div>
-							</Button>
-						</Grid>
-						<Grid item>
-							<Button title={!underlineStatus ? "Wyłącz podkreślenie linków" : "Włącz podkreślenie linków"}  onClick={(e) => toggleUnderlineLinks(e)}>
-								<div className={classes.helper}>
-										<FontAwesomeIcon icon={faLink} size="2x"/>
-								</div>
-							</Button>
-						</Grid>
-					</Grid>
+					<WcagControl
+						changeFontSize={changeFontSize}
+						toggleContrast={toggleContrast}
+						toggleUnderlineLinks={toggleUnderlineLinks}
+						toggleContrastHandler={props.toggleContrast}
+						toggleUnderlineLinksHandler={props.toggleUnderline}
+					/>
         </Grid>
         <Grid item xs={4} sm={4} md={2} className={classes.alignRight}>
           <img className={classes.logo} src="/images/logos/footer_UE.png" alt="Logo Unia Europejska Europejski Fundusz Społeczny" />
         </Grid>
+				<Grid xs={12} className={classes.wcag_controller_bottom}>
+					<WcagControl
+						changeFontSize={changeFontSize}
+						toggleContrast={toggleContrast}
+						toggleUnderlineLinks={toggleUnderlineLinks}
+						toggleContrastHandler={props.toggleContrast}
+						toggleUnderlineLinksHandler={props.toggleUnderline}
+					/>
+				</Grid>
 				<Grid item xs={12}>
 					<Grid container justify="center">
 						<Typography variant={"h1"} className={classes.site_title}>

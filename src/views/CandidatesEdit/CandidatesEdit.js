@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
+	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox, Typography
 } from '@material-ui/core';
 
 
@@ -794,8 +794,10 @@ const CandidatesEdit = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane kandydata
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Dane kandydata
+									</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label for="name">Imię(Imiona)</label></div>
@@ -817,12 +819,14 @@ const CandidatesEdit = props => {
 												className={classes.date_picker}
 												variant="inline"
 												format="dd.MM.yyyy"
+                    		placeholder="Format wprowadzania daty DD.MM.RRRR"
 												margin="normal"
 												id="date_birth"
 												value={date_of_birth}
 												onChange={(value) => handleChangeDateOfBirth(value)}
+												aria-label="Data urodzenia"
 												KeyboardButtonProps={{
-													'aria-label': 'change date',
+													'aria-label': 'Zmień datę',
 												}}
 											/>
 										</Grid>
@@ -834,8 +838,10 @@ const CandidatesEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Adres zameldowania
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Adres zameldowania
+									</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -884,9 +890,11 @@ const CandidatesEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane kontaktowe
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Dane kontaktowe
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="type">Telefon komórkowy</div>
 									<PhoneInput country="pl" value={mobile_phone} onChange={handleChangeMobilePhone} inputClass={classes.phone_input} dropdownClass={classes.phone_drop_down} buttonClass={classes.buttonStyle} />
@@ -920,12 +928,14 @@ const CandidatesEdit = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12}>
-									<div className={classes.form_title}>
-										Adres korespondencyjny
-                	</div>
-									<div className={classes.form_title_small}>
-										(wypełnić jeśli inny niż adres zameldowania)
-                	</div>
+									<Typography variant="h2" className={classes.form_title}>
+										<div className={classes.form_title}>
+											Adres korespondencyjny
+										</div>
+										<div className={classes.form_title_small}>
+											(wypełnić jeśli inny niż adres zameldowania)
+										</div>
+									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -960,8 +970,10 @@ const CandidatesEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Wykształcenie
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Wykształcenie
+									</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<FormControl component="fieldset" error={error.education}>
@@ -991,9 +1003,11 @@ const CandidatesEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Tryb pobytu
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Tryb pobytu
+									</Typography>
+              	</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Ze względów logistycznych (brak możliwości codziennych dojazdów) deklaruję pobyt stacjonarny w Ośrodku Kompleksowej Rehabilitacji</div>
 									<FormControl component="fieldset" error={error.stay_status}>
@@ -1040,12 +1054,14 @@ const CandidatesEdit = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12}>
-									<div className={classes.form_title}>
-										Status na rynku pracy
-                	</div>
-									<div className={classes.form_title_small}>
-										(proszę zaznaczyć właściwy)
-                	</div>
+									<Typography variant="h2" className={classes.form_title}>
+										<div className={classes.form_title}>
+											Status na rynku pracy
+										</div>
+										<div className={classes.form_title_small}>
+											(proszę zaznaczyć właściwy)
+										</div>
+									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Jestem zatrudniony</div>
@@ -1175,12 +1191,14 @@ const CandidatesEdit = props => {
 														className={classes.date_picker}
 														variant="inline"
 														format="dd.MM.yyyy"
+                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={date_of_certificate}
 														onChange={(value) => handleChangeDateOfCertificate(value)}
+														aria-label="Data ważności"
 														KeyboardButtonProps={{
-															'aria-label': 'change date',
+															'aria-label': 'Zmień datę',
 														}}
 													/>
 												</Grid>
@@ -1206,8 +1224,10 @@ const CandidatesEdit = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3} className={classes.form_title}>
 								<Grid item md={3} xs={12}>
-									Inne
-              </Grid>
+									<Typography variant="h2" className={classes.form_title}>
+										Inne
+									</Typography>
+              	</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.input_box_label} htmlFor="name">Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia</div>
 									<FormControl component="fieldset" error={error.ethnic_minority_status}>
@@ -1272,9 +1292,9 @@ const CandidatesEdit = props => {
 							<Grid item xs={12}>
 								<Card className={classes.form}>
 									<Grid container spacing={2}>
-										<div className={classes.form_title}>
+										<Typography variant="h2" className={classes.form_title}>
 											Karty informacyjne
-                  	</div>
+                  	</Typography>
 										<Grid item xs={12}>
 											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleGotoInformation}>
 												{parseInt(stage) === 1 && parseInt(status) == 1 ? 'Załóż kartę informacyjną' : 'Zobacz kartę informacyjną'}
@@ -1295,17 +1315,17 @@ const CandidatesEdit = props => {
 											<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} id="comment" value={comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 											<Grid container spacing={2}>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleHistory}>
+													<Button aria-label="Historia modyfikacji" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleHistory}>
 														<HistoryOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
+													<Button aria-label="Podgląd" variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
 														<FindInPageOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={4}>
-													<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
+													<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
 														<DeleteIcon />
 													</Button>
 												</Grid>

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox
+	Button, Grid, Card, CircularProgress, TextareaAutosize, FormControl, RadioGroup, Radio, FormControlLabel, Checkbox, Typography
 } from '@material-ui/core';
 
 
@@ -228,7 +228,9 @@ const CandidatesInfoPreview = props => {
 						<Card className={classes.form} ref={chart}>
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane kandydata
+									<Typography variant="h2" className={classes.form_title}>
+										Dane kandydata
+									</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -256,7 +258,9 @@ const CandidatesInfoPreview = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
-									Decyzje
+									<Typography variant="h2" className={classes.form_title}>
+										Decyzje
+									</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -296,7 +300,9 @@ const CandidatesInfoPreview = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
-									Decyzja komisji centralnej
+									<Typography variant="h2" className={classes.form_title}>
+										Decyzja komisji centralnej
+									</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -316,7 +322,9 @@ const CandidatesInfoPreview = props => {
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
 								<Grid item md={3} xs={12} className={classes.form_title}>
-									Skierowanie do ORK
+									<Typography variant="h2" className={classes.form_title}>
+										Skierowanie do ORK
+									</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
@@ -355,12 +363,12 @@ const CandidatesInfoPreview = props => {
 										<Grid item xs={12}>
 											<Grid container spacing={2}>
 												<Grid item xs={6}>
-													<Button variant="outlined" color="secondary" className={classes.btnControl} onClick={handleExportPdf}>
+													<Button aria-label="Pobierz PDF" variant="outlined" color="secondary" className={classes.btnControl} onClick={handleExportPdf}>
 														<PictureAsPdfOutlinedIcon />
 													</Button>
 												</Grid>
 												<Grid item xs={6}>
-													<Button variant="outlined" color="secondary" className={classes.btnControl} onClick={handleDelete}>
+													<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnControl} onClick={handleDelete}>
 														<DeleteIcon />
 													</Button>
 												</Grid>

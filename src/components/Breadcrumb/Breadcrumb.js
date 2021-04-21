@@ -26,7 +26,7 @@ const Breadcrumb = props => {
   const classes = useStyles();
 	const title = "Po zmianie opcji wyszukiwania formularz przeładuje się automatycznie";
   return (
-    <Breadcrumbs aria-label="breadcrumb" class={classes.breadcrumb}>
+    <Breadcrumbs aria-label="Ścieżka okruszków" class={classes.breadcrumb}>
       {
         list && list.map((item, index) => (
           item.active ? 

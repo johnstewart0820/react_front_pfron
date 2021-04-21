@@ -112,6 +112,22 @@ const CandidatesHistory = props => {
     })
   }
 
+	const handlePaginationLabel = (type, page, selected) => {
+		if (type === 'first') {
+			return 'Przejdź do pierwszej strony'
+		}
+		if (type === 'previous') {
+			return 'Wróć do poprzedniej strony';
+		}
+		if (type === 'next') {
+			return 'Przejdź do następnej strony';
+		}
+		if (type === 'last') {
+			return 'Przejdź do ostatniej strony';
+		}
+		return `Strona ${page}`;
+	}
+
   return (
     <div className={classes.public}>
       <div className={classes.controlBlock}>
@@ -121,7 +137,7 @@ const CandidatesHistory = props => {
 				<Button variant="contained" color="secondary" className={classes.btnCreate} onClick={handleBack}>
 					Wróć do listy kandydata
         </Button>
-        <Button variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
+        <Button title="wielkość pliku poniżej 1 megabajt" variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
           Eksport listy do XLS
         </Button>
       </div>
@@ -165,6 +181,7 @@ className={classes.pagenation_class}
             count={ total%selectedCount == 0 ? total / selectedCount : parseInt(total / selectedCount) + 1} 
             onChange={(e, page) => {setPage(page)}} 
             page={page} 
+						getItemAriaLabel={handlePaginationLabel}
             showFirstButton 
             showLastButton />
         </div>

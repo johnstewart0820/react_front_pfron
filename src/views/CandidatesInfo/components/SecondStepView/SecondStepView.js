@@ -86,12 +86,14 @@ const SecondStepView = (props) => {
 								className={classes.date_picker}
 								variant="inline"
 								format="dd.MM.yyyy"
+								placeholder="Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="date-picker-inline"
 								value={doctor_date}
 								onChange={(value) => setDoctorDate(handleDate(value))}
+								aria-label="Orzeczenie o kwalifikacji z dnia"
 								KeyboardButtonProps={{
-									'aria-label': 'change date',
+									'aria-label': 'Zmień datę',
 								}}
 							/>
 						</Grid>
@@ -102,7 +104,8 @@ const SecondStepView = (props) => {
 						</Grid>
 						<Grid item xs={12}>
 							<div className={classes.label_content}>Uwagi od lekarza</div>
-							<ReactQuill 
+							<textArea
+								rows={6}
 								onChange={setDoctorRemark}
 								value={doctor_remark}
 								className={classes.qlClass}
@@ -126,12 +129,14 @@ const SecondStepView = (props) => {
 								className={classes.date_picker}
 								variant="inline"
 								format="dd.MM.yyyy"
+								placeholder="Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="date-picker-inline"
 								value={psycology_date}
 								onChange={(value) => setPsycologyDate(handleDate(value))}
+								aria-label="Orzeczenie o kwalifikacji z dnia"
 								KeyboardButtonProps={{
-									'aria-label': 'change date',
+									'aria-label': 'Zmień datę',
 								}}
 							/>
 						</Grid>
@@ -142,7 +147,8 @@ const SecondStepView = (props) => {
 						</Grid>
 						<Grid item xs={12}>
 							<div className={classes.label_content}>Uwagi od psychologa</div>
-							<ReactQuill 
+							<textArea
+								rows={6}
 								onChange={setPsycologyRemark}
 								value={psycology_remark}
 								className={classes.qlClass}

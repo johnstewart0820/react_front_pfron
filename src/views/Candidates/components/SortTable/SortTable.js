@@ -169,12 +169,14 @@ const SortTable = (props) => {
                     disableToolbar
                     variant="inline"
                     format="dd.MM.yyyy"
+                    placeholder="Format wprowadzania daty DD.MM.RRRR"
                     margin="normal"
                     id="date"
                     value={searchDateModified.from}
                     onChange={(e) => handleChangeDate(e, 'from')}
+										aria-label="Data rozpoczęcia wyszukiwania kandydatów specjalnych"
                     KeyboardButtonProps={{
-                      'aria-label': 'change date',
+                      'aria-label': 'Zmień datę',
                     }}
 										className={classes.date_picker}
                   />
@@ -184,12 +186,14 @@ const SortTable = (props) => {
                     disableToolbar
                     variant="inline"
                     format="dd.MM.yyyy"
+                    placeholder="Format wprowadzania daty DD.MM.RRRR"
                     margin="normal"
                     id="date"
                     value={searchDateModified.to}
                     onChange={(e) => handleChangeDate(e, 'to')}
+										aria-label="Data zakończenia wyszukiwania kandydatów specjalnych"
                     KeyboardButtonProps={{
-                      'aria-label': 'change date',
+                      'aria-label': 'Zmień datę',
                     }}
 										className={classes.date_picker}
                   />

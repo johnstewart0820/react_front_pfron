@@ -11,10 +11,9 @@ const SingleSelect = (props) => {
   }, []);
 
   return (
-    <FormControl variant="outlined" className={classes.formControl}>
+    <FormControl variant="outlined" className={classes.formControl} aria-label={`50 wyświetleń rekordów na stronie`}>
       <Select
         native 
-				className={classes.input_box}
         value={value}
         className={classes.name_select_box}
         onChange={(event) =>handleChange(event.target.value ? event.target.value : {})}
@@ -22,12 +21,12 @@ const SingleSelect = (props) => {
           name: 'age',
           id: 'outlined-age-native-simple',
         }}
+				aria-label={`${value} wyświetleń rekordów na stronie`}
       >
         {
           list.map((item, index) => (
 						<>
-						<label for={item}>Ilość pozycji na stronie</label>
-            <option id={item} key={index} value={item}>{item}</option>
+            <option aria-label={`${item} wyświetleń rekordów na stronie`} id={item} key={index} value={item}>{item}</option>
 						</>
 					))
         }

@@ -91,7 +91,7 @@ const ResetPassword = props => {
       <div className={classes.root}>
         <div className={classes.mainContainer}>
           <div className={classes.logoContainer}>
-            <img src="/images/logos/logo.png" alt="logo" />
+            <img src="/images/logos/logo.png" alt="Logo Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych" />
           </div>
           <div className={classes.loginForm}>
             <span>Ustaw nowe hasło</span>

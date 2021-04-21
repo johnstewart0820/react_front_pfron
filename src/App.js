@@ -31,16 +31,22 @@ validate.validators = {
 export default class App extends Component {
 	state = {
 		is_contrast: false,
+		is_underline: false,
 	}
 	toggleContrast = () => {
 		this.setState({ is_contrast: !this.state.is_contrast });
 	}
+	toggleUnderline = () => {
+		this.setState({ is_underline: !this.state.is_underline });
+	}
+
 	render() {
 		return (
 			<MuiPickersUtilsProvider utils={LuxonUtils} locale={pl}>
 					<SiteInfoContext.Provider value={{
 						...this.state,
-						toggleContrast: this.toggleContrast
+						toggleContrast: this.toggleContrast,
+						toggleUnderline: this.toggleUnderline,
 					}} >
 						<ThemeProvider theme={theme(this.state.is_contrast)}>
 							<Router history={browserHistory}>

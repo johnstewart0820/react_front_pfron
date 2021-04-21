@@ -553,12 +553,14 @@ const TrainingsEdit = props => {
 														disableToolbar
 														variant="inline"
 														format="dd.MM.yyyy"
+                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={item.date}
 														onChange={(value) => handleChangeClassDate(value, index)}
+														aria-label="Data zajęć"
 														KeyboardButtonProps={{
-															'aria-label': 'change date',
+															'aria-label': 'Zmień datę',
 														}}
 														className={classes.date_picker}
 													/>
@@ -646,7 +648,7 @@ const TrainingsEdit = props => {
 									<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />
 									<Grid container spacing={2}>
 										<Grid item xs={6}>
-											<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
+											<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
 												<DeleteIcon />
 											</Button>
 										</Grid>

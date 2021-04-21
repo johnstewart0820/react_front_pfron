@@ -482,12 +482,14 @@ const TrainingsAdd = props => {
 														disableToolbar
 														variant="inline"
 														format="dd.MM.yyyy"
+                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="class_date"
 														value={item.date}
 														onChange={(value) => handleChangeClassDate(value, index)}
+														aria-label="Data zajęć"
 														KeyboardButtonProps={{
-															'aria-label': 'change date',
+															'aria-label': 'Zmień datę',
 														}}
 														className={classes.date_picker}
 													/>

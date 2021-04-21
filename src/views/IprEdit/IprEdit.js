@@ -232,12 +232,14 @@ const IprEdit = props => {
 											disableToolbar
 											variant="inline"
 											format="dd.MM.yyyy"
+                    placeholder="Format wprowadzania daty DD.MM.RRRR"
 											margin="normal"
 											id="date-picker-inline"
 											value={schedule_date}
 											onChange={setScheduleDate}
+											aria-label="Data wypełnienia"
 											KeyboardButtonProps={{
-												'aria-label': 'change date',
+												'aria-label': 'Zmień datę',
 											}}
 										/>
 									</Grid>
@@ -268,7 +270,7 @@ const IprEdit = props => {
 								<Link to={`/ipr_list/plan/edit/${id}`} className={classes.link}><div className={classes.top_label}>Dodaj proponowany zakres wsparcia</div></Link>
 							</Grid>
 							<Grid item xs={4}>
-								<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
+								<Button aria-label="Pobierz PDF" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
 								<PictureAsPdfOutlinedIcon/>
 								</Button>
 							</Grid>

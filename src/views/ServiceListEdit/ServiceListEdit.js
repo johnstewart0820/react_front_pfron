@@ -274,7 +274,7 @@ const ServiceListEdit = props => {
                 </Button>
 								</Grid>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={handleDelete}>
+									<Button aria-label="Usuń" variant="outlined" color="secondary" className={classes.btnDelete} onClick={handleDelete}>
 										<DeleteIcon />
 									</Button>
 								</Grid>

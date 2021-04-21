@@ -59,12 +59,14 @@ const FourthStepView = (props) => {
               className={classes.date_picker}
               variant="inline"
               format="dd.MM.yyyy"
+							placeholder="Format wprowadzania daty DD.MM.RRRR"
               margin="normal"
               id="date-picker-inline"
               value={date_referal}
               onChange={(value) => setDateReferal(handleDate(value))}
+							aria-label="Data skierowania do ORK"
               KeyboardButtonProps={{
-                'aria-label': 'change date',
+                'aria-label': 'Zmień datę',
               }}
             />
           </Grid>
@@ -83,12 +85,14 @@ const FourthStepView = (props) => {
               className={classes.date_picker}
               variant="inline"
               format="dd.MM.yyyy"
+							placeholder="Format wprowadzania daty DD.MM.RRRR"
               margin="normal"
               id="date-picker-inline"
               value={date_rehabitation_center}
               onChange={(value) => setDateRehabitationCenter(handleDate(value))}
+							aria-label="Data wejścia do ORK"
               KeyboardButtonProps={{
-                'aria-label': 'change date',
+                'aria-label': 'Zmień datę',
               }}
             />
           </Grid>
@@ -98,7 +102,8 @@ const FourthStepView = (props) => {
           </Grid>
           <Grid item xs={12}>
             <div className={classes.label_content}>Uwagi dotyczące uczestnika</div>
-            <ReactQuill 
+            <textArea
+							rows={6}
               onChange={setParticipantRemark}
               value={participant_remark}
               className={classes.qlClass}

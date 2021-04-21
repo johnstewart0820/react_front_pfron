@@ -34,7 +34,7 @@ const MultiSelect = (props) => {
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="outlined-age-native-simple" className={classes.name_select_box} shrink={false}>
+      <InputLabel htmlFor="outlined-age-native-simple" aria-label="Wybierz opcję" className={classes.name_select_box} shrink={false}>
         {
           (value.length === 0 ) ? '' : ''
         }

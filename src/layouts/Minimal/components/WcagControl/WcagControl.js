@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WcagControl = props => {
-	const { className, changeFontSize, toggleContrast, toggleUnderlineLinks, toggleContrastHandler, toggleUnderlineLinksHandler } = props;
+	const { className, is_contrast, is_underline, changeFontSize, toggleContrast, toggleUnderlineLinks, toggleContrastHandler, toggleUnderlineLinksHandler } = props;
 
 	const classes = useStyles();
 
@@ -52,14 +52,14 @@ const WcagControl = props => {
 				</Button>
 			</Grid>
 			<Grid item>
-				<Button title={props.is_contrast ? "Wyłącz tryb wysokokontrastowy" : "Włącz tryb wysokokontrastowy"} onClick={(e) => toggleContrast(e, toggleContrastHandler)}>
+				<Button title={is_contrast ? "Wyłącz tryb wysokokontrastowy" : "Włącz tryb wysokokontrastowy"} onClick={(e) => toggleContrast(e, toggleContrastHandler)}>
 					<div className={classes.helper}>
 						<FontAwesomeIcon icon={faEye} size="2x" />
 					</div>
 				</Button>
 			</Grid>
 			<Grid item>
-				<Button title={props.is_underline ? "Wyłącz podkreślenie linków" : "Włącz podkreślenie linków"} onClick={(e) => toggleUnderlineLinks(e, toggleUnderlineLinksHandler)}>
+				<Button title={is_underline ? "Wyłącz podkreślenie linków" : "Włącz podkreślenie linków"} onClick={(e) => toggleUnderlineLinks(e, toggleUnderlineLinksHandler)}>
 					<div className={classes.helper}>
 						<FontAwesomeIcon icon={faLink} size="2x" />
 					</div>

@@ -66,6 +66,8 @@ const Minimal = props => {
 						toggleUnderlineLinks={toggleUnderlineLinks}
 						toggleContrastHandler={props.toggleContrast}
 						toggleUnderlineLinksHandler={props.toggleUnderline}
+						is_underline={props.is_underline}
+						is_contrast={props.is_contrast}
 					/>
         </Grid>
         <Grid item xs={4} sm={4} md={2} className={classes.alignRight}>
@@ -78,6 +80,8 @@ const Minimal = props => {
 						toggleUnderlineLinks={toggleUnderlineLinks}
 						toggleContrastHandler={props.toggleContrast}
 						toggleUnderlineLinksHandler={props.toggleUnderline}
+						is_underline={props.is_underline}
+						is_contrast={props.is_contrast}
 					/>
 				</Grid>
 				<Grid item xs={12}>

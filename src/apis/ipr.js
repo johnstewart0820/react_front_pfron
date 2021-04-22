@@ -64,6 +64,27 @@ class Ipr {
 			})
 	}
 
+	getWeekSchedule = (from, to, id) => {
+		return axios
+			.post(`${process.env.REACT_APP_BACKEND_URL}/ipr/get_week_schedule`, {
+				from: moment(from).format('YYYY-MM-DD'),
+				to: moment(to).format('YYYY-MM-DD'),
+				id: id,
+			}, {
+				headers: authHeader(storage.getStorage('token')),
+			})
+			.then(response => {
+				if (response.data.code === 401) {
+					storage.removeStorage('token');
+					storage.removeStorage('role');
+					return response.data;
+				} else if (response.data.code === 200) {
+					return response.data;
+				}
+			}).catch(error => {
+				return error;
+			})
+	}
 	getPlanInfo = (id) => {
 		return axios
 			.get(`${process.env.REACT_APP_BACKEND_URL}/ipr/get_plan_info`, {

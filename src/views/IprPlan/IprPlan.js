@@ -17,6 +17,7 @@ import {
 } from '@material-ui/pickers';
 import { pl } from 'date-fns/locale';
 import DateFnsUtils from '@date-io/date-fns';
+import { PDFDownloadLink, Document, Page } from "@react-pdf/renderer";
 import moment from 'moment';
 import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
@@ -24,11 +25,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 import ExpandLessOutlinedIcon from '@material-ui/icons/ExpandLessOutlined';
 import domtopdf from 'dom-to-pdf';
-import ReactToPdf from 'react-to-pdf';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './tab.css';
 
-import { PlanView, ScheduleView } from './components';
+import { PlanView, ScheduleView, PdfTemplate, PdfTemplateSchedule } from './components';
 
 const IprPlan = props => {
 	const id = props.match.params.id;
@@ -37,6 +37,8 @@ const IprPlan = props => {
 	const classes = useStyles();
 
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Plan realizacji IPR' }];
+	const [iprWeekData, setIprWeekData] = useState([]);
+	const [iprWeekDates, setIprWeekDates] = useState([]);
 	const [show_status, setShowStatus] = useState(false);
 	const [moduleList, setModuleList] = useState([]);
 	const [selectedItem, setSelectedItem] = useState(0);
@@ -125,7 +127,7 @@ const IprPlan = props => {
 					}
 					setIprType(response.data.ipr.ipr_type);
 					setNumber(response.data.ipr.number);
-					// setOrkPerson(response.data.ipr.id_ork_person);
+					setOrkPerson(response.data.ipr.id_ork_person);
 					setProfession(response.data.ipr.profession);
 					setScheduleDate(new Date(response.data.ipr.schedule_date));
 				}
@@ -254,14 +256,18 @@ const IprPlan = props => {
 	}
 
 	const handleExportPdf = () => {
-		const plan_dom = plan_ref.current;
-		const schedule_dom = schedule_ref.current;
-		var options = {
-			filename: 'download.pdf',
-		};
+		// const plan_dom = plan_ref.current;
+		// const schedule_dom = schedule_ref.current;
+		// var options = {
+		// 	filename: 'download.pdf',
+		// };
 
-		domtopdf(selectedItem === 0 ? plan_dom : schedule_dom, options, function () {
-		});
+		// domtopdf(selectedItem === 0 ? plan_dom : schedule_dom, options, function () {
+		// });
+		if (selectedItem === 0)
+			document.getElementById('export-pdf').click();
+		else
+			document.getElementById('week-pdf').click();
 	}
 
 	const toggleView = () => {
@@ -272,8 +278,60 @@ const IprPlan = props => {
 		setOpenModal(false);
 	}
 
+	const getOrkPerson = (ork_person) => {
+		let obj = orkPersonList.find((item) => {return item.id == ork_person || item.id == ork_person.id});
+		return obj.name;
+	}
+
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
+			<PDFDownloadLink
+				document={
+					<PdfTemplate 
+						participant_number={participant_number}
+						participant_name={participant_name}
+						ipr_type={iprTypeList.length > 0 && ipr_type > 0 ? iprTypeList[ipr_type - 1].name : ''}
+						number={number}
+						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1)+ '.' + schedule_date.getFullYear()}
+						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
+						moduleList={moduleList}
+					/>
+				}
+				fileName="download.pdf"
+				style={{
+					display: 'none'
+				}}
+			>
+				{({ blob, url, loading, error }) => 
+					<div id="export-pdf">
+						aaa
+					</div>
+				}
+			</PDFDownloadLink>
+			<PDFDownloadLink
+				document={
+					<PdfTemplateSchedule
+						participant_number={participant_number}
+						participant_name={participant_name}
+						ipr_type={iprTypeList.length > 0 && ipr_type > 0 ? iprTypeList[ipr_type - 1].name : ''}
+						number={number}
+						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1)+ '.' + schedule_date.getFullYear()}
+						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
+						moduleList={iprWeekData}
+						dayList={iprWeekDates}
+					/>
+				}
+				fileName="download.pdf"
+				style={{
+					display: 'none'
+				}}
+			>
+				{({ blob, url, loading, error }) => 
+					<div id="week-pdf">
+						aaa
+					</div>
+				}
+			</PDFDownloadLink>
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
@@ -393,6 +451,8 @@ const IprPlan = props => {
 											setDateList={setDateList}
 											selectedItem={selectedScheduleItem}
 											setSelectedItem={setSelectedScheduleItem}
+											handleWeekData={setIprWeekData}
+											handleWeekDates={setIprWeekDates}
 											id={id}
 										/>
 									</div>

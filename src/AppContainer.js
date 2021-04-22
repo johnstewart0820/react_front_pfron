@@ -9,7 +9,7 @@ class AppContainer extends React.Component {
 		super(props);
 		this.state = { role: 0 };
 		this.login_links = [
-			{title: 'Przejdź do logowania', to: 'main' },
+			{title: 'Przejdź do logowania', to: 'email' },
 		];
 		this.links = [
 			{title: 'Przejdź do treści', to: 'main'},
@@ -66,7 +66,7 @@ class AppContainer extends React.Component {
 	render() {
 		return this.state.role !== 0 ? 
 		<>
-			<SkipLinks links={this.props.location.pathname === '/login' ? this.login_links : this.links}/>{React.cloneElement(this.props.children, { role: this.state.role })}
+			<SkipLinks links={this.props.location.pathname === '/login' || this.props.location.pathname === '/forgotpassword' ? this.login_links : this.links}/>{React.cloneElement(this.props.children, { role: this.state.role })}
 		</> 
 		: <></>;
 	}

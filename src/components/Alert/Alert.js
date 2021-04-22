@@ -5,12 +5,23 @@ import MuiAlert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles(theme => ({
-	
+	alert: {
+		width: '100%', 
+		position: 'relative', 
+		marginTop: '5px',
+		'& .MuiAlert-filledError': {
+			backgroundColor: theme.palette.pink
+		},
+		'& .MuiAlert-filledSuccess': {
+			backgroundColor: theme.palette.green
+		}
+	}
 }));
 
 function Alert_Component(props) {
+	const classes = useStyles();
 	return (
-		<div style={{width: '100%', position: 'relative', marginTop: '5px'}}>
+		<div className={classes.alert}>
 			<MuiAlert elevation={6} variant="filled" {...props} />
 		</div>
 	)

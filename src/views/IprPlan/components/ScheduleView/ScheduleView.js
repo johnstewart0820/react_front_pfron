@@ -16,7 +16,7 @@ import clsx from 'clsx';
 
 const ScheduleView = (props) => {
 	const classes = useStyles();
-	const { scheduleDate, handleGetScheduleData, scheduleData, setScheduleData, week, setWeek, weeks, setWeeks, status, setStatus, dateList, setDateList, selectedItem, setSelectedItem, id, history } = props;
+	const { scheduleDate, handleGetScheduleData, scheduleData, setScheduleData, week, setWeek, weeks, setWeeks, status, setStatus, dateList, setDateList, selectedItem, setSelectedItem, handleWeekData, handleWeekDates, id, history } = props;
 	const [statusList, setStatusList] = useState([{ id: 1, name: 'Planowany' }, { id: 2, name: 'Zrealizowany' }]);
 
 	const _date_arr = [
@@ -92,6 +92,15 @@ const ScheduleView = (props) => {
 					history.push('/login');
 				} else {
 					setStatus(response.data.status);
+				}
+			})
+		ipr.getWeekSchedule(temp.from, temp.to, id)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					handleWeekData(response.data.module);
+					handleWeekDates(response.data.week_days);
 				}
 			})
 	}

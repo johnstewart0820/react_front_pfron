@@ -111,23 +111,35 @@ const Trainings = props => {
 	}
 
 	const handleExport = () => {
-		let export_data = [];
-		for (let i = 0; i < data.length; i++) {
-			let item = [];
-			item.push(data[i].id);
-			item.push(data[i].name);
-			item.push(getParticipantStr(data[i].participant));
-			item.push(trainingStatusList[data[i].training_status - 1].name);
-			let _date = new Date(data[i].date);
-			item.push(_date.getDate() + '.' + (_date.getMonth() + 1) + '.' + _date.getFullYear() + ' ' + _date.getHours() + ':' + _date.getMinutes());
-			export_data.push(item);
-		}
+		training
+			.getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchParticipant, searchTrainingStatus, getDate(searchScheduleDate))
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						let _data = response.data.trainings;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].name);
+							item.push(getParticipantStr(_data[i].participant));
+							item.push(trainingStatusList[_data[i].training_status - 1].name);
+							let _date = new Date(_data[i].date);
+							item.push(_date.getDate() + '.' + (_date.getMonth() + 1) + '.' + _date.getFullYear() + ' ' + _date.getHours() + ':' + _date.getMinutes());
+							export_data.push(item);
+						}
 
-		EXCEL.outPut({
-			header: ['ID', 'Nazwa', 'Zaipisani uczestnicy', 'Zaakceptowane', 'Data rozpoczęcia'],
-			data: export_data,
-			name: 'download'
-		})
+						EXCEL.outPut({
+							header: ['ID', 'Nazwa', 'Zaipisani uczestnicy', 'Zaakceptowane', 'Data rozpoczęcia'],
+							data: export_data,
+							name: 'download'
+						})
+					}
+				}
+			})
+		
 	}
 
 	const handleSelectedItem = (id) => {

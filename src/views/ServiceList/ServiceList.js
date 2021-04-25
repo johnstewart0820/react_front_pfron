@@ -107,7 +107,7 @@ const ServiceList = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-setHasAlert(true);
+						setHasAlert(true);
 						setMessage(response.message);
 						setIsSuccess(response.code === 200);
           }
@@ -120,21 +120,32 @@ setHasAlert(true);
   }
 
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      let item = [];
-      item.push(data[i].id);
-      item.push(data[i].number);
-      item.push(data[i].name);
-      item.push(moduleList[data[i].module - 1].name);
-      item.push(data[i].amount_usage + ' ' + unitList[data[i].unit - 1].name);
-      export_data.push(item);
-    }
-    EXCEL.outPut({
-      header: ['ID', 'Numer', 'Nazwa', 'Moduł', 'Jednostka'],
-      data: export_data,
-      name: 'download'
-    })
+		service_list
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchNumber, searchName, searchModule, searchUnit)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+						let _data = response.data.service_list;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i ++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].number);
+							item.push(_data[i].name);
+							item.push(moduleList[_data[i].module - 1].name);
+							item.push(_data[i].amount_usage + ' ' + unitList[_data[i].unit - 1].name);
+							export_data.push(item);
+						}
+						EXCEL.outPut({
+							header: ['ID', 'Numer', 'Nazwa', 'Moduł', 'Jednostka'],
+							data: export_data,
+							name: 'download'
+						})
+          }
+        }
+      })
   }
 
 	const handlePaginationLabel = (type, page, selected) => {

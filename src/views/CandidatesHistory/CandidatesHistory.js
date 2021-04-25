@@ -95,21 +95,33 @@ const CandidatesHistory = props => {
 		return result;
 	}
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      let item = [];
-      item.push(data[i].id);
-			let date = new Date(data[i].created_at);
-      item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
-      item.push(data[i].description);
-			item.push(getUser(data[i].created_by));
-			export_data.push(item);
-    }
-    EXCEL.outPut({
-      header: ['ID', 'Data modyfikacji', 'Zmiana', 'Uzytkownik'],
-      data: export_data,
-      name: 'download'
-    })
+		candidate
+      .getHistoryListByOption(id, sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchCreatedAt, searchDescription, searchUser)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+						let _data = response.data.histories;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i ++) {
+							let item = [];
+							item.push(_data[i].id);
+							let date = new Date(_data[i].created_at);
+							item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+							item.push(_data[i].description);
+							item.push(getUser(_data[i].created_by));
+							export_data.push(item);
+						}
+						EXCEL.outPut({
+							header: ['ID', 'Data modyfikacji', 'Zmiana', 'Uzytkownik'],
+							data: export_data,
+							name: 'download'
+						})
+          }
+        }
+      })
+    
   }
 
 	const handlePaginationLabel = (type, page, selected) => {

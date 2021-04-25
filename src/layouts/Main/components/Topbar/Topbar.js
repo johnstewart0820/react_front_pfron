@@ -145,8 +145,8 @@ const Topbar = props => {
 							open={avatarOpen}
 							onClose={handleClose}
 						>
-							<MenuItem onClick={handleProfile} aria-label="Konto użytkownika: naciśnij Enter dwukrotnie, aby się wylogować">Edytuj profil</MenuItem>
-							<MenuItem onClick={handleLogout} aria-label="Konto użytkownika: naciśnij Enter dwukrotnie, aby się wylogować">Wyloguj</MenuItem>
+							<MenuItem onClick={handleProfile} aria-label="Edytuj profil">Profil Użytkownika</MenuItem>
+							<MenuItem onClick={handleLogout} aria-label="Wyloguj">Wyloguj</MenuItem>
 						</Menu>
 					</div>
 				</div>

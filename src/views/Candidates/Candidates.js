@@ -211,28 +211,40 @@ const Candidates = props => {
 	}
 
 	const handleExport = () => {
-		let export_data = [];
-		for (let i = 0; i < data.length; i++) {
-			let item = [];
-			item.push(data[i].id);
-			item.push(data[i].name);
-			item.push(data[i].surname);
-			let temp = '';
-			for (let j = 0; j < qualificationPointList.length; j++) {
-				if (parseInt(qualificationPointList[j].id) === parseInt(data[i].qualification_point))
-					temp = qualificationPointList[j].name;
-			}
-			item.push(temp);
-			item.push(stageList[data[i].stage - 1].name);
-			let date = new Date(data[i].updated_at);
-			item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
-			export_data.push(item);
-		}
-		EXCEL.outPut({
-			header: ['ID', 'Imię kandydata', 'Nazwisko kandydata', 'Punkt kwalifikacyjny', 'Etap rekrutacji', 'Data modyfikacji'],
-			data: export_data,
-			name: 'download'
-		})
+		candidate
+			.getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchSurname, searchQualificationPoint, searchStage, searchStatus, searchDateModified)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						let _data = response.data.candidates;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].name);
+							item.push(_data[i].surname);
+							let temp = '';
+							for (let j = 0; j < qualificationPointList.length; j++) {
+								if (parseInt(qualificationPointList[j].id) === parseInt(_data[i].qualification_point))
+									temp = qualificationPointList[j].name;
+							}
+							item.push(temp);
+							item.push(stageList[_data[i].stage - 1].name);
+							let date = new Date(_data[i].updated_at);
+							item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+							export_data.push(item);
+						}
+						EXCEL.outPut({
+							header: ['ID', 'Imię kandydata', 'Nazwisko kandydata', 'Punkt kwalifikacyjny', 'Etap rekrutacji', 'Data modyfikacji'],
+							data: export_data,
+							name: 'download'
+						})
+					}
+				}
+			})
+		
 	}
 
 	const handleSelectedItem = (id) => {

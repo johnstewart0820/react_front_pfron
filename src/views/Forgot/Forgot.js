@@ -95,7 +95,7 @@ const Forgot = props => {
 						<span>Podaj swój adres e-mail, aby odzyskać hasło</span>
 						<div>
 							<div className={classes.input_box_label}><label htmlFor="email">E-mail</label></div>
-							<input className={classes.input_box} type="email" value={input.email} name="email" id="email" onChange={handleChange} onKeyPress={handleKeyPress} />
+							<input className={classes.input_box} aria-label="e-mail" type="email" value={input.email} name="email" id="email" onChange={handleChange} onKeyPress={handleKeyPress} />
 							<div className={classes.error_log}>{error["email"] && error["email"].length > 0 && error.email}</div>
 						</div>
 						<div className={classes.buttonContainer}>

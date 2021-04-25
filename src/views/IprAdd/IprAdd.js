@@ -181,6 +181,7 @@ const IprAdd = props => {
 												options={participantList}
 												getOptionLabel={(option) => participantList && option && option.participant_number}
 												renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+												disabled={searchKey !== null}
 											/>
 										</Grid>
 										<Grid item xs={7}>
@@ -193,6 +194,7 @@ const IprAdd = props => {
 												options={participantList}
 												getOptionLabel={(option) => participantList && option && `${option.name} ${option.surname}`}
 												renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+												disabled={searchKey !== null}
 											/>
 										</Grid>
 										<Grid item xs={5}>

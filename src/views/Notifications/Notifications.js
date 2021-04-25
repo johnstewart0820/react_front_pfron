@@ -75,21 +75,33 @@ const Notifications = props => {
 	}
 
 	const handleExport = () => {
-		let export_data = [];
-		for (let i = 0; i < data.length; i++) {
-			let item = [];
-			item.push(data[i].id);
-			item.push(data[i].title);
-			let date = new Date(data[i].updated_at);
-			item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
-			item.push(data[i].activate_status === 1 ? 'TAK' : 'NIE');
-			export_data.push(item);
-		}
-		EXCEL.outPut({
-			header: ['ID', 'Temat', 'Data', 'Akceptacja'],
-			data: export_data,
-			name: 'download'
-		})
+		notification
+			.getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchTitle, searchDateModified)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						let _data = response.data.notifications;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].title);
+							let date = new Date(_data[i].updated_at);
+							item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+							item.push(_data[i].activate_status === 1 ? 'TAK' : 'NIE');
+							export_data.push(item);
+						}
+						EXCEL.outPut({
+							header: ['ID', 'Temat', 'Data', 'Akceptacja'],
+							data: export_data,
+							name: 'download'
+						})
+					}
+				}
+			})
+		
 	}
 
 	const handleSelectedItem = (id) => {

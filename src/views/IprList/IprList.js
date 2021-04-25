@@ -88,23 +88,35 @@ const IprList = props => {
 	}
 
 	const handleExport = () => {
-		let export_data = [];
-		for (let i = 0; i < data.length; i++) {
-			let item = [];
-			item.push(data[i].id);
-			item.push(data[i].name);
-			item.push(iprTypeList[data[i].ipr_type - 1].name);
-			item.push(data[i].number);
-			item.push(data[i].created_at);
-			item.push(data[i].schedule_date);
-			export_data.push(item);
-		}
-
-		EXCEL.outPut({
-			header: ['ID', 'Imię i nazwisko uczestnika', 'Typ IPR', 'Numer', 'Data powstania', 'Data wypełnienia'],
-			data: export_data,
-			name: 'download'
-		})
+		ipr
+			.getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchIprType, searchNumber, searchCreatedAt, searchScheduleDate)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						let _data = response.data.iprs;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].name);
+							item.push(iprTypeList[_data[i].ipr_type - 1].name);
+							item.push(_data[i].number);
+							item.push(_data[i].created_at);
+							item.push(_data[i].schedule_date);
+							export_data.push(item);
+						}
+				
+						EXCEL.outPut({
+							header: ['ID', 'Imię i nazwisko uczestnika', 'Typ IPR', 'Numer', 'Data powstania', 'Data wypełnienia'],
+							data: export_data,
+							name: 'download'
+						})
+					}
+				}
+			})
+		
 	}
 
 	const handleSelectedItem = (id) => {

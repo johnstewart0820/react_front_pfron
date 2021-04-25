@@ -103,21 +103,32 @@ const QualificationPoints = props => {
   }
 
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      let item = [];
-      item.push(data[i].id);
-      item.push(data[i].name);
-      item.push(typeList[data[i].type - 1].name);
-      item.push(getAmbassadorStr(data[i].ambassador));
-      export_data.push(item);
-    }
-    
-    EXCEL.outPut({
-      header: ['ID', 'Punkt kwalifikacyjny', 'Typ', 'Przypisani Ambasadorzy'],
-      data: export_data,
-      name: 'download'
-    })
+		qualification
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchType, searchAmbassador)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+						let _data = response.data.qualification_points;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i ++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].name);
+							item.push(typeList[_data[i].type - 1].name);
+							item.push(getAmbassadorStr(_data[i].ambassador));
+							export_data.push(item);
+						}
+						
+						EXCEL.outPut({
+							header: ['ID', 'Punkt kwalifikacyjny', 'Typ', 'Przypisani Ambasadorzy'],
+							data: export_data,
+							name: 'download'
+						})
+          }
+        }
+      })
   }
 
   const handleSelectedItem = (id) => {

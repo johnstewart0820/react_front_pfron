@@ -69,18 +69,30 @@ const OrkList = props => {
   }
 
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      let item = [];
-      item.push(data[i].id);
-      item.push(data[i].name);
-      export_data.push(item);
-    }
-    EXCEL.outPut({
-      header: ['ID', 'Nazwa ośrodka'],
-      data: export_data,
-      name: 'download'
-    })
+		rehabitation_center
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+						let _data = response.data.rehabitation_centers;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i ++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].name);
+							export_data.push(item);
+						}
+						EXCEL.outPut({
+							header: ['ID', 'Nazwa ośrodka'],
+							data: export_data,
+							name: 'download'
+						})
+          }
+        }
+      })
+
   }
 
 	const handlePaginationLabel = (type, page, selected) => {

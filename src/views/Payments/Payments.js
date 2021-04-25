@@ -86,21 +86,32 @@ const Payments = props => {
   }
   
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      let item = [];
-      item.push(data[i].id);
-	  item.push(data[i].value);
-	  item.push(rehabitationCenterList[data[i].rehabitation_center - 1].name);
-      item.push(serviceList[data[i].service - 1].name);
-      export_data.push(item);
-    }
-    
-    EXCEL.outPut({
-      header: ['ID', 'Cena jednostkowa', 'Koszt dla ORK', 'Usługa'],
-      data: export_data,
-      name: 'download'
-    })
+		payment
+		.getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchValue, searchRehabitationCenter, searchService)
+		.then(response => {
+			if (response.code === 401) {
+				history.push('/login');
+			} else {
+				if (response.code === 200) {
+					let _data = response.data.payments;
+					let export_data = [];
+					for (let i = 0; i < _data.length; i ++) {
+						let item = [];
+						item.push(_data[i].id);
+						item.push(_data[i].value);
+						item.push(rehabitationCenterList[_data[i].rehabitation_center - 1].name);
+						item.push(serviceList[_data[i].service - 1].name);
+						export_data.push(item);
+					}
+					
+					EXCEL.outPut({
+						header: ['ID', 'Cena jednostkowa', 'Koszt dla ORK', 'Usługa'],
+						data: export_data,
+						name: 'download'
+					})
+				}
+			}
+		})
   }
 
   const handleSelectedItem = (id) => {

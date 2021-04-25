@@ -15,6 +15,19 @@ class AppContainer extends React.Component {
 			{title: 'Przejdź do treści', to: 'main'},
 		];
 	}
+
+	keydownHandler(e){
+    if (e.keyCode===36 && e.ctrlKey)
+		{
+			let dom = document.getElementsByClassName('c-links__item')[0];
+			dom.focus();
+		}
+  };
+
+  componentWillUnmount(){
+    document.removeEventListener('keydown',this.keydownHandler);
+  };
+
 	checkValidity() {
 		if (constants.unauthenticated_url.indexOf(this.props.location.pathname) !== -1) {
 			this.setState({ role: 1 });
@@ -57,6 +70,7 @@ class AppContainer extends React.Component {
 
 	componentDidMount() {
 		this.checkValidity();
+		document.addEventListener('keydown',this.keydownHandler);
 	}
 	componentDidUpdate(prevProps) {
 		if (this.props.location.pathname !== prevProps.location.pathname) {

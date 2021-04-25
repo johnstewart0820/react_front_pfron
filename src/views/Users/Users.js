@@ -103,21 +103,33 @@ const Users = props => {
     return name;
   }
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      let item = [];
-      item.push(data[i].id);
-      item.push(data[i].name);
-      item.push(getRoleName(data[i].id_role));
-	  item.push(data[i].email);
-	  item.push(activateStatusList[(parseInt(data[i].activate_status) + 1) % 2].name);
-      export_data.push(item);
-    }
-    EXCEL.outPut({
-      header: ['ID', 'Nazwa użytkownika (login)', 'Rola', 'E-mail', 'Aktywny'],
-      data: export_data,
-      name: 'download'
-    })
+		users
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchRole, searchEmail, searchActivateStatus)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+						let _data = response.data.users;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i ++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].name);
+							item.push(getRoleName(_data[i].id_role));
+							item.push(_data[i].email);
+							item.push(activateStatusList[(parseInt(_data[i].activate_status) + 1) % 2].name);
+							export_data.push(item);
+						}
+						EXCEL.outPut({
+							header: ['ID', 'Nazwa użytkownika (login)', 'Rola', 'E-mail', 'Aktywny'],
+							data: export_data,
+							name: 'download'
+						})
+          }
+        }
+      })
+    
   }
 
   const handleSelectedItem = (id) => {
@@ -139,7 +151,7 @@ const Users = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-setHasAlert(true);
+						setHasAlert(true);
 						setMessage(response.message);
 						setIsSuccess(response.code === 200);
           }

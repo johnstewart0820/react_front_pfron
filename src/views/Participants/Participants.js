@@ -102,7 +102,6 @@ const Participants = props => {
 
 	const handleExportSL = () => {
 		let export_data = [];
-
 		totalCandidateList.map((data, index) => {
 			let item = [];
 			item.push('POWR.02.06.00-00-0057/17-01');
@@ -203,23 +202,35 @@ const Participants = props => {
 		})
 	}
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      let item = [];
-      item.push(data[i].id);
-      item.push(data[i].name);
-      item.push(data[i].surname);
-	  item.push(rehabitationCenterList[data[i].rehabitation_center - 1].name);
-      item.push(data[i].participant_status_type >= 1 ? participantStatusTypeList[data[i].participant_status_type - 1].name : '');
-      let date = new Date(data[i].updated_at);
-      item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
-      export_data.push(item);
-    }
-    EXCEL.outPut({
-      header: ['ID', 'Imię uczestnika', 'Nazwisko uczestnika', 'Ośrodek', 'Status', 'Data modyfikacji'],
-      data: export_data,
-      name: 'download'
-    })
+		participant
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchSurname, searchRehabitationCenter, searchParticipantStatusType, searchDateModified)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+						let _data = response.data.participant;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i ++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].name);
+							item.push(_data[i].surname);
+							item.push(_data[i].rehabitation_center >= 1 ? rehabitationCenterList[_data[i].rehabitation_center - 1].name : '');
+							item.push(_data[i].participant_status_type >= 1 ? participantStatusTypeList[_data[i].participant_status_type - 1].name : '');
+							let date = new Date(_data[i].updated_at);
+							item.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+							export_data.push(item);
+						}
+						EXCEL.outPut({
+							header: ['ID', 'Imię uczestnika', 'Nazwisko uczestnika', 'Ośrodek', 'Status', 'Data modyfikacji'],
+							data: export_data,
+							name: 'download'
+						})
+          }
+        }
+      })
+    
   }
 
   const handleSelectedItem = (id) => {

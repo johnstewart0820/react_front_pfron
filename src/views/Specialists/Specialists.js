@@ -104,7 +104,7 @@ const Specialists = props => {
           history.push('/login');
         } else {
           if (response.code === 200) {
-setHasAlert(true);
+						setHasAlert(true);
 						setMessage(response.message);
 						setIsSuccess(response.code === 200);
           }
@@ -116,24 +116,35 @@ setHasAlert(true);
   }
 
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      let item = [];
-      item.push(data[i].id);
-      item.push(data[i].name);
-      for (let j = 0; j < qualificationPointList.length; j ++) {
-        if (qualificationPointList[j].id === data[i].qualification_point) {
-          item.push(qualificationPointList[j].name);
+		specialist
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchQualificationPoint, searchSpecialty)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+						let _data = response.data.specialists;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i ++) {
+							let item = [];
+							item.push(_data[i].id);
+							item.push(_data[i].name);
+							for (let j = 0; j < qualificationPointList.length; j ++) {
+								if (qualificationPointList[j].id === _data[i].qualification_point) {
+									item.push(qualificationPointList[j].name);
+								}
+							}
+							item.push(specialtyList[_data[i].specialty - 1].name);
+							export_data.push(item);
+						}
+						EXCEL.outPut({
+							header: ['ID', 'Imię i nazwisko', 'Punkt kwalifikacyjny', 'Specjalność'],
+							data: export_data,
+							name: 'download'
+						})
+          }
         }
-      }
-      item.push(specialtyList[data[i].specialty - 1].name);
-      export_data.push(item);
-    }
-    EXCEL.outPut({
-      header: ['ID', 'Imię i nazwisko', 'Punkt kwalifikacyjny', 'Specjalność'],
-      data: export_data,
-      name: 'download'
-    })
+      })
   }
 
 	const handlePaginationLabel = (type, page, selected) => {

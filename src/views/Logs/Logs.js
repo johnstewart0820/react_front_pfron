@@ -13,6 +13,8 @@ import audit from '../../apis/audit';
 import { ExportToCsv } from 'export-to-csv';
 import { DateTime } from 'luxon';
 
+import EXCEL from 'js-export-xlsx';
+
 
 const columnAsKey = (array, column) => {
   const ret = {};
@@ -126,33 +128,37 @@ const Logs = props => {
   }
 
   const handleExport = () => {
-    let export_data = [];
-    for (let i = 0; i < data.length; i ++) {
-      const user = data[i].user;
-      const role = data[i].role;
-      const item = {};
-      item['ID']         = data[i].id;
-      item['Użytkownik'] = user ? user.name : '';
-      item['Rola']       = role ? role.name : '';
-      item['Data']       = DateTime.fromISO(data[i].date).toFormat('dd.MM.yyyy hh:mm');
-      item['Czynność']   = data[i].event;
-      item['IP adres']   = data[i].ip_address;
-      export_data.push(item);
-    }
-    const options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: false,
-      showTitle: false,
-      title: 'PFRON_Log_zdarzen',
-      useTextFile: false,
-      useBom: true,
-      useKeysAsHeaders: true,
-    };
-    const csvExporter = new ExportToCsv(options);
-
-    csvExporter.generateCsv(export_data);
+		audit
+      .getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchUserName, searchRole, searchDate, searchEvent)
+      .then(response => {
+        if (response.code === 401) {
+          history.push('/login');
+        } else {
+          if (response.code === 200) {
+						let _data = response.data.audits;
+						let export_data = [];
+						for (let i = 0; i < _data.length; i ++) {
+							const user = _data[i].user;
+							const role = _data[i].role;
+							const item = [];
+							
+							item.push(_data[i].id);
+							item.push(user ? user.name : '');
+							item.push(role ? role.name : '');
+							item.push(DateTime.fromISO(_data[i].date).toFormat('dd.MM.yyyy hh:mm'));
+							item.push(_data[i].event);
+							item.push(_data[i].ip_address);
+							export_data.push(item);
+						}
+						
+						EXCEL.outPut({
+							header: ['ID', 'Użytkownik', 'Rola', 'Data', 'Czynność', 'IP adres'],
+							data: export_data,
+							name: 'download'
+						})
+          }
+        }
+      })
   }
 
   const handleSelectedItem = (id) => {

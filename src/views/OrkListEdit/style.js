@@ -129,9 +129,16 @@ height: '100%',
     },
     date_picker: {
         marginTop: theme.spacing(1),
+				width: '100%',
 				'& svg': {
 					fill: theme.palette.text.secondary
 				},
+				'& .MuiIconButton-root': {
+					padding: 0
+				},
+				'& .MuiInputAdornment-positionEnd': {
+					marginLeft: 0
+				}
     },
     addContainer: {
       display: 'flex',

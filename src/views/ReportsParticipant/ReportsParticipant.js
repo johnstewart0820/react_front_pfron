@@ -119,15 +119,31 @@ const ReportsParticipant = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						handleExport(response.data.count_list);
+						handleExport(response.data.count_list, rehabitationCenter, quater_from, quater_to);
 					}
 					setProgressStatus(false);
 				})
 		}
 	}
 
-	const handleExport = (data) => {
+	const getPolishMonth = (str_date) => {
+		let _str = str_date.split('Kw. ')[1].split(')')[0];
+		let arr = _str.split(' (');
+		let id = arr[0];
+		let _arr = arr[1].split('-');
+		return {id: id, date: `${_arr[2]}.${_arr[1]}.${_arr[0]}`};
+	}
+
+	const handleExport = (data, rehabitation_center, quater_from, quater_to) => {
 		let total_data = [];
+
+		let start_date_info = getPolishMonth(quater_from.start_date);
+		let end_date_info = getPolishMonth(quater_to.end_date);
+
+		total_data.push([`${rehabitationCenterList[rehabitation_center - 1].name} - 
+			Raport sprawozdawczy z rekrutacji uczestników, Kwartał ${start_date_info.id} 
+			(${start_date_info.date}) - ${end_date_info.id} (${end_date_info.date})`]);
+
 		total_data.push(['Instytucja rekrutująca',
 		'Liczba zakwalifikowanych uczestników']);
 		total_data.push(['PFRON', data[0]]);
@@ -145,7 +161,29 @@ const ReportsParticipant = props => {
 		];
 		
 		ws['!cols']	= wscols;
+
+		var merge = { s: {r:0, c:0}, e: {r:0, c: 1} };
+		if (!ws['!merges']) ws['!merges'] = [];
+		ws['!merges'].push(merge);
 		
+		ws["!rows"] = [ // just demo, should use for-loop
+			{ hpx: 120, },
+			
+		]
+		for (const key in ws) {
+			// first row
+			if (key == '!ref')
+					break;
+			if (key.replace(/[^0-9]/ig, '') === '1' || key.replace(/[^0-9]/ig, '') === '2') {
+				ws[key].s = {
+						font: {
+								sz: 12, // font size
+								bold: true // bold
+						},
+				}
+			}
+		}
+
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
     /* generate XLSX file and send to client */

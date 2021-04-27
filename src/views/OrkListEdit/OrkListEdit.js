@@ -239,7 +239,7 @@ const OrkListEdit = props => {
 														Kwartał {index + 1}
 													</div>
 													<Grid container spacing={2}>
-														<Grid item xs={6}>
+														<Grid item xs={12} md={12} lg={6}>
 															<div className={classes.title}>
 																<label htmlFor={`start_date${index}`}>
 																	Data rozpoczęcia
@@ -263,7 +263,7 @@ const OrkListEdit = props => {
 																/>
 															</Grid>
 														</Grid>
-														<Grid item xs={6}>
+														<Grid item xs={12} md={12} lg={6}>
 															<div className={classes.title}>
 																<label htmlFor={`end_date${index}`}>
 																	Data zakończenia

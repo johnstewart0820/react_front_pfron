@@ -66,7 +66,28 @@ const useStyles = makeStyles(theme => ({
 			padding: theme.spacing(1.5)
 		},
 		cursor: 'pointer'
-	}
+	},
+	name_select_box: {
+		'& .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {
+			padding: '2px 10px',
+			borderRadius: '0px',
+			border: '0px'
+		},
+		'& fieldset': {
+			border: `1px solid ${theme.palette.gray}`,
+		},
+		'& .MuiChip-root': {
+			borderRadius: '2px',
+			backgroundColor: theme.palette.green,
+			color: theme.palette.black_white,
+			padding: '0px 10px',
+			height: '26px'
+		}, 
+		'& .MuiChip-deleteIcon': {
+			color: theme.palette.black_white,
+			height: '70%'
+		}
+	},
 }));
 
 export default useStyles;

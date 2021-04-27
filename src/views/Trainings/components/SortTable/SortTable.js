@@ -7,7 +7,8 @@ import {
 	TableCell,
 	TableFooter,
 	TableSortLabel,
-	IconButton
+	IconButton,
+	TextField
 } from '@material-ui/core';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
@@ -21,6 +22,7 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { pl } from 'date-fns/locale'
+import { Autocomplete } from '@material-ui/lab';
 
 const SortTable = (props) => {
 	const classes = useStyles();
@@ -130,7 +132,17 @@ const SortTable = (props) => {
 					<TableRow>
 						<TableCell><input className={classes.input_box} type="id" id="id" value={searchId} name="searchId" onChange={(e) => setSearchId(e.target.value)} /></TableCell>
 						<TableCell><input className={classes.input_box} type="name" id="name" value={searchName} name="searchId" onChange={(e) => setSearchName(e.target.value)} /></TableCell>
-						<TableCell><SingleSelect value={searchParticipant} handleChange={setSearchParticipant} list={participantList} /> </TableCell>
+						<TableCell>
+							<Autocomplete
+								className={classes.name_select_box}
+								id="number"
+								onChange={(event, value) => setSearchParticipant(value)}
+								value={searchParticipant}
+								options={participantList}
+								getOptionLabel={(option) => participantList && option && option.name}
+								renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+							/>
+						</TableCell>
 						<TableCell><SingleSelect value={searchTrainingStatus} handleChange={setSearchTrainingStatus} list={trainingStatusList} /></TableCell>
 						<TableCell className={classes.cell_removable}>
 							<KeyboardDatePicker

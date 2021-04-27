@@ -136,21 +136,37 @@ const ReportsFinancial = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						handleExport(response.data.candidate);
+						handleExport(response.data.candidate, participant === null ? rehabitationCenter : participant.rehabitation_center, quater_from, quater_to);
 					}
 					setProgressStatus(false);
 				})
 		}
 	}
+	
+	const getPolishMonth = (str_date) => {
+		let _str = str_date.split('Kw. ')[1].split(')')[0];
+		let arr = _str.split(' (');
+		let id = arr[0];
+		let _arr = arr[1].split('-');
+		return {id: id, date: `${_arr[2]}.${_arr[1]}.${_arr[0]}`};
+	}
 
-	const handleExport = (data) => {
+	const handleExport = (data, rehabitation_center, quater_from, quater_to) => {
 		let romic_number = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
 		let total_sum = ['', ''];
 		let header = [
 			'Lp.',
 			'Działanie'
 		];
+		let start_date_info = getPolishMonth(quater_from.start_date);
+		let end_date_info = getPolishMonth(quater_to.end_date);
+
 		let total_data = { cols: [], data: [] };
+
+		total_data.data.push([`${rehabitationCenterList[rehabitation_center - 1].name} - 
+			Raport finansowy, Kwartał ${start_date_info.id} 
+			(${start_date_info.date}) - ${end_date_info.id} (${end_date_info.date})`]);
+
 		let column = ['', ''];
 		for (let i = 0; i < data.length; i++) {
 			column.push('');
@@ -190,7 +206,7 @@ const ReportsFinancial = props => {
 
 		total_data.data.push(sub_header);
 		let index = 0;
-		let module_index = 3;
+		let module_index = 4;
 		let arr = [];
 		let total_price = 0;
 		if (data.length > 0) {
@@ -226,7 +242,7 @@ const ReportsFinancial = props => {
 							total_sum[2 + data.length] = 0;
 						total_sum[2 + data.length] += value;
 
-						item.push(value === 0 ? '' : money.toFixed(2) + 'xxx');
+						item.push(value === 0 ? '' : money.toFixed(2));
 						if (value !== 0)
 							count++;
 						sum += value;
@@ -265,7 +281,7 @@ const ReportsFinancial = props => {
 		let item_last = [];
 		for (let i = 0; i < total_sum.length; i++) {
 			let value = total_sum[i];
-			item_last.push(total_sum[i] === undefined ? '' : parseFloat(value).toFixed(2) + '' );
+			item_last.push(total_sum[i] === undefined || !total_sum[i] ? '' : parseFloat(value).toFixed(2) + '' );
 		}
 		total_data.data.push(item_last);
 		const ws = XLSX.utils.aoa_to_sheet(total_data.data);
@@ -291,12 +307,25 @@ const ReportsFinancial = props => {
 			{ hpx: 120, },
 			
 		]
+
+		var merge = { s: {r:0, c:0}, e: {r:0, c: data.length + 8} };
+		if(!ws['!merges']) ws['!merges'] = [];
+		ws['!merges'].push(merge);
+
 		arr.push(module_index);
 		for (const key in ws) {
 			// first row
 			if (key == '!ref')
 					break;
-			if(key.replace(/[^0-9]/ig, '') === '1' || key.replace(/[^0-9]/ig, '') === '2') {
+			if (key.replace(/[^0-9]/ig, '') === '1') {
+					ws[key].s = {
+							font: {
+									sz: 12, // font size
+									bold: true // bold
+							},
+					}
+				}
+			if (key.replace(/[^0-9]/ig, '') === '2' || key.replace(/[^0-9]/ig, '') === '3') {
 				ws[key].s = {
 					alignment: {
 						wrapText: '1', // any truthy value here
@@ -363,14 +392,6 @@ const ReportsFinancial = props => {
 						},
 					}
 				}
-			}
-			if (ws[key].v.toString().endsWith('xxx')) {
-				ws[key].s = {
-					fill: {
-						fgColor: { rgb: '0000FF' } // Add background color
-					},
-				}
-				ws[key].v = ws[key].v.split('xxx')[0]
 			}
 		}
     const wb = XLSX.utils.book_new();

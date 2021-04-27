@@ -23,6 +23,12 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'initial',
 		fontFamily: 'roboto'
 	},
+	declaration: {
+		fontFamily: 'roboto',
+		fontSize: '1.4em',
+		color: theme.palette.color,
+		fontWeight: '500'
+	},
 	site_title: {
 		marginBottom: theme.spacing(2),
 		color: theme.palette.color,

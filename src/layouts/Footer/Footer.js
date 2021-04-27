@@ -27,7 +27,14 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		justifyContent: 'center',
 		width: '100%'
-	}
+	},
+	declaration: {
+		fontFamily: 'roboto',
+
+		color: theme.palette.color,
+		fontWeight: '500',
+		marginBottom: '20px'
+	},
 }));
 
 const Footer = props => {
@@ -38,7 +45,6 @@ const Footer = props => {
 	const handleWcagPage = () => {
 		var newWindow = window.open();
 		newWindow.document.write(constants.DECLARATION_DATA);
-		newWindow.document.title = "Strona zostanie otwarta w nowym oknie przeglądarki";
 	}
 
   return (
@@ -63,9 +69,7 @@ const Footer = props => {
           <img className={classes.logo} src="/images/logos/footer_UE.png" alt="Logo Unia Europejska Europejski Fundusz Społeczny" />
         </Grid>
 				<div className={classes.wcag_container}>
-					<Button className={classes.wcag_footer} onClick={handleWcagPage}>
-						Deklaracja dostępności
-					</Button>
+					<a href="https://pfron.nfinity.pl/deklaracja.html" className={classes.declaration} target="_blank" aria-label="Strona zostanie otwarta w nowym oknie przeglądarki">Deklaracja dostępności</a>
 				</div>
       </Grid>
     </div>

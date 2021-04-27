@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Grid,
+  Grid, Typography
 } from '@material-ui/core';
 import { SingleSelect} from 'components';
 import {
@@ -47,8 +47,10 @@ const FourthStepView = (props) => {
 				:
 				<></>
 			}
-      <Grid item md={3} xs={12} className={classes.form_title}>
-        Przypisanie do ORK
+      <Grid item md={3} xs={12}>
+				<Typography variant="h2" className={classes.form_title}>
+        	Przypisanie do ORK
+				</Typography>
       </Grid>
       <Grid item md={9} xs={12}>
         <Grid container spacing={3}>

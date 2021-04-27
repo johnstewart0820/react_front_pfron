@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: '0.7em'
 	},
 	form_title: {
-		fontWeight: '500'
+		fontWeight: '500',
+		fontSize: '1em'
 	},
 	textArea: {
 		backgroundColor: theme.palette.black_white,

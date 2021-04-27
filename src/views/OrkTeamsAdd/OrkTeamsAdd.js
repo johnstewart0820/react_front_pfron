@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, FormControl, RadioGroup, FormControlLabel, Radio
+	Button, Grid, Card, TextField, CircularProgress, FormControl, RadioGroup, FormControlLabel, Radio, Typography
 } from '@material-ui/core';
 
 import { Autocomplete } from '@material-ui/lab';
@@ -142,9 +142,11 @@ const OrkTeamsAdd = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane podstawowe
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Dane podstawowe
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Tytuł, imię i nazwisko osoby w zespole</label></div>
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} type="name" value={name} id="name" name="name" onChange={(e) => handleChangeName(e.target.value)} />
@@ -170,38 +172,38 @@ const OrkTeamsAdd = props => {
 									/>
 									{
 										storage.getStorage('role').includes('1') ?
-										<>
-										<div className={classes.input_box_label}>Zaakceptowany</div>
-										<FormControl component="fieldset">
-											<RadioGroup aria-label="is_accepted" name="is_accepted" value={is_accepted} onChange={(e) => setIsAccepted(e.target.value)} row>
-												<FormControlLabel value="true" control={<Radio />} label="TAK" />
-												<FormControlLabel value="false" control={<Radio />} label="NIE" />
-											</RadioGroup>
-										</FormControl>
-										{is_accepted === 'true' || is_accepted === true ?
 											<>
-												<div className={classes.input_box_label}>Data akceptacji</div>
-												<KeyboardDatePicker
-													disableToolbar
-													variant="inline"
-													format="dd.MM.yyyy"
-                    			placeholder="Format wprowadzania daty DD.MM.RRRR"
-													margin="normal"
-													id="date-picker-inline"
-													value={date_of_acceptance}
-													onChange={(e) => handleChangeDate(e)}
-													aria-label="Data akceptacji"
-													KeyboardButtonProps={{
-														'aria-label': 'Zmień datę',
-													}}
-												/>
+												<div className={classes.input_box_label}>Zaakceptowany</div>
+												<FormControl component="fieldset">
+													<RadioGroup aria-label="is_accepted" name="is_accepted" value={is_accepted} onChange={(e) => setIsAccepted(e.target.value)} row>
+														<FormControlLabel value="true" control={<Radio />} label="TAK" />
+														<FormControlLabel value="false" control={<Radio />} label="NIE" />
+													</RadioGroup>
+												</FormControl>
+												{is_accepted === 'true' || is_accepted === true ?
+													<>
+														<div className={classes.input_box_label}>Data akceptacji</div>
+														<KeyboardDatePicker
+															disableToolbar
+															variant="inline"
+															format="dd.MM.yyyy"
+															placeholder="Format wprowadzania daty DD.MM.RRRR"
+															margin="normal"
+															id="date-picker-inline"
+															value={date_of_acceptance}
+															onChange={(e) => handleChangeDate(e)}
+															aria-label="Data akceptacji"
+															KeyboardButtonProps={{
+																'aria-label': 'Zmień datę',
+															}}
+														/>
+													</>
+													:
+													<></>
+												}
 											</>
 											:
 											<></>
-										}
-										</>
-										:
-										<></>
 									}
 								</Grid>
 							</Grid>

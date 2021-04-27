@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox
+	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox, Typography
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -16,7 +16,7 @@ const Profile = props => {
 	const { history } = props;
 	const id = props.match.params.id;
 	const classes = useStyles();
-	
+
 	const breadcrumbs = [{ active: true, href: '/users', label: 'Użytkownicy systemu' }, { active: false, label: 'Edytuj profil' }];
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -26,10 +26,10 @@ const Profile = props => {
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const [roleList, setRoleList] = useState([]);
 	const [activateStatus, setActivateStatus] = useState(false);
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 
 	useEffect(() => {
 		users.getInfo()
@@ -66,7 +66,7 @@ const Profile = props => {
 	}
 
 	const handleSave = () => {
-     
+
 		if (name.length === 0 || email.length === 0 || role.length === 0) {
 			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
@@ -94,8 +94,8 @@ const Profile = props => {
 								history.push('/login');
 							} else {
 								setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+								setMessage(response.message);
+								setIsSuccess(response.code === 200);
 								setProgressStatus(false);
 							}
 						})
@@ -109,8 +109,8 @@ const Profile = props => {
 						history.push('/login');
 					} else {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						setProgressStatus(false);
 					}
 				})
@@ -118,7 +118,7 @@ const Profile = props => {
 	}
 
 	const handleDelete = () => {
-    
+
 		setProgressStatus(true);
 		users
 			.delete(id)
@@ -143,10 +143,10 @@ const Profile = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
         </Button>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -156,15 +156,17 @@ const Profile = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Użytkownik
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Użytkownik
+									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>
 									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
 									<div className={classes.input_box_label}><label htmlFor="email">E-mail</label></div>
 									<input className={classes.input_box} type="name" value={email} name="name" id="email" onChange={(e) => setEmail(e.target.value)} />
-									<div className={classes.input_box_label}><label  htmlFor="role">Rola</label></div>
+									<div className={classes.input_box_label}><label htmlFor="role">Rola</label></div>
 									<Autocomplete
 										multiple
 										id="role"
@@ -187,8 +189,10 @@ const Profile = props => {
 									/>
 								</Grid>
 								<div className={classes.divide} />
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Zmiana hasła
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Zmiana hasła
+									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="password">Obecne hasło</label></div>

@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
 		fontFamily: 'roboto',
 	},
 	form_title: {
-		fontWeight: '500'
+		fontWeight: '500',
+		fontSize: '1em'
 	},
 	error: {
 		border: '0.5px solid red'

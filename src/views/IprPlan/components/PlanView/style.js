@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
 		boxShadow: '0.055rem 0.055rem 1.11rem rgba(20, 20, 20, 0.27)'
 	},
 	form_title: {
-		fontWeight: '500'
+		fontWeight: '500',
+		fontSize: '1em'
 	},
 	small_title: {
 		fontSize: '0.7em',

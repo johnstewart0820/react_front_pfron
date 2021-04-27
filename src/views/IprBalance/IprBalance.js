@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress
+	Button, Grid, Card, TextField, CircularProgress, Typography
 } from '@material-ui/core';
 
 import { Autocomplete } from '@material-ui/lab';
@@ -32,7 +32,7 @@ const IprBalance = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const { history } = props;
 	const classes = useStyles();
-	
+
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Bilans realizacji IPR' }];
 	const [show_status, setShowStatus] = useState(false);
 	const [participant_number, setParticipantNumber] = useState('');
@@ -54,10 +54,10 @@ const IprBalance = props => {
 	const [sumPlanBasic, setSumPlanBasic] = useState(0);
 	const [sumScheduleBasic, setSumScheduleBasic] = useState(0);
 	const [sumBalance, setSumBalance] = useState(0);
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
 	useEffect(() => {
@@ -73,17 +73,17 @@ const IprBalance = props => {
 
 	useEffect(() => {
 		let _a = 0, _b = 0, _c = 0, _d = 0, _e = 0;
-		for (let i = 0; i < dataList.length; i ++) {
+		for (let i = 0; i < dataList.length; i++) {
 			let service = dataList[i].service_lists;
-			for (let j = 0; j < service.length; j ++) {
+			for (let j = 0; j < service.length; j++) {
 				let schedule = service[j].schedule;
 				let plan = service[j].plan;
 				let balance = service[j].balance;
-				_a += plan ? plan.trial ? parseInt(plan.trial) : 0 :0;
-				_b += plan ? plan.basic ? parseInt(plan.basic) : 0 :0;
-				_c += schedule ? schedule.trial ? parseInt(schedule.trial) : 0 :0;
-				_d += schedule ? schedule.basic ? parseInt(schedule.basic) : 0 :0;
-				_e += balance ? balance.amount ? parseInt(balance.amount) : 0 :0;
+				_a += plan ? plan.trial ? parseInt(plan.trial) : 0 : 0;
+				_b += plan ? plan.basic ? parseInt(plan.basic) : 0 : 0;
+				_c += schedule ? schedule.trial ? parseInt(schedule.trial) : 0 : 0;
+				_d += schedule ? schedule.basic ? parseInt(schedule.basic) : 0 : 0;
+				_e += balance ? balance.amount ? parseInt(balance.amount) : 0 : 0;
 			}
 		}
 		setSumPlanTrial(_a);
@@ -150,7 +150,7 @@ const IprBalance = props => {
 	}
 
 	const handleSave = () => {
-     
+
 		setProgressStatus(true);
 		ipr.updateBalance(dataList, id)
 			.then(response => {
@@ -169,7 +169,7 @@ const IprBalance = props => {
 	}
 
 	const handleDelete = () => {
-    
+
 		setProgressStatus(true);
 		ipr
 			.delete(id)
@@ -218,7 +218,7 @@ const IprBalance = props => {
 	const handleChangeBalanceRemark = (value, index_module, index_service) => {
 		let _dataList = JSON.parse(JSON.stringify(dataList));
 		_dataList[index_module].service_lists[index_service].balance.remarks = value;
-		setDataList(_dataList);	
+		setDataList(_dataList);
 	}
 
 	return (
@@ -226,10 +226,10 @@ const IprBalance = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy IPR
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy IPR
 				</Button>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -239,9 +239,11 @@ const IprBalance = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item xs={12} className={classes.form_title} >
+								<Grid item xs={12}>
 									<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-										<div>Dane IPR</div>
+										<Typography variant="h2" className={classes.form_title}>
+											Dane IPR
+										</Typography>
 										<div onClick={toggleView}>
 											{show_status ? <ExpandLessOutlinedIcon /> : <ExpandMoreOutlinedIcon />}
 										</div>
@@ -278,7 +280,7 @@ const IprBalance = props => {
 														id="date"
 														variant="inline"
 														format="dd.MM.yyyy"
-                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
+														placeholder="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={schedule_date}
@@ -316,12 +318,14 @@ const IprBalance = props => {
 						<div className={classes.second_form}>
 							<Card className={classes.form}>
 								<Grid container spacing={1}>
-									<Grid item xs={3}/>
+									<Grid item xs={3} />
 									<Grid item xs={6}>
 										<Grid container spacing={2}>
 											<Grid item xs={4} className={classes.service}>
-												<div style={{display: 'flex', justifyContent: 'center'}}>
-													Okres próbny
+												<div style={{ display: 'flex', justifyContent: 'center' }}>
+													<Typography variant="h2" className={classes.form_title}>
+														Okres próbny
+													</Typography>
 												</div>
 												<Grid container spacing={3} className={classes.form_service_title}>
 													<Grid item xs={6}>
@@ -333,7 +337,7 @@ const IprBalance = props => {
 												</Grid>
 											</Grid>
 											<Grid item xs={4} className={classes.service}>
-												<div style={{display: 'flex', justifyContent: 'center'}}>
+												<div style={{ display: 'flex', justifyContent: 'center' }}>
 													Okres podstawowy
 												</div>
 												<Grid container spacing={3} className={classes.form_service_title}>
@@ -363,7 +367,7 @@ const IprBalance = props => {
 												<Grid item xs={3} className={classes.module}>
 													{module.name}
 												</Grid>
-												<Grid item xs={9}/>
+												<Grid item xs={9} />
 												{
 													module.service_lists.map((item, index_service) => (
 														<>
@@ -398,13 +402,13 @@ const IprBalance = props => {
 																</Grid>
 															</Grid>
 															<Grid item xs={3}>
-																<input className={classes.input_box} type="name" value={item.balance.amount} name="name" id="value_balance" onChange={(e) => handleChangeBalanceAmount(e.target.value, index_module, index_service)}/>
+																<input className={classes.input_box} type="name" value={item.balance.amount} name="name" id="value_balance" onChange={(e) => handleChangeBalanceAmount(e.target.value, index_module, index_service)} />
 															</Grid>
 															<Grid item xs={4} className={classes.service}>Uwagi dotyczące realizacji wsparcia (zmiany, odstępstwa od IPR, powody opóźnień realizacji...)</Grid>
 															<Grid item xs={8}>
-																<input className={classes.input_box} aria-label="remark" type="name" value={item.balance.remarks} name="name" onChange={(e) => handleChangeBalanceRemark(e.target.value, index_module, index_service)}/>
+																<input className={classes.input_box} aria-label="remark" type="name" value={item.balance.remarks} name="name" onChange={(e) => handleChangeBalanceRemark(e.target.value, index_module, index_service)} />
 															</Grid>
-															<div className={classes.divide}/>
+															<div className={classes.divide} />
 														</>
 													))
 												}

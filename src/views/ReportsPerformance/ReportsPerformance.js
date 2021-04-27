@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, CircularProgress, TextField
+	Button, Grid, Card, CircularProgress, TextField, Typography
 } from '@material-ui/core';
 
 import XLSX from "xlsx-style-tw";
@@ -152,8 +152,8 @@ const ReportsPerformance = props => {
 			'Działanie',
 			'Plan IPR1+IPR2',
 		];
-		
-		for (let i = start_order; i <= end_order; i ++) {
+
+		for (let i = start_order; i <= end_order; i++) {
 			header.push(`Realizacja Kwartał ${i}`);
 		}
 
@@ -163,24 +163,24 @@ const ReportsPerformance = props => {
 		total_data.push(header);
 		let count = 1;
 		data.map((candidate, index) => {
-			
+
 			let service_lists = candidate.service_lists;
-			
+
 			service_lists.map((service, index) => {
-				
+
 				let item = [];
 				let plan = service.plan;
 				let schedule = service.schedule;
 				let plan_total = plan.trial + plan.basic;
 				let schedule_total = 0;
-	
-				item.push(count ++);
+
+				item.push(count++);
 
 				item.push(index != 0 ? '' : candidate.participant_number);
 				item.push(service.name);
 				item.push(plan_total);
-	
-				for(let i = 0; i < schedule.basic.length; i ++) {
+
+				for (let i = 0; i < schedule.basic.length; i++) {
 					schedule_total += (schedule.basic[i] + schedule.trial[i]);
 					item.push(schedule.basic[i] + schedule.trial[i])
 				}
@@ -188,36 +188,44 @@ const ReportsPerformance = props => {
 				item.push(schedule_total);
 				item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
 				item.push('');
-	
+
 				total_data.push(item);
 			})
 		})
 		const ws = XLSX.utils.aoa_to_sheet(total_data);
 		var wscols = [
-			{wch:10, alignment: {
-				wrapText: '1', // any truthy value here
-			}},
-			{wch:10, alignment: {
-				wrapText: '1', // any truthy value here
-			}},
-			{wch:40, alignment: {
-				wrapText: '1', // any truthy value here
-			}},
+			{
+				wch: 10, alignment: {
+					wrapText: '1', // any truthy value here
+				}
+			},
+			{
+				wch: 10, alignment: {
+					wrapText: '1', // any truthy value here
+				}
+			},
+			{
+				wch: 40, alignment: {
+					wrapText: '1', // any truthy value here
+				}
+			},
 		];
 		for (let i = start_order; i <= end_order + 4; i++) {
-			wscols.push({wch:10, alignment: {
-				wrapText: '1', // any truthy value here
-			}});
+			wscols.push({
+				wch: 10, alignment: {
+					wrapText: '1', // any truthy value here
+				}
+			});
 		}
-		ws['!cols']	= wscols;
+		ws['!cols'] = wscols;
 		ws["!rows"] = [ // just demo, should use for-loop
 			{ hpx: 80, },
 		]
 		for (const key in ws) {
 			// first row
 			if (key == '!ref')
-					break;
-			if(key.replace(/[^0-9]/ig, '') === '1') {
+				break;
+			if (key.replace(/[^0-9]/ig, '') === '1') {
 				ws[key].s = {
 					alignment: {
 						wrapText: '1', // any truthy value here
@@ -277,14 +285,14 @@ const ReportsPerformance = props => {
 							color: 'FF000000'
 						},
 					},
-					
+
 				}
 			}
 		}
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
-    /* generate XLSX file and send to client */
-    XLSX.writeFile(wb, `${name}.xlsx`);
+		const wb = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+		/* generate XLSX file and send to client */
+		XLSX.writeFile(wb, `${name}.xlsx`);
 	}
 
 	return (
@@ -293,7 +301,7 @@ const ReportsPerformance = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -303,9 +311,11 @@ const ReportsPerformance = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Zdefiniuj dane raportu
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Zdefiniuj dane raportu
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label} ><label htmlFor="name">Nazwa raportu</label></div>
 									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
@@ -313,9 +323,11 @@ const ReportsPerformance = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Okres
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Okres
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item md={5} xs={12}>

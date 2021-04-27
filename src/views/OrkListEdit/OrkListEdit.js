@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, CircularProgress, IconButton
+	Button, Grid, Card, CircularProgress, IconButton, Typography
 } from '@material-ui/core';
 import {
 	KeyboardDatePicker, MuiPickersUtilsProvider,
@@ -217,9 +217,11 @@ const OrkListEdit = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane podstawowe
-                </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Dane podstawowe
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label} htmlFor="name">Nazwa ORK</div>
 									<div className={classes.name}>{rehabitationCenter.name}</div>
@@ -227,9 +229,11 @@ const OrkListEdit = props => {
 									<input className={classes.input_box} type="text" value={rehabitationCenter.contact_number} name="contact_number" id="contact_number" onChange={handleChange} />
 								</Grid>
 								<div className={classes.divide} />
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Kwartały
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Kwartały
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										{
@@ -251,7 +255,7 @@ const OrkListEdit = props => {
 																	disableToolbar
 																	variant="inline"
 																	format="dd.MM.yyyy"
-                    							placeholder="Format wprowadzania daty DD.MM.RRRR"
+																	placeholder="Format wprowadzania daty DD.MM.RRRR"
 																	margin="normal"
 																	id={`start_date${index}`}
 																	value={item.start_date}
@@ -275,7 +279,7 @@ const OrkListEdit = props => {
 																	disableToolbar
 																	variant="inline"
 																	format="dd.MM.yyyy"
-                    							placeholder="Format wprowadzania daty DD.MM.RRRR"
+																	placeholder="Format wprowadzania daty DD.MM.RRRR"
 																	margin="normal"
 																	id={`end_date${index}`}
 																	value={item.end_date}
@@ -304,9 +308,11 @@ const OrkListEdit = props => {
 									</Grid>
 								</Grid>
 								<div className={classes.divide} />
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane o liderze
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Dane o liderze
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={12}>
@@ -330,9 +336,11 @@ const OrkListEdit = props => {
 									</Grid>
 								</Grid>
 								<div className={classes.divide} />
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Partnerstwo
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Partnerstwo
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={12}>
@@ -363,9 +371,11 @@ const OrkListEdit = props => {
 									</Grid>
 								</Grid>
 								<div className={classes.divide} />
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Osoba do kontaktu (odpowiedzialna za zbieranie danych)
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Osoba do kontaktu (odpowiedzialna za zbieranie danych)
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item xs={7}>

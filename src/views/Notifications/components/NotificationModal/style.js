@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		justifyContent: 'flex-end'
 	},
+	form_title: {
+		fontSize: '1em'
+	},
 	input_box: {
 		'& svg': {
 			fill: theme.palette.text.secondary

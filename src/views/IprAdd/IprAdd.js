@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress
+	Button, Grid, Card, TextField, CircularProgress, Typography
 } from '@material-ui/core';
 
 import { Autocomplete } from '@material-ui/lab';
@@ -64,13 +64,13 @@ const IprAdd = props => {
 				}
 			})
 	}, [participant])
-	
+
 	useEffect(() => {
 		if (searchKey) {
 			let participant_obj = {};
 			participantList.map((item, index) => {
 				if (item.participant_number === searchKey)
-				participant_obj = item;
+					participant_obj = item;
 			})
 			setParticipantNumber(participant_obj);
 			setParticipantName(participant_obj);
@@ -122,7 +122,7 @@ const IprAdd = props => {
 	}
 
 	const handleSave = () => {
-     
+
 		if (checkError()) {
 			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
@@ -137,8 +137,8 @@ const IprAdd = props => {
 						history.push('/login');
 					} else {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push(parseInt(ipr_type) !== 1 ? `/ipr_list/plan/edit/${response.data.id}` : `/ipr_list/balance/edit/${response.data.id}`) }, 1000);
 						}
@@ -153,10 +153,10 @@ const IprAdd = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy IPR
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy IPR
         			</Button>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -166,8 +166,10 @@ const IprAdd = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane IPR
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Dane IPR
+									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={3}>
@@ -199,7 +201,7 @@ const IprAdd = props => {
 										</Grid>
 										<Grid item xs={5}>
 											<div className={classes.top_label} htmlFor="name">Typ</div>
-											<SingleSelect value={ipr_type} handleChange={handleChangeIprType} list={iprTypeList}/>
+											<SingleSelect value={ipr_type} handleChange={handleChangeIprType} list={iprTypeList} />
 										</Grid>
 										<Grid item xs={2}>
 											<div className={classes.top_label} htmlFor="name">Numer</div>
@@ -211,7 +213,7 @@ const IprAdd = props => {
 												disableToolbar
 												variant="inline"
 												format="dd.MM.yyyy"
-                    		placeholder="Format wprowadzania daty DD.MM.RRRR"
+												placeholder="Format wprowadzania daty DD.MM.RRRR"
 												margin="normal"
 												id="date"
 												value={schedule_date}

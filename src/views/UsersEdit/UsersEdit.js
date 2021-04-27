@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox
+	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox, Typography
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import users from '../../apis/users';
@@ -58,7 +57,7 @@ const UsersEdit = props => {
 							role_arr.push(roleList[parseInt(id_role_arr[i]) - 1]);
 						}
 					}
-					
+
 					setRole(role_arr);
 				}
 			})
@@ -145,8 +144,10 @@ const UsersEdit = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Użytkownik
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Użytkownik
+									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>

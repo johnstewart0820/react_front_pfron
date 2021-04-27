@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(0),
 	},
 	form_title: {
-		fontWeight: '500'
+		fontWeight: '500',
+		fontSize: '1em'
 	},
 	wrapper: {
 		position: 'absolute',

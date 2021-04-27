@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-	Grid, FormControl, FormControlLabel, Radio, RadioGroup, FormLabel
+	Grid, FormControl, FormControlLabel, Radio, RadioGroup, FormLabel, Typography
 } from '@material-ui/core';
 import { SingleSelect, WeekSelect } from 'components';
 import { withRouter } from 'react-router-dom';
@@ -115,7 +115,7 @@ const ScheduleView = (props) => {
 	const handleChangeScheduleFrom = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		if (!_schedule_data[index_module].service_list[index_service].schedule) {
-			_schedule_data[index_module].service_list[index_service].schedule = {start_time: '00:00', end_time: '00:00'}
+			_schedule_data[index_module].service_list[index_service].schedule = { start_time: '00:00', end_time: '00:00' }
 		}
 		_schedule_data[index_module].service_list[index_service].schedule.start_time = value;
 		let end_time = _schedule_data[index_module].service_list[index_service].schedule.end_time;
@@ -123,7 +123,7 @@ const ScheduleView = (props) => {
 		if (!end_time) {
 			end_time = '00:00';
 		}
-		total_time = parseInt(value.split(':')[0]) * 60 + parseInt(value.split(':')[1]) - parseInt(end_time.split(':')[0])*60 - parseInt(end_time.split(':')[1]);
+		total_time = parseInt(value.split(':')[0]) * 60 + parseInt(value.split(':')[1]) - parseInt(end_time.split(':')[0]) * 60 - parseInt(end_time.split(':')[1]);
 		_schedule_data[index_module].service_list[index_service].schedule.total_time = total_time * -1 / 60;
 		setScheduleData(_schedule_data);
 		checkOverlap(_schedule_data);
@@ -132,7 +132,7 @@ const ScheduleView = (props) => {
 	const handleChangeScheduleTo = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		if (!_schedule_data[index_module].service_list[index_service].schedule) {
-			_schedule_data[index_module].service_list[index_service].schedule = {start_time: '00:00', end_time: '00:00'}
+			_schedule_data[index_module].service_list[index_service].schedule = { start_time: '00:00', end_time: '00:00' }
 		}
 		_schedule_data[index_module].service_list[index_service].schedule.end_time = value;
 		let start_time = _schedule_data[index_module].service_list[index_service].schedule.start_time;
@@ -140,7 +140,7 @@ const ScheduleView = (props) => {
 			start_time = '00:00';
 		}
 		let total_time = 0;
-		total_time = parseInt(start_time.split(':')[0]) * 60 + parseInt(start_time.split(':')[1]) - parseInt(value.split(':')[0])*60 - parseInt(value.split(':')[1]);
+		total_time = parseInt(start_time.split(':')[0]) * 60 + parseInt(start_time.split(':')[1]) - parseInt(value.split(':')[0]) * 60 - parseInt(value.split(':')[1]);
 		_schedule_data[index_module].service_list[index_service].schedule.total_time = total_time * -1 / 60;
 		setScheduleData(_schedule_data);
 		checkOverlap(_schedule_data);
@@ -149,11 +149,11 @@ const ScheduleView = (props) => {
 	const checkOverlap = (_schedule_data) => {
 		// let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		let _arr = [];
-		for (let i = 0; i < _schedule_data.length; i ++) {
-			for (let j = 0; j < _schedule_data[i].service_list.length; j ++) {
+		for (let i = 0; i < _schedule_data.length; i++) {
+			for (let j = 0; j < _schedule_data[i].service_list.length; j++) {
 				if (!_schedule_data[i].service_list[j].schedule)
 					continue;
-				_arr.push({index_module: i, index_service: j, start_time: _schedule_data[i].service_list[j].schedule.start_time, end_time: _schedule_data[i].service_list[j].schedule.end_time, check: true});
+				_arr.push({ index_module: i, index_service: j, start_time: _schedule_data[i].service_list[j].schedule.start_time, end_time: _schedule_data[i].service_list[j].schedule.end_time, check: true });
 			}
 		}
 		_arr.sort((item1, item2) => {
@@ -180,7 +180,7 @@ const ScheduleView = (props) => {
 	const handleChangeScheduleBreak = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		if (!_schedule_data[index_module].service_list[index_service].schedule) {
-			_schedule_data[index_module].service_list[index_service].schedule = {start_time: '00:00', end_time: '00:00'}
+			_schedule_data[index_module].service_list[index_service].schedule = { start_time: '00:00', end_time: '00:00' }
 		}
 		_schedule_data[index_module].service_list[index_service].schedule.break_time = value;
 		setScheduleData(_schedule_data);
@@ -192,33 +192,33 @@ const ScheduleView = (props) => {
 	const handleChangeTotalAmount = (value, index_module, index_service) => {
 		let _schedule_data = JSON.parse(JSON.stringify(scheduleData));
 		if (!_schedule_data[index_module].service_list[index_service].schedule) {
-			_schedule_data[index_module].service_list[index_service].schedule = {start_time: '00:00', end_time: '00:00'}
+			_schedule_data[index_module].service_list[index_service].schedule = { start_time: '00:00', end_time: '00:00' }
 		}
 		_schedule_data[index_module].service_list[index_service].schedule.total_amount = value;
 		let total_unit_amount = 0;
 		for (let i = 0; i < _schedule_data[index_module].service_list.length; i++) {
-				total_unit_amount += parseInt(_schedule_data[index_module].service_list[i].schedule ? _schedule_data[index_module].service_list[i].schedule.total_amount : 0);
+			total_unit_amount += parseInt(_schedule_data[index_module].service_list[i].schedule ? _schedule_data[index_module].service_list[i].schedule.total_amount : 0);
 		}
 		_schedule_data[index_module].total_unit_amount = total_unit_amount;
 		if (_schedule_data[index_module].service_list[index_service].amount === null) {
 			_schedule_data[index_module].service_list[index_service].amount = 0;
 		}
 
-		if (_schedule_data[index_module].service_list[index_service].amount !== undefined 
+		if (_schedule_data[index_module].service_list[index_service].amount !== undefined
 			&& (_schedule_data[index_module].service_list[index_service].current_amount ? _schedule_data[index_module].service_list[index_service].current_amount : 0) + parseInt(value) > parseInt(_schedule_data[index_module].service_list[index_service].amount))
 			_schedule_data[index_module].service_list[index_service].error_amount = true;
 		else
 			_schedule_data[index_module].service_list[index_service].error_amount = false;
 		setScheduleData(_schedule_data);
 	}
-	
+
 	return (
 		<>
 			<Grid container spacing={3} className={classes.form}>
 				<Grid item md={3} xs={12}>
-					<div className={classes.form_title}>
+					<Typography variant="h2" className={classes.form_title}>
 						Tydzień
-					</div>
+					</Typography>
 				</Grid>
 				<Grid item md={5} xs={12}>
 					<div className={classes.top_label_content}>Wybierz tydzień</div>
@@ -253,60 +253,62 @@ const ScheduleView = (props) => {
 								{
 									scheduleData.map((module, index_module) => (
 										<>
-											<Grid item md={3} xs={12} className={classes.form_title} >
-												<div>
-													Procedury
+											<Grid item md={3} xs={12}>
+												<Typography variant="h2" className={classes.form_title}>
+													<div>
+														Procedury
 												</div>
-												<div className={classes.small_title}>
-													{module.name}
-												</div>
+													<div className={classes.small_title}>
+														{module.name}
+													</div>
+												</Typography>
 											</Grid>
 											<Grid item md={9} xs={12}>
 												<Grid container spacing={2}>
 													{
 														index_module == 0 ?
-														<>
-														<Grid item xs={4}/>
-														<Grid item xs={8}>
-															<Grid container spacing={2} style={{alignItems: 'end', wordBreak: 'break-all', fontSize: '0.7em'}}>
-																<Grid item xs>od</Grid>
-																<Grid item xs>do</Grid>
-																<Grid item xs>
-																	przerwy (w min)
+															<>
+																<Grid item xs={4} />
+																<Grid item xs={8}>
+																	<Grid container spacing={2} style={{ alignItems: 'end', wordBreak: 'break-all', fontSize: '0.7em' }}>
+																		<Grid item xs>od</Grid>
+																		<Grid item xs>do</Grid>
+																		<Grid item xs>
+																			przerwy (w min)
 																</Grid>
-																<Grid item xs>
-																	łącznie (w godz)
+																		<Grid item xs>
+																			łącznie (w godz)
 																</Grid>
-																<Grid item xs>
-																	łącznie (w jednostce)
+																		<Grid item xs>
+																			łącznie (w jednostce)
 																</Grid>
-															</Grid>
-														</Grid>
-														</>
-														:
-														<></>
+																	</Grid>
+																</Grid>
+															</>
+															:
+															<></>
 													}
-														
-														{
+
+													{
 														module.service_list.map((service, index_service) => (
 															<>
-																<Grid item xs={4} style={{fontSize: '0.7em'}}>
+																<Grid item xs={4} style={{ fontSize: '0.7em' }}>
 																	{service.name}
 																</Grid>
 																<Grid item xs={8}>
 																	<Grid container spacing={2}>
 																		<Grid item xs>
 																			<MaskedInput
-																				className={clsx({[classes.input_box] : true, [classes.input_error] : scheduleData[index_module].service_list[index_service].schedule && scheduleData[index_module].service_list[index_service].schedule.error === true})}
+																				className={clsx({ [classes.input_box]: true, [classes.input_error]: scheduleData[index_module].service_list[index_service].schedule && scheduleData[index_module].service_list[index_service].schedule.error === true })}
 																				mask={[/\d/, /\d/, ':', /\d/, /\d/]}
-																				value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.start_time : '00:00' }
+																				value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.start_time : '00:00'}
 																				defaultValue='00:00'
 																				onChange={(e) => handleChangeScheduleFrom(e.target.value, index_module, index_service)}
 																			/>
 																		</Grid>
 																		<Grid item xs>
 																			<MaskedInput
-																				className={clsx({[classes.input_box] : true, [classes.input_error] : scheduleData[index_module].service_list[index_service].schedule && scheduleData[index_module].service_list[index_service].schedule.error === true})}
+																				className={clsx({ [classes.input_box]: true, [classes.input_error]: scheduleData[index_module].service_list[index_service].schedule && scheduleData[index_module].service_list[index_service].schedule.error === true })}
 																				mask={[/\d/, /\d/, ':', /\d/, /\d/]}
 																				defaultValue='00:00'
 																				value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.end_time : '00:00'}
@@ -314,27 +316,27 @@ const ScheduleView = (props) => {
 																			/>
 																		</Grid>
 																		<Grid item xs>
-																			<input className={classes.input_box} type="name" 
-																			value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.break_time : ''} name="name" 
-																			onChange={
-																				(e) => handleChangeScheduleBreak(e.target.value, index_module, index_service)
-																			}
-																		/>
+																			<input className={classes.input_box} type="name"
+																				value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.break_time : ''} name="name"
+																				onChange={
+																					(e) => handleChangeScheduleBreak(e.target.value, index_module, index_service)
+																				}
+																			/>
 																		</Grid>
 																		<Grid item xs>
-																			<input className={classes.input_box} type="name" 
-																			value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.total_time : ''} name="name" 
-																			readOnly
-																		/>
+																			<input className={classes.input_box} type="name"
+																				value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.total_time : ''} name="name"
+																				readOnly
+																			/>
 																		</Grid>
 																		<Grid item xs>
-																			<input className={clsx({[classes.input_box] : true, [classes.input_error] : scheduleData[index_module].service_list[index_service] && scheduleData[index_module].service_list[index_service].error_amount === true})} 
-																			type="name" 
-																			value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.total_amount : ''} name="name" 
-																			onChange={
-																				(e) => handleChangeTotalAmount(e.target.value, index_module, index_service)
-																			}
-																		/>
+																			<input className={clsx({ [classes.input_box]: true, [classes.input_error]: scheduleData[index_module].service_list[index_service] && scheduleData[index_module].service_list[index_service].error_amount === true })}
+																				type="name"
+																				value={scheduleData[index_module].service_list[index_service].schedule ? scheduleData[index_module].service_list[index_service].schedule.total_amount : ''} name="name"
+																				onChange={
+																					(e) => handleChangeTotalAmount(e.target.value, index_module, index_service)
+																				}
+																			/>
 																		</Grid>
 																	</Grid>
 																</Grid>
@@ -343,15 +345,15 @@ const ScheduleView = (props) => {
 													}
 												</Grid>
 											</Grid>
-											<Grid container spacing={0} style={{display: 'flex', justifyContent:'flex-end', padding: '15px'}}>
+											<Grid container spacing={0} style={{ display: 'flex', justifyContent: 'flex-end', padding: '15px' }}>
 												<Grid item sm={3} xs={6} className={classes.sum_title}>
 													<div>
 														łącznie (w danym module)
 													</div>
 												</Grid>
 												<Grid item xs={2}>
-													<input className={classes.input_box} type="name" 
-														value={scheduleData[index_module].total_unit_amount ? scheduleData[index_module].total_unit_amount : 0} name="name" 
+													<input className={classes.input_box} type="name"
+														value={scheduleData[index_module].total_unit_amount ? scheduleData[index_module].total_unit_amount : 0} name="name"
 														readOnly
 													/>
 												</Grid>

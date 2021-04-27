@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox
+	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox, Typography
 } from '@material-ui/core';
 
 
@@ -99,9 +99,11 @@ const UsersAdd = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Użytkownik
-              	</Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Użytkownik
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>
 									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />

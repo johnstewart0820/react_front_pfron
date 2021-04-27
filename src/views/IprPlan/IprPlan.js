@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress
+	Button, Grid, Card, TextField, CircularProgress, Typography
 } from '@material-ui/core';
 
 import { Autocomplete } from '@material-ui/lab';
@@ -279,7 +279,7 @@ const IprPlan = props => {
 	}
 
 	const getOrkPerson = (ork_person) => {
-		let obj = orkPersonList.find((item) => {return item.id == ork_person || item.id == ork_person.id});
+		let obj = orkPersonList.find((item) => { return item.id == ork_person || item.id == ork_person.id });
 		return obj.name;
 	}
 
@@ -287,12 +287,12 @@ const IprPlan = props => {
 		<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
 			<PDFDownloadLink
 				document={
-					<PdfTemplate 
+					<PdfTemplate
 						participant_number={participant_number}
 						participant_name={participant_name}
 						ipr_type={iprTypeList.length > 0 && ipr_type > 0 ? iprTypeList[ipr_type - 1].name : ''}
 						number={number}
-						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1)+ '.' + schedule_date.getFullYear()}
+						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1) + '.' + schedule_date.getFullYear()}
 						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
 						moduleList={moduleList}
 					/>
@@ -302,7 +302,7 @@ const IprPlan = props => {
 					display: 'none'
 				}}
 			>
-				{({ blob, url, loading, error }) => 
+				{({ blob, url, loading, error }) =>
 					<div id="export-pdf">
 						aaa
 					</div>
@@ -315,7 +315,7 @@ const IprPlan = props => {
 						participant_name={participant_name}
 						ipr_type={iprTypeList.length > 0 && ipr_type > 0 ? iprTypeList[ipr_type - 1].name : ''}
 						number={number}
-						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1)+ '.' + schedule_date.getFullYear()}
+						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1) + '.' + schedule_date.getFullYear()}
 						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
 						moduleList={iprWeekData}
 						dayList={iprWeekDates}
@@ -326,7 +326,7 @@ const IprPlan = props => {
 					display: 'none'
 				}}
 			>
-				{({ blob, url, loading, error }) => 
+				{({ blob, url, loading, error }) =>
 					<div id="week-pdf">
 						aaa
 					</div>
@@ -348,9 +348,11 @@ const IprPlan = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item xs={12} className={classes.form_title} >
+								<Grid item xs={12}>
 									<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-										<div>Dane IPR</div>
+										<Typography variant="h2" className={classes.form_title}>
+											Dane IPR
+										</Typography>
 										<div onClick={toggleView}>
 											{show_status ? <ExpandLessOutlinedIcon /> : <ExpandMoreOutlinedIcon />}
 										</div>
@@ -386,7 +388,7 @@ const IprPlan = props => {
 														disabled={true}
 														variant="inline"
 														format="dd.MM.yyyy"
-                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
+														placeholder="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={schedule_date}
@@ -427,7 +429,7 @@ const IprPlan = props => {
 									<Tab style={{ width: '50%' }}>HARMONOGRAMY TYGODNIOWE</Tab>
 								</TabList>
 								<TabPanel>
-									<div style={{ width: ref.current ? ref.current.clientWidth : '100%'}} ref={plan_ref}>
+									<div style={{ width: ref.current ? ref.current.clientWidth : '100%' }} ref={plan_ref}>
 										<PlanView
 											moduleList={moduleList}
 											setModuleList={setModuleList}
@@ -435,7 +437,7 @@ const IprPlan = props => {
 									</div>
 								</TabPanel>
 								<TabPanel>
-									<div style={{ width: ref.current ? ref.current.clientWidth : '100%'}} ref={schedule_ref}>
+									<div style={{ width: ref.current ? ref.current.clientWidth : '100%' }} ref={schedule_ref}>
 										<ScheduleView
 											scheduleDate={schedule_date}
 											scheduleData={scheduleData}
@@ -470,7 +472,7 @@ const IprPlan = props => {
 									</Button>
 								</Grid>
 								<Grid item xs={4}>
-									<Button aria-label="Podgląd"  variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
+									<Button aria-label="Podgląd" variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
 										<FindInPageOutlinedIcon />
 									</Button>
 								</Grid>

@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
 		fontFamily: 'roboto',
 	},
 	form_title: {
-		fontWeight: '500'
+		fontWeight: '500',
+		fontSize: '1em'
 	},
 	module: {
 		fontSize: '0.8750em',
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 	// 	marginTop: theme.spacing(0)
 	// },
 	btnSave: {
-height: '100%',
+		height: '100%',
 		'& .MuiButton-label': {
 			textTransform: 'none',
 			fontSize: '0.8750em',
@@ -103,12 +104,12 @@ height: '100%',
 		fontSize: '0.8750em',
 	},
 	input_box: {
-    '& svg': {
+		'& svg': {
 			fill: theme.palette.text.secondary
 		},
-			color: theme.palette.text.primary,
-    backgroundColor: theme.palette.black_white,
-			border: `1px solid ${theme.palette.text.primary}`,
+		color: theme.palette.text.primary,
+		backgroundColor: theme.palette.black_white,
+		border: `1px solid ${theme.palette.text.primary}`,
 		padding: '10px 20px',
 		width: '100%',
 		fontSize: '0.8750em'

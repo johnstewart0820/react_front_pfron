@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, IconButton, TextareaAutosize
+	Button, Grid, Card, TextField, CircularProgress, IconButton, TextareaAutosize, Typography
 } from '@material-ui/core';
 
 import { Autocomplete } from '@material-ui/lab';
@@ -457,8 +457,10 @@ const TrainingsEdit = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane podstawowe
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Dane podstawowe
+									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label} htmlFor="name">Nazwa</div>
@@ -528,7 +530,11 @@ const TrainingsEdit = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>Harmonogram</Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Harmonogram
+									</Typography>
+								</Grid>
 								<Grid item md={6} xs={12}>
 									{
 										training_class.map((item, index) => (
@@ -553,7 +559,7 @@ const TrainingsEdit = props => {
 														disableToolbar
 														variant="inline"
 														format="dd.MM.yyyy"
-                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
+														placeholder="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={item.date}
@@ -637,12 +643,12 @@ const TrainingsEdit = props => {
 								<Grid item xs={12}>
 									{
 										storage.getStorage('role').includes(1) ?
-										<>
-											<div className={classes.top_label}>Zaakceptowane</div>
-											<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
-										</>
-										:
-										<></>
+											<>
+												<div className={classes.top_label}>Zaakceptowane</div>
+												<SingleSelect value={training.training_status} handleChange={(value) => handleChangeTrainingStatus(value)} list={trainingStatusList} error={error.training_status} />
+											</>
+											:
+											<></>
 									}
 									<div className={classes.input_box_label} htmlFor="name">Komentarz dotyczący edycji (max 100 znaków)</div>
 									<TextareaAutosize className={clsx({ [classes.textArea]: true, [classes.error]: error.comment })} value={training.comment} rowsMin={10} onChange={(e) => handleChangeComment(e.target.value)} placeholder="Utworzenie profilu uczestnika" />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, CircularProgress, TextField
+	Button, Grid, Card, CircularProgress, TextField, Typography
 } from '@material-ui/core';
 
 import XLSX from "xlsx-style-tw";
@@ -142,13 +142,13 @@ const ReportsFinancial = props => {
 				})
 		}
 	}
-	
+
 	const getPolishMonth = (str_date) => {
 		let _str = str_date.split('Kw. ')[1].split(')')[0];
 		let arr = _str.split(' (');
 		let id = arr[0];
 		let _arr = arr[1].split('-');
-		return {id: id, date: `${_arr[2]}.${_arr[1]}.${_arr[0]}`};
+		return { id: id, date: `${_arr[2]}.${_arr[1]}.${_arr[0]}` };
 	}
 
 	const handleExport = (data, rehabitation_center, quater_from, quater_to) => {
@@ -179,7 +179,7 @@ const ReportsFinancial = props => {
 		column.push('');
 		column.push('');
 		column.push('');
-		header.push( 'Liczba Uczestników w okresie sprawozdawczym');
+		header.push('Liczba Uczestników w okresie sprawozdawczym');
 		header.push('Jednostka');
 		header.push('Liczba zrealizowanych jednostek na jednego Uczestnika (średnio)');
 		header.push('Liczba zrealizowanych jednostek w okresie 8.12.19-07.03.2020 (C x E)');
@@ -215,13 +215,13 @@ const ReportsFinancial = props => {
 				let item = [];
 				item.push('');
 				item.push(romic_number[i] + '. ' + module[i].name);
-				for (let j = 0; j < data.length + 7; j ++) {
+				for (let j = 0; j < data.length + 7; j++) {
 					item.push('');
 				}
 				total_data.data.push(item);
 				let service_list = module[i].service_lists;
 				arr.push(module_index);
-				module_index ++;
+				module_index++;
 				for (let j = 0; j < service_list.length; j++) {
 					let item = [];
 					item.push(++index);
@@ -233,7 +233,7 @@ const ReportsFinancial = props => {
 						let schedule = data[k].module[i].service_lists[j].schedule;
 						let value = (parseFloat(schedule.trial) + parseFloat(schedule.basic));
 						let money = value * cost;
-						
+
 						if (!total_sum[k + 2])
 							total_sum[k + 2] = 0;
 						total_sum[k + 2] += money;
@@ -249,13 +249,13 @@ const ReportsFinancial = props => {
 					}
 					let average = sum / data.length;
 
-					item.push(count === 0 ? 'nd' : count + '' );
-					item.push(data[0].module[i].service_lists[j].unit_name );
-					item.push(average === 0 ? 'nd' : average.toFixed(2) );
+					item.push(count === 0 ? 'nd' : count + '');
+					item.push(data[0].module[i].service_lists[j].unit_name);
+					item.push(average === 0 ? 'nd' : average.toFixed(2));
 					item.push(
 						sum === 0 ? 'nd' : sum.toFixed(2));
 
-					
+
 					item.push(parseFloat(cost).toFixed(2));
 					let sum_value = (cost * sum);
 					total_price += sum_value;
@@ -265,7 +265,7 @@ const ReportsFinancial = props => {
 					item.push(sum_value === 0 ? 'nd' : sum_value.toFixed(2));
 					item.push(sum_value === 0 ? 'nd' : sum_value.toFixed(2));
 					total_data.data.push(item);
-					module_index ++;
+					module_index++;
 				}
 			}
 		}
@@ -281,50 +281,54 @@ const ReportsFinancial = props => {
 		let item_last = [];
 		for (let i = 0; i < total_sum.length; i++) {
 			let value = total_sum[i];
-			item_last.push(total_sum[i] === undefined || !total_sum[i] ? '' : parseFloat(value).toFixed(2) + '' );
+			item_last.push(total_sum[i] === undefined || !total_sum[i] ? '' : parseFloat(value).toFixed(2) + '');
 		}
 		total_data.data.push(item_last);
 		const ws = XLSX.utils.aoa_to_sheet(total_data.data);
 		var wscols = [
-			{wch:6,alignment: {
-				wrapText: '1', // any truthy value here
-			},},
-			{wch:120, alignment: {
-				wrapText: '1', // any truthy value here
-			},},
+			{
+				wch: 6, alignment: {
+					wrapText: '1', // any truthy value here
+				},
+			},
+			{
+				wch: 120, alignment: {
+					wrapText: '1', // any truthy value here
+				},
+			},
 		];
 		for (let i = 0; i <= data.length; i++) {
-			wscols.push({wch: 10});
+			wscols.push({ wch: 10 });
 		}
-		wscols.push({wch: 30});
-		wscols.push({wch: 20});
-		wscols.push({wch: 20});
-		wscols.push({wch: 20});
-		wscols.push({wch: 20});
-		wscols.push({wch: 20});
-		ws['!cols']	= wscols;
+		wscols.push({ wch: 30 });
+		wscols.push({ wch: 20 });
+		wscols.push({ wch: 20 });
+		wscols.push({ wch: 20 });
+		wscols.push({ wch: 20 });
+		wscols.push({ wch: 20 });
+		ws['!cols'] = wscols;
 		ws["!rows"] = [ // just demo, should use for-loop
 			{ hpx: 120, },
-			
+
 		]
 
-		var merge = { s: {r:0, c:0}, e: {r:0, c: data.length + 8} };
-		if(!ws['!merges']) ws['!merges'] = [];
+		var merge = { s: { r: 0, c: 0 }, e: { r: 0, c: data.length + 8 } };
+		if (!ws['!merges']) ws['!merges'] = [];
 		ws['!merges'].push(merge);
 
 		arr.push(module_index);
 		for (const key in ws) {
 			// first row
 			if (key == '!ref')
-					break;
+				break;
 			if (key.replace(/[^0-9]/ig, '') === '1') {
-					ws[key].s = {
-							font: {
-									sz: 12, // font size
-									bold: true // bold
-							},
-					}
+				ws[key].s = {
+					font: {
+						sz: 12, // font size
+						bold: true // bold
+					},
 				}
+			}
 			if (key.replace(/[^0-9]/ig, '') === '2' || key.replace(/[^0-9]/ig, '') === '3') {
 				ws[key].s = {
 					alignment: {
@@ -358,7 +362,7 @@ const ReportsFinancial = props => {
 					},
 				}
 			}
-			for (let i = 0; i < arr.length; i ++) {
+			for (let i = 0; i < arr.length; i++) {
 				if (arr[i] === parseInt(key.replace(/[^0-9]/ig, ''))) {
 					ws[key].s = {
 						alignment: {
@@ -394,10 +398,10 @@ const ReportsFinancial = props => {
 				}
 			}
 		}
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
-    /* generate XLSX file and send to client */
-    XLSX.writeFile(wb, `${name}.xlsx`);
+		const wb = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+		/* generate XLSX file and send to client */
+		XLSX.writeFile(wb, `${name}.xlsx`);
 	}
 
 	return (
@@ -406,7 +410,7 @@ const ReportsFinancial = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -416,9 +420,11 @@ const ReportsFinancial = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Zdefiniuj dane raportu
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Zdefiniuj dane raportu
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label} ><label htmlFor="name">Nazwa raportu</label></div>
 									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
@@ -426,9 +432,11 @@ const ReportsFinancial = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Okres
-              </Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Okres
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item md={5} xs={12}>

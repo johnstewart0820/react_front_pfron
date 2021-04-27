@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Grid, FormControl,FormControlLabel, Radio, RadioGroup, FormLabel
+  Grid, FormControl,FormControlLabel, Radio, RadioGroup, FormLabel, Typography
 } from '@material-ui/core';
 import { SingleSelect} from 'components';
 import { withRouter } from 'react-router-dom';
@@ -21,8 +21,10 @@ const FirstStepView = (props) => {
 				:
 				<></>
 			}
-      <Grid item md={3} xs={12} className={classes.form_title}>
-        Dane kandydata
+      <Grid item md={3} xs={12}>
+				<Typography variant="h2" className={classes.form_title}>
+        	Dane kandydata
+				</Typography>
       </Grid>
       <Grid item md={6} xs={12}>
         <Grid container spacing={3}>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox
+	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox, Typography
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -15,7 +15,7 @@ const ServiceListEdit = props => {
 	const { children } = props;
 	const { history } = props;
 	const classes = useStyles();
-	
+
 	const breadcrumbs = [{ active: true, href: '/service_list', label: 'Usługi' }, { active: true, label: 'Lista dostępnych usług', href: '/service_list' }, { active: false, label: 'Edytuj Usługę' }];
 	const [number, setNumber] = useState('');
 	const [name, setName] = useState('');
@@ -29,10 +29,10 @@ const ServiceListEdit = props => {
 	const [amount_takes, setAmountTakes] = useState('');
 	const [is_required, setIsRequired] = useState(false);
 	const [not_applicable, setNotApplicable] = useState(false);
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 	const id = props.match.params.id;
 	const [error, setError] = useState({});
 	const [openModal, setOpenModal] = useState(false);
@@ -132,9 +132,9 @@ const ServiceListEdit = props => {
 	}
 
 	const handleSave = () => {
-     
+
 		if (checkError()) {
-						setHasAlert(true);
+			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 			handleError();
@@ -147,8 +147,8 @@ const ServiceListEdit = props => {
 						history.push('/login');
 					} else {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/service_list'); }, 1000);
 						}
@@ -159,7 +159,7 @@ const ServiceListEdit = props => {
 	}
 
 	const handleDelete = () => {
-    
+
 		setProgressStatus(true);
 		service_list
 			.delete(id)
@@ -187,10 +187,10 @@ const ServiceListEdit = props => {
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>						Wróć do listy usług
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy usług
         </Button>
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -200,8 +200,10 @@ const ServiceListEdit = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Dane podstawowe
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Dane podstawowe
+									</Typography>
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={1}>

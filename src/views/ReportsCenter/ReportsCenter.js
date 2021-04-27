@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, CircularProgress, TextField
+	Button, Grid, Card, CircularProgress, TextField, Typography
 } from '@material-ui/core';
 
 import XLSX from "xlsx-style-tw";
@@ -67,7 +67,7 @@ const ReportsCenter = props => {
 	}
 
 	const generateDocument = (data) => {
-		loadFile(template_zip, function(
+		loadFile(template_zip, function (
 			error,
 			content
 		) {
@@ -101,14 +101,14 @@ const ReportsCenter = props => {
 				// The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
 				function replaceErrors(key, value) {
 					if (value instanceof Error) {
-						return Object.getOwnPropertyNames(value).reduce(function(
+						return Object.getOwnPropertyNames(value).reduce(function (
 							error,
 							key
 						) {
 							error[key] = value[key];
 							return error;
 						},
-						{});
+							{});
 					}
 					return value;
 				}
@@ -116,7 +116,7 @@ const ReportsCenter = props => {
 
 				if (error.properties && error.properties.errors instanceof Array) {
 					const errorMessages = error.properties.errors
-						.map(function(error) {
+						.map(function (error) {
 							return error.properties.explanation;
 						})
 						.join("\n");
@@ -189,7 +189,7 @@ const ReportsCenter = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -199,9 +199,11 @@ const ReportsCenter = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Zdefiniuj dane raportu
-              	</Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Zdefiniuj dane raportu
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label} ><label htmlFor="name">Nazwa raportu</label></div>
 									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
@@ -209,9 +211,11 @@ const ReportsCenter = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Okres
-              	</Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Okres
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item md={5} xs={12}>

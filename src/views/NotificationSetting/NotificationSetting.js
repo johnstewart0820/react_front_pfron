@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, Checkbox, FormControl, FormControlLabel, CircularProgress
+	Button, Grid, Card, Checkbox, FormControl, FormControlLabel, CircularProgress, Typography
 } from '@material-ui/core';
 
 import { Breadcrumb, SingleSelect } from 'components';
@@ -80,8 +80,10 @@ const NotificationSetting = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Aktywne powiadomienia
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Aktywne powiadomienia
+									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container>
@@ -92,7 +94,7 @@ const NotificationSetting = props => {
 									</Grid>
 									<Grid container>
 										<FormControlLabel
-											control={<Checkbox checked={setting.undone_service_participant == 1 ? true: false} onChange={handleChange} name="undone_service_participant" />}
+											control={<Checkbox checked={setting.undone_service_participant == 1 ? true : false} onChange={handleChange} name="undone_service_participant" />}
 											label="Niezrealizowanie danej usługi przez uczestnika (uczestnik zrezygnował)"
 										/>
 									</Grid>

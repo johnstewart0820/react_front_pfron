@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
 		fontFamily: 'roboto',
 	},
 	form_title: {
-		fontWeight: '500'
+		fontWeight: '500',
+		fontSize: '1em'
 	},
 	textArea: {
 		backgroundColor: theme.palette.black_white,

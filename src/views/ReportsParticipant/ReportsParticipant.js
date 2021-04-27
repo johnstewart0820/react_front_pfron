@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, CircularProgress, TextField
+	Button, Grid, Card, CircularProgress, TextField, Typography
 } from '@material-ui/core';
 
 import XLSX from "xlsx-style-tw";
@@ -131,7 +131,7 @@ const ReportsParticipant = props => {
 		let arr = _str.split(' (');
 		let id = arr[0];
 		let _arr = arr[1].split('-');
-		return {id: id, date: `${_arr[2]}.${_arr[1]}.${_arr[0]}`};
+		return { id: id, date: `${_arr[2]}.${_arr[1]}.${_arr[0]}` };
 	}
 
 	const handleExport = (data, rehabitation_center, quater_from, quater_to) => {
@@ -145,49 +145,53 @@ const ReportsParticipant = props => {
 			(${start_date_info.date}) - ${end_date_info.id} (${end_date_info.date})`]);
 
 		total_data.push(['Instytucja rekrutująca',
-		'Liczba zakwalifikowanych uczestników']);
+			'Liczba zakwalifikowanych uczestników']);
 		total_data.push(['PFRON', data[0]]);
 		total_data.push(['ZUS', data[1]]);
 		total_data.push(['Powiat', data[2]]);
 
 		const ws = XLSX.utils.aoa_to_sheet(total_data);
 		var wscols = [
-			{wch:40,alignment: {
-				wrapText: '1', // any truthy value here
-			},},
-			{wch:80, alignment: {
-				wrapText: '1', // any truthy value here
-			},},
+			{
+				wch: 40, alignment: {
+					wrapText: '1', // any truthy value here
+				},
+			},
+			{
+				wch: 80, alignment: {
+					wrapText: '1', // any truthy value here
+				},
+			},
 		];
-		
-		ws['!cols']	= wscols;
 
-		var merge = { s: {r:0, c:0}, e: {r:0, c: 1} };
+		ws['!cols'] = wscols;
+
+		var merge = { s: { r: 0, c: 0 }, e: { r: 0, c: 1 } };
 		if (!ws['!merges']) ws['!merges'] = [];
 		ws['!merges'].push(merge);
-		
+
 		ws["!rows"] = [ // just demo, should use for-loop
 			{ hpx: 120, },
-			
+
 		]
 		for (const key in ws) {
 			// first row
 			if (key == '!ref')
-					break;
+				break;
 			if (key.replace(/[^0-9]/ig, '') === '1' || key.replace(/[^0-9]/ig, '') === '2') {
 				ws[key].s = {
-						font: {
-								sz: 12, // font size
-								bold: true // bold
-						},
+					font: {
+						sz: 12, // font size
+						bold: true // bold
+					},
 				}
 			}
 		}
 
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
-    /* generate XLSX file and send to client */
-    XLSX.writeFile(wb, `${name}.xlsx`);
+		const wb = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+		/* generate XLSX file and send to client */
+		XLSX.writeFile(wb, `${name}.xlsx`);
 	}
 
 	return (
@@ -196,7 +200,7 @@ const ReportsParticipant = props => {
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />
 				</div>
-				<Alert 
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
@@ -206,9 +210,11 @@ const ReportsParticipant = props => {
 					<Grid item md={9} xs={12}>
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Zdefiniuj dane raportu
-              	</Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Zdefiniuj dane raportu
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label} ><label htmlFor="name">Nazwa raportu</label></div>
 									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
@@ -216,9 +222,11 @@ const ReportsParticipant = props => {
 							</Grid>
 							<div className={classes.divide} />
 							<Grid container spacing={3}>
-								<Grid item md={3} xs={12} className={classes.form_title}>
-									Okres
-              	</Grid>
+								<Grid item md={3} xs={12}>
+									<Typography variant="h2" className={classes.form_title}>
+										Okres
+									</Typography>
+								</Grid>
 								<Grid item md={9} xs={12}>
 									<Grid container spacing={2}>
 										<Grid item md={5} xs={12}>

@@ -101,7 +101,7 @@ const SortTable = (props) => {
             return (
               <TableRow key={indx} className={classes.root}>
                 <TableCell className={classes.title} onClick={() => handleClick(item)}>{item.title}</TableCell>
-                <TableCell>{getDateTime(item.updated_at)}</TableCell>
+                <TableCell onClick={() => handleClick(item)}>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
                   <IconButton variant="outlined" component="span" className={classes.iconButton} onClick={() => handleSetState(item.id)}>
 										{

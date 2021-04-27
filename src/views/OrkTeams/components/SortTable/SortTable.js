@@ -115,10 +115,10 @@ const SortTable = (props) => {
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell>{item.id}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{getRehabitationCenterStr(item.rehabitation_center)}</TableCell>
-              <TableCell>{getSpecializationStr(item.specialization)}</TableCell>
+              <TableCell onClick={() => history.push(`/ork_teams/edit/${item.id}`)}>{item.id}</TableCell>
+              <TableCell onClick={() => history.push(`/ork_teams/edit/${item.id}`)}>{item.name}</TableCell>
+              <TableCell onClick={() => history.push(`/ork_teams/edit/${item.id}`)}>{getRehabitationCenterStr(item.rehabitation_center)}</TableCell>
+              <TableCell onClick={() => history.push(`/ork_teams/edit/${item.id}`)}>{getSpecializationStr(item.specialization)}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj osobę ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/ork_teams/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

@@ -59,7 +59,8 @@ const useStyles = makeStyles(theme => ({
     root: {
       '& .MuiTableCell-root': {
         padding: theme.spacing(1.5)
-      }
+      },
+			cursor: 'pointer',
     }
 }));
 

@@ -63,8 +63,8 @@ const SortTable = (props) => {
 				{rows.map((item, indx) => {
 					return (
 						<TableRow key={indx} className={classes.root}>
-							<TableCell>{item.id}</TableCell>
-							<TableCell>{item.name}</TableCell>
+							<TableCell onClick={() => history.push(`/ork_list/edit/${item.id}`)}>{item.id}</TableCell>
+							<TableCell onClick={() => history.push(`/ork_list/edit/${item.id}`)}>{item.name}</TableCell>
 							<TableCell>
 								<IconButton  aria-label={`Edytuj Ośrodków Rehabilitacji ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/ork_list/edit/${item.id}`)}>
 									<EditOutlinedIcon className={classes.icon}/>

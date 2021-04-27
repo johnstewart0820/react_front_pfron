@@ -41,6 +41,10 @@ const SortTable = (props) => {
 		}
 		return _date.getFullYear() + '-' + month + '-' + date;
 	}
+
+	const handleEdit = (item) => {
+		history.push(parseInt(item.ipr_type) !== 1 ? `/ipr_list/plan/edit/${item.id}` : `/ipr_list/balance/edit/${item.id}`);
+	}
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
 			<Table>
@@ -164,15 +168,15 @@ const SortTable = (props) => {
 					{rows.map((item, indx) => {
 						return (
 							<TableRow key={indx} className={classes.root}>
-								<TableCell>{item.id}</TableCell>
-								<TableCell>{item.name}</TableCell>
-								<TableCell>{iprTypeList && iprTypeList.length > 0 && iprTypeList[item.ipr_type - 1].name}</TableCell>
-								<TableCell className={classes.cell_removable}>{item.number}</TableCell>
-								<TableCell className={classes.cell_removable}>{getDate(item.created_at)}</TableCell>
-								<TableCell className={classes.cell_removable}>{getDate(item.schedule_date)}</TableCell>
+								<TableCell onClick={() => handleEdit(item)}>{item.id}</TableCell>
+								<TableCell onClick={() => handleEdit(item)}>{item.name}</TableCell>
+								<TableCell onClick={() => handleEdit(item)}>{iprTypeList && iprTypeList.length > 0 && iprTypeList[item.ipr_type - 1].name}</TableCell>
+								<TableCell onClick={() => handleEdit(item)} className={classes.cell_removable}>{item.number}</TableCell>
+								<TableCell onClick={() => handleEdit(item)} className={classes.cell_removable}>{getDate(item.created_at)}</TableCell>
+								<TableCell onClick={() => handleEdit(item)} className={classes.cell_removable}>{getDate(item.schedule_date)}</TableCell>
 								<TableCell>
-									<IconButton aria-label={`Edytuj IPR ${item.name}`} component="span" className={classes.iconButton} onClick={
-										() => history.push(parseInt(item.ipr_type) !== 1 ? `/ipr_list/plan/edit/${item.id}` : `/ipr_list/balance/edit/${item.id}`)
+									<IconButton aria-label={`Edytuj IPR ${item.name}`} component="span" className={classes.iconButton} 
+										onClick={() => handleEdit(item)
 									}>
 										<EditOutlinedIcon className={classes.icon} />
 									</IconButton>

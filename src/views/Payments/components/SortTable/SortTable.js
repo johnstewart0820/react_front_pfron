@@ -85,10 +85,10 @@ const SortTable = (props) => {
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell>{item.id}</TableCell>
-              <TableCell>{item.value}</TableCell>
-              <TableCell className={classes.cell_removable}>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
-              <TableCell>{serviceList && serviceList.length > 0 && serviceList[item.service - 1].name}</TableCell>
+              <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)}>{item.id}</TableCell>
+              <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)}>{item.value}</TableCell>
+              <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)} className={classes.cell_removable}>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
+              <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)}>{serviceList && serviceList.length > 0 && serviceList[item.service - 1].name}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj koszt`} component="span" className={classes.iconButton} onClick={() => history.push(`/payments/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

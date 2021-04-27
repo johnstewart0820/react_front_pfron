@@ -110,10 +110,10 @@ const SortTable = (props) => {
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell>{item.id}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{getQualificationPointName(item.qualification_point)}</TableCell>
-              <TableCell  className={classes.cell_removable}>{getSpecialtyName(item.specialty)}</TableCell>
+              <TableCell onClick={() => history.push(`/specialists/edit/${item.id}`)}>{item.id}</TableCell>
+              <TableCell onClick={() => history.push(`/specialists/edit/${item.id}`)}>{item.name}</TableCell>
+              <TableCell onClick={() => history.push(`/specialists/edit/${item.id}`)}>{getQualificationPointName(item.qualification_point)}</TableCell>
+              <TableCell onClick={() => history.push(`/specialists/edit/${item.id}`)} className={classes.cell_removable}>{getSpecialtyName(item.specialty)}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj specjalistę ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/specialists/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

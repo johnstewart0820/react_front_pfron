@@ -154,11 +154,11 @@ const SortTable = (props) => {
 					{rows.map((item, indx) => {
 						return (
 							<TableRow key={indx} className={classes.root}>
-								<TableCell>{item.id}</TableCell>
-								<TableCell>{item.name}</TableCell>
-								<TableCell>{getParticipantStr(item.participant)}</TableCell>
-								<TableCell>{trainingStatusList && trainingStatusList.length > 0 && trainingStatusList[item.training_status - 1].name}</TableCell>
-								<TableCell className={classes.cell_removable}>{item.date}</TableCell>
+								<TableCell onClick={() => history.push(`/trainings/edit/${item.id}`)}>{item.id}</TableCell>
+								<TableCell onClick={() => history.push(`/trainings/edit/${item.id}`)}>{item.name}</TableCell>
+								<TableCell onClick={() => history.push(`/trainings/edit/${item.id}`)}>{getParticipantStr(item.participant)}</TableCell>
+								<TableCell onClick={() => history.push(`/trainings/edit/${item.id}`)}>{trainingStatusList && trainingStatusList.length > 0 && trainingStatusList[item.training_status - 1].name}</TableCell>
+								<TableCell onClick={() => history.push(`/trainings/edit/${item.id}`)} className={classes.cell_removable}>{item.date}</TableCell>
 								<TableCell>
 									<IconButton aria-label={`Edytuj szkolenie ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/trainings/edit/${item.id}`)}>
 										<EditOutlinedIcon className={classes.icon} />

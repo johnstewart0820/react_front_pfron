@@ -122,11 +122,11 @@ const SortTable = (props) => {
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell className={classes.cell_removable}>{item.id}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{getRoleName(item.id_role)}</TableCell>
-              <TableCell>{item.email}</TableCell>
-              <TableCell className={classes.cell_removable}>{getActivateStatusName(item.activate_status)}</TableCell>
+              <TableCell onClick={() => history.push(`/users/edit/${item.id}`)} className={classes.cell_removable}>{item.id}</TableCell>
+              <TableCell onClick={() => history.push(`/users/edit/${item.id}`)}>{item.name}</TableCell>
+              <TableCell onClick={() => history.push(`/users/edit/${item.id}`)}>{getRoleName(item.id_role)}</TableCell>
+              <TableCell onClick={() => history.push(`/users/edit/${item.id}`)}>{item.email}</TableCell>
+              <TableCell onClick={() => history.push(`/users/edit/${item.id}`)} className={classes.cell_removable}>{getActivateStatusName(item.activate_status)}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj użytkownik systemu ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/users/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

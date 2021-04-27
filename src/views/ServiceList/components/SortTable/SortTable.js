@@ -114,10 +114,10 @@ const SortTable = (props) => {
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell>{item.number}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{getModuleName(item.module)}</TableCell>
-              <TableCell className={classes.cell_removable}>{getUnitName(item.unit)}</TableCell>
+              <TableCell onClick={() => history.push(`/service_list/edit/${item.id}`)}>{item.number}</TableCell>
+              <TableCell onClick={() => history.push(`/service_list/edit/${item.id}`)}>{item.name}</TableCell>
+              <TableCell onClick={() => history.push(`/service_list/edit/${item.id}`)}>{getModuleName(item.module)}</TableCell>
+              <TableCell onClick={() => history.push(`/service_list/edit/${item.id}`)} className={classes.cell_removable}>{getUnitName(item.unit)}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj Usługę ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/service_list/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

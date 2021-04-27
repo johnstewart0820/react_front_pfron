@@ -23,13 +23,6 @@ const SortTable = (props) => {
   useEffect(() => {
   }, []);
 
-  const handleGotoSimulation = (indx) => {
-    history.push({
-      pathname: '/forecasting_module/simulation_info',
-      state: {item: rows[indx]
-    }});
-  }
-
   const getAmbassadorStr = (str) => {
 	  if (str == null) {
 		  str = '';
@@ -111,10 +104,10 @@ const SortTable = (props) => {
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell>{item.id}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{typeList && typeList.length > 0 && typeList[item.type - 1].name}</TableCell>
-              <TableCell>{getAmbassadorStr(item.ambassador)}</TableCell>
+              <TableCell onClick={() => history.push(`/qualification_points/edit/${item.id}`)}>{item.id}</TableCell>
+              <TableCell onClick={() => history.push(`/qualification_points/edit/${item.id}`)}>{item.name}</TableCell>
+              <TableCell onClick={() => history.push(`/qualification_points/edit/${item.id}`)}>{typeList && typeList.length > 0 && typeList[item.type - 1].name}</TableCell>
+              <TableCell onClick={() => history.push(`/qualification_points/edit/${item.id}`)}>{getAmbassadorStr(item.ambassador)}</TableCell>
               <TableCell>
                 <IconButton  aria-label={`Edytuj punkt kwalifikacyjny ${item.name}`} component="span" className={classes.iconButton} onClick={() => history.push(`/qualification_points/edit/${item.id}`)}>
                   <EditOutlinedIcon className={classes.icon}/>

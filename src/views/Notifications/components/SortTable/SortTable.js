@@ -103,7 +103,7 @@ const SortTable = (props) => {
                 <TableCell className={classes.title} onClick={() => handleClick(item)}>{item.title}</TableCell>
                 <TableCell onClick={() => handleClick(item)}>{getDateTime(item.updated_at)}</TableCell>
                 <TableCell>
-                  <IconButton variant="outlined" component="span" className={classes.iconButton} onClick={() => handleSetState(item.id)}>
+                  <IconButton variant="outlined" component="span" aria-label={item.activate_status ? `potwierdzone powiadomienie ${item.title}` : `potwierdź powiadomienie ${item.title}`}className={classes.iconButton} onClick={() => handleSetState(item.id)}>
 										{
 											item.activate_status ?
 												<DoneIcon className={classes.green} />
@@ -111,7 +111,7 @@ const SortTable = (props) => {
 												<CloseIcon className={classes.red} />
 										}
                   </IconButton>
-                  <IconButton variant="outlined" component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+                  <IconButton variant="outlined" component="span" aria-label={`Usuń powiadomienie ${item.title}`} className={classes.iconButton} onClick={() => handleDelete(item.id)}>
 										<DeleteOutlineOutlinedIcon className={classes.icon}/>
 									</IconButton>
                 </TableCell>

@@ -232,52 +232,53 @@ const CandidatesEdit = props => {
 
 	const handleError = () => {
 		let _error = {}
-		var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-		_error.name = (name.length === 0);
-		_error.surname = (surname.length === 0);
-		_error.person_id = (validatepesel(person_id) !== true);
-		_error.place_of_birth = (place_of_birth.length === 0);
-		_error.street = (street.length === 0);
-		_error.house_number = (house_number.length === 0);
-		_error.post_code = (post_code.length === 0);
-		_error.post_office = (post_office.length === 0);
-		_error.city = (city.length === 0);
-		_error.voivodeship = (parseInt(voivodeship) === 0);
-		_error.community = (parseInt(community) === 0);
-		_error.county = (parseInt(county) === 0);
+		// var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+		// _error.name = (name.length === 0);
+		// _error.surname = (surname.length === 0);
+		// _error.person_id = (validatepesel(person_id) !== true);
+		// _error.place_of_birth = (place_of_birth.length === 0);
+		// _error.street = (street.length === 0);
+		// _error.house_number = (house_number.length === 0);
+		// _error.post_code = (post_code.length === 0);
+		// _error.post_office = (post_office.length === 0);
+		// _error.city = (city.length === 0);
+		// _error.voivodeship = (parseInt(voivodeship) === 0);
+		// _error.community = (parseInt(community) === 0);
+		// _error.county = (parseInt(county) === 0);
+		// _error.comment = (comment.length === 0);
+		// _error.mobile_phone = (mobile_phone.length === 0);
+		// _error.home_phone = (home_phone.length === 0);
+		// _error.email = (email.length != 0 && !pattern.test(email));
+		// _error.family_home_phone = (family_home_phone.length === 0);
+		// _error.family_mobile_phone = (family_mobile_phone.length === 0);
+		// _error.education = (parseInt(education) === 0);
+		// _error.academic_title = (parseInt(education) === 10 && academic_title.length === 0)
+		// _error.stay_status = (parseInt(stay_status) === 0);
+		// _error.children_amount = (children_applicable && isNaN(children_amount));
+		// _error.children_age = (children_applicable && children_age.length === 0);
+		// _error.employed_status = (parseInt(employed_status) === 0);
+		// _error.employed_in = (parseInt(employed_status) === 1 && employed_in.length === 0)
+		// _error.occupation = (parseInt(employed_status) === 1 && occupation.length === 0)
+		// _error.unemployed_status = (parseInt(unemployed_status) === 0);
+		// _error.have_unemployed_person_status = (parseInt(have_unemployed_person_status) === 0);
+		// _error.unemployed_person_id = (parseInt(have_unemployed_person_status) === 1 && unemployed_person_id.length === 0);
+		// _error.long_term_employed_status = (parseInt(long_term_employed_status) === 0);
+		// _error.seek_work_status = (parseInt(seek_work_status) === 0);
+		// _error.passive_person_status = (parseInt(passive_person_status) === 0);
+		// _error.full_time_status = (parseInt(full_time_status) === 0);
+		// _error.evening_student_status = (parseInt(evening_student_status) === 0);
+		// _error.disabled_person_status = (parseInt(disabled_person_status) === 0);
+		// _error.number_certificate = (parseInt(disabled_person_status) === 1 && isNaN(number_certificate));
+		// _error.level_certificate = (parseInt(disabled_person_status) === 1 && level_certificate.length === 0);
+		// _error.code_certificate = (parseInt(disabled_person_status) === 1 && code_certificate.length === 0);
+		// _error.necessary_certificate = (parseInt(disabled_person_status) === 1 && necessary_certificate.length === 0)
+		// _error.ethnic_minority_status = (parseInt(ethnic_minority_status) === 0);
+		// _error.homeless_person_status = (parseInt(homeless_person_status) === 0);
+		// _error.stay_house_status = (parseInt(stay_house_status) === 0);
+		// _error.house_hold_status = (parseInt(house_hold_status) === 0);
+		// _error.house_hold_adult_status = (parseInt(house_hold_adult_status) === 0);
+		// _error.uncomfortable_status = (parseInt(uncomfortable_status) === 0);
 		_error.comment = (comment.length === 0);
-		_error.mobile_phone = (mobile_phone.length === 0);
-		_error.home_phone = (home_phone.length === 0);
-		_error.email = (email.length != 0 && !pattern.test(email));
-		_error.family_home_phone = (family_home_phone.length === 0);
-		_error.family_mobile_phone = (family_mobile_phone.length === 0);
-		_error.education = (parseInt(education) === 0);
-		_error.academic_title = (parseInt(education) === 10 && academic_title.length === 0)
-		_error.stay_status = (parseInt(stay_status) === 0);
-		_error.children_amount = (children_applicable && isNaN(children_amount));
-		_error.children_age = (children_applicable && children_age.length === 0);
-		_error.employed_status = (parseInt(employed_status) === 0);
-		_error.employed_in = (parseInt(employed_status) === 1 && employed_in.length === 0)
-		_error.occupation = (parseInt(employed_status) === 1 && occupation.length === 0)
-		_error.unemployed_status = (parseInt(unemployed_status) === 0);
-		_error.have_unemployed_person_status = (parseInt(have_unemployed_person_status) === 0);
-		_error.unemployed_person_id = (parseInt(have_unemployed_person_status) === 1 && unemployed_person_id.length === 0);
-		_error.long_term_employed_status = (parseInt(long_term_employed_status) === 0);
-		_error.seek_work_status = (parseInt(seek_work_status) === 0);
-		_error.passive_person_status = (parseInt(passive_person_status) === 0);
-		_error.full_time_status = (parseInt(full_time_status) === 0);
-		_error.evening_student_status = (parseInt(evening_student_status) === 0);
-		_error.disabled_person_status = (parseInt(disabled_person_status) === 0);
-		_error.number_certificate = (parseInt(disabled_person_status) === 1 && isNaN(number_certificate));
-		_error.level_certificate = (parseInt(disabled_person_status) === 1 && level_certificate.length === 0);
-		_error.code_certificate = (parseInt(disabled_person_status) === 1 && code_certificate.length === 0);
-		_error.necessary_certificate = (parseInt(disabled_person_status) === 1 && necessary_certificate.length === 0)
-		_error.ethnic_minority_status = (parseInt(ethnic_minority_status) === 0);
-		_error.homeless_person_status = (parseInt(homeless_person_status) === 0);
-		_error.stay_house_status = (parseInt(stay_house_status) === 0);
-		_error.house_hold_status = (parseInt(house_hold_status) === 0);
-		_error.house_hold_adult_status = (parseInt(house_hold_adult_status) === 0);
-		_error.uncomfortable_status = (parseInt(uncomfortable_status) === 0);
 		setError(_error);
 	};
 
@@ -304,51 +305,53 @@ const CandidatesEdit = props => {
 
 	const checkError = () => {
 		var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-		return (name.length === 0) ||
-			(surname.length === 0) ||
-			(validatepesel(person_id) !== true) ||
-			(place_of_birth.length === 0) ||
-			(street.length === 0) ||
-			(house_number.length === 0) ||
-			(post_code.length === 0) ||
-			(post_office.length === 0) ||
-			(city.length === 0) ||
-			(parseInt(voivodeship) === 0) ||
-			(parseInt(community) === 0) ||
-			(parseInt(county) === 0) ||
-			(comment.length === 0) ||
-			(mobile_phone.length === 0) ||
-			(home_phone.length === 0) ||
-			(email.length != 0 && !pattern.test(email)) ||
-			(family_home_phone.length === 0) ||
-			(family_mobile_phone.length === 0) ||
-			(parseInt(education) === 0) ||
-			(parseInt(education) === 10 && academic_title.length === 0) ||
-			(parseInt(stay_status) === 0) ||
-			(children_applicable && isNaN(children_amount)) ||
-			(children_applicable && children_age.length === 0) ||
-			(parseInt(employed_status) === 0) ||
-			(parseInt(employed_status) === 1 && employed_in.length === 0) ||
-			(parseInt(employed_status) === 1 && occupation.length === 0) ||
-			(parseInt(unemployed_status) === 0) ||
-			(parseInt(have_unemployed_person_status) === 0) ||
-			(parseInt(have_unemployed_person_status) === 1 && unemployed_person_id.length === 0) ||
-			(parseInt(long_term_employed_status) === 0) ||
-			(parseInt(seek_work_status) === 0) ||
-			(parseInt(passive_person_status) === 0) ||
-			(parseInt(full_time_status) === 0) ||
-			(parseInt(evening_student_status) === 0) ||
-			(parseInt(disabled_person_status) === 0) ||
-			(parseInt(disabled_person_status) === 1 && isNaN(number_certificate)) ||
-			(parseInt(disabled_person_status) === 1 && level_certificate.length === 0) ||
-			(parseInt(disabled_person_status) === 1 && code_certificate.length === 0) ||
-			(parseInt(disabled_person_status) === 1 && necessary_certificate.length === 0) ||
-			(parseInt(ethnic_minority_status) === 0) ||
-			(parseInt(homeless_person_status) === 0) ||
-			(parseInt(stay_house_status) === 0) ||
-			(parseInt(house_hold_status) === 0) ||
-			(parseInt(house_hold_adult_status) === 0) ||
-			(parseInt(uncomfortable_status) === 0);
+		// return (name.length === 0) ||
+		// 	(surname.length === 0) ||
+		// 	(validatepesel(person_id) !== true) ||
+		// 	(place_of_birth.length === 0) ||
+		// 	(street.length === 0) ||
+		// 	(house_number.length === 0) ||
+		// 	(post_code.length === 0) ||
+		// 	(post_office.length === 0) ||
+		// 	(city.length === 0) ||
+		// 	(parseInt(voivodeship) === 0) ||
+		// 	(parseInt(community) === 0) ||
+		// 	(parseInt(county) === 0) ||
+		// 	(comment.length === 0) ||
+		// 	(mobile_phone.length === 0) ||
+		// 	(home_phone.length === 0) ||
+		// 	(email.length != 0 && !pattern.test(email)) ||
+		// 	(family_home_phone.length === 0) ||
+		// 	(family_mobile_phone.length === 0) ||
+		// 	(parseInt(education) === 0) ||
+		// 	(parseInt(education) === 10 && academic_title.length === 0) ||
+		// 	(parseInt(stay_status) === 0) ||
+		// 	(children_applicable && isNaN(children_amount)) ||
+		// 	(children_applicable && children_age.length === 0) ||
+		// 	(parseInt(employed_status) === 0) ||
+		// 	(parseInt(employed_status) === 1 && employed_in.length === 0) ||
+		// 	(parseInt(employed_status) === 1 && occupation.length === 0) ||
+		// 	(parseInt(unemployed_status) === 0) ||
+		// 	(parseInt(have_unemployed_person_status) === 0) ||
+		// 	(parseInt(have_unemployed_person_status) === 1 && unemployed_person_id.length === 0) ||
+		// 	(parseInt(long_term_employed_status) === 0) ||
+		// 	(parseInt(seek_work_status) === 0) ||
+		// 	(parseInt(passive_person_status) === 0) ||
+		// 	(parseInt(full_time_status) === 0) ||
+		// 	(parseInt(evening_student_status) === 0) ||
+		// 	(parseInt(disabled_person_status) === 0) ||
+		// 	(parseInt(disabled_person_status) === 1 && isNaN(number_certificate)) ||
+		// 	(parseInt(disabled_person_status) === 1 && level_certificate.length === 0) ||
+		// 	(parseInt(disabled_person_status) === 1 && code_certificate.length === 0) ||
+		// 	(parseInt(disabled_person_status) === 1 && necessary_certificate.length === 0) ||
+		// 	(parseInt(ethnic_minority_status) === 0) ||
+		// 	(parseInt(homeless_person_status) === 0) ||
+		// 	(parseInt(stay_house_status) === 0) ||
+		// 	(parseInt(house_hold_status) === 0) ||
+		// 	(parseInt(house_hold_adult_status) === 0) ||
+		// 	(parseInt(uncomfortable_status) === 0);
+
+		return comment.length === 0;
 	}
 
 	const handleSave = () => {

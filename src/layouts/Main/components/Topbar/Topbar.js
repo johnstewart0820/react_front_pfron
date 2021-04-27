@@ -123,7 +123,7 @@ const Topbar = props => {
 					</div>
 					<div className={classes.avatar}>
 						<IconButton
-							aria-label="account of current user"
+							aria-label="Profil użytkownika"
 							aria-controls="menu-appbar"
 							aria-haspopup="true"
 							onClick={handleMenu}
@@ -145,7 +145,7 @@ const Topbar = props => {
 							open={avatarOpen}
 							onClose={handleClose}
 						>
-							<MenuItem onClick={handleProfile} aria-label="Edytuj profil">Profil Użytkownika</MenuItem>
+							<MenuItem onClick={handleProfile} aria-label="Edytuj profil">Edytuj profil</MenuItem>
 							<MenuItem onClick={handleLogout} aria-label="Wyloguj">Wyloguj</MenuItem>
 						</Menu>
 					</div>

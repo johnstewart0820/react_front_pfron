@@ -70,6 +70,10 @@ class AppContainer extends React.Component {
 
 	componentDidMount() {
 		this.checkValidity();
+		let dom = document.getElementById('skip-link');
+		console.log(dom);
+		// let child = document.getElementsByClassName('u-vs-hidden')[0];
+		// dom.removeChild(child);
 		document.addEventListener('keydown',this.keydownHandler);
 	}
 	componentDidUpdate(prevProps) {
@@ -80,7 +84,7 @@ class AppContainer extends React.Component {
 	render() {
 		return this.state.role !== 0 ? 
 		<>
-			<SkipLinks links={this.props.location.pathname === '/login' || this.props.location.pathname === '/forgotpassword' ? this.login_links : this.links}/>{React.cloneElement(this.props.children, { role: this.state.role })}
+			<SkipLinks id="skip-link" links={this.props.location.pathname === '/login' || this.props.location.pathname === '/forgotpassword' ? this.login_links : this.links}/>{React.cloneElement(this.props.children, { role: this.state.role })}
 		</> 
 		: <></>;
 	}

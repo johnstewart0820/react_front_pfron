@@ -49,8 +49,8 @@ const ReportsParticipant = props => {
 					} else {
 						let quater_list = response.data.quater;
 						quater_list = quater_list.map((item, index) => {
-							item.start_date = `Kwartał ${index + 1} (${item.start_date})`;
-							item.end_date = `Kwartał ${index + 1} (${item.end_date})`;
+							item.start_date = `Kw. ${index + 1} (${item.start_date})`;
+							item.end_date = `Kw. ${index + 1} (${item.end_date})`;
 							return item;
 						})
 						setQuaterList(quater_list);
@@ -68,8 +68,8 @@ const ReportsParticipant = props => {
 					} else {
 						let quater_list = response.data.quater;
 						quater_list = quater_list.map((item, index) => {
-							item.start_date = `Kwartał ${index + 1} (${item.start_date})`;
-							item.end_date = `Kwartał ${index + 1} (${item.end_date})`;
+							item.start_date = `Kw. ${index + 1} (${item.start_date})`;
+							item.end_date = `Kw. ${index + 1} (${item.end_date})`;
 							return item;
 						})
 						setQuaterList(quater_list);

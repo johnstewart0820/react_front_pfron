@@ -150,11 +150,10 @@ const SortTable = (props) => {
 								id="date"
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+								aria-label="uczestnik planuje termin szkolenia - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								value={searchScheduleDate}
 								onChange={setSearchScheduleDate}
-								aria-label="uczestnik planuje termin szkolenia"
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}

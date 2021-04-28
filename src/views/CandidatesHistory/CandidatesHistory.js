@@ -187,17 +187,20 @@ const CandidatesHistory = props => {
           setSearchUser={setSearchUser}
           userList={userList}
         />
-        <div className={classes.pagination}>
-          <Pagination
-            className={classes.pagenation_class}
-            count={total % selectedCount == 0 ? total / selectedCount : parseInt(total / selectedCount) + 1}
-            onChange={(e, page) => { setPage(page) }}
-            page={page}
-            getItemAriaLabel={handlePaginationLabel}
-            showFirstButton
-            showLastButton 
-            aria-label="Przejdź do następnych stron wyników wyszukiwania wybierając intersująca cię stronę"/>
-        </div>
+        {
+          total > selectedCount &&
+          <div className={classes.pagination}>
+            <Pagination
+              className={classes.pagenation_class}
+              count={total % selectedCount == 0 ? total / selectedCount : parseInt(total / selectedCount) + 1}
+              onChange={(e, page) => { setPage(page) }}
+              page={page}
+              getItemAriaLabel={handlePaginationLabel}
+              showFirstButton
+              showLastButton
+              aria-label="Przejdź do następnych stron wyników wyszukiwania wybierając intersująca cię stronę" />
+          </div>
+        }
       </Card>
     </div>
   );

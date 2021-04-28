@@ -255,12 +255,11 @@ const OrkListEdit = props => {
 																	disableToolbar
 																	variant="inline"
 																	format="dd.MM.yyyy"
-																	aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+																	aria-label="data rozpoczęcia tego kwartału - Format wprowadzania daty DD.MM.RRRR"
 																	margin="normal"
 																	id={`start_date${index}`}
 																	value={item.start_date}
 																	onChange={(e) => handleDateChange(e, index, "from")}
-																	aria-label="data rozpoczęcia tego kwartału"
 																	KeyboardButtonProps={{
 																		'aria-label': 'Zmień datę',
 																	}}
@@ -279,12 +278,11 @@ const OrkListEdit = props => {
 																	disableToolbar
 																	variant="inline"
 																	format="dd.MM.yyyy"
-																	aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+																	aria-label="data zakończenia tego kwartału - Format wprowadzania daty DD.MM.RRRR"
 																	margin="normal"
 																	id={`end_date${index}`}
 																	value={item.end_date}
 																	onChange={(e) => handleDateChange(e, index, "to")}
-																	aria-label="data zakończenia tego kwartału"
 																	KeyboardButtonProps={{
 																		'aria-label': 'Zmień datę',
 																	}}

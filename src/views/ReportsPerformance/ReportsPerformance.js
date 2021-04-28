@@ -382,7 +382,7 @@ const ReportsPerformance = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
-									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleGenerate}>
+									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleGenerate}  title="Generuj raport - Kliknij aby pobrać plik poniżej 1MB">
 										Generuj raport
                 	</Button>
 								</Grid>

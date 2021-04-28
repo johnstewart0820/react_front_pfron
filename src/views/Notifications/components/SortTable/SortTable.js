@@ -84,12 +84,11 @@ const SortTable = (props) => {
 								disableToolbar
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+								aria-label="Data powiadomienia - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="date"
 								value={searchDateModified}
 								onChange={(e) => setSearchDateModified(e)}
-								aria-label="data utworzenia specjalnego powiadomienia wyszukiwania"
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}

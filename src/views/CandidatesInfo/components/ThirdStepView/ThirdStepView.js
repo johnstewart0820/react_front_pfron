@@ -66,12 +66,11 @@ const ThirdStepView = (props) => {
 											className={classes.date_picker}
 											variant="inline"
 											format="dd.MM.yyyy"
-											aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+											aria-label="Data wydania decyzji - Format wprowadzania daty DD.MM.RRRR"
 											margin="normal"
 											id="date_central_commision"
 											value={date_central_commision}
 											onChange={(value) => setDateCentralCommision(handleDate(value))}
-											aria-label="Data wydania decyzji"
 											KeyboardButtonProps={{
 												'aria-label': 'Zmień datę',
 											}}

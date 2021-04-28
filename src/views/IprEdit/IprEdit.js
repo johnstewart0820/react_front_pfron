@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
@@ -27,7 +27,7 @@ const IprEdit = props => {
 	const [openModal, setOpenModal] = useState(false);
 	const { history } = props;
 	const classes = useStyles();
-	
+
 	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: true, label: 'Lista IPR', href: '/ipr_list' }, { active: false, label: 'Dodaj IPR' }];
 	const [participant_number, setParticipantNumber] = useState('');
 	const [participant_name, setParticipantName] = useState('');
@@ -40,10 +40,10 @@ const IprEdit = props => {
 	const [ork_person, setOrkPerson] = useState(null);
 	const [orkPersonList, setOrkPersonList] = useState([]);
 	const [profession, setProfession] = useState('');
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
+	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
 	useEffect(() => {
@@ -66,7 +66,7 @@ const IprEdit = props => {
 				} else {
 					setParticipant(response.data.ipr.id_candidate);
 					getOrkPersonData(response.data.ipr.id_candidate, response.data.ipr.id_ork_person);
-					for (let i = 0; i < participantList.length; i ++) {
+					for (let i = 0; i < participantList.length; i++) {
 						if (participantList[i].id === response.data.ipr.id_candidate) {
 							setParticipantName(participantList[i].name + ' ' + participantList[i].surname);
 							setParticipantNumber(participantList[i].participant_number);
@@ -89,7 +89,7 @@ const IprEdit = props => {
 				} else {
 					setNumber(response.data.count);
 					setOrkPersonList(response.data.ork_person);
-					for (let i = 0; i < response.data.ork_person.length; i ++) {
+					for (let i = 0; i < response.data.ork_person.length; i++) {
 						if (response.data.ork_person[i].id == id_ork_person)
 							setOrkPerson(response.data.ork_person[i]);
 					}
@@ -129,9 +129,9 @@ const IprEdit = props => {
 	}
 
 	const handleSave = () => {
-     
+
 		if (checkError()) {
-						setHasAlert(true);
+			setHasAlert(true);
 			setMessage('Proszę wypełnić wszystkie wymagane pola.');
 			setIsSuccess(false);
 			handleError();
@@ -144,8 +144,8 @@ const IprEdit = props => {
 						history.push('/login');
 					} else {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 						if (response.code === 200) {
 							setTimeout(function () { history.push('/ipr_list'); }, 1000);
 						}
@@ -156,7 +156,7 @@ const IprEdit = props => {
 	}
 
 	const handleDelete = () => {
-    
+
 		setProgressStatus(true);
 		ipr
 			.delete(id)
@@ -189,128 +189,127 @@ const IprEdit = props => {
 
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
-		<div className={classes.public}>
-			<div className={classes.controlBlock}>
-				<Breadcrumb list={breadcrumbs} />
-				<Button variant="outlined" color="secondary" id="main"  className={classes.btnBack} onClick={handleBack}>					Wróć do listy IPR
+			<div className={classes.public}>
+				<div className={classes.controlBlock}>
+					<Breadcrumb list={breadcrumbs} />
+					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>					Wróć do listy IPR
 				</Button>
-			</div>
-			<Alert 
+				</div>
+				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
 					isSuccess={isSuccess}
 					message={message}
 				/>
-			<Grid container spacing={3} className={classes.formBlock}>
-				<Grid item xs={9}>
-					<Card className={classes.form}>
-						<Grid container spacing={3}>
-							<Grid item xs={3} className={classes.form_title}>
-								Dane IPR
+				<Grid container spacing={3} className={classes.formBlock}>
+					<Grid item xs={9}>
+						<Card className={classes.form}>
+							<Grid container spacing={3}>
+								<Grid item xs={3} className={classes.form_title}>
+									Dane IPR
 							  </Grid>
-							<Grid item xs={9}>
-								<Grid container spacing={3}>
-									<Grid item xs={5}>
-										<div className={classes.top_label} htmlFor="name">Numer uczestnika</div>
-										<div className={classes.number}>{participant_number}</div>
-									</Grid>
-									<Grid item xs={7}>
-										<div className={classes.top_label} htmlFor="name">Uczestnik</div>
-										<div className={classes.number}>{participant_name}</div>
-									</Grid>
-									<Grid item xs={5}>
-										<div className={classes.top_label} htmlFor="name">Typ</div>
-										<SingleSelect value={ipr_type} handleChange={handleChangeIprType} list={iprTypeList}/>
-									</Grid>
-									<Grid item xs={2}>
-										<div className={classes.top_label} htmlFor="name">Numer</div>
-										<div className={classes.number}>{number}</div>
-									</Grid>
-									<Grid item xs={5}>
-										<div className={classes.top_label} htmlFor="name">Data wypełnienia</div>
-										<KeyboardDatePicker
-											disableToolbar
-											variant="inline"
-											format="dd.MM.yyyy"
-                    aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
-											margin="normal"
-											id="date-picker-inline"
-											value={schedule_date}
-											onChange={setScheduleDate}
-											aria-label="Data wypełnienia"
-											KeyboardButtonProps={{
-												'aria-label': 'Zmień datę',
-											}}
-										/>
-									</Grid>
-									<Grid item xs={12}>
-										<div className={classes.top_label} htmlFor="name">Specjalista ds. zarządzania rehabilitacją</div>
-										<Autocomplete
-											className={classes.name_select_box}
-											onChange={(event, value) => setOrkPerson(value)}
-											value={ork_person}
-											options={orkPersonList}
-											getOptionLabel={(option) => participantList && option && option.name}
-											renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
-										/>
-									</Grid>
-									<Grid item xs={12}>
-										<div className={classes.top_label} htmlFor="name">Wybrany zawód</div>
-										<input className={classes.input_box} type="name" value={profession} name="name" onChange={(e) => handleChangeProfession(e.target.value)} />
+								<Grid item xs={9}>
+									<Grid container spacing={3}>
+										<Grid item xs={5}>
+											<div className={classes.top_label} htmlFor="name">Numer uczestnika</div>
+											<div className={classes.number}>{participant_number}</div>
+										</Grid>
+										<Grid item xs={7}>
+											<div className={classes.top_label} htmlFor="name">Uczestnik</div>
+											<div className={classes.number}>{participant_name}</div>
+										</Grid>
+										<Grid item xs={5}>
+											<div className={classes.top_label} htmlFor="name">Typ</div>
+											<SingleSelect value={ipr_type} handleChange={handleChangeIprType} list={iprTypeList} />
+										</Grid>
+										<Grid item xs={2}>
+											<div className={classes.top_label} htmlFor="name">Numer</div>
+											<div className={classes.number}>{number}</div>
+										</Grid>
+										<Grid item xs={5}>
+											<div className={classes.top_label} htmlFor="name">Data wypełnienia</div>
+											<KeyboardDatePicker
+												disableToolbar
+												variant="inline"
+												format="dd.MM.yyyy"
+												aria-label="Data wypełnienia - Format wprowadzania daty DD.MM.RRRR"
+												margin="normal"
+												id="date-picker-inline"
+												value={schedule_date}
+												onChange={setScheduleDate}
+												KeyboardButtonProps={{
+													'aria-label': 'Zmień datę',
+												}}
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<div className={classes.top_label} htmlFor="name">Specjalista ds. zarządzania rehabilitacją</div>
+											<Autocomplete
+												className={classes.name_select_box}
+												onChange={(event, value) => setOrkPerson(value)}
+												value={ork_person}
+												options={orkPersonList}
+												getOptionLabel={(option) => participantList && option && option.name}
+												renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<div className={classes.top_label} htmlFor="name">Wybrany zawód</div>
+											<input className={classes.input_box} type="name" value={profession} name="name" onChange={(e) => handleChangeProfession(e.target.value)} />
+										</Grid>
 									</Grid>
 								</Grid>
 							</Grid>
-						</Grid>
-					</Card>
+						</Card>
+					</Grid>
+					<Grid item xs={3}>
+						<Card className={classes.form}>
+							<Grid container spacing={3}>
+								<Grid item xs={12}>
+									<Link to={`/ipr_list/plan/edit/${id}`} className={classes.link}><div className={classes.top_label}>Dodaj proponowany zakres wsparcia</div></Link>
+								</Grid>
+								<Grid item xs={4}>
+									<Button aria-label="Pobierz PDF" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
+										<PictureAsPdfOutlinedIcon />
+									</Button>
+								</Grid>
+								<Grid item xs={4}>
+									<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
+										<FindInPageOutlinedIcon />
+									</Button>
+								</Grid>
+								<Grid item xs={4}>
+									<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
+										<DeleteIcon />
+									</Button>
+								</Grid>
+								<Grid item xs={12}>
+									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
+										Zapisz
+								</Button>
+								</Grid>
+							</Grid>
+						</Card>
+					</Grid>
 				</Grid>
-				<Grid item xs={3}>
-					<Card className={classes.form}>
-						<Grid container spacing={3}>
-							<Grid item xs={12}>
-								<Link to={`/ipr_list/plan/edit/${id}`} className={classes.link}><div className={classes.top_label}>Dodaj proponowany zakres wsparcia</div></Link>
-							</Grid>
-							<Grid item xs={4}>
-								<Button aria-label="Pobierz PDF" variant="outlined" color="secondary" className={classes.btnOption} onClick={handleExportPdf}>
-								<PictureAsPdfOutlinedIcon/>
-								</Button>
-							</Grid>
-							<Grid item xs={4}>
-								<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handlePreview}>
-								<FindInPageOutlinedIcon/>
-								</Button>
-							</Grid>
-							<Grid item xs={4}>
-								<Button variant="outlined" color="secondary" className={classes.btnOption} onClick={handleDelete}>
-								<DeleteIcon/>
-								</Button>
-							</Grid>
-							<Grid item xs={12}>
-								<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
-									Zapisz
-								</Button>
-							</Grid>
-						</Grid>
-					</Card>
-				</Grid>
-			</Grid>
-		</div>
-		{
-			progressStatus ?
-				<>
-					<div className={classes.progressContainer}>
-						<CircularProgress className={classes.progress} />
-					</div>
-				</>
-				:
-				<></>
-		}
-		<DeleteModal
+			</div>
+			{
+				progressStatus ?
+					<>
+						<div className={classes.progressContainer}>
+							<CircularProgress className={classes.progress} />
+						</div>
+					</>
+					:
+					<></>
+			}
+			<DeleteModal
 				openModal={openModal}
 				handleClose={handleCloseModal}
 				handleDelete={handleDelete}
 				selectedIndex={id}
 			/>
-	</MuiPickersUtilsProvider>
+		</MuiPickersUtilsProvider>
 	);
 };
 

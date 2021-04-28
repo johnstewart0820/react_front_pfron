@@ -88,12 +88,11 @@ const SecondStepView = (props) => {
 								className={classes.date_picker}
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+								aria-label="Orzeczenie o kwalifikacji z dnia - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="doctor_date"
 								value={doctor_date}
 								onChange={(value) => setDoctorDate(handleDate(value))}
-								aria-label="Orzeczenie o kwalifikacji z dnia"
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}
@@ -132,12 +131,11 @@ const SecondStepView = (props) => {
 								className={classes.date_picker}
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+								aria-label="Orzeczenie o kwalifikacji z dnia - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="psycology_date"
 								value={psycology_date}
 								onChange={(value) => setPsycologyDate(handleDate(value))}
-								aria-label="Orzeczenie o kwalifikacji z dnia"
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}

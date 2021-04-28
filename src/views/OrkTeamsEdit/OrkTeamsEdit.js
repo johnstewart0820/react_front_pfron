@@ -262,11 +262,10 @@ const OrkTeamsEdit = props => {
 														id="date"
 														variant="inline"
 														format="dd.MM.yyyy"
-														aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+														aria-label="Data akceptacji - Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														value={date_of_acceptance}
 														onChange={(e) => handleChangeDate(e)}
-														aria-label="Data akceptacji"
 														KeyboardButtonProps={{
 															'aria-label': 'Zmień datę',
 														}}

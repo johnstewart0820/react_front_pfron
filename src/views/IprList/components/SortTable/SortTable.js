@@ -134,12 +134,11 @@ const SortTable = (props) => {
 								disableToolbar
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+								aria-label="utworzono datę wyszukiwania specjalnych iprs - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="start_date"
 								value={searchCreatedAt}
 								onChange={(e) => setSearchCreatedAt(getDate(e))}
-								aria-label="utworzono datę wyszukiwania specjalnych iprs"
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}
@@ -151,12 +150,11 @@ const SortTable = (props) => {
 								disableToolbar
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+								aria-label="zaplanuj datę wyszukiwania specjalnych iprs - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="end_date"
 								value={searchScheduleDate}
 								onChange={(e) => setSearchScheduleDate(getDate(e))}
-								aria-label="schedule date for search special iprs"
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}

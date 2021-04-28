@@ -1086,12 +1086,11 @@ const CandidatesAdd = props => {
 														className={classes.date_picker}
 														variant="inline"
 														format="dd.MM.yyyy"
-                    				aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+                    				aria-label="Data ważności - Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={date_of_certificate}
 														onChange={(value) => handleChangeDateOfCertificate(value)}
-														aria-label="Data ważności"
 														KeyboardButtonProps={{
 															'aria-label': 'Zmień datę',
 														}}

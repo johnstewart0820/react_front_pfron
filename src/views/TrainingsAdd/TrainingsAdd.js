@@ -488,12 +488,11 @@ const TrainingsAdd = props => {
 														disableToolbar
 														variant="inline"
 														format="dd.MM.yyyy"
-														aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+														aria-label="Data zajęć - Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="class_date"
 														value={item.date}
 														onChange={(value) => handleChangeClassDate(value, index)}
-														aria-label="Data zajęć"
 														KeyboardButtonProps={{
 															'aria-label': 'Zmień datę',
 														}}

@@ -388,12 +388,11 @@ const IprPlan = props => {
 														disabled={true}
 														variant="inline"
 														format="dd.MM.yyyy"
-														aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
+														aria-label="Data wypełnienia - Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={schedule_date}
 														onChange={setScheduleDate}
-														aria-label="Data wypełnienia"
 														KeyboardButtonProps={{
 															'aria-label': 'Zmień datę',
 														}}

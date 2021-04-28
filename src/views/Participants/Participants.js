@@ -1,8 +1,8 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-  Button, Card, CircularProgress
+	Button, Card, CircularProgress
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import AddIcon from '@material-ui/icons/Add';
@@ -13,46 +13,46 @@ import participant from '../../apis/participant';
 import EXCEL from 'js-export-xlsx';
 
 const Participants = props => {
-  const { children } = props;
-  const { history } = props;
-  const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
-  const [countList, setCountList] = useState([25, 50, 100]);
-  const [selectedCount, setSelectedCount] = useState(25);
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState([]);
-  const [total, setTotal] = useState(0);
+	const { children } = props;
+	const { history } = props;
+	const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
+	const [countList, setCountList] = useState([25, 50, 100]);
+	const [selectedCount, setSelectedCount] = useState(25);
+	const [page, setPage] = useState(1);
+	const [data, setData] = useState([]);
+	const [total, setTotal] = useState(0);
 	const [totalCandidateList, setTotalCandidateList] = useState([]);
 	const [educationList, setEducationList] = useState([]);
 	const [voivodeshipList, setVoivodeshipList] = useState([]);
 	const [communityList, setCommunityList] = useState([]);
 	const [countyList, setCountyList] = useState([]);
-  const [searchId, setSearchId] = useState('');
-  const [searchName, setSearchName] = useState('');
-  const [searchSurname, setSearchSurname] = useState('');
-  const [searchRehabitationCenter, setSearchRehabitationCenter] = useState(0);
-  const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
-  const [searchParticipantStatusType, setSearchParticipantStatusType] = useState(0);
-  const [participantStatusTypeList, setParticipantStatusTypeList] = useState([]);
-  const [searchDateModified, setSearchDateModified] = useState({from: new Date('2020-01-01'), to: new Date('2050-12-31')});
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(-1);
-  const classes = useStyles();
-  const breadcrumbs = [{active: true, label: 'Uczestnicy', href: '/participants'}, {active: false, label: 'Lista uczestników'}];
-  	const [hasAlert, setHasAlert] = useState(false);
+	const [searchId, setSearchId] = useState('');
+	const [searchName, setSearchName] = useState('');
+	const [searchSurname, setSearchSurname] = useState('');
+	const [searchRehabitationCenter, setSearchRehabitationCenter] = useState(0);
+	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
+	const [searchParticipantStatusType, setSearchParticipantStatusType] = useState(0);
+	const [participantStatusTypeList, setParticipantStatusTypeList] = useState([]);
+	const [searchDateModified, setSearchDateModified] = useState({ from: new Date('2020-01-01'), to: new Date('2050-12-31') });
+	const [openModal, setOpenModal] = useState(false);
+	const [selectedItem, setSelectedItem] = useState(-1);
+	const classes = useStyles();
+	const breadcrumbs = [{ active: true, label: 'Uczestnicy', href: '/participants' }, { active: false, label: 'Lista uczestników' }];
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
-  
-  useEffect(() => {
-    participant.getInfo()
-      .then(response => {
-        if (response.code === 401) {
-          history.push('/login');
-        } else {
-          setRehabitationCenterList(response.data.rehabitation_center);
-		  setParticipantStatusTypeList(response.data.participant_status_type);
-        }
-      })
+	const [progressStatus, setProgressStatus] = useState(false);
+
+	useEffect(() => {
+		participant.getInfo()
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					setRehabitationCenterList(response.data.rehabitation_center);
+					setParticipantStatusTypeList(response.data.participant_status_type);
+				}
+			})
 		participant.getTotalList()
 			.then(response => {
 				if (response.code === 401) {
@@ -65,40 +65,40 @@ const Participants = props => {
 					setCountyList(response.data.counties);
 				}
 			})
-    handleSearch();
-  }, []);
+		handleSearch();
+	}, []);
 
-  useEffect(() => {
-    handleSearch();
-  }, [sortOption, page]);
+	useEffect(() => {
+		handleSearch();
+	}, [sortOption, page]);
 
-  useEffect(() => {
-    handleSearch();
-    setPage(1);
-  }, [selectedCount, searchId, searchName, searchDateModified, searchRehabitationCenter, searchParticipantStatusType, searchSurname]);
-  
-  const requestSort = (pSortBy) => {
-    var sortOrder = "asc";
-    if (pSortBy === sortOption.sortBy) {
-      sortOrder = (sortOption.sortOrder === "asc" ? "desc" : "asc");
-    }
-    setSortOption({ sortBy: pSortBy, sortOrder: sortOrder })
-  }
-  
-  const handleSearch = () => {
-    participant
-      .getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchName, searchSurname, searchRehabitationCenter, searchParticipantStatusType, searchDateModified)
-      .then(response => {
-        if (response.code === 401) {
-          history.push('/login');
-        } else {
-          if (response.code === 200) {
-            setData(response.data.participant);
-            setTotal(response.data.count);
-          }
-        }
-      })
-  }
+	useEffect(() => {
+		handleSearch();
+		setPage(1);
+	}, [selectedCount, searchId, searchName, searchDateModified, searchRehabitationCenter, searchParticipantStatusType, searchSurname]);
+
+	const requestSort = (pSortBy) => {
+		var sortOrder = "asc";
+		if (pSortBy === sortOption.sortBy) {
+			sortOrder = (sortOption.sortOrder === "asc" ? "desc" : "asc");
+		}
+		setSortOption({ sortBy: pSortBy, sortOrder: sortOrder })
+	}
+
+	const handleSearch = () => {
+		participant
+			.getListByOption(sortOption.sortBy, sortOption.sortOrder, selectedCount, page, searchId, searchName, searchSurname, searchRehabitationCenter, searchParticipantStatusType, searchDateModified)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						setData(response.data.participant);
+						setTotal(response.data.count);
+					}
+				}
+			})
+	}
 
 	const handleExportSL = () => {
 		let export_data = [];
@@ -110,7 +110,7 @@ const Participants = props => {
 			item.push('1/1/2018');
 			item.push('12/31/2023');
 			item.push('-');
-			for(let j = 0; j < 24; j ++)
+			for (let j = 0; j < 24; j++)
 				item.push('');
 			item.push('Polska');
 			item.push('indywidualny');
@@ -153,9 +153,9 @@ const Participants = props => {
 			if (unemployed_status === '1' && have_unemployed_person_status != '1' && seek_work_status != '1') {
 				res = 'osoba bezrobotna niezarejestrowana w ewidencji urzędów pracy';
 			}
-			
+
 			item.push(res);
-			
+
 			if (long_term_employed_status === '1') {
 				item.push('osoba długotrwale bezrobotna')
 			} else {
@@ -169,7 +169,7 @@ const Participants = props => {
 			item.push(data.decision_central_commision === '2' ? 'osoba nie otrzymała żadnej oferty' : '');
 			item.push(data.decision_central_commision === '2' ? 'Tak' : '');
 
-			for (let j = 0; j < 7; j ++)
+			for (let j = 0; j < 7; j++)
 				item.push('');
 
 			let arr = ['Tak', 'Nie', 'Odmowa podania informacji'];
@@ -181,37 +181,37 @@ const Participants = props => {
 			item.push('');
 
 			export_data.push(item);
-		}) 
+		})
 		EXCEL.outPut({
 			header: ['Numer umowy/ decyzji /aneksu', 'Nazwa beneficjenta', 'Tytuł projektu', 'Okres realizacji projektu od', 'Okres realizacji projektu do',
-			'Wniosek za okres', 'Kraj', 'Nazwa instytucji', 'NIP', 'Brak NIP', 'Typ instytucji', 'w tym', 'Województwo', 'Powiat', 'Gmina',
-			'Miejscowość', 'Ulica', 'Nr budynku', 'Nr lokalu', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)', 'Telefon kontaktowy', 'Adres e-mail',
-			'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Czy wsparciem zostali objęci pracownicy instytucji', 
-			'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu', 
-		  'Kraj', 'Rodzaj uczestnika', 'Nazwa instytucji', 'Imię', 'Nazwisko', 'Pesel', 'Brak PESEL', 'Płeć', 'Wiek w chwili przystąpienia do projektu', 'Wykształcenie',
-		  'Województwo', 'Powiat', 'Gmina', 'Miejscowość', 'Ulica', 'Nr budynku', 'Nr budynku', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)',
-			'Telefon kontaktowy', 'Adres e-mail', 'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Status osoby na rynku pracy w chwili przystąpienia do projektu',
-			'W tym', 'Wykonywany zawód', 'Zatrudniony w:', 'Sytuacja (1) osoby w momencie zakończenia udziału w projekcie', 'Sytuacja (2) osoby w momencie zakończenia udziału w projekcie',
-			'Inne rezultaty dotyczące osób młodych (dotyczy IZM)', 'Zakończenie udziału osoby w projekcie zgodnie z zaplanowaną dla niej ścieżką uczestnictwa',
-			'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu', 'Data założenia działalności gospodarczej',
-			'Kwota środków przyznanych na założenie działalności gospodarczej', 'PKD założonej działalności gospodarczej', 'Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia',
-			'Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań', 'Osoba z niepełnosprawnościami', 'Osoba w innej niekorzystnej sytuacji społecznej',
-			'Planowana data zakończenia edukacji w placówce edukacyjnej, w której skorzystano ze wsparcia'],
+				'Wniosek za okres', 'Kraj', 'Nazwa instytucji', 'NIP', 'Brak NIP', 'Typ instytucji', 'w tym', 'Województwo', 'Powiat', 'Gmina',
+				'Miejscowość', 'Ulica', 'Nr budynku', 'Nr lokalu', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)', 'Telefon kontaktowy', 'Adres e-mail',
+				'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Czy wsparciem zostali objęci pracownicy instytucji',
+				'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu',
+				'Kraj', 'Rodzaj uczestnika', 'Nazwa instytucji', 'Imię', 'Nazwisko', 'Pesel', 'Brak PESEL', 'Płeć', 'Wiek w chwili przystąpienia do projektu', 'Wykształcenie',
+				'Województwo', 'Powiat', 'Gmina', 'Miejscowość', 'Ulica', 'Nr budynku', 'Nr budynku', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)',
+				'Telefon kontaktowy', 'Adres e-mail', 'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Status osoby na rynku pracy w chwili przystąpienia do projektu',
+				'W tym', 'Wykonywany zawód', 'Zatrudniony w:', 'Sytuacja (1) osoby w momencie zakończenia udziału w projekcie', 'Sytuacja (2) osoby w momencie zakończenia udziału w projekcie',
+				'Inne rezultaty dotyczące osób młodych (dotyczy IZM)', 'Zakończenie udziału osoby w projekcie zgodnie z zaplanowaną dla niej ścieżką uczestnictwa',
+				'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu', 'Data założenia działalności gospodarczej',
+				'Kwota środków przyznanych na założenie działalności gospodarczej', 'PKD założonej działalności gospodarczej', 'Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia',
+				'Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań', 'Osoba z niepełnosprawnościami', 'Osoba w innej niekorzystnej sytuacji społecznej',
+				'Planowana data zakończenia edukacji w placówce edukacyjnej, w której skorzystano ze wsparcia'],
 			data: export_data,
 			name: 'SL'
 		})
 	}
-  const handleExport = () => {
+	const handleExport = () => {
 		participant
-      .getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchSurname, searchRehabitationCenter, searchParticipantStatusType, searchDateModified)
-      .then(response => {
-        if (response.code === 401) {
-          history.push('/login');
-        } else {
-          if (response.code === 200) {
+			.getListByOption(sortOption.sortBy, sortOption.sortOrder, total, page, searchId, searchName, searchSurname, searchRehabitationCenter, searchParticipantStatusType, searchDateModified)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
 						let _data = response.data.participant;
 						let export_data = [];
-						for (let i = 0; i < _data.length; i ++) {
+						for (let i = 0; i < _data.length; i++) {
 							let item = [];
 							item.push(_data[i].id);
 							item.push(_data[i].name);
@@ -227,16 +227,16 @@ const Participants = props => {
 							data: export_data,
 							name: 'download'
 						})
-          }
-        }
-      })
-    
-  }
+					}
+				}
+			})
 
-  const handleSelectedItem = (id) => {
-    setSelectedItem(id);
-    setOpenModal(true);
-  }
+	}
+
+	const handleSelectedItem = (id) => {
+		setSelectedItem(id);
+		setOpenModal(true);
+	}
 
 	const handlePaginationLabel = (type, page, selected) => {
 		if (type === 'first') {
@@ -254,69 +254,70 @@ const Participants = props => {
 		return `Strona ${page}`;
 	}
 
-  return (
-    <div className={classes.public}>
-      <div className={classes.controlBlock}>
+	return (
+		<div className={classes.public}>
+			<div className={classes.controlBlock}>
 				<Button title="wielkość pliku poniżej 1 megabajt" variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExportSL}>
 					Eksport listy do SL
 				</Button>
 				<Button title="wielkość pliku poniżej 1 megabajt" variant="outlined" color="secondary" className={classes.btnExport} onClick={handleExport}>
-          Eksport listy do XLS
+					Eksport listy do XLS
         </Button>
-				
-      </div>
-      <div className={classes.divide}/>
-      <div className={classes.filter}>
-        <Breadcrumb list={breadcrumbs}/>
-        <div className={classes.rowsBlock}>
-          <div>Pokaż:</div>
-          <SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
-          <div>pozycji</div>
-        </div>
-      </div>
-			<Alert 
-					hasAlert={hasAlert}
-					setHasAlert={setHasAlert}
-					isSuccess={isSuccess}
-					message={message}
+
+			</div>
+			<div className={classes.divide} />
+			<div className={classes.filter}>
+				<Breadcrumb list={breadcrumbs} />
+				<div className={classes.rowsBlock}>
+					<div>Pokaż:</div>
+					<SingleSelect value={selectedCount} handleChange={setSelectedCount} list={countList} />
+					<div>pozycji</div>
+				</div>
+			</div>
+			<Alert
+				hasAlert={hasAlert}
+				setHasAlert={setHasAlert}
+				isSuccess={isSuccess}
+				message={message}
+			/>
+			<Card className={classes.table}>
+				<SortTable
+					rows={data}
+					requestSort={requestSort}
+					sortOrder={sortOption.sortOrder}
+					sortBy={sortOption.sortBy}
+					total={total}
+					page={page}
+					selectedCount={selectedCount}
+					searchId={searchId}
+					setSearchId={setSearchId}
+					searchName={searchName}
+					setSearchName={setSearchName}
+					searchSurname={searchSurname}
+					setSearchSurname={setSearchSurname}
+					searchRehabitationCenter={searchRehabitationCenter}
+					rehabitationCenterList={rehabitationCenterList}
+					setSearchRehabitationCenter={setSearchRehabitationCenter}
+					searchParticipantStatusType={searchParticipantStatusType}
+					setSearchParticipantStatusType={setSearchParticipantStatusType}
+					participantStatusTypeList={participantStatusTypeList}
+					searchDateModified={searchDateModified}
+					setSearchDateModified={setSearchDateModified}
 				/>
-      <Card className={classes.table}>
-        <SortTable
-          rows={data}
-          requestSort={requestSort}
-          sortOrder={sortOption.sortOrder}
-          sortBy={sortOption.sortBy}
-          total={total}
-          page={page}
-          selectedCount={selectedCount}
-          searchId={searchId}
-          setSearchId={setSearchId}
-          searchName={searchName}
-          setSearchName={setSearchName}
-          searchSurname={searchSurname}
-          setSearchSurname={setSearchSurname}
-          searchRehabitationCenter={searchRehabitationCenter}
-		  rehabitationCenterList={rehabitationCenterList}
-          setSearchRehabitationCenter={setSearchRehabitationCenter}
-          searchParticipantStatusType={searchParticipantStatusType}
-		  setSearchParticipantStatusType={setSearchParticipantStatusType}
-		  participantStatusTypeList={participantStatusTypeList}
-          searchDateModified={searchDateModified}
-          setSearchDateModified={setSearchDateModified}
-        />
-        <div className={classes.pagination}>
-          <Pagination
-className={classes.pagenation_class}
-            count={ total%selectedCount == 0 ? total / selectedCount : parseInt(total / selectedCount) + 1} 
-            onChange={(e, page) => {setPage(page)}} 
-            page={page} 
+				<div className={classes.pagination}>
+					<Pagination
+						className={classes.pagenation_class}
+						count={total % selectedCount == 0 ? total / selectedCount : parseInt(total / selectedCount) + 1}
+						onChange={(e, page) => { setPage(page) }}
+						page={page}
 						getItemAriaLabel={handlePaginationLabel}
-            showFirstButton 
-            showLastButton />
-        </div>
-      </Card>
-    </div>
-  );
+						showFirstButton
+						showLastButton 
+						aria-label="Przejdź do następnych stron wyników wyszukiwania wybierając intersująca cię stronę"/>
+				</div>
+			</Card>
+		</div>
+	);
 };
 
 export default Participants;

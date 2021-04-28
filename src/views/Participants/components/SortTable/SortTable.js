@@ -158,7 +158,7 @@ const SortTable = (props) => {
                     disableToolbar
                     variant="inline"
                     format="dd.MM.yyyy"
-                    placeholder="Format wprowadzania daty DD.MM.RRRR"
+                    aria-label="Format wprowadzania daty DD.MM.RRRR"
                     margin="normal"
                     id="date"
                     value={searchDateModified.from}
@@ -175,7 +175,7 @@ const SortTable = (props) => {
                     disableToolbar
                     variant="inline"
                     format="dd.MM.yyyy"
-                    placeholder="Format wprowadzania daty DD.MM.RRRR"
+                    aria-label="Format wprowadzania daty DD.MM.RRRR"
                     margin="normal"
                     id="date"
                     value={searchDateModified.to}

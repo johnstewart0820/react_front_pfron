@@ -101,7 +101,7 @@ const Notifications = props => {
 					}
 				}
 			})
-		
+
 	}
 
 	const handleSelectedItem = (id) => {
@@ -240,7 +240,8 @@ const Notifications = props => {
 							page={page}
 							getItemAriaLabel={handlePaginationLabel}
 							showFirstButton
-							showLastButton />
+							showLastButton 
+							aria-label="Przejdź do następnych stron wyników wyszukiwania wybierając intersująca cię stronę"/>
 					</div>
 				</Card>
 			</div>

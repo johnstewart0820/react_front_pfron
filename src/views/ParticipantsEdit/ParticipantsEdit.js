@@ -853,7 +853,7 @@ const ParticipantsEdit = props => {
 												className={classes.date_picker}
 												variant="inline"
 												format="dd.MM.yyyy"
-                    		placeholder="Format wprowadzania daty DD.MM.RRRR"
+                    		aria-label="Format wprowadzania daty DD.MM.RRRR"
 												margin="normal"
 												id="date_birth"
 												value={date_of_birth}
@@ -1226,7 +1226,7 @@ const ParticipantsEdit = props => {
 														className={classes.date_picker}
 														variant="inline"
 														format="dd.MM.yyyy"
-                    				placeholder="Format wprowadzania daty DD.MM.RRRR"
+                    				aria-label="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={date_of_certificate}

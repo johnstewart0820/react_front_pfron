@@ -255,7 +255,7 @@ const OrkListEdit = props => {
 																	disableToolbar
 																	variant="inline"
 																	format="dd.MM.yyyy"
-																	placeholder="Format wprowadzania daty DD.MM.RRRR"
+																	aria-label="Format wprowadzania daty DD.MM.RRRR"
 																	margin="normal"
 																	id={`start_date${index}`}
 																	value={item.start_date}
@@ -279,7 +279,7 @@ const OrkListEdit = props => {
 																	disableToolbar
 																	variant="inline"
 																	format="dd.MM.yyyy"
-																	placeholder="Format wprowadzania daty DD.MM.RRRR"
+																	aria-label="Format wprowadzania daty DD.MM.RRRR"
 																	margin="normal"
 																	id={`end_date${index}`}
 																	value={item.end_date}

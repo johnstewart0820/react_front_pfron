@@ -150,7 +150,7 @@ const SortTable = (props) => {
 								id="date"
 								variant="inline"
 								format="dd.MM.yyyy"
-								placeholder="Format wprowadzania daty DD.MM.RRRR"
+								aria-label="Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								value={searchScheduleDate}
 								onChange={setSearchScheduleDate}

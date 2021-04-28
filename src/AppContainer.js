@@ -70,13 +70,18 @@ class AppContainer extends React.Component {
 
 	componentDidMount() {
 		this.checkValidity();
-		let dom = document.getElementById('skip-link');
-		console.log(dom);
-		// let child = document.getElementsByClassName('u-vs-hidden')[0];
-		// dom.removeChild(child);
+		
 		document.addEventListener('keydown',this.keydownHandler);
 	}
+
 	componentDidUpdate(prevProps) {
+		let dom = document.getElementsByClassName('c-links')[0];
+		let child = document.getElementsByClassName('u-vs-hidden');
+		if (child.length > 0)
+		dom.removeChild(child[0]);
+		let link_title = document.getElementsByClassName('c-links__item')[0];
+		link_title.setAttribute('aria-label', 
+			this.props.location.pathname === '/login' || this.props.location.pathname === '/forgotpassword' ? this.login_links[0].title : this.links[0].title);
 		if (this.props.location.pathname !== prevProps.location.pathname) {
 			this.checkValidity();
 		}

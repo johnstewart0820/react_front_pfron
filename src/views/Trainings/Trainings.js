@@ -31,11 +31,11 @@ const Trainings = props => {
 	const [selectedItem, setSelectedItem] = useState(-1);
 	const classes = useStyles();
 	const breadcrumbs = [{ active: true, label: 'Usługi', href: '/service_list' }, { active: false, label: 'Szkolenia' }];
-		const [hasAlert, setHasAlert] = useState(false);
+	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
-        const [progressStatus, setProgressStatus] = useState(false);
-	
+	const [progressStatus, setProgressStatus] = useState(false);
+
 
 	useEffect(() => {
 		training.getInfo()
@@ -139,7 +139,7 @@ const Trainings = props => {
 					}
 				}
 			})
-		
+
 	}
 
 	const handleSelectedItem = (id) => {
@@ -152,7 +152,7 @@ const Trainings = props => {
 	}
 
 	const handleDelete = () => {
-    
+
 		setProgressStatus(true);
 		training
 			.delete(selectedItem)
@@ -162,8 +162,8 @@ const Trainings = props => {
 				} else {
 					if (response.code === 200) {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 					}
 					setProgressStatus(false);
 					handleSearch();
@@ -208,12 +208,12 @@ const Trainings = props => {
 					<div>pozycji</div>
 				</div>
 			</div>
-			<Alert 
-					hasAlert={hasAlert}
-					setHasAlert={setHasAlert}
-					isSuccess={isSuccess}
-					message={message}
-				/>
+			<Alert
+				hasAlert={hasAlert}
+				setHasAlert={setHasAlert}
+				isSuccess={isSuccess}
+				message={message}
+			/>
 			<Card className={classes.table}>
 				<SortTable
 					rows={data}
@@ -245,7 +245,8 @@ const Trainings = props => {
 						page={page}
 						getItemAriaLabel={handlePaginationLabel}
 						showFirstButton
-						showLastButton />
+						showLastButton 
+						aria-label="Przejdź do następnych stron wyników wyszukiwania wybierając intersująca cię stronę"/>
 				</div>
 			</Card>
 			<DeleteModal

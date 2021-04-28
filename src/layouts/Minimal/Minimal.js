@@ -88,7 +88,7 @@ const Minimal = props => {
         <main className={classes.content}>{children}</main>
         <Grid container spacing={3} className={classes.footer}>
 					<Grid item xs={12}>
-						<a href="https://pfron.nfinity.pl/deklaracja.html" target="_blank" className={classes.declaration} aria-label="Strona zostanie otwarta w nowym oknie przeglądarki">Deklaracja dostępności</a>
+						<a href="https://pfron.nfinity.pl/deklaracja.html" target="_blank" className={classes.declaration} aria-label="Deklaracja dostępności - Strona zostanie otwarta w nowym oknie przeglądarki">Deklaracja dostępności</a>
 					</Grid>
           <Grid item md={2} sm={4} xs={4}>
             <img className={classes.logo} src="/images/logos/footer_pfron.png" alt="Logo Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych" />

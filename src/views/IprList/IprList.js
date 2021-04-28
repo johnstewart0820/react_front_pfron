@@ -38,7 +38,7 @@ const IprList = props => {
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
 	const [progressStatus, setProgressStatus] = useState(false);
-	
+
 	useEffect(() => {
 		ipr.getInfo()
 			.then(response => {
@@ -107,7 +107,7 @@ const IprList = props => {
 							item.push(_data[i].schedule_date);
 							export_data.push(item);
 						}
-				
+
 						EXCEL.outPut({
 							header: ['ID', 'Imię i nazwisko uczestnika', 'Typ IPR', 'Numer', 'Data powstania', 'Data wypełnienia'],
 							data: export_data,
@@ -116,7 +116,7 @@ const IprList = props => {
 					}
 				}
 			})
-		
+
 	}
 
 	const handleSelectedItem = (id) => {
@@ -129,7 +129,7 @@ const IprList = props => {
 	}
 
 	const handleDelete = () => {
-    
+
 		setProgressStatus(true);
 		ipr
 			.delete(selectedItem)
@@ -139,8 +139,8 @@ const IprList = props => {
 				} else {
 					if (response.code === 200) {
 						setHasAlert(true);
-					setMessage(response.message);
-					setIsSuccess(response.code === 200);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
 					}
 					setProgressStatus(false);
 					handleSearch();
@@ -185,12 +185,12 @@ const IprList = props => {
 					<div>pozycji</div>
 				</div>
 			</div>
-			<Alert 
-					hasAlert={hasAlert}
-					setHasAlert={setHasAlert}
-					isSuccess={isSuccess}
-					message={message}
-				/>
+			<Alert
+				hasAlert={hasAlert}
+				setHasAlert={setHasAlert}
+				isSuccess={isSuccess}
+				message={message}
+			/>
 			<Card className={classes.table}>
 				<SortTable
 					rows={data}
@@ -223,7 +223,8 @@ const IprList = props => {
 						page={page}
 						getItemAriaLabel={handlePaginationLabel}
 						showFirstButton
-						showLastButton />
+						showLastButton
+						aria-label="Przejdź do następnych stron wyników wyszukiwania wybierając intersująca cię stronę" />
 				</div>
 			</Card>
 			<DeleteModal

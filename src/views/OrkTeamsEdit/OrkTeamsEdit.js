@@ -252,7 +252,7 @@ const OrkTeamsEdit = props => {
 														id="date"
 														variant="inline"
 														format="dd.MM.yyyy"
-														placeholder="Format wprowadzania daty DD.MM.RRRR"
+														aria-label="Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														value={date_of_acceptance}
 														onChange={(e) => handleChangeDate(e)}

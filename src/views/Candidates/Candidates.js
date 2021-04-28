@@ -360,7 +360,8 @@ const Candidates = props => {
 						page={page}
 						getItemAriaLabel={handlePaginationLabel}
 						showFirstButton
-						showLastButton />
+						showLastButton 
+						aria-label="Przejdź do następnych stron wyników wyszukiwania wybierając intersująca cię stronę"/>
 				</div>
 			</Card>
 			<DeleteModal

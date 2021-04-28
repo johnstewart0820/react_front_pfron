@@ -177,7 +177,7 @@ const PlanView = (props) => {
 										id="start_date"
 										variant="inline"
 										format="dd.MM.yyyy"
-										aria-label="Format wprowadzania daty DD.MM.RRRR"
+										aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 										margin="normal"
 										value={service.start_date}
 										onChange={(value) => handleChangeStartDate(value, index, index_module)}

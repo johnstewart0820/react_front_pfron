@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, Typography
+	Button, Grid, Card, TextField, CircularProgress, Typography, Chip
 } from '@material-ui/core';
 
 import { Autocomplete } from '@material-ui/lab';
-
+import CloseIcon from '@material-ui/icons/Close';
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import qualification from '../../apis/qualification';
 import clsx from 'clsx';
@@ -136,7 +136,12 @@ const QualificationPointsAdd = props => {
 										options={ambassadorList}
 										getOptionLabel={(option) => ambassadorList && option && option.name}
 										id="ambassador"
-										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+										renderTags={(value, getTagProps) =>
+											value.map((option, index) => (
+												<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+											))
+										}
+										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }}/>}
 									/>
 								</Grid>
 							</Grid>

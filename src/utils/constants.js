@@ -284,6 +284,7 @@ class constants {
 			'/candidates/history/*',
 			'/candidates/info/step1/*',
 			'/candidates/info/step2/*',
+			'/candidates/info/step3/*',
 			'/candidates/info/step4/*',
 
 			'/qualification_points',

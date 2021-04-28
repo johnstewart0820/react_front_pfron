@@ -101,11 +101,12 @@ const styles = StyleSheet.create({
 
 const PdfTemplate = (props) => {
   const { participant_number, participant_name, ipr_type, number, schedule_date, ork_person, moduleList } = props;
-	
 	const getOrkPerson = (module, id_ork, index_module) => {
-	  if (id_ork === null)
+	  if (id_ork === null || id_ork === undefined)
 	  	return '';
 	  for (let i = 0; i < module.ork_team.length; i ++) {
+			if (module.ork_team[i] === undefined)
+				continue;
 		  if (module.ork_team[i].id == id_ork || module.ork_team[i].id == id_ork.id) {
 			  return module.ork_team[i].name;
 		  }

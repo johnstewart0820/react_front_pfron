@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, Typography
+	Button, Grid, Card, TextField, CircularProgress, Typography, Chip
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import CloseIcon from '@material-ui/icons/Close';
 import { Autocomplete } from '@material-ui/lab';
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
@@ -187,7 +187,12 @@ const QualificationPointsEdit = props => {
 										onChange={(event, value) => setAmbassador(value ? value : [])}
 										options={ambassadorList}
 										getOptionLabel={(option) => ambassadorList && option && option.name}
-										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+										renderTags={(value, getTagProps) =>
+											value.map((option, index) => (
+												<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+											))
+										}
+										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }}/>}
 									/>
 								</Grid>
 							</Grid>
@@ -202,7 +207,7 @@ const QualificationPointsEdit = props => {
                 </Button>
 								</Grid>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)} aria-label="usunąć">
+									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)} aria-label="usuń">
 										<DeleteIcon />
 									</Button>
 								</Grid>

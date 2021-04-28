@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox, Typography
+	Button, Grid, Card, TextField, CircularProgress, FormControlLabel, Checkbox, Typography, Chip
 } from '@material-ui/core';
-
+import CloseIcon from '@material-ui/icons/Close';
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import users from '../../apis/users';
@@ -118,6 +118,11 @@ const UsersAdd = props => {
 										value={role}
 										options={roleList}
 										getOptionLabel={(option) => roleList && option && option.name}
+										renderTags={(value, getTagProps) =>
+											value.map((option, index) => (
+												<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+											))
+										}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 									/>
 									{
@@ -132,6 +137,11 @@ const UsersAdd = props => {
 													value={qualification_point}
 													options={qualificationPointList}
 													getOptionLabel={(option) => roleList && option && option.name}
+													renderTags={(value, getTagProps) =>
+														value.map((option, index) => (
+															<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+														))
+													}
 													renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 												/>
 											</>

@@ -61,7 +61,7 @@ const FourthStepView = (props) => {
               className={classes.date_picker}
               variant="inline"
               format="dd.MM.yyyy"
-							aria-label="Format wprowadzania daty DD.MM.RRRR"
+							aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
               margin="normal"
               id="date_referal"
               value={date_referal}
@@ -87,7 +87,7 @@ const FourthStepView = (props) => {
               className={classes.date_picker}
               variant="inline"
               format="dd.MM.yyyy"
-							aria-label="Format wprowadzania daty DD.MM.RRRR"
+							aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
               margin="normal"
               id="date_rehabitation_center"
               value={date_rehabitation_center}

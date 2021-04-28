@@ -66,7 +66,7 @@ const ThirdStepView = (props) => {
 											className={classes.date_picker}
 											variant="inline"
 											format="dd.MM.yyyy"
-											aria-label="Format wprowadzania daty DD.MM.RRRR"
+											aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 											margin="normal"
 											id="date_central_commision"
 											value={date_central_commision}

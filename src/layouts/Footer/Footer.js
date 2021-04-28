@@ -69,7 +69,7 @@ const Footer = props => {
           <img className={classes.logo} src="/images/logos/footer_UE.png" alt="Logo Unia Europejska Europejski Fundusz Społeczny" />
         </Grid>
 				<div className={classes.wcag_container}>
-					<a href="https://pfron.nfinity.pl/deklaracja.html" className={classes.declaration} target="_blank" aria-label="Deklaracja dostępności - Strona zostanie otwarta w nowym oknie przeglądarki">Deklaracja dostępności</a>
+					<a href="https://pfron.nfinity.pl/deklaracja.html" className={classes.declaration} target="_blank" title="Deklaracja dostępności - Strona zostanie otwarta w nowym oknie przeglądarki">Deklaracja dostępności</a>
 				</div>
       </Grid>
     </div>

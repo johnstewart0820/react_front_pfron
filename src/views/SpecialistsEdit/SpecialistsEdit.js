@@ -187,7 +187,7 @@ const SpecialistsEdit = props => {
                 </Button>
 								</Grid>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)} aria-label="usunąć">
+									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)} aria-label="usuń">
 										<DeleteIcon />
 									</Button>
 								</Grid>

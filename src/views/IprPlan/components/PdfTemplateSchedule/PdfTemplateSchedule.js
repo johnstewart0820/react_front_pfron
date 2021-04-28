@@ -147,7 +147,6 @@ const PdfTemplateSchedule = (props) => {
 	}
 
   return (
-		console.log(moduleList),
 		<Document>
 			<Page style={styles.page} wrap={true}>				
 				<View style={styles.header}>

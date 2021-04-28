@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, FormControl, RadioGroup, FormControlLabel, Radio, Typography
+	Button, Grid, Card, TextField, CircularProgress, FormControl, RadioGroup, FormControlLabel, Radio, Typography, Chip
 } from '@material-ui/core';
-
+import CloseIcon from '@material-ui/icons/Close';
 import { Autocomplete } from '@material-ui/lab';
 import {
 	KeyboardDatePicker, MuiPickersUtilsProvider,
@@ -158,6 +158,11 @@ const OrkTeamsAdd = props => {
 										onChange={(event, value) => handleChangeRehabitationCenter(value ? value : [])}
 										options={rehabitationCenterList}
 										getOptionLabel={(option) => rehabitationCenterList && option && option.name}
+										renderTags={(value, getTagProps) =>
+											value.map((option, index) => (
+												<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+											))
+										}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.rehabitationCenter} />}
 									/>
 									<div className={classes.input_box_label}><label htmlFor="specialization">Specjalizacja</label></div>
@@ -168,6 +173,11 @@ const OrkTeamsAdd = props => {
 										onChange={(event, value) => handleChangeSpecialization(value ? value : [])}
 										options={specializationList}
 										getOptionLabel={(option) => specializationList && option && option.name + (option.module_type ? (' (' + option.module_type + ')') : '')}
+										renderTags={(value, getTagProps) =>
+											value.map((option, index) => (
+												<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+											))
+										}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.specialization} />}
 									/>
 									{
@@ -187,7 +197,7 @@ const OrkTeamsAdd = props => {
 															disableToolbar
 															variant="inline"
 															format="dd.MM.yyyy"
-															aria-label="Format wprowadzania daty DD.MM.RRRR"
+															aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 															margin="normal"
 															id="date_of_acceptance"
 															value={date_of_acceptance}

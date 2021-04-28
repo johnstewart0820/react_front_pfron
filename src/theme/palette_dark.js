@@ -17,7 +17,7 @@ const sidebar_hover_color = white;
 const sidebar_title_color = green;
 const card_border = `1px solid ${green}`;
 const pagination_background = green;
-
+const white_black = '#FFFFFF';
 export default {
   black,
   white,
@@ -36,6 +36,7 @@ export default {
 	sidebar_title_color,
 	card_border,
 	pagination_background,
+  white_black,
   primary: {
     contrastText: white,
     dark: colors.indigo[900],

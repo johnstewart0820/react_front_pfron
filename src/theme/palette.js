@@ -6,7 +6,7 @@ const pink = '#B30600';
 const gray = '#44545e';
 const green= '#2E6228';
 const color = '#454648';
-const btn_gray = '#727E91';
+const btn_gray = '#000';
 const pink_disable = '#a02000';
 const gray_disable = '#404040';
 const topbar_color = '#FFFFFF';
@@ -17,6 +17,7 @@ const sidebar_hover_color = '#EBECF0';
 const sidebar_title_color = 'gray';
 const card_border = 'none';
 const pagination_background = 'rgba(0, 0, 0, 0.08)';
+const white_black = '#000000';
 export default {
   black,
   white,
@@ -35,6 +36,7 @@ export default {
 	sidebar_title_color,
 	card_border,
 	pagination_background,
+  white_black,
   primary: {
     contrastText: white,
     dark: colors.indigo[900],
@@ -83,5 +85,5 @@ export default {
   icon: colors.blueGrey[600],
   divider: colors.grey[200],
 	pagination_color: colors.blueGrey[900],
-	btn_darkgray: 'darkgray',
+	btn_darkgray: 'black',
 };

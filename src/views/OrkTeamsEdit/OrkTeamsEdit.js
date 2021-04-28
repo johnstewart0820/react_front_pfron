@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, FormControl, RadioGroup, FormControlLabel, Radio, Typography
+	Button, Grid, Card, TextField, CircularProgress, FormControl, RadioGroup, FormControlLabel, Radio, Typography, Chip
 } from '@material-ui/core';
-
+import CloseIcon from '@material-ui/icons/Close';
 import { Autocomplete } from '@material-ui/lab';
 import {
 	KeyboardDatePicker, MuiPickersUtilsProvider,
@@ -222,6 +222,11 @@ const OrkTeamsEdit = props => {
 										onChange={(event, value) => handleChangeRehabitationCenter(value ? value : [])}
 										options={rehabitationCenterList}
 										getOptionLabel={(option) => rehabitationCenterList && option && option.name}
+										renderTags={(value, getTagProps) =>
+											value.map((option, index) => (
+												<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+											))
+										}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.rehabitationCenter} />}
 									/>
 									<div className={classes.input_box_label}><label htmlFor="specialization">Specjalizacja</label></div>
@@ -233,6 +238,11 @@ const OrkTeamsEdit = props => {
 										onChange={(event, value) => handleChangeSpecialization(value ? value : [])}
 										options={specializationList}
 										getOptionLabel={(option) => specializationList && option && option.name + (option.module_type ? (' (' + option.module_type + ')') : '')}
+										renderTags={(value, getTagProps) =>
+											value.map((option, index) => (
+												<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+											))
+										}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.specialization} />}
 									/>
 									{storage.getStorage('role').includes('1') ?
@@ -252,7 +262,7 @@ const OrkTeamsEdit = props => {
 														id="date"
 														variant="inline"
 														format="dd.MM.yyyy"
-														aria-label="Format wprowadzania daty DD.MM.RRRR"
+														aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														value={date_of_acceptance}
 														onChange={(e) => handleChangeDate(e)}
@@ -282,7 +292,7 @@ const OrkTeamsEdit = props => {
                 </Button>
 								</Grid>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)}>
+									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)} aria-label="usuń">
 										<DeleteIcon />
 									</Button>
 								</Grid>

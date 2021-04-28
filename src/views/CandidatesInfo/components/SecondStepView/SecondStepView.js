@@ -88,7 +88,7 @@ const SecondStepView = (props) => {
 								className={classes.date_picker}
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Format wprowadzania daty DD.MM.RRRR"
+								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="doctor_date"
 								value={doctor_date}
@@ -132,7 +132,7 @@ const SecondStepView = (props) => {
 								className={classes.date_picker}
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Format wprowadzania daty DD.MM.RRRR"
+								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="psycology_date"
 								value={psycology_date}

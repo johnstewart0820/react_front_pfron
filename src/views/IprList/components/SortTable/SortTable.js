@@ -134,7 +134,7 @@ const SortTable = (props) => {
 								disableToolbar
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Format wprowadzania daty DD.MM.RRRR"
+								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="start_date"
 								value={searchCreatedAt}
@@ -151,7 +151,7 @@ const SortTable = (props) => {
 								disableToolbar
 								variant="inline"
 								format="dd.MM.yyyy"
-								aria-label="Format wprowadzania daty DD.MM.RRRR"
+								aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
 								id="end_date"
 								value={searchScheduleDate}

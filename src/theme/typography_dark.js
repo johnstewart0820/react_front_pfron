@@ -1,4 +1,4 @@
-import palette from './palette';
+import palette from './palette_dark';
 
 export default {
   h1: {

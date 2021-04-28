@@ -57,7 +57,6 @@ const ScheduleView = (props) => {
 	}, [weeks]);
 
 	useEffect(() => {
-		// console.log(weeks, week);
 		if (weeks.length !== 0) {
 			let _week = weeks[week - 1];
 			let _start_date = _week.from;

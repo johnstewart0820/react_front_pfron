@@ -711,12 +711,11 @@ const CandidatesAdd = props => {
 												className={classes.date_picker}
 												variant="inline"
 												format="dd.MM.yyyy"
-                    		aria-label="Format wprowadzania daty DD.MM.RRRR"
+                    		aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 												margin="normal"
 												id="date_birth"
 												value={date_of_birth}
 												onChange={(value) => handleChangeDateOfBirth(value)}
-												aria-label="Data urodzenia"
 												KeyboardButtonProps={{
 													'aria-label': 'Zmień datę',
 												}}
@@ -1087,7 +1086,7 @@ const CandidatesAdd = props => {
 														className={classes.date_picker}
 														variant="inline"
 														format="dd.MM.yyyy"
-                    				aria-label="Format wprowadzania daty DD.MM.RRRR"
+                    				aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="date-picker-inline"
 														value={date_of_certificate}

@@ -79,9 +79,10 @@ class AppContainer extends React.Component {
 		let child = document.getElementsByClassName('u-vs-hidden');
 		if (child.length > 0)
 		dom.removeChild(child[0]);
-		let link_title = document.getElementsByClassName('c-links__item')[0];
-		link_title.setAttribute('aria-label', 
-			this.props.location.pathname === '/login' || this.props.location.pathname === '/forgotpassword' ? this.login_links[0].title : this.links[0].title);
+		let link_title = document.getElementsByClassName('c-links__item');
+		if (link_title.length > 0)
+			link_title[0].setAttribute('aria-label', 
+				this.props.location.pathname === '/login' || this.props.location.pathname === '/forgotpassword' ? this.login_links[0].title : this.links[0].title);
 		if (this.props.location.pathname !== prevProps.location.pathname) {
 			this.checkValidity();
 		}

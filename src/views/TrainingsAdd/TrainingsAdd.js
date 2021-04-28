@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, IconButton, TextareaAutosize, Typography
+	Button, Grid, Card, TextField, CircularProgress, IconButton, TextareaAutosize, Typography, Chip
 } from '@material-ui/core';
-
+import CloseIcon from '@material-ui/icons/Close';
 import { Autocomplete } from '@material-ui/lab';
 
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
@@ -488,7 +488,7 @@ const TrainingsAdd = props => {
 														disableToolbar
 														variant="inline"
 														format="dd.MM.yyyy"
-														aria-label="Format wprowadzania daty DD.MM.RRRR"
+														aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 														margin="normal"
 														id="class_date"
 														value={item.date}
@@ -537,6 +537,11 @@ const TrainingsAdd = props => {
 														onChange={(event, value) => handleChangeOrkTeam(value ? value : [], index)}
 														options={orkTeamList}
 														getOptionLabel={(option) => orkTeamList && option && (option.name)}
+														renderTags={(value, getTagProps) =>
+															value.map((option, index) => (
+																<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+															))
+														}
 														renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 													/>
 												</Grid>

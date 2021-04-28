@@ -218,7 +218,7 @@ const SortTable = (props) => {
 						disableToolbar
 						variant="inline"
 						format="dd.MM.yyyy"
-						aria-label="Format wprowadzania daty DD.MM.RRRR"
+						aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 						value={searchDate}
 						onChange={setSearchDate}
 						KeyboardButtonProps={{
@@ -250,7 +250,7 @@ const SortTable = (props) => {
 								}
 							</TableCell>
 							<TableCell>
-								<IconButton variant="outlined" aria-label={`Usuń log`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
+								<IconButton variant="outlined" aria-label={`Usuń log ${item.user.name} z dnia ${DateTime.fromISO(item.created_at).toFormat('dd.MM.yyyy hh:mm')}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
 									<DeleteOutlineOutlinedIcon className={classes.icon} />
 								</IconButton>
 							</TableCell>

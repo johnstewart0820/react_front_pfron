@@ -109,7 +109,17 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: theme.palette.green,
 			color: theme.palette.black_white,
 			padding: '0px 10px',
-			height: '26px'
+			height: '26px',
+			'&:focus': {
+				'& svg': {
+					color: theme.palette.white_black
+				},
+				borderRadius: '2px',
+				backgroundColor: theme.palette.green,
+				color: theme.palette.black_white,
+				padding: '0px 10px',
+				height: '26px',
+			}
 		},
 		'& .MuiChip-deleteIcon': {
 			color: theme.palette.black_white,

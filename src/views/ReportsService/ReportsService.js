@@ -55,7 +55,6 @@ const ReportsService = props => {
 							item.end_date = `Kw. ${index + 1} (${item.end_date})`;
 							return item;
 						})
-						console.log(quater_list);
 						setQuaterList(quater_list);
 					}
 				})
@@ -238,7 +237,7 @@ const ReportsService = props => {
 							total_sum[2 + data.length] = 0;
 						total_sum[2 + data.length] += value;
 
-						item.push(value === 0 ? '' : value + 'xxx');
+						item.push(value === 0 ? '' : value);
 						if (value !== 0)
 							count++;
 						sum += value;
@@ -390,14 +389,6 @@ const ReportsService = props => {
 						},
 					}
 				}
-			}
-			if (ws[key].v.toString().endsWith('xxx')) {
-				ws[key].s = {
-					fill: {
-						fgColor: { rgb: '0000FF' } // Add background color
-					},
-				}
-				ws[key].v = ws[key].v.split('xxx')[0]
 			}
 		}
 		const wb = XLSX.utils.book_new();

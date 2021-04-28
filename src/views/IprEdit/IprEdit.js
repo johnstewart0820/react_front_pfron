@@ -232,7 +232,7 @@ const IprEdit = props => {
 											disableToolbar
 											variant="inline"
 											format="dd.MM.yyyy"
-                    aria-label="Format wprowadzania daty DD.MM.RRRR"
+                    aria-label="Data urodzenia - Format wprowadzania daty DD.MM.RRRR"
 											margin="normal"
 											id="date-picker-inline"
 											value={schedule_date}

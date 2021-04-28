@@ -170,10 +170,10 @@ const SpecialistsEdit = props => {
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label} ><label htmlFor="name">Tytuł, imię i nazwisko specjalisty</label></div>
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
-									<div className={classes.input_box_label} htmlFor="type">Wybierz punkt kwalifikacyjny</div>
-									<SingleSelect value={qualification} handleChange={(value) => handleChangeQualification(value)} list={qualificationList} error={error.qualification} />
-									<div className={classes.input_box_label} htmlFor="ambassador">Specjalność</div>
-									<SingleSelect value={specialty} handleChange={(value) => handleChangeSpecialty(value)} list={specialtyList} error={error.specialty} />
+									<div className={classes.input_box_label}><label htmlFor="qualification_point">Wybierz punkt kwalifikacyjny</label></div>
+									<SingleSelect value={qualification} handleChange={(value) => handleChangeQualification(value)} list={qualificationList} error={error.qualification} id="qualification_point"/>
+									<div className={classes.input_box_label}><label htmlFor="specialty">Specjalność</label></div>
+									<SingleSelect value={specialty} handleChange={(value) => handleChangeSpecialty(value)} list={specialtyList} error={error.specialty} id="specialty"/>
 								</Grid>
 							</Grid>
 						</Card>
@@ -187,7 +187,7 @@ const SpecialistsEdit = props => {
                 </Button>
 								</Grid>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)}>
+									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)} aria-label="usunąć">
 										<DeleteIcon />
 									</Button>
 								</Grid>

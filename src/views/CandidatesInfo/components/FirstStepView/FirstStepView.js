@@ -56,8 +56,8 @@ const FirstStepView = (props) => {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <div className={classes.label_content} htmlFor="name">Punkt kwalifikacyjny</div>
-            <SingleSelect value={qualification_point} handleChange={setQualificationPoint} list={qualificationPointList}/>
+            <div className={classes.label_content}><label htmlFor="qualification_point">Punkt kwalifikacyjny</label></div>
+            <SingleSelect value={qualification_point} handleChange={setQualificationPoint} list={qualificationPointList} id="qualification_point"/>
           </Grid>
         </Grid>
       </Grid>

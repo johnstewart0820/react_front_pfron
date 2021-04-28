@@ -6,7 +6,7 @@ import { Alert } from 'components';
 
 const SingleSelect = (props) => {
   const classes = useStyles();
-  const { value, handleChange, list, error, disabled} = props;
+  const { value, handleChange, list, error, disabled, id} = props;
   useEffect(() => {
   }, []);
 
@@ -18,7 +18,7 @@ const SingleSelect = (props) => {
         onChange={(event) =>handleChange(event.target.value ? event.target.value : {})}
         inputProps={{
           name: 'age',
-          // id: 'outlined-age-native-simple',
+          id: id
         }}
         className={classes.input_box}
 				aria-label="Wybierz opcję"

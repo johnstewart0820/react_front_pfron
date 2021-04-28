@@ -869,7 +869,6 @@ const CandidatesAdd = props => {
               	</Grid>
 								<Grid item md={9} xs={12}>
 									<FormControl component="fieldset" error={error.education}>
-									<FormLabel component="legend">wykształcenie</FormLabel>
 										<RadioGroup aria-label="wykształcenie" name="education" value={education} onChange={handleChangeEducation}>
 											{
 												educationList.map((item, index) => (
@@ -884,7 +883,7 @@ const CandidatesAdd = props => {
 												<Grid item xs={1}></Grid>
 												<Grid item xs={11}>
 													<div className={classes.input_box_label} htmlFor="name">Tytuł naukowy</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error.academic_title })} type="name" value={academic_title} name="name" onChange={(e) => handleChangeAcademicTitle(e.target.value)} />
+													<input aria-label="Tytuł naukowy" className={clsx({ [classes.input_box]: true, [classes.error]: error.academic_title })} type="name" value={academic_title} name="name" onChange={(e) => handleChangeAcademicTitle(e.target.value)} />
 													<div className={classes.error_label} style={{ display: error.academic_title ? 'block' : 'none' }}>Wpisz co najmniej jedną literę.</div>
 												</Grid>
 											</Grid>
@@ -925,12 +924,12 @@ const CandidatesAdd = props => {
 												<Grid item xs={1}></Grid>
 												<Grid item xs={5}>
 													<div className={classes.input_box_label} htmlFor="name">Liczba dzieci</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error.children_amount })} type="name" value={children_amount} name="name" onChange={(e) => handleChangeChildrenAmount(e.target.value)} />
+													<input aria-label="Liczba dzieci" className={clsx({ [classes.input_box]: true, [classes.error]: error.children_amount })} type="name" value={children_amount} name="name" onChange={(e) => handleChangeChildrenAmount(e.target.value)} />
 													<div className={classes.error_label} style={{ display: error.children_amount ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												</Grid>
 												<Grid item xs={6}>
 													<div className={classes.input_box_label} htmlFor="name">Wiek</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error.children_age })} type="name" value={children_age} name="name" onChange={(e) => handleChangeChildrenAge(e.target.value)} />
+													<input aria-label="Wiek" className={clsx({ [classes.input_box]: true, [classes.error]: error.children_age })} type="name" value={children_age} name="name" onChange={(e) => handleChangeChildrenAge(e.target.value)} />
 													<div className={classes.error_label} style={{ display: error.children_age ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												</Grid>
 											</Grid>
@@ -953,7 +952,7 @@ const CandidatesAdd = props => {
 									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
-									<FormControl component="fieldset" error={error.employed_status}>
+									<FormControl component="fieldset" error={error.employed_status} >
 										<FormLabel component="legend">Jestem zatrudniony</FormLabel>
 										<RadioGroup aria-label="Jestem zatrudniony" name="employed_status" value={employed_status} onChange={handleChangeEmployedStatus} row>
 											<FormControlLabel value={1} control={<Radio />} label="Tak" />
@@ -981,10 +980,10 @@ const CandidatesAdd = props => {
 													}
 												</FormControl>
 												<div className={classes.input_box_label} htmlFor="name">Jestem zatrudniony w</div>
-												<input className={clsx({ [classes.input_box]: true, [classes.error]: error.employed_in })} type="name" value={employed_in} name="name" onChange={(e) => handleChangeEmplotedIn(e.target.value)} />
+												<input aria-label="Jestem zatrudniony w" className={clsx({ [classes.input_box]: true, [classes.error]: error.employed_in })} type="name" value={employed_in} name="name" onChange={(e) => handleChangeEmplotedIn(e.target.value)} />
 												<div className={classes.error_label} style={{ display: error.employed_in ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												<div className={classes.input_box_label} htmlFor="name">Wykonywany zawód</div>
-												<input className={clsx({ [classes.input_box]: true, [classes.error]: error.occupation })} type="name" value={occupation} name="name" onChange={(e) => handleChangeOccupation(e.target.value)} />
+												<input aria-label="Wykonywany zawód" className={clsx({ [classes.input_box]: true, [classes.error]: error.occupation })} type="name" value={occupation} name="name" onChange={(e) => handleChangeOccupation(e.target.value)} />
 												<div className={classes.error_label} style={{ display: error.occupation ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 											</div>
 											:
@@ -1012,7 +1011,7 @@ const CandidatesAdd = props => {
 										have_unemployed_person_status === 1 ?
 											<>
 												<div className={classes.input_box_label} htmlFor="name">Numer statusu osoby bezrobotnej</div>
-												<input className={clsx({ [classes.input_box]: true, [classes.error]: error.unemployed_person_id })} type="name" value={unemployed_person_id} name="name" onChange={(e) => handleChangeUnemployedPersonId(e.target.value)} />
+												<input aria-label="Numer statusu osoby bezrobotnej" className={clsx({ [classes.input_box]: true, [classes.error]: error.unemployed_person_id })} type="name" value={unemployed_person_id} name="name" onChange={(e) => handleChangeUnemployedPersonId(e.target.value)} />
 												<div className={classes.error_label} style={{ display: error.have_unemployed_person_status ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 											</>
 											:
@@ -1078,7 +1077,7 @@ const CandidatesAdd = props => {
 											<Grid container spacing={1}>
 												<Grid item xs={8}>
 													<div className={classes.input_box_label} htmlFor="name">Numer orzeczenia o niepełnosprawności</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error.number_certificate })} type="name" value={number_certificate} name="name" onChange={(e) => handleChangeNumberCertificate(e.target.value)} />
+													<input aria-label="Numer orzeczenia o niepełnosprawności" className={clsx({ [classes.input_box]: true, [classes.error]: error.number_certificate })} type="name" value={number_certificate} name="name" onChange={(e) => handleChangeNumberCertificate(e.target.value)} />
 													<div className={classes.error_label} style={{ display: error.number_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												</Grid>
 												<Grid item xs={4}>
@@ -1101,16 +1100,16 @@ const CandidatesAdd = props => {
 												</Grid>
 												<Grid item xs={8}>
 													<div className={classes.input_box_label} htmlFor="name">Stopień niepełnosprawności</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error.level_certificate })} type="name" value={level_certificate} name="name" onChange={(e) => handleChangeLevelCertificate(e.target.value)} />
+													<input aria-label="Stopień niepełnosprawności" className={clsx({ [classes.input_box]: true, [classes.error]: error.level_certificate })} type="name" value={level_certificate} name="name" onChange={(e) => handleChangeLevelCertificate(e.target.value)} />
 													<div className={classes.error_label} style={{ display: error.level_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												</Grid>
 												<Grid item xs={4}>
 													<div className={classes.input_box_label} htmlFor="name">Kod orzeczenia</div>
-													<input className={clsx({ [classes.input_box]: true, [classes.error]: error.code_certificate })} type="name" value={code_certificate} name="name" onChange={(e) => handleChangeCodeCertificate(e.target.value)} />
+													<input aria-label="Kod orzeczenia" className={clsx({ [classes.input_box]: true, [classes.error]: error.code_certificate })} type="name" value={code_certificate} name="name" onChange={(e) => handleChangeCodeCertificate(e.target.value)} />
 													<div className={classes.error_label} style={{ display: error.code_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 												</Grid>
 												<div className={classes.input_box_label} htmlFor="name">Konieczne wymagania związane z niepełnosprawnością (np. pomoc asystenta, tłumacza migowego)</div>
-												<input className={clsx({ [classes.input_box]: true, [classes.error]: error.necessary_certificate })} type="name" value={necessary_certificate} name="name" onChange={(e) => handleChangeNecessaryCertificate(e.target.value)} />
+												<input aria-label="Konieczne wymagania związane z niepełnosprawnością (np. pomoc asystenta, tłumacza migowego)" className={clsx({ [classes.input_box]: true, [classes.error]: error.necessary_certificate })} type="name" value={necessary_certificate} name="name" onChange={(e) => handleChangeNecessaryCertificate(e.target.value)} />
 												<div className={classes.error_label} style={{ display: error.necessary_certificate ? 'block' : 'none' }}>Wpisz poprawne informacje.</div>
 											</Grid>
 											:

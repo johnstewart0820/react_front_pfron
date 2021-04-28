@@ -200,11 +200,11 @@ const IprAdd = props => {
 											/>
 										</Grid>
 										<Grid item xs={5}>
-											<div className={classes.top_label} htmlFor="name">Typ</div>
-											<SingleSelect value={ipr_type} handleChange={handleChangeIprType} list={iprTypeList} />
+											<div className={classes.top_label}><label htmlFor="ipr_type">Typ</label></div>
+											<SingleSelect value={ipr_type} handleChange={handleChangeIprType} list={iprTypeList} id="ipr_type"/>
 										</Grid>
 										<Grid item xs={2}>
-											<div className={classes.top_label} htmlFor="name">Numer</div>
+											<div className={classes.top_label}>Numer</div>
 											<div className={classes.number}>{number + 1}</div>
 										</Grid>
 										<Grid item xs={5}>

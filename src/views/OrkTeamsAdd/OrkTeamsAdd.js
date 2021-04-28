@@ -173,23 +173,23 @@ const OrkTeamsAdd = props => {
 									{
 										storage.getStorage('role').includes('1') ?
 											<>
-												<div className={classes.input_box_label}>Zaakceptowany</div>
+												<div className={classes.input_box_label}><label htmlFor="is_accepted">Zaakceptowany</label></div>
 												<FormControl component="fieldset">
-													<RadioGroup aria-label="is_accepted" name="is_accepted" value={is_accepted} onChange={(e) => setIsAccepted(e.target.value)} row>
+													<RadioGroup aria-label="Zaakceptowany" name="is_accepted" value={is_accepted} onChange={(e) => setIsAccepted(e.target.value)} row>
 														<FormControlLabel value="true" control={<Radio />} label="TAK" />
 														<FormControlLabel value="false" control={<Radio />} label="NIE" />
 													</RadioGroup>
 												</FormControl>
 												{is_accepted === 'true' || is_accepted === true ?
 													<>
-														<div className={classes.input_box_label}>Data akceptacji</div>
+														<div className={classes.input_box_label}><label htmlFor="date_of_acceptance">Data akceptacji</label></div>
 														<KeyboardDatePicker
 															disableToolbar
 															variant="inline"
 															format="dd.MM.yyyy"
 															placeholder="Format wprowadzania daty DD.MM.RRRR"
 															margin="normal"
-															id="date-picker-inline"
+															id="date_of_acceptance"
 															value={date_of_acceptance}
 															onChange={(e) => handleChangeDate(e)}
 															aria-label="Data akceptacji"

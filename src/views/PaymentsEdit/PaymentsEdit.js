@@ -129,10 +129,10 @@ const PaymentsEdit = props => {
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="value">Cena jednostkowa</label></div>
 									<input className={classes.input_box} type="name" value={value} id="value" name="name" onChange={(e) => setValue(e.target.value)} />
-									<div className={classes.input_box_label} htmlFor="type">Wybierz ORK</div>
-									<SingleSelect value={rehabitationCenter} handleChange={setRehabitationCenter} list={rehabitationCenterList} />
-									<div className={classes.input_box_label} htmlFor="ambassador">Wybierz usługę</div>
-									<SingleSelect value={service} handleChange={setService} list={serviceList} />
+									<div className={classes.input_box_label}><label htmlFor="type">Wybierz ORK</label></div>
+									<SingleSelect value={rehabitationCenter} handleChange={setRehabitationCenter} list={rehabitationCenterList} id="type" />
+									<div className={classes.input_box_label}><label htmlFor="service">Wybierz usługę</label></div>
+									<SingleSelect value={service} handleChange={setService} list={serviceList} id="service"/>
 								</Grid>
 							</Grid>
 						</Card>

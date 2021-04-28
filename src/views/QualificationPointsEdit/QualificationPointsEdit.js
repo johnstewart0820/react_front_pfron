@@ -176,8 +176,8 @@ const QualificationPointsEdit = props => {
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa punktu</label></div>
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} id="name" type="name" value={name} name="name" onChange={(e) => handleChangeName(e.target.value)} />
-									<div className={classes.input_box_label} htmlFor="type">Typ punktu</div>
-									<SingleSelect value={type} handleChange={(value) => handleChangeType(value)} list={typeList} error={error.type} />
+									<div className={classes.input_box_label}><label htmlFor="type">Typ punktu</label></div>
+									<SingleSelect value={type} handleChange={(value) => handleChangeType(value)} list={typeList} error={error.type} id="type"/>
 									<div className={classes.input_box_label}><label htmlFor="ambassador">Ambasadorzy</label></div>
 									<Autocomplete
 										multiple
@@ -202,7 +202,7 @@ const QualificationPointsEdit = props => {
                 </Button>
 								</Grid>
 								<Grid item xs={6}>
-									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)}>
+									<Button variant="outlined" color="secondary" className={classes.btnDelete} onClick={() => setOpenModal(true)} aria-label="usunąć">
 										<DeleteIcon />
 									</Button>
 								</Grid>

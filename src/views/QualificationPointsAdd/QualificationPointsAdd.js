@@ -126,8 +126,8 @@ const QualificationPointsAdd = props => {
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label} ><label htmlFor="name">Nazwa punktu</label></div>
 									<input className={clsx({ [classes.input_box]: true, [classes.error]: error.name })} type="name" value={name} name="name" id="name" onChange={(e) => handleChangeName(e.target.value)} />
-									<div className={classes.input_box_label} htmlFor="type">Typ punktu</div>
-									<SingleSelect value={type} handleChange={(value) => handleChangeType(value)} list={typeList} error={error.type} />
+									<div className={classes.input_box_label}><label htmlFor="type">Typ punktu</label></div>
+									<SingleSelect value={type} handleChange={(value) => handleChangeType(value)} list={typeList} error={error.type} id="type"/>
 									<div className={classes.input_box_label} ><label htmlFor="ambassador">Ambasadorzy</label></div>
 									<Autocomplete
 										multiple
@@ -148,7 +148,7 @@ const QualificationPointsAdd = props => {
 								<Grid item xs={12}>
 									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleSave}>
 										Zapisz
-                </Button>
+                	</Button>
 								</Grid>
 							</Grid>
 						</Card>

@@ -82,7 +82,7 @@ const SecondStepView = (props) => {
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
-							<div className={classes.label_content}>Orzeczenie o kwalifikacji z dnia</div>
+							<div className={classes.label_content}><label htmlFor="doctor_date">Orzeczenie o kwalifikacji z dnia</label></div>
 							<KeyboardDatePicker
 								disableToolbar
 								className={classes.date_picker}
@@ -90,7 +90,7 @@ const SecondStepView = (props) => {
 								format="dd.MM.yyyy"
 								placeholder="Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
-								id="date-picker-inline"
+								id="doctor_date"
 								value={doctor_date}
 								onChange={(value) => setDoctorDate(handleDate(value))}
 								aria-label="Orzeczenie o kwalifikacji z dnia"
@@ -101,12 +101,13 @@ const SecondStepView = (props) => {
 						</Grid>
 						
 						<Grid item xs={12}>
-							<div className={classes.label_content} htmlFor="name">Imię i nazwisko lekarza</div>
-							<SingleSelect value={doctor} handleChange={setDoctor} list={doctorList}/>
+							<div className={classes.label_content}><label htmlFor="doctor">Imię i nazwisko lekarza</label></div>
+							<SingleSelect value={doctor} handleChange={setDoctor} list={doctorList} id="doctor"/>
 						</Grid>
 						<Grid item xs={12}>
-							<div className={classes.label_content}>Uwagi od lekarza</div>
+							<div className={classes.label_content}><label htmlFor="doctor_remark">Uwagi od lekarza</label></div>
 							<textArea
+								id="doctor_remark"
 								rows={6}
 								onChange={setDoctorRemark}
 								value={doctor_remark}
@@ -125,7 +126,7 @@ const SecondStepView = (props) => {
 							</FormControl>
 						</Grid>
 						<Grid item xs={12}>
-							<div className={classes.label_content}>Orzeczenie o kwalifikacji z dnia</div>
+							<div className={classes.label_content}><label htmlFor="psycology_date">Orzeczenie o kwalifikacji z dnia</label></div>
 							<KeyboardDatePicker
 								disableToolbar
 								className={classes.date_picker}
@@ -133,7 +134,7 @@ const SecondStepView = (props) => {
 								format="dd.MM.yyyy"
 								placeholder="Format wprowadzania daty DD.MM.RRRR"
 								margin="normal"
-								id="date-picker-inline"
+								id="psycology_date"
 								value={psycology_date}
 								onChange={(value) => setPsycologyDate(handleDate(value))}
 								aria-label="Orzeczenie o kwalifikacji z dnia"
@@ -144,12 +145,13 @@ const SecondStepView = (props) => {
 						</Grid>
 						
 						<Grid item xs={12}>
-							<div className={classes.label_content} htmlFor="name">Imię i nazwisko psychologa</div>
-							<SingleSelect value={psycology} handleChange={setPsycology} list={psycologyList}/>
+							<div className={classes.label_content}><label htmlFor="psycology">Imię i nazwisko psychologa</label></div>
+							<SingleSelect value={psycology} handleChange={setPsycology} list={psycologyList} id="psycology"/>
 						</Grid>
 						<Grid item xs={12}>
-							<div className={classes.label_content}>Uwagi od psychologa</div>
+							<div className={classes.label_content}><label htmlFor="psycology_remark">Uwagi od psychologa</label></div>
 							<textArea
+								id="psycology_remark"
 								rows={6}
 								onChange={setPsycologyRemark}
 								value={psycology_remark}

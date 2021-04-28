@@ -55,7 +55,7 @@ const FourthStepView = (props) => {
       <Grid item md={9} xs={12}>
         <Grid container spacing={3}>
           <Grid item xs={4}>
-            <div className={classes.label_content}>Data skierowania do ORK</div>
+            <div className={classes.label_content}><label htmlFor="date_referal">Data skierowania do ORK</label></div>
             <KeyboardDatePicker
               disableToolbar
               className={classes.date_picker}
@@ -63,7 +63,7 @@ const FourthStepView = (props) => {
               format="dd.MM.yyyy"
 							placeholder="Format wprowadzania daty DD.MM.RRRR"
               margin="normal"
-              id="date-picker-inline"
+              id="date_referal"
               value={date_referal}
               onChange={(value) => setDateReferal(handleDate(value))}
 							aria-label="Data skierowania do ORK"
@@ -77,11 +77,11 @@ const FourthStepView = (props) => {
             <SingleSelect value={rehabitation_center} handleChange={setRehabitationCenter} list={rehabitationCenterList}/>
           </Grid>
           <Grid item xs={4}>
-            <div className={classes.label_content} htmlFor="name">Numer uczestnika</div>
-            <input className={classes.input_box} type="name" value={participant_number} name="name" onChange={(e) => setParticipantNumber(e.target.value)} />
+            <div className={classes.label_content}><label htmlFor="participant_number">Numer uczestnika</label></div>
+            <input className={classes.input_box} type="name" value={participant_number} name="name" id="participant_number" onChange={(e) => setParticipantNumber(e.target.value)} />
           </Grid>
           <Grid item xs={4}>
-            <div className={classes.label_content}>Data wejścia do ORK</div>
+            <div className={classes.label_content}><label htmlFor="date_rehabitation_center">Data wejścia do ORK</label></div>
             <KeyboardDatePicker
               disableToolbar
               className={classes.date_picker}
@@ -89,7 +89,7 @@ const FourthStepView = (props) => {
               format="dd.MM.yyyy"
 							placeholder="Format wprowadzania daty DD.MM.RRRR"
               margin="normal"
-              id="date-picker-inline"
+              id="date_rehabitation_center"
               value={date_rehabitation_center}
               onChange={(value) => setDateRehabitationCenter(handleDate(value))}
 							aria-label="Data wejścia do ORK"
@@ -99,12 +99,13 @@ const FourthStepView = (props) => {
             />
           </Grid>
           <Grid item xs={8}>
-            <div className={classes.label_content} htmlFor="name">Tryb pobytu uczestnika</div>
-            <SingleSelect value={type_to_stay} handleChange={setTypeToStay} list={typeToStayList}/>
+            <div className={classes.label_content} htmlFor="name"><label htmlFor="type_to_stay">Tryb pobytu uczestnika</label></div>
+            <SingleSelect value={type_to_stay} handleChange={setTypeToStay} list={typeToStayList} id="type_to_stay"/>
           </Grid>
           <Grid item xs={12}>
-            <div className={classes.label_content}>Uwagi dotyczące uczestnika</div>
+            <div className={classes.label_content}><label htmlFor="participant_remark">Uwagi dotyczące uczestnika</label></div>
             <textArea
+							id="participant_remark"
 							rows={6}
               onChange={setParticipantRemark}
               value={participant_remark}

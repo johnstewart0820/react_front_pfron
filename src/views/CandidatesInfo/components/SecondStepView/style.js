@@ -159,7 +159,9 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.pink
 	},
 	qlClass: {
-		width: '100%'
+		width: '100%',
+		padding: '10px',
+		fontFamily: 'roboto'
 	},
 }));
 

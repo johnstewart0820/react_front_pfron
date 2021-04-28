@@ -443,11 +443,11 @@ const ReportsService = props => {
 									<Grid container spacing={2}>
 										<Grid item md={5} xs={12}>
 											<div className={classes.top_label} ><label htmlFor="rehabilitation_centers">Wybierz ORK</label></div>
-											<SingleSelect value={rehabitationCenter} handleChange={(value) => handleChangeRehabitationCenter(value)} list={rehabitationCenterList} />
+											<SingleSelect value={rehabitationCenter} handleChange={(value) => handleChangeRehabitationCenter(value)} list={rehabitationCenterList} id="rehabilitation_centers" />
 										</Grid>
 										<Grid item md={2} xs={12} className={classes.center}>
 											lub
-									</Grid>
+										</Grid>
 										<Grid item md={5} xs={12}>
 											<div className={classes.top_label} ><label htmlFor="participants">Wybierz uczestnika</label></div>
 											<Autocomplete

@@ -56,43 +56,34 @@ const ThirdStepView = (props) => {
 								</RadioGroup>
 							</FormControl>
 						</Grid>
-						{
-							decision_central_commision === 1 ?
-								<>
-									<Grid item xs={12}>
-										<div className={classes.label_content}><label htmlFor="date_central_commision">Data wydania decyzji</label></div>
-										<KeyboardDatePicker
-											disableToolbar
-											className={classes.date_picker}
-											variant="inline"
-											format="dd.MM.yyyy"
-											aria-label="Data wydania decyzji - Format wprowadzania daty DD.MM.RRRR"
-											margin="normal"
-											id="date_central_commision"
-											value={date_central_commision}
-											onChange={(value) => setDateCentralCommision(handleDate(value))}
-											KeyboardButtonProps={{
-												'aria-label': 'Zmień datę',
-											}}
-										/>
-									</Grid>
+						<Grid item xs={12}>
+							<div className={classes.label_content}><label htmlFor="date_central_commision">Data wydania decyzji</label></div>
+							<KeyboardDatePicker
+								disableToolbar
+								className={classes.date_picker}
+								variant="inline"
+								format="dd.MM.yyyy"
+								aria-label="Data wydania decyzji - Format wprowadzania daty DD.MM.RRRR"
+								margin="normal"
+								id="date_central_commision"
+								value={date_central_commision}
+								onChange={(value) => setDateCentralCommision(handleDate(value))}
+								KeyboardButtonProps={{
+									'aria-label': 'Zmień datę',
+								}}
+							/>
+						</Grid>
 
-									<Grid item xs={12}>
-										<div className={classes.label_content}><label htmlFor="general_remark">Uwagi ogólne</label></div>
-										<textArea
-											id="general_remark"
-											rows={6}
-											onChange={setGeneralRemark}
-											value={general_remark}
-											className={classes.qlClass}
-										/>
-									</Grid>
-								</>
-								:
-								<></>
-						}
-
-
+						<Grid item xs={12}>
+							<div className={classes.label_content}><label htmlFor="general_remark">Uwagi ogólne</label></div>
+							<textArea
+								id="general_remark"
+								rows={6}
+								onChange={setGeneralRemark}
+								value={general_remark}
+								className={classes.qlClass}
+							/>
+						</Grid>
 					</Grid>
 				</Grid>
 			</Grid>

@@ -73,6 +73,7 @@ const IprPlan = props => {
 	const [error, setError] = useState({});
 
 	useEffect(() => {
+		setProgressStatus(true);
 		ipr.getPlanInfo(id)
 			.then(response => {
 				if (response.code === 401) {
@@ -100,6 +101,7 @@ const IprPlan = props => {
 					setModuleList(_arr);
 					setModulePdfList(_arr);
 					setOrkTeam(response.data.ork_team);
+					setProgressStatus(false);
 				}
 			})
 
@@ -116,6 +118,7 @@ const IprPlan = props => {
 
 
 	useEffect(() => {
+		setProgressStatus(true);
 		ipr.get(id)
 			.then(response => {
 				if (response.code === 401) {
@@ -134,6 +137,7 @@ const IprPlan = props => {
 					setOrkPerson(response.data.ipr.id_ork_person);
 					setProfession(response.data.ipr.profession);
 					setScheduleDate(new Date(response.data.ipr.schedule_date));
+					setProgressStatus(false);
 				}
 			})
 	}, [participantList]);
@@ -141,6 +145,7 @@ const IprPlan = props => {
 	const handleGetScheduleData = (date) => {
 		const format2 = "YYYY-MM-DD";
 		let _date = moment(date).format(format2);
+		setProgressStatus(true);
 		ipr.getScheduleData(id, _date)
 			.then(response => {
 				if (response.code === 401) {
@@ -154,11 +159,13 @@ const IprPlan = props => {
 						}
 					}
 					setScheduleData(_schedule_data);
+					setProgressStatus(false);
 				}
 			})
 	}
 
 	const getOrkPersonData = (data, id_ork_person) => {
+		setProgressStatus(true);
 		ipr.getOrkPerson(data)
 			.then(response => {
 				if (response.code === 401) {
@@ -170,6 +177,7 @@ const IprPlan = props => {
 						if (response.data.ork_person[i].id == id_ork_person)
 							setOrkPerson(response.data.ork_person[i]);
 					}
+					setProgressStatus(false);
 				}
 			})
 	}

@@ -41,6 +41,7 @@ const IprPlan = props => {
 	const [iprWeekDates, setIprWeekDates] = useState([]);
 	const [show_status, setShowStatus] = useState(false);
 	const [moduleList, setModuleList] = useState([]);
+	const [modulePdfList, setModulePdfList] = useState([]);
 	const [selectedItem, setSelectedItem] = useState(0);
 
 	const [participant_number, setParticipantNumber] = useState('');
@@ -53,6 +54,7 @@ const IprPlan = props => {
 	const [schedule_date, setScheduleDate] = useState(new Date());
 	const [ork_person, setOrkPerson] = useState(null);
 	const [orkPersonList, setOrkPersonList] = useState([]);
+	const [orkTeam, setOrkTeam] = useState([]);
 	const [profession, setProfession] = useState('');
 
 	const [scheduleData, setScheduleData] = useState([]);
@@ -96,6 +98,8 @@ const IprPlan = props => {
 						_arr.push(item);
 					}
 					setModuleList(_arr);
+					setModulePdfList(_arr);
+					setOrkTeam(response.data.ork_team);
 				}
 			})
 
@@ -294,7 +298,8 @@ const IprPlan = props => {
 						number={number}
 						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1) + '.' + schedule_date.getFullYear()}
 						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
-						moduleList={moduleList}
+						moduleList={modulePdfList}
+						orkTeam={orkTeam}
 					/>
 				}
 				fileName="download.pdf"
@@ -432,6 +437,7 @@ const IprPlan = props => {
 										<PlanView
 											moduleList={moduleList}
 											setModuleList={setModuleList}
+											orkTeam={orkTeam}
 										/>
 									</div>
 								</TabPanel>

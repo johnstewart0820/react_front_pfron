@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
 	Grid, FormControl, FormControlLabel, Radio, RadioGroup, FormLabel, Checkbox, TextField, Button, IconButton, Typography
 } from '@material-ui/core';
@@ -18,7 +18,7 @@ import { useTheme } from '@material-ui/styles';
 const PlanView = (props) => {
 	const classes = useStyles();
 	const theme = useTheme();
-	const { moduleList, setModuleList } = props;
+	const { moduleList, setModuleList, orkTeam } = props;
 
 	const handleChangeApplicable = (index, index_module) => {
 		let _module_list = JSON.parse(JSON.stringify(moduleList));
@@ -49,9 +49,9 @@ const PlanView = (props) => {
 	const getOrkPerson = (module, id_ork, index_module) => {
 		if (isNaN(id_ork))
 			return id_ork;
-		for (let i = 0; i < module.ork_team.length; i++) {
-			if (module.ork_team[i].id === id_ork) {
-				return module.ork_team[i];
+		for (let i = 0; i < orkTeam.length; i++) {
+			if (orkTeam[i].id === id_ork) {
+				return orkTeam[i];
 			}
 		}
 		return null;
@@ -194,20 +194,20 @@ const PlanView = (props) => {
 										className={classes.name_select_box}
 										onChange={(event, value) => handleChangeOrkPerson(value, index, index_module)}
 										value={getOrkPerson(module, service.id_ork_person, index_module)}
-										options={module.ork_team}
-										getOptionLabel={(option) => module.ork_team && option && option.name}
+										options={orkTeam}
+										getOptionLabel={(option) => orkTeam && option && option.name}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 									/>
 								</Grid>
 								<Grid item md={2} xs={12}>
 									<div className={classes.top_label}><label htmlFor="room_number">Sala</label></div>
-									<input className={classes.input_box} type="name" value={service.room_number} id="room_number" name="name" onChange={(e) => handleChangeRoomNumber(e.target.value, index, index_module)} disabled={service.disable_status} />
+									<input className={classes.input_box} type="name" value={service.room_number || ''} id="room_number" name="name" onChange={(e) => handleChangeRoomNumber(e.target.value, index, index_module)} disabled={service.disable_status} />
 								</Grid>
 							</Grid>
 						</Grid>
 						<Grid item xs={12}>
 							<div className={classes.top_label}><label htmlFor="remark">Uwagi/suma wymiaru</label></div>
-							<input className={classes.input_box} type="name" value={service.remarks} name="name" id="remark" onChange={(e) => handleChangeRemarks(e.target.value, index, index_module)} disabled={service.disable_status} />
+							<input className={classes.input_box} type="name" value={service.remarks || ''} name="name" id="remark" onChange={(e) => handleChangeRemarks(e.target.value, index, index_module)} disabled={service.disable_status} />
 						</Grid>
 					</Grid>
 				</Grid>
@@ -231,7 +231,7 @@ const PlanView = (props) => {
 		<Grid container spacing={3} className={classes.form} style={{ backgroundColor: theme.palette.black_white, margin: '0px', width: '100%' }}>
 			{
 				moduleList.map((module, index) => (
-					<>
+					<Fragment key={index}>
 						<Grid item md={3} xs={12}>
 							<Typography variant="h2" className={classes.form_title}>
 								<div>
@@ -262,7 +262,7 @@ const PlanView = (props) => {
 								:
 								<></>
 						}
-					</>
+					</Fragment>
 				))
 			}
 		</Grid>

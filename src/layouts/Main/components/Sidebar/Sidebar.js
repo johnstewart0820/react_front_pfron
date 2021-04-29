@@ -26,7 +26,7 @@ import useStyles from './style';
 import { Alert } from 'components';
 
 const Sidebar = props => {
-	const { open, variant, history, onClose, className, ...rest } = props;
+	const { open, variant, history, onClose, className, staticContext, ...rest } = props;
 	const [pages, setPages] = useState([]);
 	const classes = useStyles();
 	const items = [

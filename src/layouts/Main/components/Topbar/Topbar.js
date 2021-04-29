@@ -82,7 +82,7 @@ const Topbar = props => {
       <div className={classes.toolbar}>
         <div className={classes.titlebar}>
           <Button className={classes.close_drawer_icon} onClick={onMaxTopbar} aria-label={!openSidebar ? 'Rozwiń menu' : 'Zwiń menu'} title={!openSidebar ? 'Rozwiń menu' : 'Zwiń menu'}>
-            <MenuIcon color="white"/>
+            <MenuIcon/>
           </Button>
         </div>
 				<div className={classes.rightControllerArea}>

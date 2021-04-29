@@ -232,7 +232,7 @@ const ScheduleView = (props) => {
 				<TabList>
 					{
 						dateList.map((item, index) => (
-							<Tab style={{ width: '14%' }} disabled={index > 4 || moment(item.date) < moment(scheduleDate) || moment(item.date) > moment()}>
+							<Tab key={index} style={{ width: '14%' }} disabled={index > 4 || moment(item.date) < moment(scheduleDate) || moment(item.date) > moment()}>
 								<div style={{ display: 'block', paddingTop: '10px', fontSize: '10px' }}>
 									<div>
 										{_date_arr[item.id]}
@@ -247,7 +247,7 @@ const ScheduleView = (props) => {
 				</TabList>
 				{
 					dateList.map((item, index) => (
-						<TabPanel>
+						<TabPanel key={index}>
 							<Grid container spacing={3} className={classes.grid}>
 								{
 									scheduleData.map((module, index_module) => (

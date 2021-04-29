@@ -26,9 +26,7 @@ const SingleSelect = (props) => {
       >
         {
           list.map((item, index) => (
-						<>
 						<option aria-label={`${item} wyświetleń rekordów na stronie`} id={item} key={index} value={item}>{item}</option>
-						</>
 					))
         }
       </Select>

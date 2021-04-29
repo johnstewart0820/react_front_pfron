@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
-import React, { forwardRef, useState, } from 'react';
+import React, { forwardRef, Fragment, useState, } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -143,21 +143,22 @@ const SidebarNav = props => {
 			{...rest}
 			className={clsx(classes.root, className)}
 		>
-			{pages.map(page => (
+			{pages.map((page, index) => (
 				page.main_label ?
-					<Typography variant="h2" className={classes.label}>
+					<Typography key={index} variant="h2" className={classes.label}>
 						{page.main_label}
 					</Typography>
 					:
 					page.label ?
-						<Typography variant="h3" className={classes.label}>
+						<Typography key={index} variant="h3" className={classes.label}>
 							{page.label}
 						</Typography>
 						:
 						(
-							<>
+							<Fragment key={index}>
 								<ListItem
 									className={classes.item}
+									key={index}
 									disableGutters
 									key={page.title}
 									onClick={() => handleClick(page)}
@@ -190,6 +191,7 @@ const SidebarNav = props => {
 												{
 													page.sub.map((item, index) => (
 														<ListItem
+															key={index}
 															disableGutters
 															className={classes.item}
 														>
@@ -213,7 +215,7 @@ const SidebarNav = props => {
 										:
 										<></>
 								}
-							</>
+							</Fragment>
 						)
 			))}
 		</List>

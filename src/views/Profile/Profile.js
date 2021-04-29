@@ -138,6 +138,12 @@ const Profile = props => {
 
 	}
 
+	const isAdministrator = (element) => {
+		if (element === undefined)
+			return;
+		return element.id === 1;
+	}
+
 	return (
 		<>
 			<div className={classes.public}>
@@ -163,7 +169,7 @@ const Profile = props => {
 								</Grid>
 								<Grid item md={9} xs={12}>
 									<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>
-									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} />
+									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} disabled={role.findIndex(isAdministrator) === -1}/>
 									<div className={classes.input_box_label}><label htmlFor="email">E-mail</label></div>
 									<input className={classes.input_box} type="name" value={email} name="name" id="email" onChange={(e) => setEmail(e.target.value)} />
 									<div className={classes.input_box_label}><label htmlFor="role">Rola</label></div>
@@ -176,6 +182,7 @@ const Profile = props => {
 										options={roleList}
 										getOptionLabel={(option) => roleList && option && option.name}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
+										disabled={role.findIndex(isAdministrator) === -1}
 									/>
 									<FormControlLabel
 										className={classes.rememberMe}
@@ -183,6 +190,7 @@ const Profile = props => {
 											<Checkbox
 												checked={activateStatus}
 												onChange={() => setActivateStatus(!activateStatus)}
+												disabled={role.findIndex(isAdministrator) === -1}
 											/>
 										}
 										label="Aktywny"

@@ -15,7 +15,7 @@ const ReportsService = props => {
 	const classes = useStyles();
 
 	const breadcrumbs = [{ active: true, label: 'Finanse', href: '/reports_service' }, { active: true, label: 'Raporty', href: '#' }, { active: false, label: 'Zestawienie zrealizowanych usług' }];
-	const [name, setName] = useState('raport');
+	const [name, setName] = useState('Indywidualna Kartoteka Uczestnika');
 	const [rehabitationCenter, setRehabitationCenter] = useState(0);
 	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
 	const [participant, setParticipant] = useState(null);

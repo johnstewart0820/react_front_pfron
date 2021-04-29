@@ -71,7 +71,7 @@ export const modelPropertyLabel = (modelName, property) => {
 export const modelName = (modelName) => {
 	const names = {
 		'App\\Models\\QualificationPoint': 'Qualification point',
-		'App\\Models\\Candidate':          'Cadidate',
+		'App\\Models\\Candidate':          'kandydat',
 		'App\\Models\\OrkTeam':            'OrkTeam',
 		'App\\Models\\Payment':            'Zdefiniowane koszta usług',
 		'App\\Models\\ServiceList':        'Usługa',

@@ -19,7 +19,7 @@ const ReportsCenter = props => {
 	const classes = useStyles();
 
 	const breadcrumbs = [{ active: true, label: 'Finanse', href: '/reports_service' }, { active: true, label: 'Raporty', href: '#' }, { active: false, label: 'Raport sprawozdawczy z rekrutacji uczestników' }];
-	const [name, setName] = useState('raport');
+	const [name, setName] = useState('Raport sprawozdawczy z działalności ośrodka');
 	const [rehabitationCenter, setRehabitationCenter] = useState(0);
 	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
 	const [quater_from, setQuaterFrom] = useState([]);

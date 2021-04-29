@@ -82,7 +82,7 @@ const SortTable = (props) => {
                 onClick={() => requestSort(0)}
               >
 								<label htmlFor="id">
-									ID
+                  Numer uczestnika
 								</label>
             </TableSortLabel>
             </TableCell>
@@ -192,7 +192,7 @@ const SortTable = (props) => {
           {rows.map((item, indx) => {
             return (
               <TableRow key={indx} className={classes.root}>
-                <TableCell onClick={() => handleClick(item.id_candidate)}>{item.id_candidate}</TableCell>
+                <TableCell onClick={() => handleClick(item.id_candidate)}>{item.participant_number}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{item.name}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)}>{item.surname}</TableCell>
                 <TableCell onClick={() => handleClick(item.id_candidate)} className={classes.cell_removable}>{rehabitationCenterList && rehabitationCenterList.length > 0 && item.rehabitation_center > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>

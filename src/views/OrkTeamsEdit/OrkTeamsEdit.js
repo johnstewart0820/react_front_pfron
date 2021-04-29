@@ -240,7 +240,7 @@ const OrkTeamsEdit = props => {
 										getOptionLabel={(option) => specializationList && option && option.name + (option.module_type ? (' (' + option.module_type + ')') : '')}
 										renderTags={(value, getTagProps) =>
 											value.map((option, index) => (
-												<Chip variant="outlined" label={option.name} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
+												<Chip variant="outlined" label={option.name + (option.module_type ? (' (' + option.module_type + ')') : '')} {...getTagProps({ index })} deleteIcon={<CloseIcon aria-label="Wyczyść wartość"/>}/>
 											))
 										}
 										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} error={error.specialization} />}

@@ -34,7 +34,7 @@ const SortTable = (props) => {
               onClick={() => requestSort(0)}
             >
 							<label htmlFor="id">
-								ID
+								Numer
 							</label>
             </TableSortLabel>
           </TableCell>
@@ -85,7 +85,7 @@ const SortTable = (props) => {
         {rows.map((item, indx) => {
           return (
             <TableRow key={indx} className={classes.root}>
-              <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)}>{item.id}</TableCell>
+              <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)}>{item.number}</TableCell>
               <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)}>{item.value}</TableCell>
               <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)} className={classes.cell_removable}>{rehabitationCenterList && rehabitationCenterList.length > 0 && rehabitationCenterList[item.rehabitation_center - 1].name}</TableCell>
               <TableCell onClick={() => history.push(`/payments/edit/${item.id}`)}>{serviceList && serviceList.length > 0 && serviceList[item.service - 1].name}</TableCell>

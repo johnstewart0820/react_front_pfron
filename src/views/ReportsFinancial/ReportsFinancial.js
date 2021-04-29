@@ -205,7 +205,6 @@ const ReportsFinancial = props => {
 		sub_header.push('I');
 
 		total_data.data.push(sub_header);
-		let index = 0;
 		let module_index = 4;
 		let arr = [];
 		let total_price = 0;
@@ -224,7 +223,7 @@ const ReportsFinancial = props => {
 				module_index++;
 				for (let j = 0; j < service_list.length; j++) {
 					let item = [];
-					item.push(++index);
+					item.push(service_list[j].number);
 					item.push(service_list[j].name);
 					let count = 0;
 					let sum = 0;

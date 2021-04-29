@@ -43,7 +43,7 @@ const Payments = props => {
 					history.push('/login');
 				} else {
 					setRehabitationCenterList(response.data.rehabitation_center);
-					setServiceList(response.data.service);
+					setServiceList(response.data.service_list);
 				}
 			})
 		handleSearch();

@@ -130,7 +130,7 @@ const PlanView = (props) => {
 										:
 										<Grid item xs={9}>
 											<div className={classes.normal_font}>
-												{service.name}
+												{`${service.name} (Numer ${service.number})`}
 											</div>
 										</Grid>
 								}

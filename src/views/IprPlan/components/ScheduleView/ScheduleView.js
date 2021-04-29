@@ -292,7 +292,7 @@ const ScheduleView = (props) => {
 														module.service_list.map((service, index_service) => (
 															<>
 																<Grid item xs={4} style={{ fontSize: '0.7em' }}>
-																	{service.name}
+																	{`${service.number}. ${service.name}`}
 																</Grid>
 																<Grid item xs={8}>
 																	<Grid container spacing={2}>

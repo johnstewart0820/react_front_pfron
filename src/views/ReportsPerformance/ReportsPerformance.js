@@ -161,7 +161,6 @@ const ReportsPerformance = props => {
 		header.push('Nadwykonanie');
 		header.push('Wartość ostateczna rozliczenia danej pozycji budżetowej w V kwartale');
 		total_data.push(header);
-		let count = 1;
 		data.map((candidate, index) => {
 
 			let service_lists = candidate.service_lists;
@@ -171,18 +170,18 @@ const ReportsPerformance = props => {
 				let item = [];
 				let plan = service.plan;
 				let schedule = service.schedule;
-				let plan_total = plan.trial + plan.basic;
+				let plan_total = Number(plan.trial) + Number(plan.basic);
 				let schedule_total = 0;
 
-				item.push(count++);
+				item.push(service.number);
 
 				item.push(index != 0 ? '' : candidate.participant_number);
 				item.push(service.name);
 				item.push(plan_total);
 
 				for (let i = 0; i < schedule.basic.length; i++) {
-					schedule_total += (schedule.basic[i] + schedule.trial[i]);
-					item.push(schedule.basic[i] + schedule.trial[i])
+					schedule_total += (Number(schedule.basic[i]) + Number(schedule.trial[i]));
+					item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
 				}
 
 				item.push(schedule_total);

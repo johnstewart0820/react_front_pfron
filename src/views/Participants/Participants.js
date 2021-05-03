@@ -100,8 +100,17 @@ const Participants = props => {
 			})
 	}
 
+	const getValueFromArray = ( arr, current) => {
+		let ind = -1;
+		arr.map((item, index) => {
+			if (item.id == current)
+				ind = index;
+		})
+		return arr[ind].name;
+	}
 	const handleExportSL = () => {
 		let export_data = [];
+
 		totalCandidateList.map((data, index) => {
 			let item = [];
 			item.push('POWR.02.06.00-00-0057/17-01');
@@ -110,7 +119,7 @@ const Participants = props => {
 			item.push('1/1/2018');
 			item.push('12/31/2023');
 			item.push('-');
-			for (let j = 0; j < 24; j++)
+			for(let j = 0; j < 24; j ++)
 				item.push('');
 			item.push('Polska');
 			item.push('indywidualny');
@@ -119,11 +128,12 @@ const Participants = props => {
 			item.push(data.surname);
 			item.push(data.person_id);
 			item.push('Nie');
-			item.push(parseInt(data.gender) === 1 ? 'mężczyzna' : 'kobieta')
-			item.push(parseInt(data.education) === 0 ? '' : educationList[parseInt(data.education) - 1])
-			item.push(parseInt(data.voivodeship) === 0 ? '' : voivodeshipList[parseInt(data.voivodeship) - 1])
-			item.push(parseInt(data.county) === 0 ? '' : countyList[parseInt(data.county) - 1])
-			item.push(parseInt(data.community) === 0 ? '' : communityList[parseInt(data.community) - 1])
+			item.push(parseInt(data.gender) === 1 ? 'kobieta' : 'mężczyzna')
+			item.push(parseInt(data.age))
+			item.push(parseInt(data.education) === 0 ? '' : getValueFromArray(educationList, data.education))
+			item.push(parseInt(data.voivodeship) === 0 ? '' : getValueFromArray(voivodeshipList, data.voivodeship))
+			item.push(parseInt(data.county) === 0 ? '' : getValueFromArray(countyList, data.county))
+			item.push(parseInt(data.community) === 0 ? '' : getValueFromArray(communityList, data.community))
 			item.push(data.city);
 			item.push(data.street);
 			item.push(data.house_number);
@@ -153,9 +163,9 @@ const Participants = props => {
 			if (unemployed_status === '1' && have_unemployed_person_status != '1' && seek_work_status != '1') {
 				res = 'osoba bezrobotna niezarejestrowana w ewidencji urzędów pracy';
 			}
-
+			
 			item.push(res);
-
+			
 			if (long_term_employed_status === '1') {
 				item.push('osoba długotrwale bezrobotna')
 			} else {
@@ -169,7 +179,7 @@ const Participants = props => {
 			item.push(data.decision_central_commision === '2' ? 'osoba nie otrzymała żadnej oferty' : '');
 			item.push(data.decision_central_commision === '2' ? 'Tak' : '');
 
-			for (let j = 0; j < 7; j++)
+			for (let j = 0; j < 7; j ++)
 				item.push('');
 
 			let arr = ['Tak', 'Nie', 'Odmowa podania informacji'];
@@ -181,22 +191,22 @@ const Participants = props => {
 			item.push('');
 
 			export_data.push(item);
-		})
+		}) 
 		EXCEL.outPut({
 			header: ['Numer umowy/ decyzji /aneksu', 'Nazwa beneficjenta', 'Tytuł projektu', 'Okres realizacji projektu od', 'Okres realizacji projektu do',
-				'Wniosek za okres', 'Kraj', 'Nazwa instytucji', 'NIP', 'Brak NIP', 'Typ instytucji', 'w tym', 'Województwo', 'Powiat', 'Gmina',
-				'Miejscowość', 'Ulica', 'Nr budynku', 'Nr lokalu', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)', 'Telefon kontaktowy', 'Adres e-mail',
-				'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Czy wsparciem zostali objęci pracownicy instytucji',
-				'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu',
-				'Kraj', 'Rodzaj uczestnika', 'Nazwa instytucji', 'Imię', 'Nazwisko', 'Pesel', 'Brak PESEL', 'Płeć', 'Wiek w chwili przystąpienia do projektu', 'Wykształcenie',
-				'Województwo', 'Powiat', 'Gmina', 'Miejscowość', 'Ulica', 'Nr budynku', 'Nr budynku', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)',
-				'Telefon kontaktowy', 'Adres e-mail', 'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Status osoby na rynku pracy w chwili przystąpienia do projektu',
-				'W tym', 'Wykonywany zawód', 'Zatrudniony w:', 'Sytuacja (1) osoby w momencie zakończenia udziału w projekcie', 'Sytuacja (2) osoby w momencie zakończenia udziału w projekcie',
-				'Inne rezultaty dotyczące osób młodych (dotyczy IZM)', 'Zakończenie udziału osoby w projekcie zgodnie z zaplanowaną dla niej ścieżką uczestnictwa',
-				'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu', 'Data założenia działalności gospodarczej',
-				'Kwota środków przyznanych na założenie działalności gospodarczej', 'PKD założonej działalności gospodarczej', 'Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia',
-				'Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań', 'Osoba z niepełnosprawnościami', 'Osoba w innej niekorzystnej sytuacji społecznej',
-				'Planowana data zakończenia edukacji w placówce edukacyjnej, w której skorzystano ze wsparcia'],
+			'Wniosek za okres', 'Kraj', 'Nazwa instytucji', 'NIP', 'Brak NIP', 'Typ instytucji', 'w tym', 'Województwo', 'Powiat', 'Gmina',
+			'Miejscowość', 'Ulica', 'Nr budynku', 'Nr lokalu', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)', 'Telefon kontaktowy', 'Adres e-mail',
+			'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Czy wsparciem zostali objęci pracownicy instytucji', 
+			'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu', 
+		  'Kraj', 'Rodzaj uczestnika', 'Nazwa instytucji', 'Imię', 'Nazwisko', 'Pesel', 'Brak PESEL', 'Płeć', 'Wiek w chwili przystąpienia do projektu', 'Wykształcenie',
+		  'Województwo', 'Powiat', 'Gmina', 'Miejscowość', 'Ulica', 'Nr budynku', 'Nr budynku', 'Kod pocztowy', 'Obszar wg stopnia urbanizacji (DEGURBA)',
+			'Telefon kontaktowy', 'Adres e-mail', 'Data rozpoczęcia udziału w projekcie', 'Data zakończenia udziału w projekcie', 'Status osoby na rynku pracy w chwili przystąpienia do projektu',
+			'W tym', 'Wykonywany zawód', 'Zatrudniony w:', 'Sytuacja (1) osoby w momencie zakończenia udziału w projekcie', 'Sytuacja (2) osoby w momencie zakończenia udziału w projekcie',
+			'Inne rezultaty dotyczące osób młodych (dotyczy IZM)', 'Zakończenie udziału osoby w projekcie zgodnie z zaplanowaną dla niej ścieżką uczestnictwa',
+			'Rodzaj przyznanego wsparcia', 'W tym', 'Data rozpoczęcia udziału we wsparciu', 'Data zakończenia udziału we wsparciu', 'Data założenia działalności gospodarczej',
+			'Kwota środków przyznanych na założenie działalności gospodarczej', 'PKD założonej działalności gospodarczej', 'Osoba należąca do mniejszości narodowej lub etnicznej, migrant, osoba obcego pochodzenia',
+			'Osoba bezdomna lub dotknięta wykluczeniem z dostępu do mieszkań', 'Osoba z niepełnosprawnościami', 'Osoba w innej niekorzystnej sytuacji społecznej',
+			'Planowana data zakończenia edukacji w placówce edukacyjnej, w której skorzystano ze wsparcia'],
 			data: export_data,
 			name: 'SL'
 		})

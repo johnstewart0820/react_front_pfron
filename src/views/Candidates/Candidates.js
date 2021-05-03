@@ -107,6 +107,14 @@ const Candidates = props => {
 		history.push('/candidates/create');
 	}
 
+	const getValueFromArray = ( arr, current) => {
+		let ind = -1;
+		arr.map((item, index) => {
+			if (item.id == current)
+				ind = index;
+		})
+		return arr[ind].name;
+	}
 	const handleExportSL = () => {
 		let export_data = [];
 
@@ -127,11 +135,12 @@ const Candidates = props => {
 			item.push(data.surname);
 			item.push(data.person_id);
 			item.push('Nie');
-			item.push(parseInt(data.gender) === 1 ? 'mężczyzna' : 'kobieta')
-			item.push(parseInt(data.education) === 0 ? '' : educationList[parseInt(data.education) - 1])
-			item.push(parseInt(data.voivodeship) === 0 ? '' : voivodeshipList[parseInt(data.voivodeship) - 1])
-			item.push(parseInt(data.county) === 0 ? '' : countyList[parseInt(data.county) - 1])
-			item.push(parseInt(data.community) === 0 ? '' : communityList[parseInt(data.community) - 1])
+			item.push(parseInt(data.gender) === 1 ? 'kobieta' : 'mężczyzna')
+			item.push(parseInt(data.age))
+			item.push(parseInt(data.education) === 0 ? '' : getValueFromArray(educationList, data.education))
+			item.push(parseInt(data.voivodeship) === 0 ? '' : getValueFromArray(voivodeshipList, data.voivodeship))
+			item.push(parseInt(data.county) === 0 ? '' : getValueFromArray(countyList, data.county))
+			item.push(parseInt(data.community) === 0 ? '' : getValueFromArray(communityList, data.community))
 			item.push(data.city);
 			item.push(data.street);
 			item.push(data.house_number);

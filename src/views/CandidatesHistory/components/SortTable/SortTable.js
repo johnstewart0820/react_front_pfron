@@ -108,7 +108,7 @@ const SortTable = (props) => {
                 direction={sortOrder}
                 onClick={() => requestSort(3)}
               >
-                Uzytkownik
+                Użytkownik
             </TableSortLabel>
             </TableCell>
           </TableRow>

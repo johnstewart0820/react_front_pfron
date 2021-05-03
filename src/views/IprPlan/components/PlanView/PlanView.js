@@ -216,7 +216,7 @@ const PlanView = (props) => {
 						<Grid item xs={12}>
 							<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
 								<Button variant="outlined" color="secondary" className={classes.btnCreate} onClick={() => handleCreatePlan(index_module)}>
-									Dodaj kolejna procedure
+									Dodaj kolejną procedurę
 						</Button>
 							</div>
 						</Grid>
@@ -253,7 +253,7 @@ const PlanView = (props) => {
 									<Grid item xs={12}>
 										<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
 											<Button variant="outlined" color="secondary" className={classes.btnCreate} onClick={() => handleCreatePlan(index)}>
-												Dodaj kolejna procedure
+												Dodaj kolejną procedurę
 								</Button>
 										</div>
 									</Grid>

@@ -189,10 +189,11 @@ class Ipr {
 			})
 	}
 
-	updateBalance = (moduleList, id_ipr) => {
+	updateBalance = (moduleList, balance_remark, id_ipr) => {
 		return axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/ipr/ipr_balance`, {
 				moduleList: moduleList,
+				balance_remark: balance_remark,
 				id_ipr: id_ipr,
 			}, {
 				headers: authHeader(storage.getStorage('token'))

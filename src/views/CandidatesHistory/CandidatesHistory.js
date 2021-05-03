@@ -114,7 +114,7 @@ const CandidatesHistory = props => {
               export_data.push(item);
             }
             EXCEL.outPut({
-              header: ['ID', 'Data modyfikacji', 'Zmiana', 'Uzytkownik'],
+              header: ['ID', 'Data modyfikacji', 'Zmiana', 'Użytkownik'],
               data: export_data,
               name: 'download'
             })

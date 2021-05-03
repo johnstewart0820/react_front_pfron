@@ -30,6 +30,17 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: '0.8750em',
 		fontWeight: '500',
 	},
+	remark: {
+		fontSize: '0.8750em',
+		fontWeight: '500',
+		marginTop: theme.spacing(4),
+	},
+	textArea: {
+		width: '100%',
+		fontSize: '0.875em',
+		fontFamily: 'roboto',
+		padding: theme.spacing(2)
+	},
 	service: {
 		fontSize: '0.75em',
 	},

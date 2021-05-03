@@ -103,7 +103,7 @@ const Forgot = props => {
 								Wyślij
               </Button>
 							<Link to="/login" component={RouterLink} className={classes.btnBack}>
-								Powróć do poprzedniej strony
+								Wróć do poprzedniej strony
               </Link>
 						</div>
 					</div>

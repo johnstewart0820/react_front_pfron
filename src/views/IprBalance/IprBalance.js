@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, Typography
+	Button, Grid, Card, TextField, CircularProgress, Typography, TextareaAutosize
 } from '@material-ui/core';
 
 import { Autocomplete } from '@material-ui/lab';
@@ -57,6 +57,7 @@ const IprBalance = props => {
 	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
+	const [remark, setRemark] = useState('');
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
@@ -67,6 +68,7 @@ const IprBalance = props => {
 					history.push('/login');
 				} else {
 					setDataList(response.data.module);
+					setRemark(response.data.balance_remark);
 				}
 			})
 	}, []);
@@ -152,7 +154,7 @@ const IprBalance = props => {
 	const handleSave = () => {
 
 		setProgressStatus(true);
-		ipr.updateBalance(dataList, id)
+		ipr.updateBalance(dataList, remark, id)
 			.then(response => {
 				if (response.code === 401) {
 					history.push('/login');
@@ -440,6 +442,15 @@ const IprBalance = props => {
 									</Grid>
 									<Grid item xs={3}>
 										{sumBalance}
+									</Grid>
+									<Grid item xs={12}>
+										<Typography variant="h2" className={classes.remark}>
+											Informacje o zatrudnieniu, nazwa pracodawcy, stanowisko, forma i okres zatrudnienia
+										</Typography>
+									</Grid>
+									<Grid item xs={12}>
+									<TextareaAutosize className={classes.textArea} aria-label="Informacje o zatrudnieniu, nazwa pracodawcy, stanowisko, forma i okres zatrudnienia" 
+										value={remark} rowsMin={10} onChange={(e) => setRemark(e.target.value)}/>
 									</Grid>
 								</Grid>
 							</Card>

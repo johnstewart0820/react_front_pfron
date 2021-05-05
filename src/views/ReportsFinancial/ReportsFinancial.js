@@ -230,7 +230,7 @@ const ReportsFinancial = props => {
 					let cost = data[0].module[i].service_lists[j].cost;
 					for (let k = 0; k < data.length; k++) {
 						let schedule = data[k].module[i].service_lists[j].schedule;
-						let value = (parseFloat(schedule.trial) + parseFloat(schedule.basic));
+						let value = (Number(schedule.trial) + Number(schedule.basic));
 						let money = value * cost;
 
 						if (!total_sum[k + 2])
@@ -241,28 +241,28 @@ const ReportsFinancial = props => {
 							total_sum[2 + data.length] = 0;
 						total_sum[2 + data.length] += value;
 
-						item.push(value === 0 ? '' : money.toFixed(2));
+						item.push(value === 0 ? '' : money);
 						if (value !== 0)
 							count++;
 						sum += value;
 					}
 					let average = sum / data.length;
 
-					item.push(count === 0 ? 'nd' : count + '');
+					item.push(count === 0 ? 'nd' : count);
 					item.push(data[0].module[i].service_lists[j].unit_name);
-					item.push(average === 0 ? 'nd' : average.toFixed(2));
+					item.push(average === 0 ? 'nd' : average);
 					item.push(
-						sum === 0 ? 'nd' : sum.toFixed(2));
+						sum === 0 ? 'nd' : sum);
 
 
-					item.push(parseFloat(cost).toFixed(2));
+					item.push(Number(cost));
 					let sum_value = (cost * sum);
 					total_price += sum_value;
 					if (!total_sum[5 + data.length])
 						total_sum[5 + data.length] = 0;
-					total_sum[5 + data.length] += parseFloat(sum);
-					item.push(sum_value === 0 ? 'nd' : sum_value.toFixed(2));
-					item.push(sum_value === 0 ? 'nd' : sum_value.toFixed(2));
+					total_sum[5 + data.length] += Number(sum);
+					item.push(sum_value === 0 ? 'nd' : sum_value);
+					item.push(sum_value === 0 ? 'nd' : sum_value);
 					total_data.data.push(item);
 					module_index++;
 				}
@@ -280,7 +280,7 @@ const ReportsFinancial = props => {
 		let item_last = [];
 		for (let i = 0; i < total_sum.length; i++) {
 			let value = total_sum[i];
-			item_last.push(total_sum[i] === undefined || !total_sum[i] ? '' : parseFloat(value).toFixed(2) + '');
+			item_last.push(total_sum[i] === undefined || !total_sum[i] ? '' : Number(value));
 		}
 		total_data.data.push(item_last);
 		const ws = XLSX.utils.aoa_to_sheet(total_data.data);
@@ -320,8 +320,25 @@ const ReportsFinancial = props => {
 			// first row
 			if (key == '!ref')
 				break;
+
+			let column = key.replace(new RegExp("[0-9]", "g"), "");
+			let row = key.replace(/[^0-9]/ig, '');
+			if (!isNaN(ws[key].v) && column != 'A') {
+				ws[key].t = 'n';
+				ws[key].s = { numFmt: "0.00" };
+			}
+			if ((ws[column + '2'].v.startsWith("M")
+				|| ws[column + '2'].v.startsWith("Liczba Uczestnikó")
+				|| ws[column + '2'].v.startsWith("Liczba zrealizowanych jednostek w okresie")
+			) && row == total_data.data.length) {
+				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 1}, "<>nd", ${column}3:${column}${total_data.data.length - 1})`
+			}
+			if (ws[column + '2'].v.startsWith("Cena brutto") && row == total_data.data.length - 1) {
+				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 2}, "<>nd", ${column}3:${column}${total_data.data.length - 2})`
+			}
 			if (key.replace(/[^0-9]/ig, '') === '1') {
 				ws[key].s = {
+					...ws[key].s,
 					font: {
 						sz: 12, // font size
 						bold: true // bold
@@ -330,6 +347,7 @@ const ReportsFinancial = props => {
 			}
 			if (key.replace(/[^0-9]/ig, '') === '2' || key.replace(/[^0-9]/ig, '') === '3') {
 				ws[key].s = {
+					...ws[key].s,
 					alignment: {
 						wrapText: '1', // any truthy value here
 					},
@@ -364,6 +382,7 @@ const ReportsFinancial = props => {
 			for (let i = 0; i < arr.length; i++) {
 				if (arr[i] === parseInt(key.replace(/[^0-9]/ig, ''))) {
 					ws[key].s = {
+						...ws[key].s,
 						alignment: {
 							wrapText: '1', // any truthy value here
 						},
@@ -490,7 +509,7 @@ const ReportsFinancial = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
-									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleGenerate}  title="Generuj raport - Kliknij aby pobrać plik poniżej 1MB">
+									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleGenerate} title="Generuj raport - Kliknij aby pobrać plik poniżej 1MB">
 										Generuj raport
                 	</Button>
 								</Grid>

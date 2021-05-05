@@ -133,7 +133,7 @@ const SortTable = (props) => {
                 onClick={() => requestSort(5)}
               >
 								<label htmlFor="date">
-									Data modyfikacji
+									Data modyfikacji - DD.MM.RRRR
 								</label>
             </TableSortLabel>
             </TableCell>
@@ -202,10 +202,10 @@ const SortTable = (props) => {
                   <IconButton aria-label={`Edytuj uczestnika ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => history.push(`/participants/edit/${item.id_candidate}`)}>
                     <EditOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label='Pokaż listę IPR' component="span" className={classes.iconButton} onClick={() => showIprList(`${item.name} ${item.surname}`)}>
+                  <IconButton variant="outlined" aria-label={`Pokaż listę IPR ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => showIprList(`${item.name} ${item.surname}`)}>
                     <EventNoteOutlinedIcon className={classes.icon} />
                   </IconButton>
-                  <IconButton variant="outlined" aria-label='Dodaj listę IPR' component="span" className={classes.iconButton} onClick={() => createIpr(item.participant_number)}>
+                  <IconButton variant="outlined" aria-label={`Dodaj listę IPR ${item.name + ' ' + item.surname}`} component="span" className={classes.iconButton} onClick={() => createIpr(item.participant_number)}>
                     <NoteAddOutlinedIcon className={classes.icon} />
                   </IconButton>
                 </TableCell>

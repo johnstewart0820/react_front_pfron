@@ -143,7 +143,7 @@ const SortTable = (props) => {
                 onClick={() => requestSort(6)}
               >
 								<label htmlFor="date">
-									Data modyfikacji
+									Data modyfikacji - DD.MM.RRRR
 								</label>
             </TableSortLabel>
             </TableCell>

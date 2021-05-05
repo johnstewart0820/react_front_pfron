@@ -42,6 +42,7 @@ const CandidatesFourthStep = props => {
 	const [typeToStayList, setTypeToStayList] = useState([{ id: 1, name: 'Stacjonarny' }, { id: 2, name: 'Niestacjonarny' }])
 	const [type_to_stay, setTypeToStay] = useState(0);
 	const [participant_remark, setParticipantRemark] = useState('');
+	const [is_participant, setIsParticipant] = useState(0);
 	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
@@ -110,6 +111,7 @@ const CandidatesFourthStep = props => {
 					setDateRehabitationCenter(response.data.candidate_info.date_rehabitation_center);
 					setTypeToStay(response.data.candidate_info.type_to_stay);
 					setParticipantRemark(response.data.candidate_info.participant_remark ? response.data.candidate_info.participant_remark : '');
+					setIsParticipant(response.data.candidate.is_participant);
 				}
 				setProgressStatus(false);
 			})
@@ -245,6 +247,7 @@ const CandidatesFourthStep = props => {
 									setTypeToStay={setTypeToStay}
 									participant_remark={participant_remark}
 									setParticipantRemark={setParticipantRemark}
+									is_participant={is_participant}
 									stage={stage}
 								/>
 							</TabPanel>

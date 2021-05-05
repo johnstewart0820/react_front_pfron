@@ -342,6 +342,7 @@ class constants {
 			'/candidates/profile/*',
 			'/candidates/info/step1/*',
 			'/candidates/info/step2/*',
+			'/profile',
 		]
 	];
 }

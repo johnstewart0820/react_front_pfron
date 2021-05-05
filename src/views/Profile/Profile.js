@@ -147,7 +147,7 @@ const Profile = props => {
 	return (
 		<>
 			<div className={classes.public}>
-				<div className={classes.controlBlock}>
+				<div className={classes.controlBlock} style={role.findIndex(isAdministrator) === -1 ? {display: 'none'} : {}}>
 					<Breadcrumb list={breadcrumbs} />
 					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
         </Button>

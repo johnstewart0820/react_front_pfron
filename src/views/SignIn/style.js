@@ -64,6 +64,9 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.black_white,
     width: '100%'
   },
+	rippleClass: {
+		backgroundColor: 'red'
+	},
   btnForgot: {
     marginTop: theme.spacing(2),
     '&:hover': {

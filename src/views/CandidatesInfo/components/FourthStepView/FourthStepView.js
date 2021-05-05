@@ -31,6 +31,7 @@ const FourthStepView = (props) => {
     setTypeToStay,
     participant_remark,
     setParticipantRemark,
+		is_participant,
 		stage
   } = props;
   const handleDate = (value) => {
@@ -42,7 +43,7 @@ const FourthStepView = (props) => {
 	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
 			{
-				stage != 4 ?
+				is_participant == 1 ?
 				<div className={classes.wrapper}/>
 				:
 				<></>

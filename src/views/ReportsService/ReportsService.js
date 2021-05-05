@@ -150,6 +150,31 @@ const ReportsService = props => {
 		let _arr = arr[1].split('-');
 		return { id: id, date: `${_arr[2]}.${_arr[1]}.${_arr[0]}` };
 	}
+
+	function numToAlpha(num) {
+
+		var alpha = '';
+	
+		for (; num >= 0; num = parseInt(num / 26, 10) - 1) {
+			alpha = String.fromCharCode(num % 26 + 0x41) + alpha;
+		}
+	
+		return alpha;
+	}
+
+	function alphaToNum(alpha) {
+
+		var i = 0,
+				num = 0,
+				len = alpha.length;
+	
+		for (; i < len; i++) {
+			num = num * 26 + alpha.charCodeAt(i) - 0x40;
+		}
+	
+		return num - 1;
+	}
+
 	const handleExport = (data, rehabitation_center, quater_from, quater_to) => {
 		let romic_number = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
 		let total_sum = ['', ''];
@@ -319,15 +344,29 @@ const ReportsService = props => {
 				ws[key].t = 'n';
 				ws[key].s = { numFmt: "0.00" };
 			}
+
 			if ((ws[column + '2'].v.startsWith("M")
 				|| ws[column + '2'].v.startsWith("Liczba Uczestnikó")
 				|| ws[column + '2'].v.startsWith("Liczba zrealizowanych jednostek w okresie")
 			) && row == total_data.data.length) {
 				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 1}, "<>nd", ${column}3:${column}${total_data.data.length - 1})`
 			}
+
 			if (ws[column + '2'].v.startsWith("Cena brutto") && row == total_data.data.length - 1) {
 				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 2}, "<>nd", ${column}3:${column}${total_data.data.length - 2})`
 			}
+
+			if (ws[column + '2'].v.startsWith('Liczba zrealizowanych jednostek w okresie')) {
+				let start = 2;
+				let end = 2 + data.length - 1;
+				if (ws[`A${row}`].v != '' && row >= 4) {
+					ws[key].f = `SUM(${numToAlpha(start)}${row}:${numToAlpha(end)}${row})`;
+					ws[`${numToAlpha(alphaToNum(column) - 1)}${row}`].f = `IF(${numToAlpha(alphaToNum(column) - 3)}${row}="nd", "nd", ${key}/${numToAlpha(alphaToNum(column) - 3)}${row})`
+					ws[`${numToAlpha(alphaToNum(column) + 2)}${row}`].f = `IF(${key}="nd", "nd", ${key}*${numToAlpha(alphaToNum(column) + 1)}${row})`
+					ws[`${numToAlpha(alphaToNum(column) + 3)}${row}`].f = `${numToAlpha(alphaToNum(column) + 2)}${row}`
+				}
+			}
+
 			if (key.replace(/[^0-9]/ig, '') === '1') {
 				ws[key].s = {
 					...ws[key].s,

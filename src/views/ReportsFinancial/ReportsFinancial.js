@@ -143,6 +143,32 @@ const ReportsFinancial = props => {
 		}
 	}
 
+
+	function numToAlpha(num) {
+
+		var alpha = '';
+
+		for (; num >= 0; num = parseInt(num / 26, 10) - 1) {
+			alpha = String.fromCharCode(num % 26 + 0x41) + alpha;
+		}
+
+		return alpha;
+	}
+
+	function alphaToNum(alpha) {
+
+		var i = 0,
+			num = 0,
+			len = alpha.length;
+
+		for (; i < len; i++) {
+			num = num * 26 + alpha.charCodeAt(i) - 0x40;
+		}
+
+		return num - 1;
+	}
+
+
 	const getPolishMonth = (str_date) => {
 		let _str = str_date.split('Kw. ')[1].split(')')[0];
 		let arr = _str.split(' (');
@@ -336,6 +362,18 @@ const ReportsFinancial = props => {
 			if (ws[column + '2'].v.startsWith("Cena brutto") && row == total_data.data.length - 1) {
 				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 2}, "<>nd", ${column}3:${column}${total_data.data.length - 2})`
 			}
+
+			if (ws[column + '2'].v.startsWith('Liczba zrealizowanych jednostek w okresie')) {
+				let start = 2;
+				let end = 2 + data.length - 1;
+				if (ws[`A${row}`].v != '' && row >= 4) {
+					ws[key].f = `SUM(${numToAlpha(start)}${row}:${numToAlpha(end)}${row})`;
+					ws[`${numToAlpha(alphaToNum(column) - 1)}${row}`].f = `IF(${numToAlpha(alphaToNum(column) - 3)}${row}="nd", "nd", ${key}/${numToAlpha(alphaToNum(column) - 3)}${row})`
+					ws[`${numToAlpha(alphaToNum(column) + 2)}${row}`].f = `IF(${key}="nd", "nd", ${key}*${numToAlpha(alphaToNum(column) + 1)}${row})`
+					ws[`${numToAlpha(alphaToNum(column) + 3)}${row}`].f = `${numToAlpha(alphaToNum(column) + 2)}${row}`
+				}
+			}
+
 			if (key.replace(/[^0-9]/ig, '') === '1') {
 				ws[key].s = {
 					...ws[key].s,

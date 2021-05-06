@@ -117,6 +117,8 @@ const Candidates = props => {
 	}
 
 	const getDateString = (value) => {
+		if (value === null)
+			return '';
 		let date = new Date(value);
 		return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 	}
@@ -173,7 +175,7 @@ const Candidates = props => {
 			if (have_unemployed_person_status === '1' || seek_work_status === '1') {
 				res = 'osoba bezrobotna zarejestrowana w ewidencji urzędów pracy';
 			}
-			if (unemployed_status === '1' && have_unemployed_person_status != '1' && seek_work_status != '1') {
+			if (employed_status === '2' && have_unemployed_person_status != '1') {
 				res = 'osoba bezrobotna niezarejestrowana w ewidencji urzędów pracy';
 			}
 			

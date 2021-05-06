@@ -149,6 +149,26 @@ const IprList = props => {
 			})
 	}
 
+	const handleDuplicate = (ipr_id) => {
+		setProgressStatus(true);
+		ipr
+			.duplicate(ipr_id)
+			.then(response => {
+				if (response.code === 401) {
+					history.push('/login');
+				} else {
+					if (response.code === 200) {
+						setHasAlert(true);
+						setMessage(response.message);
+						setIsSuccess(response.code === 200);
+					}
+					setProgressStatus(false);
+					handleSearch();
+					setPage(1);
+				}
+			})
+	}
+
 	const handlePaginationLabel = (type, page, selected) => {
 		if (type === 'first') {
 			return 'Przejdź do pierwszej strony'
@@ -214,6 +234,7 @@ const IprList = props => {
 					searchScheduleDate={searchScheduleDate}
 					setSearchScheduleDate={setSearchScheduleDate}
 					handleDelete={handleSelectedItem}
+					handleDuplicate={handleDuplicate}
 				/>
 				{
 					total > selectedCount &&

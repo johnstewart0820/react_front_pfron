@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import { SingleSelect } from 'components';
 import { withRouter } from 'react-router-dom';
 import useStyles from './style';
@@ -25,7 +26,7 @@ import DateFnsUtils from '@date-io/date-fns';
 const SortTable = (props) => {
 	const classes = useStyles();
 	const { history } = props;
-	const { sortBy, sortOrder, requestSort, rows, searchId, setSearchId, searchName, setSearchName, searchIprType, setSearchIprType, iprTypeList, searchNumber, setSearchNumber, searchCreatedAt, setSearchCreatedAt, searchScheduleDate, setSearchScheduleDate, handleDelete } = props;
+	const { sortBy, sortOrder, requestSort, rows, searchId, setSearchId, searchName, setSearchName, searchIprType, setSearchIprType, iprTypeList, searchNumber, setSearchNumber, searchCreatedAt, setSearchCreatedAt, searchScheduleDate, setSearchScheduleDate, handleDelete, handleDuplicate } = props;
 	useEffect(() => {
 	}, []);
 
@@ -45,6 +46,7 @@ const SortTable = (props) => {
 	const handleEdit = (item) => {
 		history.push(parseInt(item.ipr_type) !== 1 ? `/ipr_list/plan/edit/${item.id}` : `/ipr_list/balance/edit/${item.id}`);
 	}
+
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
 			<Table>
@@ -177,6 +179,9 @@ const SortTable = (props) => {
 										onClick={() => handleEdit(item)
 									}>
 										<EditOutlinedIcon className={classes.icon} />
+									</IconButton>
+									<IconButton variant="outlined" aria-label={`Zduplikowany Ipr ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDuplicate(item.id)}>
+										<FileCopyOutlinedIcon className={classes.icon} />
 									</IconButton>
 									<IconButton variant="outlined" aria-label={`Usuń IPR ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>
 										<DeleteOutlineOutlinedIcon className={classes.icon} />

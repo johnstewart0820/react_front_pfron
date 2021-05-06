@@ -189,6 +189,21 @@ class Ipr {
 			})
 	}
 
+	duplicate = (id_ipr) => {
+		return axios
+			.post(`${process.env.REACT_APP_BACKEND_URL}/ipr/duplicate`, {
+				id_ipr: id_ipr,
+			}, {
+				headers: authHeader(storage.getStorage('token'))
+			}).then(response => {
+				if (response.data.code === 401)
+					storage.removeStorage('token');
+				return response.data;
+			}).catch(error => {
+				return error;
+			})
+	}
+
 	updateBalance = (moduleList, balance_remark, id_ipr) => {
 		return axios
 			.post(`${process.env.REACT_APP_BACKEND_URL}/ipr/ipr_balance`, {

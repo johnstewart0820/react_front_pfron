@@ -42,12 +42,6 @@ const FourthStepView = (props) => {
   return (
 	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
-			{
-				is_participant == 1 ?
-				<div className={classes.wrapper}/>
-				:
-				<></>
-			}
       <Grid item md={3} xs={12}>
 				<Typography variant="h2" className={classes.form_title}>
         	Przypisanie do ORK
@@ -70,15 +64,16 @@ const FourthStepView = (props) => {
               KeyboardButtonProps={{
                 'aria-label': 'Zmień datę',
               }}
+							disabled={is_participant == 1}
             />
           </Grid>
           <Grid item xs={8}>
             <div className={classes.label_content} htmlFor="name">Skierowanie do ORK</div>
-            <SingleSelect value={rehabitation_center} handleChange={setRehabitationCenter} list={rehabitationCenterList}/>
+            <SingleSelect value={rehabitation_center} handleChange={setRehabitationCenter} list={rehabitationCenterList} disabled={is_participant == 1}/>
           </Grid>
           <Grid item xs={4}>
             <div className={classes.label_content}><label htmlFor="participant_number">Numer uczestnika</label></div>
-            <input className={classes.input_box} type="name" value={participant_number} name="name" id="participant_number" onChange={(e) => setParticipantNumber(e.target.value)} />
+            <input className={classes.input_box} type="name" value={participant_number} name="name" id="participant_number" onChange={(e) => setParticipantNumber(e.target.value)} disabled={is_participant == 1}/>
           </Grid>
           <Grid item xs={4}>
             <div className={classes.label_content}><label htmlFor="date_rehabitation_center">Data wejścia do ORK</label></div>
@@ -95,11 +90,12 @@ const FourthStepView = (props) => {
               KeyboardButtonProps={{
                 'aria-label': 'Zmień datę',
               }}
+							disabled={is_participant == 1}
             />
           </Grid>
           <Grid item xs={8}>
             <div className={classes.label_content} htmlFor="name"><label htmlFor="type_to_stay">Tryb pobytu uczestnika</label></div>
-            <SingleSelect value={type_to_stay} handleChange={setTypeToStay} list={typeToStayList} id="type_to_stay"/>
+            <SingleSelect value={type_to_stay} handleChange={setTypeToStay} list={typeToStayList} id="type_to_stay" disabled={is_participant == 1}/>
           </Grid>
           <Grid item xs={12}>
             <div className={classes.label_content}><label htmlFor="participant_remark">Uwagi dotyczące uczestnika</label></div>
@@ -109,6 +105,7 @@ const FourthStepView = (props) => {
               onChange={setParticipantRemark}
               value={participant_remark}
               className={classes.qlClass}
+							disabled={is_participant == 1}
             />
           </Grid>
         </Grid>

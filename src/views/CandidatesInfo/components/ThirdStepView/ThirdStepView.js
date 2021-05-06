@@ -34,12 +34,6 @@ const ThirdStepView = (props) => {
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
 			<Grid container spacing={3} className={classes.form}>
-				{
-					stage != 3 ?
-						<div className={classes.wrapper} />
-						:
-						<></>
-				}
 				<Grid item md={3} xs={12}>
 					<Typography variant="h2" className={classes.form_title}>
 						Decyzja komisji
@@ -48,7 +42,7 @@ const ThirdStepView = (props) => {
 				<Grid item md={9} xs={12}>
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
-							<FormControl component="fieldset">
+							<FormControl component="fieldset" disabled={stage != 3}>
 								<FormLabel>Decyzja komisji centralnej</FormLabel>
 								<RadioGroup aria-label="decision_central_commision" name="decision_central_commision" value={parseInt(decision_central_commision)} onChange={(e) => setDecisionCentralCommision(parseInt(e.target.value))} row>
 									<FormControlLabel value={1} control={<Radio />} label='TAK' />
@@ -71,6 +65,7 @@ const ThirdStepView = (props) => {
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}
+								disabled={stage != 3}
 							/>
 						</Grid>
 
@@ -82,6 +77,7 @@ const ThirdStepView = (props) => {
 								onChange={setGeneralRemark}
 								value={general_remark}
 								className={classes.qlClass}
+								disabled={stage != 3}
 							/>
 						</Grid>
 					</Grid>

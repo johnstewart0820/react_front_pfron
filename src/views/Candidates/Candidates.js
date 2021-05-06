@@ -115,6 +115,12 @@ const Candidates = props => {
 		})
 		return arr[ind].name;
 	}
+
+	const getDateString = (value) => {
+		let date = new Date(value);
+		return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+	}
+
 	const handleExportSL = () => {
 		let export_data = [];
 
@@ -149,8 +155,8 @@ const Candidates = props => {
 			item.push('');
 			item.push(data.mobile_phone === '48' ? '' : data.mobile_phone);
 			item.push(data.email);
-			item.push(data.doctor_date);
-			item.push(data.admission === '2' ? data.doctor_date : '');
+			item.push(getDateString(data.doctor_date));
+			item.push(getDateString(data.date_central_commision));
 			let employed_status = data.employed_status;
 			let passive_person_status = data.passive_person_status;
 			let have_unemployed_person_status = data.have_unemployed_person_status;

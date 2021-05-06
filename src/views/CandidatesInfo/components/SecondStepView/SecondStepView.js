@@ -48,12 +48,6 @@ const SecondStepView = (props) => {
   return (
 	<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
     <Grid container spacing={3} className={classes.form}>
-			{
-				stage != 2 ?
-				<div className={classes.wrapper}/>
-				:
-				<></>
-			}
       <Grid item md={3} xs={12}>
 				<Typography variant="h2" className={classes.form_title}>
 					Dane kandydata
@@ -62,7 +56,7 @@ const SecondStepView = (props) => {
       <Grid item md={9} xs={12}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" disabled={stage != 2}>
               <FormLabel>Dopuszczenie do kwalifikacji</FormLabel>
               <RadioGroup aria-label="admission" name="admission" value={admission} onChange={(e) => setAdmission(parseInt(e.target.value))} row>
                 <FormControlLabel value={1} control={<Radio />} label='TAK' />
@@ -72,7 +66,7 @@ const SecondStepView = (props) => {
           </Grid>
 					<>
 						<Grid item xs={12}>
-							<FormControl component="fieldset">
+							<FormControl component="fieldset" disabled={stage != 2}>
 								<FormLabel>Rekomendacja lekarza</FormLabel>
 								<RadioGroup aria-label="Rekomendacja lekarza" name="education" value={doctor_recommendation} onChange={(e) => setDoctorRecommendation(parseInt(e.target.value))} row>
 									<FormControlLabel value={1} control={<Radio />} label='TAK' />
@@ -96,12 +90,13 @@ const SecondStepView = (props) => {
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}
+								disabled={stage != 2}
 							/>
 						</Grid>
 						
 						<Grid item xs={12}>
 							<div className={classes.label_content}><label htmlFor="doctor">Imię i nazwisko lekarza</label></div>
-							<SingleSelect value={doctor} handleChange={setDoctor} list={doctorList} id="doctor"/>
+							<SingleSelect value={doctor} handleChange={setDoctor} list={doctorList} id="doctor" disabled={stage != 2}/>
 						</Grid>
 						<Grid item xs={12}>
 							<div className={classes.label_content}><label htmlFor="doctor_remark">Uwagi od lekarza</label></div>
@@ -111,11 +106,12 @@ const SecondStepView = (props) => {
 								onChange={setDoctorRemark}
 								value={doctor_remark}
 								className={classes.qlClass}
+								disabled={stage != 2}
 							/>
 						</Grid>
 
 						<Grid item xs={12}>
-							<FormControl component="fieldset">
+							<FormControl component="fieldset" disabled={stage != 2}>
 								<FormLabel>Rekomendacja psychologa</FormLabel>
 								<RadioGroup aria-label="Rekomendacja psychologa" name="education" value={psycology_recommendation} onChange={(e) => setPsycologyRecommendation(parseInt(e.target.value))} row>
 									<FormControlLabel value={1} control={<Radio />} label='TAK' />
@@ -139,12 +135,13 @@ const SecondStepView = (props) => {
 								KeyboardButtonProps={{
 									'aria-label': 'Zmień datę',
 								}}
+								disabled={stage != 2}
 							/>
 						</Grid>
 						
 						<Grid item xs={12}>
 							<div className={classes.label_content}><label htmlFor="psycology">Imię i nazwisko psychologa</label></div>
-							<SingleSelect value={psycology} handleChange={setPsycology} list={psycologyList} id="psycology"/>
+							<SingleSelect value={psycology} handleChange={setPsycology} list={psycologyList} id="psycology" disabled={stage != 2}/>
 						</Grid>
 						<Grid item xs={12}>
 							<div className={classes.label_content}><label htmlFor="psycology_remark">Uwagi od psychologa</label></div>
@@ -154,6 +151,7 @@ const SecondStepView = (props) => {
 								onChange={setPsycologyRemark}
 								value={psycology_remark}
 								className={classes.qlClass}
+								disabled={stage != 2}
 							/>
 						</Grid>
 					</>

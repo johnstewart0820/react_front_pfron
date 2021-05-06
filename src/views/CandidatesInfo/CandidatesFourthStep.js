@@ -108,7 +108,7 @@ const CandidatesFourthStep = props => {
 					setDateReferal(response.data.candidate_info.date_referal);
 					setRehabitationCenter(response.data.candidate_info.rehabitation_center);
 					setParticipantNumber(response.data.candidate_info.participant_number);
-					setDateRehabitationCenter(response.data.candidate_info.date_rehabitation_center);
+					setDateRehabitationCenter(response.data.candidate_info.date_rehabitation_center == '0000-00-00' ? null : response.data.candidate_info.date_rehabitation_center);
 					setTypeToStay(response.data.candidate_info.type_to_stay);
 					setParticipantRemark(response.data.candidate_info.participant_remark ? response.data.candidate_info.participant_remark : '');
 					setIsParticipant(response.data.candidate.is_participant);

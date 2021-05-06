@@ -15,12 +15,6 @@ const FirstStepView = (props) => {
   
   return (
     <Grid container spacing={3} className={classes.form}>
-			{
-				stage != 1 ?
-				<div className={classes.wrapper}/>
-				:
-				<></>
-			}
       <Grid item md={3} xs={12}>
 				<Typography variant="h2" className={classes.form_title}>
         	Dane kandydata
@@ -47,7 +41,7 @@ const FirstStepView = (props) => {
             <div className={classes.top_label_content}>{person_id}</div>
           </Grid>
           <Grid item xs={12}>
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" disabled={stage != 1}>
               <FormLabel>Płeć</FormLabel>
               <RadioGroup aria-label="Płeć" name="education" value={gender} onChange={(e) => setGender(parseInt(e.target.value))} row>
                 <FormControlLabel value={1} control={<Radio />} label='kobieta' />
@@ -57,7 +51,7 @@ const FirstStepView = (props) => {
           </Grid>
           <Grid item xs={12}>
             <div className={classes.label_content}><label htmlFor="qualification_point">Punkt kwalifikacyjny</label></div>
-            <SingleSelect value={qualification_point} handleChange={setQualificationPoint} list={qualificationPointList} id="qualification_point"/>
+            <SingleSelect value={qualification_point} handleChange={setQualificationPoint} list={qualificationPointList} id="qualification_point" disabled={stage != 1}/>
           </Grid>
         </Grid>
       </Grid>

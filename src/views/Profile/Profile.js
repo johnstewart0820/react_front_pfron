@@ -103,7 +103,11 @@ const Profile = props => {
 			}
 		} else {
 			setProgressStatus(true);
-			users.updateProfile(name, email, role, activateStatus, password, newPassword)
+			let role_arr = [];
+			role.map((item, index) => {
+				role_arr.push(item.id);
+			})
+			users.updateProfile(name, email, role_arr, activateStatus, password, newPassword)
 				.then(response => {
 					if (response.code === 401) {
 						history.push('/login');
@@ -147,11 +151,14 @@ const Profile = props => {
 	return (
 		<>
 			<div className={classes.public}>
-				<div className={classes.controlBlock} style={role.findIndex(isAdministrator) === -1 ? {display: 'none'} : {}}>
-					<Breadcrumb list={breadcrumbs} />
-					<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
-        </Button>
-				</div>
+				{
+					role.findIndex(isAdministrator) !== -1 &&
+					<div className={classes.controlBlock}>
+						<Breadcrumb list={breadcrumbs} />
+						<Button variant="outlined" color="secondary" id="main" className={classes.btnBack} onClick={handleBack}>						Wróć do listy użytkowników
+		        </Button>
+					</div>
+				}
 				<Alert
 					hasAlert={hasAlert}
 					setHasAlert={setHasAlert}
@@ -168,33 +175,44 @@ const Profile = props => {
 									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
-									<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>
-									<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} disabled={role.findIndex(isAdministrator) === -1}/>
+									{
+										role.findIndex(isAdministrator) !== -1 &&
+										<>
+											<div className={classes.top_label}><label htmlFor="name">Nazwa użytkownika</label></div>
+											<input className={classes.input_box} id="name" type="name" value={name} name="name" onChange={(e) => setName(e.target.value)} disabled={role.findIndex(isAdministrator) === -1} />
+										</>
+									}
 									<div className={classes.input_box_label}><label htmlFor="email">E-mail</label></div>
 									<input className={classes.input_box} type="name" value={email} name="name" id="email" onChange={(e) => setEmail(e.target.value)} />
-									<div className={classes.input_box_label}><label htmlFor="role">Rola</label></div>
-									<Autocomplete
-										multiple
-										id="role"
-										className={classes.name_select_box}
-										onChange={(event, value) => setRole(value ? value : [])}
-										value={role}
-										options={roleList}
-										getOptionLabel={(option) => roleList && option && option.name}
-										renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
-										disabled={role.findIndex(isAdministrator) === -1}
-									/>
-									<FormControlLabel
-										className={classes.rememberMe}
-										control={
-											<Checkbox
-												checked={activateStatus}
-												onChange={() => setActivateStatus(!activateStatus)}
+									{
+										role.findIndex(isAdministrator) !== -1 &&
+										<>
+											<div className={classes.input_box_label}><label htmlFor="role">Rola</label></div>
+											<Autocomplete
+												multiple
+												id="role"
+												className={classes.name_select_box}
+												onChange={(event, value) => setRole(value ? value : [])}
+												value={role}
+												options={roleList}
+												getOptionLabel={(option) => roleList && option && option.name}
+												renderInput={(params) => <TextField {...params} variant="outlined" InputLabelProps={{ shrink: false }} />}
 												disabled={role.findIndex(isAdministrator) === -1}
 											/>
-										}
-										label="Aktywny"
-									/>
+
+											<FormControlLabel
+												className={classes.rememberMe}
+												control={
+													<Checkbox
+														checked={activateStatus}
+														onChange={() => setActivateStatus(!activateStatus)}
+														disabled={role.findIndex(isAdministrator) === -1}
+													/>
+												}
+												label="Aktywny"
+											/>
+										</>
+									}
 								</Grid>
 								<div className={classes.divide} />
 								<Grid item md={3} xs={12}>

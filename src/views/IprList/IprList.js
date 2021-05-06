@@ -17,7 +17,7 @@ const IprList = props => {
 	const location = useLocation();
 
 	const { history } = props;
-	const [sortOption, setSortOption] = useState({ sortBy: 0, sortOrder: "asc" });
+	const [sortOption, setSortOption] = useState({ sortBy: 1, sortOrder: "asc" });
 	const [countList, setCountList] = useState([25, 50, 100]);
 	const [selectedCount, setSelectedCount] = useState(25);
 	const [page, setPage] = useState(1);

@@ -180,7 +180,7 @@ const SortTable = (props) => {
 									}>
 										<EditOutlinedIcon className={classes.icon} />
 									</IconButton>
-									<IconButton variant="outlined" aria-label={`Zduplikowany Ipr ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDuplicate(item.id)}>
+									<IconButton variant="outlined" aria-label={`Zduplikuj IPR ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDuplicate(item.id)}>
 										<FileCopyOutlinedIcon className={classes.icon} />
 									</IconButton>
 									<IconButton variant="outlined" aria-label={`Usuń IPR ${item.name}`} component="span" className={classes.iconButton} onClick={() => handleDelete(item.id)}>

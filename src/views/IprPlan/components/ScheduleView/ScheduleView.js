@@ -63,15 +63,17 @@ const ScheduleView = (props) => {
 			let _to_date = _week.to;
 
 			let _arr = [];
-			let index = 0;
+			let index = -1;
 			for (let i = 0; i < 7; i++) {
 				let default_start_date = JSON.parse(JSON.stringify(_start_date));
 				let date = moment(default_start_date).add(i, 'days');
-				if (index === 0 && parseInt(week) === 1 && date.diff(moment(scheduleDate), 'days') == 0) {
+				if (index === -1 && parseInt(week) === 1 && date.diff(moment(scheduleDate), 'days') == 0) {
 					index = i;
 				}
 				_arr.push({ name: `${date.get('date')}.${date.get('month') + 1}.${date.get('year')}`, date: date, id: i });
 			}
+			if (index == -1)
+				index = 0;
 			setDateList(_arr);
 			handleGetWeekStatus(weeks[week - 1]);
 			handleGetScheduleData(_arr[index].date);
@@ -232,7 +234,7 @@ const ScheduleView = (props) => {
 				<TabList>
 					{
 						dateList.map((item, index) => (
-							<Tab key={index} style={{ width: '14%' }} disabled={index > 4 || moment(item.date) < moment(scheduleDate) || moment(item.date) > moment()}>
+							<Tab key={index} style={{ width: '14%' }} disabled={index > 4 || moment(item.date).isBefore(moment(scheduleDate), 'day') || moment(item.date) > moment()}>
 								<div style={{ display: 'block', paddingTop: '10px', fontSize: '10px' }}>
 									<div>
 										{_date_arr[item.id]}

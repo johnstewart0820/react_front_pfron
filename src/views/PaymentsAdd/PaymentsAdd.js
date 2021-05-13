@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './style';
 import { Alert } from 'components';
 import {
-	Button, Grid, Card, TextField, CircularProgress, Typography
+	Button, Grid, Card, TextField, CircularProgress, Typography, FormControl, FormControlLabel, Checkbox
 } from '@material-ui/core';
 
 import { Breadcrumb, SingleSelect } from 'components';
@@ -19,6 +19,9 @@ const PaymentsAdd = props => {
 	const [rehabitationCenterList, setRehabitationCenterList] = useState([]);
 	const [service, setService] = useState(0);
 	const [serviceList, setServiceList] = useState([]);
+	const [pricelist_amount, setPricelistAmount] = useState('');
+	const [pricelist_cost, setPricelistCost] = useState('');
+	const [is_flatrate_service, setIsFlatRateService] = useState(false);
 	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
@@ -67,6 +70,10 @@ const PaymentsAdd = props => {
 		}
 	}
 
+	const handleChangeisFlatrateService = () => {
+		setIsFlatRateService(!is_flatrate_service);
+	}
+
 	return (
 		<>
 			<div className={classes.public}>
@@ -91,12 +98,33 @@ const PaymentsAdd = props => {
 									</Typography>
 								</Grid>
 								<Grid item md={9} xs={12}>
-									<div className={classes.top_label}><label htmlFor="value">Cena jednostkowa</label></div>
-									<input className={classes.input_box} type="name" id="value" value={value} name="name" onChange={(e) => setValue(e.target.value)} />
-									<div className={classes.input_box_label}><label htmlFor="type">Wybierz ORK</label></div>
-									<SingleSelect value={rehabitationCenter} handleChange={setRehabitationCenter} list={rehabitationCenterList} id="type" />
 									<div className={classes.input_box_label}><label htmlFor="service">Wybierz usługę</label></div>
 									<SingleSelect value={service} handleChange={setService} list={serviceList} id="service" />
+									<div className={classes.input_box_label}><label htmlFor="type">Wybierz ORK</label></div>
+									<SingleSelect value={rehabitationCenter} handleChange={setRehabitationCenter} list={rehabitationCenterList} id="type" />
+									<div className={classes.input_box_label}><label htmlFor="value">Cena jednostkowa</label></div>
+									<input className={classes.input_box} type="name" id="value" value={value} name="name" onChange={(e) => setValue(e.target.value)} />
+									<Grid container spacing={2}>
+										<Grid item md={6} xs={12}>
+											<div className={classes.input_box_label}><label htmlFor="amount">Liczba jednostek z cennika</label></div>
+											<input className={classes.input_box} type="name" id="amount" value={pricelist_amount} name="name" onChange={(e) => setPricelistAmount(e.target.value)} />
+										</Grid>
+										<Grid item md={6} xs={12}>
+											<div className={classes.input_box_label}><label htmlFor="cost">Wartość usługi z cennika</label></div>
+											<input className={classes.input_box} type="name" id="cost" value={pricelist_cost} name="name" onChange={(e) => setPricelistCost(e.target.value)} />
+										</Grid>
+									</Grid>
+									<FormControl component="fieldset">
+										<FormControlLabel
+											className={classes.rememberMe}
+											control={
+												<Checkbox
+													onChange={handleChangeisFlatrateService}
+												/>
+											}
+											label='Usługa ryczałtowa'
+										/>
+									</FormControl>
 								</Grid>
 							</Grid>
 						</Card>

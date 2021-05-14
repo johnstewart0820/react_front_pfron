@@ -31,8 +31,8 @@ const ScheduleView = (props) => {
 	useEffect(() => {
 		let _date = new Date(scheduleDate);
 		let moment_date = moment([_date.getFullYear(), _date.getMonth(), _date.getDate()]);
-		let start_date = getDay(moment_date, 0);
-		let last_date = getDay(moment(), 6);
+		let start_date = moment_date.isoWeekday() != 7 ? moment_date.day(1) : moment_date.day(-6);
+		let last_date = moment().day(7);
 		let diff = Math.ceil(last_date.diff(start_date, 'days') / 7);
 		let _arr = [];
 		for (let i = 0; i < diff; i++) {
@@ -44,7 +44,7 @@ const ScheduleView = (props) => {
 				from: s_date,
 				to: f_date,
 				name: `tydzień ${i + 1} | 
-			${s_date.get('date')}.${s_date.get('month') + 1}.${s_date.get('year')}-${f_date.get('date')}.${f_date.get('month') + 1}.${f_date.get('year')}`
+			${s_date.format('DD')}.${s_date.format('MM')}.${s_date.format('YYYY')}-${f_date.format('DD')}.${f_date.format('MM')}.${f_date.format('YYYY')}`
 			}
 			_arr.push(item);
 		}
@@ -56,6 +56,15 @@ const ScheduleView = (props) => {
 			setWeek(1);
 	}, [weeks]);
 
+	const compareDates = (first, second) => {
+		let year1 = first.format('YYYY');
+		let year2 = second.format('YYYY');
+		let month1 = first.format('MM');
+		let month2 = second.format('MM');
+		let day1 = first.format('DD');
+		let day2 = second.format('DD');
+		return year1 == year2 && month1 == month2 && day1 == day2;
+	}
 	useEffect(() => {
 		if (weeks.length !== 0) {
 			let _week = weeks[week - 1];
@@ -67,7 +76,7 @@ const ScheduleView = (props) => {
 			for (let i = 0; i < 7; i++) {
 				let default_start_date = JSON.parse(JSON.stringify(_start_date));
 				let date = moment(default_start_date).add(i, 'days');
-				if (index === -1 && parseInt(week) === 1 && date.diff(moment(scheduleDate), 'days') == 0) {
+				if (index === -1 && parseInt(week) === 1 && compareDates(date, moment(scheduleDate))) {
 					index = i;
 				}
 				_arr.push({ name: `${date.get('date')}.${date.get('month') + 1}.${date.get('year')}`, date: date, id: i });
@@ -234,7 +243,7 @@ const ScheduleView = (props) => {
 				<TabList>
 					{
 						dateList.map((item, index) => (
-							<Tab key={index} style={{ width: '14%' }} disabled={index > 4 || moment(item.date).isBefore(moment(scheduleDate), 'day') || moment(item.date) > moment()}>
+							<Tab key={index} style={{ width: '14%' }} disabled={moment(item.date).isBefore(moment(scheduleDate), 'day') || moment(item.date) > moment()}>
 								<div style={{ display: 'block', paddingTop: '10px', fontSize: '10px' }}>
 									<div>
 										{_date_arr[item.id]}

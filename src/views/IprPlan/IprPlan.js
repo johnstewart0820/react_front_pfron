@@ -153,11 +153,19 @@ const IprPlan = props => {
 				} else {
 					let _schedule_data = response.data.module;
 					for (let i = 0; i < _schedule_data.length; i++) {
+						let total_unit_amount = 0;
 						for (let j = 0; j < _schedule_data[i].service_list.length; j++) {
+							let _schedule = _schedule_data[i].service_list[j].schedule;
+							if (_schedule && !isNaN(_schedule.total_amount)) {
+								total_unit_amount += Number(_schedule.total_amount);
+							}
+							
 							if (!_schedule_data[i].service_list[j].schedule)
 								_schedule_data[i].service_list[j].schedule = { start_time: '00:00', end_time: '00:00', break_time: '0', total_time: '0', total_amount: '0' }
 						}
+						_schedule_data[i].total_unit_amount = total_unit_amount;
 					}
+					console.log(_schedule_data);
 					setScheduleData(_schedule_data);
 					setProgressStatus(false);
 				}

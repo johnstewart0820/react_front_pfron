@@ -264,15 +264,12 @@ const ReportsService = props => {
 						item.push(value === 0 ? '' : value);
 						if (value !== 0)
 							count++;
-						sum += value;
 					}
-					let average = sum / data.length;
 
 					item.push(count === 0 ? 'nd' : count);
 					item.push(data[0].module[i].service_lists[j].unit_name);
-					item.push(average === 0 ? 'nd' : average);
-					item.push(
-						sum === 0 ? 'nd' : sum);
+					item.push('');
+					item.push(Number(data[0].module[i].service_lists[j].total_quater_amount));
 
 					let cost = data[0].module[i].service_lists[j].cost;
 					item.push(Number(cost));
@@ -360,7 +357,6 @@ const ReportsService = props => {
 				let start = 2;
 				let end = 2 + data.length - 1;
 				if (ws[`A${row}`].v != '' && row >= 4) {
-					ws[key].f = `SUM(${numToAlpha(start)}${row}:${numToAlpha(end)}${row})`;
 					ws[`${numToAlpha(alphaToNum(column) - 1)}${row}`].f = `IF(${numToAlpha(alphaToNum(column) - 3)}${row}="nd", "nd", ${key}/${numToAlpha(alphaToNum(column) - 3)}${row})`
 					ws[`${numToAlpha(alphaToNum(column) + 2)}${row}`].f = `IF(${key}="nd", "nd", ${key}*${numToAlpha(alphaToNum(column) + 1)}${row})`
 					ws[`${numToAlpha(alphaToNum(column) + 3)}${row}`].f = `${numToAlpha(alphaToNum(column) + 2)}${row}`

@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.black_white,
 		width: '100%'
 	},
+	quater_list: {
+		display: 'flex',
+		alignItems: 'center'
+	},
 	btnBack: {
 		'& .MuiButton-label': {
 			textTransform: 'none',

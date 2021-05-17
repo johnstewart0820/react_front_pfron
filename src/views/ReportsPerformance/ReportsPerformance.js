@@ -148,50 +148,72 @@ const ReportsPerformance = props => {
 		let total_data = [];
 		let header = [
 			'Lp.',
-			'Kod uczestnika',
 			'Działanie',
-			'Plan IPR1+IPR2',
+			'Liczba Uczestników w okresie sprawozdawczym',
 		];
-
-		for (let i = start_order; i <= end_order; i++) {
-			header.push(`Realizacja Kwartał ${i}`);
-		}
-
-		header.push(`Realizacja Kwartał ${start_order} - ${end_order}`)
-		header.push('Nadwykonanie');
-		header.push('Wartość ostateczna rozliczenia danej pozycji budżetowej w V kwartale');
-		total_data.push(header);
+		let sub_header = ['', '', ''];
+		let merge = [];
+		for (let i = 0; i < 3; i++)
+			merge.push({ s: { r: 0, c: i }, e: { r: 1, c: i } });
+		let start = 3;
 		data.map((candidate, index) => {
+			header.push(candidate.participant_number);
+			for (let i = start_order; i <= end_order + 1; i++) {
+				header.push('');
+			}
+			for (let i = start_order; i <= end_order; i++) {
+				sub_header.push(`K${i}`);
+			}
+			sub_header.push('Suma');
+			sub_header.push('Plan');
+			merge.push({ s: { c: start, r: 0 }, e: { c: start + end_order - start_order + 2, r: 0 } });
+			start = start + end_order - start_order + 3;
+		});
+		total_data.push(header);
+		total_data.push(sub_header);
 
-			let service_lists = candidate.service_lists;
+		// for (let i = start_order; i <= end_order; i++) {
+		// 	header.push(`Realizacja Kwartał ${i}`);
+		// }
 
-			service_lists.map((service, index) => {
+		// header.push(`Realizacja Kwartał ${start_order} - ${end_order}`)
+		// header.push('Nadwykonanie');
+		// header.push('Wartość ostateczna rozliczenia danej pozycji budżetowej w V kwartale');
+		// total_data.push(header);
+		// data.map((candidate, index) => {
 
-				let item = [];
-				let plan = service.plan;
-				let schedule = service.schedule;
-				let plan_total = Number(plan.trial) + Number(plan.basic);
-				let schedule_total = 0;
+		// 	let service_lists = candidate.service_lists;
 
-				item.push(service.number);
+		// 	service_lists.map((service, index) => {
 
-				item.push(index != 0 ? '' : candidate.participant_number);
-				item.push(service.name);
-				item.push(plan_total);
+		// 		let item = [];
+		// 		let plan = service.plan;
+		// 		let schedule = service.schedule;
+		// 		let plan_total = Number(plan.trial) + Number(plan.basic);
+		// 		let schedule_total = 0;
 
-				for (let i = 0; i < schedule.basic.length; i++) {
-					schedule_total += (Number(schedule.basic[i]) + Number(schedule.trial[i]));
-					item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
-				}
+		// 		item.push(service.number);
 
-				item.push(schedule_total);
-				item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
-				item.push('');
+		// 		item.push(index != 0 ? '' : candidate.participant_number);
+		// 		item.push(service.name);
+		// 		item.push(plan_total);
 
-				total_data.push(item);
-			})
-		})
+		// 		for (let i = 0; i < schedule.basic.length; i++) {
+		// 			schedule_total += (Number(schedule.basic[i]) + Number(schedule.trial[i]));
+		// 			item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
+		// 		}
+
+		// 		item.push(schedule_total);
+		// 		item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
+		// 		item.push('');
+
+		// 		total_data.push(item);
+		// 	})
+		// })
 		const ws = XLSX.utils.aoa_to_sheet(total_data);
+		if (!ws['!merges']) ws['!merges'] = [];
+		for (let i = 0; i < merge.length; i++)
+			ws['!merges'].push(merge[i]);
 		var wscols = [
 			{
 				wch: 10, alignment: {
@@ -288,6 +310,7 @@ const ReportsPerformance = props => {
 				}
 			}
 		}
+		console.log(ws);
 		const wb = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
 		/* generate XLSX file and send to client */
@@ -381,7 +404,7 @@ const ReportsPerformance = props => {
 						<Card className={classes.form}>
 							<Grid container spacing={3}>
 								<Grid item xs={12}>
-									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleGenerate}  title="Generuj raport - Kliknij aby pobrać plik poniżej 1MB">
+									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleGenerate} title="Generuj raport - Kliknij aby pobrać plik poniżej 1MB">
 										Generuj raport
                 	</Button>
 								</Grid>

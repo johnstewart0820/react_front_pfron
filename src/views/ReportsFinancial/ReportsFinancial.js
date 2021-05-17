@@ -275,8 +275,10 @@ const ReportsFinancial = props => {
 					item.push(count === 0 ? 'nd' : count);
 					item.push(data[0].module[i].service_lists[j].unit_name);
 					item.push('');
-					item.push(Number(data[0].module[i].service_lists[j].total_quater_amount));
-
+					if (data[0].module[i].service_lists[j].total_quater_amount === null)
+						item.push('null');
+					else
+						item.push(Number(data[0].module[i].service_lists[j].total_quater_amount));
 
 					item.push(Number(cost));
 					let sum_value = (cost * sum);
@@ -346,10 +348,7 @@ const ReportsFinancial = props => {
 
 			let column = key.replace(new RegExp("[0-9]", "g"), "");
 			let row = key.replace(/[^0-9]/ig, '');
-			if (!isNaN(ws[key].v) && column != 'A') {
-				ws[key].t = 'n';
-				ws[key].s = { numFmt: "0.00" };
-			}
+			
 			if ((ws[column + '2'].v.startsWith("M")
 				|| ws[column + '2'].v.startsWith("Liczba Uczestnikó")
 				|| ws[column + '2'].v.startsWith("Liczba zrealizowanych jednostek w okresie")
@@ -364,10 +363,17 @@ const ReportsFinancial = props => {
 				let start = 2;
 				let end = 2 + data.length - 1;
 				if (ws[`A${row}`].v != '' && row >= 4) {
+					if (ws[key].v === 'null')
+						ws[key].f = `SUM(${numToAlpha(start)}${row}:${numToAlpha(end)}${row})/${numToAlpha(alphaToNum(column) + 1)}${row}`;
 					ws[`${numToAlpha(alphaToNum(column) - 1)}${row}`].f = `IF(${numToAlpha(alphaToNum(column) - 3)}${row}="nd", "nd", ${key}/${numToAlpha(alphaToNum(column) - 3)}${row})`
 					ws[`${numToAlpha(alphaToNum(column) + 2)}${row}`].f = `IF(${key}="nd", "nd", ${key}*${numToAlpha(alphaToNum(column) + 1)}${row})`
 					ws[`${numToAlpha(alphaToNum(column) + 3)}${row}`].f = `${numToAlpha(alphaToNum(column) + 2)}${row}`
 				}
+			}
+
+			if (column != 'A') {
+				ws[key].t = 'n';
+				ws[key].s = { numFmt: "0.00" };
 			}
 
 			if (key.replace(/[^0-9]/ig, '') === '1') {

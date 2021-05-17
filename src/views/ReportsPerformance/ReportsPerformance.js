@@ -143,7 +143,32 @@ const ReportsPerformance = props => {
 		}
 	}
 
+	function numToAlpha(num) {
+
+		var alpha = '';
+
+		for (; num >= 0; num = parseInt(num / 26, 10) - 1) {
+			alpha = String.fromCharCode(num % 26 + 0x41) + alpha;
+		}
+
+		return alpha;
+	}
+
+	function alphaToNum(alpha) {
+
+		var i = 0,
+			num = 0,
+			len = alpha.length;
+
+		for (; i < len; i++) {
+			num = num * 26 + alpha.charCodeAt(i) - 0x40;
+		}
+
+		return num - 1;
+	}
+
 	const handleExport = (data, start_order, end_order) => {
+		let romic_number = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
 		let total_sum = ['', ''];
 		let total_data = [];
 		let header = [
@@ -172,66 +197,67 @@ const ReportsPerformance = props => {
 		total_data.push(header);
 		total_data.push(sub_header);
 
-		// for (let i = start_order; i <= end_order; i++) {
-		// 	header.push(`Realizacja Kwartał ${i}`);
-		// }
+		let module = data[0].module;
+		let green_field_index_arr = [];
+		let green_field_index = 3;
+		let sum_field_index_arr = [];
 
-		// header.push(`Realizacja Kwartał ${start_order} - ${end_order}`)
-		// header.push('Nadwykonanie');
-		// header.push('Wartość ostateczna rozliczenia danej pozycji budżetowej w V kwartale');
-		// total_data.push(header);
-		// data.map((candidate, index) => {
+		for (let i = 0; i < module.length; i++) {
+			let item = [];
+			item.push('');
+			item.push(romic_number[i] + '. ' + module[i].name);
+			for (let j = 0; j <= data.length * (end_order - start_order + 3); j++) {
+				item.push('');
+			}
 
-		// 	let service_lists = candidate.service_lists;
+			total_data.push(item);
 
-		// 	service_lists.map((service, index) => {
+			green_field_index_arr.push(green_field_index);
+			green_field_index++;
 
-		// 		let item = [];
-		// 		let plan = service.plan;
-		// 		let schedule = service.schedule;
-		// 		let plan_total = Number(plan.trial) + Number(plan.basic);
-		// 		let schedule_total = 0;
+			let service_list = module[i].service_lists;
 
-		// 		item.push(service.number);
+			for (let j = 0; j < service_list.length; j++) {
+				let item = [];
+				item.push(service_list[j].number);
+				item.push(service_list[j].name);
+				item.push('');
+				for (let k = 0; k < data.length; k++) {
+					let schedule = data[k].module[i].service_lists[j].schedule;
+					let plan = data[k].module[i].service_lists[j].plan;
+					for (let l = 0; l < schedule.trial.length; l++) {
+						item.push(Number(schedule.trial[l]) + Number(schedule.basic[l]));
+					}
+					item.push('xxx');
+					item.push(Number(plan.trial) + Number(plan.basic));
+				}
+				total_data.push(item);
+				green_field_index++;
+			}
+		}
+		let item = [];
+		for( let i = 0; i < total_data[0].length; i ++) {
+			item.push('')
+		}
+		total_data.push(item);
 
-		// 		item.push(index != 0 ? '' : candidate.participant_number);
-		// 		item.push(service.name);
-		// 		item.push(plan_total);
-
-		// 		for (let i = 0; i < schedule.basic.length; i++) {
-		// 			schedule_total += (Number(schedule.basic[i]) + Number(schedule.trial[i]));
-		// 			item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
-		// 		}
-
-		// 		item.push(schedule_total);
-		// 		item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
-		// 		item.push('');
-
-		// 		total_data.push(item);
-		// 	})
-		// })
 		const ws = XLSX.utils.aoa_to_sheet(total_data);
 		if (!ws['!merges']) ws['!merges'] = [];
 		for (let i = 0; i < merge.length; i++)
 			ws['!merges'].push(merge[i]);
 		var wscols = [
 			{
-				wch: 10, alignment: {
+				wch: 6, alignment: {
 					wrapText: '1', // any truthy value here
 				}
 			},
 			{
-				wch: 10, alignment: {
-					wrapText: '1', // any truthy value here
-				}
-			},
-			{
-				wch: 40, alignment: {
+				wch: 80, alignment: {
 					wrapText: '1', // any truthy value here
 				}
 			},
 		];
-		for (let i = start_order; i <= end_order + 4; i++) {
+		for (let i = 0; i <= data.length * (end_order - start_order + 3); i++) {
 			wscols.push({
 				wch: 10, alignment: {
 					wrapText: '1', // any truthy value here
@@ -240,77 +266,112 @@ const ReportsPerformance = props => {
 		}
 		ws['!cols'] = wscols;
 		ws["!rows"] = [ // just demo, should use for-loop
-			{ hpx: 80, },
+			{ hpx: 50, },
 		]
+
 		for (const key in ws) {
 			// first row
 			if (key == '!ref')
 				break;
-			if (key.replace(/[^0-9]/ig, '') === '1') {
-				ws[key].s = {
-					alignment: {
-						wrapText: '1', // any truthy value here
+			let column = key.replace(new RegExp("[0-9]", "g"), "");
+			let row = key.replace(/[^0-9]/ig, '');
+			ws[key].s = {
+				...ws[key].s,
+				alignment: {
+					wrapText: '1', // any truthy value here
+				},
+				border: {
+					// underscore
+					bottom: {
+						style: 'thin',
+						color: 'FF000000'
 					},
-					font: {
-						sz: 12, // font size
-						bold: true // bold
+					left: {
+						style: 'thin',
+						color: 'FF000000'
 					},
-					border: {
-						// underscore
-						bottom: {
-							style: 'thin',
-							color: 'FF000000'
-						},
-						left: {
-							style: 'thin',
-							color: 'FF000000'
-						},
-						right: {
-							style: 'thin',
-							color: 'FF000000'
-						},
-						top: {
-							style: 'thin',
-							color: 'FF000000'
-						},
+					right: {
+						style: 'thin',
+						color: 'FF000000'
 					},
-					fill: {
-						fgColor: { rgb: 'FFB8CCD4' } // Add background color
+					top: {
+						style: 'thin',
+						color: 'FF000000'
 					},
-				}
-			} else {
-				ws[key].s = {
-					alignment: {
-						wrapText: '1', // any truthy value here
-					},
-					font: {
-						sz: 12, // font size
-						bold: true // bold
-					},
-					border: {
-						// underscore
-						bottom: {
-							style: 'thin',
-							color: 'FF000000'
-						},
-						left: {
-							style: 'thin',
-							color: 'FF000000'
-						},
-						right: {
-							style: 'thin',
-							color: 'FF000000'
-						},
-						top: {
-							style: 'thin',
-							color: 'FF000000'
-						},
-					},
+				},
+			};
 
+			if (ws[key].v === 'xxx') {
+				ws[key].f = `SUM(${numToAlpha(alphaToNum(column) - end_order + start_order - 1)}${row}:${numToAlpha(alphaToNum(column) - 1)}${row})`;
+				let plan = Number(ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].v);
+				let schedule = 0;
+				for (let k = 0; k <= end_order - start_order; k ++) {
+					schedule += Number(ws[`${numToAlpha(alphaToNum(column) - k - 1)}${row}`].v);
+				}
+				if (plan >= schedule) {
+					ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s = {
+						...ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s,
+						fill: {
+							fgColor: { rgb: '00FF00' } // Add background color
+						},
+					}
+				} else {
+					ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s = {
+						...ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s,
+						fill: {
+							fgColor: { rgb: 'FFCAFF' } // Add background color
+						},
+					}
+				}
+			}
+
+			if (column != 'A') {
+				ws[key].t = 'n';
+				ws[key].s = { ...ws[key].s, numFmt: "0.00" };
+			}
+
+			if (parseInt(row) === total_data.length && column != 'A' && column != 'B' && column != 'C') {
+				ws[key].f = `SUM(${column}3:${column}${row - 1})`;
+			}
+
+			for (let i = 0; i < green_field_index_arr.length; i++) {
+				if (green_field_index_arr[i] === parseInt(row)) {
+					ws[key].s = {
+						...ws[key].s,
+						alignment: {
+							wrapText: '1', // any truthy value here
+						},
+						font: {
+							sz: 12, // font size
+							bold: true // bold
+						},
+						border: {
+							// underscore
+							bottom: {
+								style: 'thin',
+								color: 'FF000000'
+							},
+							left: {
+								style: 'thin',
+								color: 'FF000000'
+							},
+							right: {
+								style: 'thin',
+								color: 'FF000000'
+							},
+							top: {
+								style: 'thin',
+								color: 'FF000000'
+							},
+						},
+						fill: {
+							fgColor: { rgb: 'FFC000' } // Add background color
+						},
+					}
 				}
 			}
 		}
-		console.log(ws);
+
 		const wb = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
 		/* generate XLSX file and send to client */

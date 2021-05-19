@@ -371,7 +371,7 @@ const ReportsFinancial = props => {
 				}
 			}
 
-			if (column != 'A') {
+			if (!isNaN(ws[key].v) && column != 'A') {
 				ws[key].t = 'n';
 				ws[key].s = { numFmt: "0.00" };
 			}

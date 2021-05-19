@@ -325,7 +325,7 @@ const ReportsPerformance = props => {
 				}
 			}
 
-			if (column != 'A') {
+			if (column != 'A' && column != 'B' && Number(row) > 2) {
 				ws[key].t = 'n';
 				ws[key].s = { ...ws[key].s, numFmt: "0.00" };
 			}

@@ -136,7 +136,10 @@ const ReportsPerformance = props => {
 					if (response.code === 401) {
 						history.push('/login');
 					} else {
-						handleExport(response.data.candidate, response.data.start_order, response.data.end_order);
+						let wb = XLSX.utils.book_new();
+						wb = handleExport(wb, response.data.candidate, response.data.start_order, response.data.end_order);
+						wb = handleExportOld(wb, response.data.candidate, response.data.start_order, response.data.end_order)
+						XLSX.writeFile(wb, `${name}.xlsx`);
 					}
 					setProgressStatus(false);
 				})
@@ -167,7 +170,158 @@ const ReportsPerformance = props => {
 		return num - 1;
 	}
 
-	const handleExport = (data, start_order, end_order) => {
+	const handleExportOld = (wb, data, start_order, end_order) => {
+		let total_sum = ['', ''];
+		let total_data = [];
+		let header = [
+			'Lp.',
+			'Kod uczestnika',
+			'Działanie',
+			'Plan IPR1+IPR2',
+		];
+
+		for (let i = start_order; i <= end_order; i++) {
+			header.push(`Realizacja Kwartał ${i}`);
+		}
+
+		header.push(`Realizacja Kwartał ${start_order} - ${end_order}`)
+		header.push('Nadwykonanie');
+		header.push('Wartość ostateczna rozliczenia danej pozycji budżetowej w V kwartale');
+		total_data.push(header);
+		data.map((candidate, index) => {
+
+			let service_lists = candidate.service_lists;
+
+			service_lists.map((service, index) => {
+
+				let item = [];
+				let plan = service.plan;
+				let schedule = service.schedule;
+				let plan_total = Number(plan.trial) + Number(plan.basic);
+				let schedule_total = 0;
+
+				item.push(service.number);
+
+				item.push(index != 0 ? '' : candidate.participant_number);
+				item.push(service.name);
+				item.push(plan_total);
+
+				for (let i = 0; i < schedule.basic.length; i++) {
+					schedule_total += (Number(schedule.basic[i]) + Number(schedule.trial[i]));
+					item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
+				}
+
+				item.push(schedule_total);
+				item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
+				item.push('');
+
+				total_data.push(item);
+			})
+		})
+		const ws = XLSX.utils.aoa_to_sheet(total_data);
+		var wscols = [
+			{
+				wch: 10, alignment: {
+					wrapText: '1', // any truthy value here
+				}
+			},
+			{
+				wch: 10, alignment: {
+					wrapText: '1', // any truthy value here
+				}
+			},
+			{
+				wch: 40, alignment: {
+					wrapText: '1', // any truthy value here
+				}
+			},
+		];
+		for (let i = start_order; i <= end_order + 4; i++) {
+			wscols.push({
+				wch: 10, alignment: {
+					wrapText: '1', // any truthy value here
+				}
+			});
+		}
+		ws['!cols'] = wscols;
+		ws["!rows"] = [ // just demo, should use for-loop
+			{ hpx: 80, },
+		]
+		for (const key in ws) {
+			// first row
+			if (key == '!ref')
+				break;
+			if (key.replace(/[^0-9]/ig, '') === '1') {
+				ws[key].s = {
+					alignment: {
+						wrapText: '1', // any truthy value here
+					},
+					font: {
+						sz: 12, // font size
+						bold: true // bold
+					},
+					border: {
+						// underscore
+						bottom: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						left: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						right: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						top: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+					},
+					fill: {
+						fgColor: { rgb: 'FFB8CCD4' } // Add background color
+					},
+				}
+			} else {
+				ws[key].s = {
+					alignment: {
+						wrapText: '1', // any truthy value here
+					},
+					font: {
+						sz: 12, // font size
+						bold: true // bold
+					},
+					border: {
+						// underscore
+						bottom: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						left: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						right: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+						top: {
+							style: 'thin',
+							color: 'FF000000'
+						},
+					},
+
+				}
+			}
+		}
+
+		XLSX.utils.book_append_sheet(wb, ws, "Nadwykonania");
+		/* generate XLSX file and send to client */
+		return wb;
+	}
+
+	const handleExport = (wb, data, start_order, end_order) => {
 		let romic_number = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
 		let total_sum = ['', ''];
 		let total_data = [];
@@ -371,11 +525,10 @@ const ReportsPerformance = props => {
 				}
 			}
 		}
-
-		const wb = XLSX.utils.book_new();
-		XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
+		
+		XLSX.utils.book_append_sheet(wb, ws, "Zestawienie dodatkowe");
 		/* generate XLSX file and send to client */
-		XLSX.writeFile(wb, `${name}.xlsx`);
+		return wb;
 	}
 
 	return (

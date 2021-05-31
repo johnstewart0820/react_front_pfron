@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  Image,
+	Page,
+	Text,
+	View,
+	Document,
+	StyleSheet,
+	Image,
 	Font
 } from "@react-pdf/renderer";
 import theme from 'theme';
@@ -13,15 +13,15 @@ import regular from "utils/Roboto-Regular.ttf";
 import { getMonth, getYear } from 'date-fns';
 
 Font.register({
-  family: "Roboto",
-  src: regular
+	family: "Roboto",
+	src: regular
 });
 const styles = StyleSheet.create({
-  page: {
-    backgroundColor: "#ffffff",
+	page: {
+		backgroundColor: "#ffffff",
 		padding: '60px 40px',
 		fontFamily: 'Roboto'
-  },
+	},
 	header: {
 		display: 'flex',
 		justifyContent: 'center',
@@ -32,6 +32,15 @@ const styles = StyleSheet.create({
 		fontSize: 8,
 		display: 'flex',
 		flexDirection: 'row'
+	},
+	top: {
+		display: 'flex',
+		justifyContent: 'space-around',
+		flexDirection: 'row',
+		marginBottom: '10px'
+	},
+	image: {
+		width: '15%'
 	},
 	border: {
 		width: '100%',
@@ -69,9 +78,9 @@ const styles = StyleSheet.create({
 		padding: 7,
 		textAlign: 'left',
 	},
-  section: {
+	section: {
 		marginBottom: '10'
-  },
+	},
 	div_1: {
 		width: '10%',
 		border: '1px solid #000000',
@@ -118,18 +127,18 @@ const styles = StyleSheet.create({
 });
 
 const PdfTemplateSchedule = (props) => {
-  const { participant_number, participant_name, ipr_type, number, schedule_date, ork_person, moduleList, dayList } = props;
+	const { participant_number, participant_name, ipr_type, number, schedule_date, ork_person, moduleList, dayList, onDocumentLoadSuccess } = props;
 	const monthList = ['STYCZ', 'LUT', 'MAR', 'KWIE', 'MAJ', 'CZERW', 'LIP', 'SIERP', 'WRZES', 'PAZDZIER', 'LISTOPAD', 'GRUD']
 	const getOrkPerson = (module, id_ork, index_module) => {
-	  if (id_ork === null)
-	  	return '';
-	  for (let i = 0; i < module.ork_team.length; i ++) {
-		  if (module.ork_team[i].id == id_ork || module.ork_team[i].id == id_ork.id) {
-			  return module.ork_team[i].name;
-		  }
-	  }
-	  return '';
-  }
+		if (id_ork === null)
+			return '';
+		for (let i = 0; i < module.ork_team.length; i++) {
+			if (module.ork_team[i].id == id_ork || module.ork_team[i].id == id_ork.id) {
+				return module.ork_team[i].name;
+			}
+		}
+		return '';
+	}
 
 	const getDay = (value, id) => {
 		let date = new Date(value);
@@ -146,9 +155,15 @@ const PdfTemplateSchedule = (props) => {
 		return sum;
 	}
 
-  return (
-		<Document>
-			<Page style={styles.page} wrap={true}>				
+	return (
+		<Document
+			onRender={onDocumentLoadSuccess}>
+			<Page style={styles.page} wrap={true} orientation="landscape" size="A3">
+				<View style={styles.top}>
+					<Image src='/images/logos/footer_FE.png' style={styles.image} />
+					<Image src='/images/logos/footer_RP.png' style={styles.image} />
+					<Image src='/images/logos/footer_UE.png' style={styles.image} />
+				</View>
 				<View style={styles.header}>
 					<Text style={styles.border}>
 						PLAN REALIZACJI INDYWIDUALNEGO PROGRAMU REHABILITACJI - HARMONOGRAM
@@ -204,48 +219,67 @@ const PdfTemplateSchedule = (props) => {
 						</Text>
 					</View>
 				</View>
-				<View wrap={false}>
-					<View style={styles.normal}>
-						<Text style={styles.div_1}>
-							Lp.
-						</Text>
-						<Text style={styles.div_1}>
-							Moduł
-						</Text>
-						<Text style={styles.div_2}>
-							Procedury/Usługi
-						</Text>
-						<View style={styles.div_5}>
-							<Text style={{width: '100%', height: 20, borderBottom: '1px solid #000000'}}>
-								Miesiąc: {monthList[getMonth(new Date(dayList[0]))]} {getYear(new Date(dayList[0]))}
-							</Text>
-							<View style={{display: 'flex', flexDirection: 'row'}}>
-								<Text style={styles.div_6}>
-									{dayList && getDay(dayList[0], 0)}
-								</Text>
-								<Text style={styles.div_6}>
-									{dayList && getDay(dayList[1], 1)}
-								</Text>
-								<Text style={styles.div_6}>
-									{dayList && getDay(dayList[2], 2)}
-								</Text>
-								<Text style={styles.div_6}>
-									{dayList && getDay(dayList[3], 3)}
-								</Text>
-								<Text style={styles.div_6}>
-									{dayList && getDay(dayList[4], 4)}
-								</Text>
-							</View>
-						</View>
-						<Text style={styles.div_3}>
-							Łączny czas - godz
-						</Text>
-						<Text style={styles.div_4}>
-							Imię, nazwisko i podpis realizującego
-						</Text>
-					</View>
-					{
-						moduleList.length > 0 && moduleList[0].map((module, index_module) => (
+			</Page>
+			{
+				moduleList.length > 0 && moduleList[0].map((module, index_module) => (
+					<Page style={styles.page} wrap={true} orientation="landscape" size="A3">
+						<View>
+							{
+								index_module === 0 &&
+								<View>
+									<View style={styles.top}>
+										<Image src='/images/logos/footer_FE.png' style={styles.image} />
+										<Image src='/images/logos/footer_RP.png' style={styles.image} />
+										<Image src='/images/logos/footer_UE.png' style={styles.image} />
+									</View>
+									<View style={styles.normal}>
+										<Text style={styles.div_1}>
+											Lp.
+										</Text>
+										<Text style={styles.div_1}>
+											Moduł
+										</Text>
+										<Text style={styles.div_2}>
+											Procedury/Usługi
+										</Text>
+										<View style={styles.div_5}>
+											<Text style={{ width: '100%', height: 20, borderBottom: '1px solid #000000' }}>
+												Miesiąc: {monthList[getMonth(new Date(dayList[0]))]} {getYear(new Date(dayList[0]))}
+											</Text>
+											<View style={{ display: 'flex', flexDirection: 'row' }}>
+												<Text style={styles.div_6}>
+													{dayList && getDay(dayList[0], 0)}
+												</Text>
+												<Text style={styles.div_6}>
+													{dayList && getDay(dayList[1], 1)}
+												</Text>
+												<Text style={styles.div_6}>
+													{dayList && getDay(dayList[2], 2)}
+												</Text>
+												<Text style={styles.div_6}>
+													{dayList && getDay(dayList[3], 3)}
+												</Text>
+												<Text style={styles.div_6}>
+													{dayList && getDay(dayList[4], 4)}
+												</Text>
+											</View>
+										</View>
+										<Text style={styles.div_3}>
+											Łączny czas - godz
+									</Text>
+										<Text style={styles.div_4}>
+											Imię, nazwisko i podpis realizującego
+									</Text>
+									</View>
+								</View>
+							}
+							{index_module > 0 &&
+								<View style={styles.top}>
+									<Image src='/images/logos/footer_FE.png' style={styles.image} />
+									<Image src='/images/logos/footer_RP.png' style={styles.image} />
+									<Image src='/images/logos/footer_UE.png' style={styles.image} />
+								</View>
+							}
 							<View style={styles.content} wrap={false}>
 								<View style={styles.content_div_1}>
 									{
@@ -257,8 +291,8 @@ const PdfTemplateSchedule = (props) => {
 									}
 								</View>
 								<View style={styles.content_div_2}>
-									<View style={{border: '1px solid #000000', width: '100%', height: module.service_list.length * 50}}>
-										<Text style={{transform: 'rotate(90deg)', width: 500, transformOrigin: '0% 100%',}}>
+									<View style={{ border: '1px solid #000000', width: '100%', height: module.service_list.length * 50 }}>
+										<Text style={{ transform: 'rotate(90deg)', width: 500, transformOrigin: '0% 100%', }}>
 											{module.name}
 										</Text>
 									</View>
@@ -266,46 +300,46 @@ const PdfTemplateSchedule = (props) => {
 								<View style={styles.content_div_3}>
 									{
 										module.service_list.map((service, index) => (
-											<View style={{width: '100%', display: 'flex', flexDirection: 'row'}} >
-												<Text style={{width: '31%', fontSize: '8',border: '1px solid #000000', height: 50, padding: 7}}>
+											<View style={{ width: '100%', display: 'flex', flexDirection: 'row' }} >
+												<Text style={{ width: '31%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
 													{service.name}
 												</Text>
-												<Text style={{width: '7.5%', fontSize: '8',border: '1px solid #000000', height: 50, padding: 7}}>
-													{!service.schedule || service.schedule === undefined ?  '' : service.schedule.total_amount}
+												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													{!service.schedule || service.schedule === undefined ? '' : service.schedule.total_amount}
 												</Text>
-												<Text style={{width: '7.5%', fontSize: '8',border: '1px solid #000000', height: 50, padding: 7}}>
+												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
 													{
-													!moduleList[1][index_module].service_list[index].schedule 
-													|| moduleList[1][index_module].service_list[index].schedule == undefined
-													? '' : moduleList[1][index_module].service_list[index].schedule.total_amount}
+														!moduleList[1][index_module].service_list[index].schedule
+															|| moduleList[1][index_module].service_list[index].schedule == undefined
+															? '' : moduleList[1][index_module].service_list[index].schedule.total_amount}
 												</Text>
-												<Text style={{width: '7.5%', fontSize: '8',border: '1px solid #000000', height: 50, padding: 7}}>
+												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
 													{
-													!moduleList[2][index_module].service_list[index].schedule 
-													|| moduleList[2][index_module].service_list[index].schedule == undefined
-													? '' : moduleList[2][index_module].service_list[index].schedule.total_amount}
+														!moduleList[2][index_module].service_list[index].schedule
+															|| moduleList[2][index_module].service_list[index].schedule == undefined
+															? '' : moduleList[2][index_module].service_list[index].schedule.total_amount}
 												</Text>
-												<Text style={{width: '7.5%', fontSize: '8',border: '1px solid #000000', height: 50, padding: 7}}>
+												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
 													{
-													!moduleList[3][index_module].service_list[index].schedule 
-													|| moduleList[3][index_module].service_list[index].schedule == undefined
-													? '' : moduleList[3][index_module].service_list[index].schedule.total_amount}
+														!moduleList[3][index_module].service_list[index].schedule
+															|| moduleList[3][index_module].service_list[index].schedule == undefined
+															? '' : moduleList[3][index_module].service_list[index].schedule.total_amount}
 												</Text>
-												<Text style={{width: '7.5%', fontSize: '8',border: '1px solid #000000', height: 50, padding: 7}}>
+												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
 													{
-													!moduleList[4][index_module].service_list[index].schedule 
-													|| moduleList[4][index_module].service_list[index].schedule == undefined
-													? '' : moduleList[4][index_module].service_list[index].schedule.total_amount}
+														!moduleList[4][index_module].service_list[index].schedule
+															|| moduleList[4][index_module].service_list[index].schedule == undefined
+															? '' : moduleList[4][index_module].service_list[index].schedule.total_amount}
 												</Text>
 
-												<Text style={{width: '13%', fontSize: '8',border: '1px solid #000000', height: 50, padding: 7}}>
+												<Text style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
 													{
 														getTotalAmount(index_module, index)
 													}
 												</Text>
 
-												<Text style={{width: '18%', fontSize: '8',border: '1px solid #000000', height: 50, padding: 7}}>
-													
+												<Text style={{ width: '18%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+
 												</Text>
 
 											</View>
@@ -313,13 +347,12 @@ const PdfTemplateSchedule = (props) => {
 									}
 								</View>
 							</View>
-						))
-					}
-				</View>
-			</Page>
-			
-		</Document>
-  );
+						</View>
+					</Page>
+				))
+			}
+		</Document >
+	);
 };
 
 export default PdfTemplateSchedule;

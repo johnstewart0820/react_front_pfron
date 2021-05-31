@@ -69,6 +69,8 @@ const IprPlan = props => {
 	const [hasAlert, setHasAlert] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('');
+	const [schedule_load_success, setScheduleLoadSuccess] = useState(false);
+	const [plan_load_success, setPlanLoadSuccess] = useState(false);
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
 
@@ -87,8 +89,8 @@ const IprPlan = props => {
 							if (response.data.module[i].id === response.data.plan[j].module) {
 								response.data.plan[j].new = 'false';
 								if (response.data.plan[j].start_date === null) {
-									let _date = new Date();
-									response.data.plan[j].start_date = _date.getFullYear() + '-' + (_date.getMonth() + 1) + '-' + _date.getDate()
+									let _date = null;
+									response.data.plan[j].start_date = null;
 								} else {
 									let _date = new Date(response.data.plan[j].start_date);
 									response.data.plan[j].start_date = _date.getFullYear() + '-' + (_date.getMonth() + 1) + '-' + _date.getDate()
@@ -165,7 +167,6 @@ const IprPlan = props => {
 						}
 						_schedule_data[i].total_unit_amount = total_unit_amount;
 					}
-					console.log(_schedule_data);
 					setScheduleData(_schedule_data);
 					setProgressStatus(false);
 				}
@@ -276,18 +277,15 @@ const IprPlan = props => {
 	}
 
 	const handleExportPdf = () => {
-		// const plan_dom = plan_ref.current;
-		// const schedule_dom = schedule_ref.current;
-		// var options = {
-		// 	filename: 'download.pdf',
-		// };
-
-		// domtopdf(selectedItem === 0 ? plan_dom : schedule_dom, options, function () {
-		// });
-		if (selectedItem === 0)
+		if (selectedItem === 0 && plan_load_success)
 			document.getElementById('export-pdf').click();
-		else
+		else if (selectedItem === 1 && schedule_load_success){
 			document.getElementById('week-pdf').click();
+		} else {
+			setHasAlert(true);
+			setMessage('Dokument nie został załadowany.');
+			setIsSuccess(false);
+		}
 	}
 
 	const toggleView = () => {
@@ -296,6 +294,16 @@ const IprPlan = props => {
 
 	const handleCloseModal = () => {
 		setOpenModal(false);
+	}
+
+	const onScheduleLoadSuccess = ({blob}) => {
+		if (blob.size > 13500)
+			setScheduleLoadSuccess(true);
+	}
+
+	const onPlanLoadSuccess = ({blob}) => {
+		if (blob.size > 13500)
+			setPlanLoadSuccess(true);
 	}
 
 	const getOrkPerson = (ork_person) => {
@@ -316,6 +324,7 @@ const IprPlan = props => {
 						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
 						moduleList={modulePdfList}
 						orkTeam={orkTeam}
+						onDocumentLoadSuccess={onPlanLoadSuccess}
 					/>
 				}
 				fileName="download.pdf"
@@ -340,6 +349,7 @@ const IprPlan = props => {
 						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
 						moduleList={iprWeekData}
 						dayList={iprWeekDates}
+						onDocumentLoadSuccess={onScheduleLoadSuccess}
 					/>
 				}
 				fileName="download.pdf"

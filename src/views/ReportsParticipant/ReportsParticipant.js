@@ -57,6 +57,8 @@ const ReportsParticipant = props => {
 					}
 				})
 		}
+		setQuaterFrom(0);
+		setQuaterTo(0);
 	}, [rehabitationCenter]);
 
 	useEffect(() => {
@@ -76,6 +78,8 @@ const ReportsParticipant = props => {
 					}
 				})
 		}
+		setQuaterFrom(0);
+		setQuaterTo(0);
 	}, [participant]);
 
 	const handleChangeName = (value) => {

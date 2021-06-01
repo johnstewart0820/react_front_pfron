@@ -59,6 +59,8 @@ const ReportsPerformance = props => {
 					}
 				})
 		}
+		setQuaterFrom(0);
+		setQuaterTo(0);
 	}, [rehabitationCenter]);
 
 	useEffect(() => {
@@ -78,6 +80,8 @@ const ReportsPerformance = props => {
 					}
 				})
 		}
+		setQuaterFrom(0);
+		setQuaterTo(0);
 	}, [participant]);
 
 	useEffect(() => {
@@ -189,34 +193,38 @@ const ReportsPerformance = props => {
 		header.push('Wartość ostateczna rozliczenia danej pozycji budżetowej w V kwartale');
 		total_data.push(header);
 		data.map((candidate, index) => {
+			let module_list = candidate.module;
 
-			let service_lists = candidate.service_lists;
+			module_list.map((module_item, index) => {
+				let service_lists = module_item.service_lists;
+				
+				service_lists.map((service, index) => {
 
-			service_lists.map((service, index) => {
+					let item = [];
+					let plan = service.plan;
+					let schedule = service.schedule;
+					let plan_total = Number(plan.trial) + Number(plan.basic);
+					let schedule_total = 0;
 
-				let item = [];
-				let plan = service.plan;
-				let schedule = service.schedule;
-				let plan_total = Number(plan.trial) + Number(plan.basic);
-				let schedule_total = 0;
+					item.push(service.number);
 
-				item.push(service.number);
+					item.push(index != 0 ? '' : candidate.participant_number);
+					item.push(service.name);
+					item.push(plan_total);
 
-				item.push(index != 0 ? '' : candidate.participant_number);
-				item.push(service.name);
-				item.push(plan_total);
+					for (let i = 0; i < schedule.basic.length; i++) {
+						schedule_total += (Number(schedule.basic[i]) + Number(schedule.trial[i]));
+						item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
+					}
 
-				for (let i = 0; i < schedule.basic.length; i++) {
-					schedule_total += (Number(schedule.basic[i]) + Number(schedule.trial[i]));
-					item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
-				}
+					item.push(schedule_total);
+					item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
+					item.push('');
 
-				item.push(schedule_total);
-				item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
-				item.push('');
-
-				total_data.push(item);
+					total_data.push(item);
+				})
 			})
+
 		})
 		const ws = XLSX.utils.aoa_to_sheet(total_data);
 		var wscols = [
@@ -390,7 +398,7 @@ const ReportsPerformance = props => {
 			}
 		}
 		let item = [];
-		for( let i = 0; i < total_data[0].length; i ++) {
+		for (let i = 0; i < total_data[0].length; i++) {
 			item.push('')
 		}
 		total_data.push(item);
@@ -457,24 +465,29 @@ const ReportsPerformance = props => {
 
 			if (ws[key].v === 'xxx') {
 				ws[key].f = `SUM(${numToAlpha(alphaToNum(column) - end_order + start_order - 1)}${row}:${numToAlpha(alphaToNum(column) - 1)}${row})`;
-				let plan = Number(ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].v);
-				let schedule = 0;
-				for (let k = 0; k <= end_order - start_order; k ++) {
-					schedule += Number(ws[`${numToAlpha(alphaToNum(column) - k - 1)}${row}`].v);
-				}
-				if (plan >= schedule) {
-					ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s = {
-						...ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s,
-						fill: {
-							fgColor: { rgb: '00FF00' } // Add background color
-						},
+				ws[key].s = {
+					...ws[key].s,
+					fill: {
+						fgColor: { rgb: 'FFFFD1' }
 					}
-				} else {
-					ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s = {
-						...ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s,
-						fill: {
-							fgColor: { rgb: 'FFCAFF' } // Add background color
-						},
+				}
+				ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s = {
+					...ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].s,
+					fill: {
+						fgColor: { rgb: 'B0CE94' } // Add background color
+					},
+				}
+				let sum = 0;
+				let plan = Number(ws[`${numToAlpha(alphaToNum(column) + 1)}${row}`].v);
+				for (let k = end_order - start_order; k >= 0; k--) {
+					sum += Number(ws[`${numToAlpha(alphaToNum(column) - k - 1)}${row}`].v);
+					if (sum > plan) {
+						ws[`${numToAlpha(alphaToNum(column) - k - 1)}${row}`].s = {
+							...ws[`${numToAlpha(alphaToNum(column) - k - 1)}${row}`].s,
+							fill: {
+								fgColor: { rgb: 'DA3323' } // Add background color
+							},
+						}
 					}
 				}
 			}
@@ -525,7 +538,7 @@ const ReportsPerformance = props => {
 				}
 			}
 		}
-		
+
 		XLSX.utils.book_append_sheet(wb, ws, "Zestawienie dodatkowe");
 		/* generate XLSX file and send to client */
 		return wb;

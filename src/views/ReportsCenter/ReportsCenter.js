@@ -60,6 +60,8 @@ const ReportsCenter = props => {
 					}
 				})
 		}
+		setQuaterFrom(0);
+		setQuaterTo(0);
 	}, [rehabitationCenter]);
 
 	const loadFile = (url, callback) => {

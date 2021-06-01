@@ -59,6 +59,8 @@ const ReportsService = props => {
 					}
 				})
 		}
+		setQuaterFrom(0);
+		setQuaterTo(0);
 	}, [rehabitationCenter]);
 
 	useEffect(() => {
@@ -78,6 +80,8 @@ const ReportsService = props => {
 					}
 				})
 		}
+		setQuaterFrom(0);
+		setQuaterTo(0);
 	}, [participant]);
 
 	useEffect(() => {

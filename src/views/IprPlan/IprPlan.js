@@ -11,7 +11,6 @@ import { Autocomplete } from '@material-ui/lab';
 import { Breadcrumb, SingleSelect, MultiSelect } from 'components';
 import { DeleteModal } from '../QualificationPoints/components';
 import ipr from '../../apis/ipr';
-import clsx from 'clsx';
 import {
 	KeyboardDatePicker, MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
@@ -24,7 +23,6 @@ import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 import ExpandLessOutlinedIcon from '@material-ui/icons/ExpandLessOutlined';
-import domtopdf from 'dom-to-pdf';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './tab.css';
 
@@ -45,16 +43,25 @@ const IprPlan = props => {
 	const [selectedItem, setSelectedItem] = useState(0);
 
 	const [participant_number, setParticipantNumber] = useState('');
+	const [pdf_participant_number, setPdfParticipantNumber] = useState('');
 	const [participant_name, setParticipantName] = useState('');
+	const [pdf_participant_name, setPdfParticipantName] = useState('');
 	const [participant, setParticipant] = useState(0);
 	const [participantList, setParticipantList] = useState([]);
 	const [ipr_type, setIprType] = useState(0);
+	const [pdf_ipr_type, setPdfIprType] = useState(0);
 	const [iprTypeList, setIprTypeList] = useState([]);
+	const [pdfIprTypeList, setPdfIprTypeList] = useState([]);
 	const [number, setNumber] = useState(0);
+	const [pdf_number, setPdfNumber] = useState(0);
 	const [schedule_date, setScheduleDate] = useState(new Date());
+	const [pdf_schedule_date, setPdfScheduleDate] = useState(new Date());
 	const [ork_person, setOrkPerson] = useState(null);
+	const [pdf_ork_person, setPdfOrkPerson] = useState(null);
 	const [orkPersonList, setOrkPersonList] = useState([]);
+	const [orkPdfPersonList, setOrkPdfPersonList] = useState([]);
 	const [orkTeam, setOrkTeam] = useState([]);
+	const [pdfOrkTeam, setPdfOrkTeam] = useState([]);
 	const [profession, setProfession] = useState('');
 
 	const [scheduleData, setScheduleData] = useState([]);
@@ -73,6 +80,7 @@ const IprPlan = props => {
 	const [plan_load_success, setPlanLoadSuccess] = useState(false);
 	const [progressStatus, setProgressStatus] = useState(false);
 	const [error, setError] = useState({});
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		setProgressStatus(true);
@@ -103,6 +111,7 @@ const IprPlan = props => {
 					setModuleList(_arr);
 					setModulePdfList(_arr);
 					setOrkTeam(response.data.ork_team);
+					setPdfOrkTeam(response.data.ork_team);
 					setProgressStatus(false);
 				}
 			})
@@ -113,6 +122,7 @@ const IprPlan = props => {
 					history.push('/login');
 				} else {
 					setIprTypeList(response.data.ipr_type);
+					setPdfIprTypeList(response.data.ipr_type);
 					setParticipantList(response.data.participant);
 				}
 			})
@@ -131,14 +141,20 @@ const IprPlan = props => {
 					for (let i = 0; i < participantList.length; i++) {
 						if (participantList[i].id === response.data.ipr.id_candidate) {
 							setParticipantName(participantList[i].name + ' ' + participantList[i].surname);
+							setPdfParticipantName(participantList[i].name + ' ' + participantList[i].surname);
 							setParticipantNumber(participantList[i].participant_number);
+							setPdfParticipantNumber(participantList[i].participant_number);
 						}
 					}
 					setIprType(response.data.ipr.ipr_type);
+					setPdfIprType(response.data.ipr.ipr_type);
 					setNumber(response.data.ipr.number);
+					setPdfNumber(response.data.ipr.number);
 					setOrkPerson(response.data.ipr.id_ork_person);
+					setPdfOrkPerson(response.data.ipr.id_ork_person);
 					setProfession(response.data.ipr.profession);
 					setScheduleDate(new Date(response.data.ipr.schedule_date));
+					setPdfScheduleDate(new Date(response.data.ipr.schedule_date));
 					setProgressStatus(false);
 				}
 			})
@@ -161,7 +177,7 @@ const IprPlan = props => {
 							if (_schedule && !isNaN(_schedule.total_amount)) {
 								total_unit_amount += Number(_schedule.total_amount);
 							}
-							
+
 							if (!_schedule_data[i].service_list[j].schedule)
 								_schedule_data[i].service_list[j].schedule = { start_time: '00:00', end_time: '00:00', break_time: '0', total_time: '0', total_amount: '0' }
 						}
@@ -181,10 +197,15 @@ const IprPlan = props => {
 					history.push('/login');
 				} else {
 					setNumber(response.data.count);
+					setPdfNumber(response.data.count);
 					setOrkPersonList(response.data.ork_person);
+					setOrkPdfPersonList(response.data.ork_person);
 					for (let i = 0; i < response.data.ork_person.length; i++) {
-						if (response.data.ork_person[i].id == id_ork_person)
+						if (response.data.ork_person[i].id == id_ork_person) {
 							setOrkPerson(response.data.ork_person[i]);
+							setPdfOrkPerson(response.data.ork_person[i]);
+						}
+
 					}
 					setProgressStatus(false);
 				}
@@ -277,16 +298,22 @@ const IprPlan = props => {
 	}
 
 	const handleExportPdf = () => {
-		if (selectedItem === 0 && plan_load_success)
-			document.getElementById('export-pdf').click();
-		else if (selectedItem === 1 && schedule_load_success){
-			document.getElementById('week-pdf').click();
-		} else {
-			setHasAlert(true);
-			setMessage('Dokument nie został załadowany.');
-			setIsSuccess(false);
-		}
+		setLoading(true);
 	}
+
+	useEffect(() => {
+		if (loading) {
+			setProgressStatus(true);
+			setTimeout(() => {
+				if (selectedItem === 0)
+					document.getElementById('export-pdf').click();
+				else
+					document.getElementById('week-pdf').click();
+				setProgressStatus(false);
+				setLoading(false);
+			}, 4000);
+		}
+	}, [loading]);
 
 	const toggleView = () => {
 		setShowStatus(!show_status);
@@ -296,12 +323,12 @@ const IprPlan = props => {
 		setOpenModal(false);
 	}
 
-	const onScheduleLoadSuccess = ({blob}) => {
+	const onScheduleLoadSuccess = ({ blob }) => {
 		if (blob.size > 13500)
 			setScheduleLoadSuccess(true);
 	}
 
-	const onPlanLoadSuccess = ({blob}) => {
+	const onPlanLoadSuccess = ({ blob }) => {
 		if (blob.size > 13500)
 			setPlanLoadSuccess(true);
 	}
@@ -311,58 +338,68 @@ const IprPlan = props => {
 		return obj.name;
 	}
 
+	const getPdfOrkPerson = (ork_person) => {
+		let obj = orkPdfPersonList.find((item) => { return item.id == ork_person || item.id == ork_person.id });
+		return obj.name;
+	}
+
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
-			<PDFDownloadLink
-				document={
-					<PdfTemplate
-						participant_number={participant_number}
-						participant_name={participant_name}
-						ipr_type={iprTypeList.length > 0 && ipr_type > 0 ? iprTypeList[ipr_type - 1].name : ''}
-						number={number}
-						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1) + '.' + schedule_date.getFullYear()}
-						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
-						moduleList={modulePdfList}
-						orkTeam={orkTeam}
-						onDocumentLoadSuccess={onPlanLoadSuccess}
-					/>
-				}
-				fileName="download.pdf"
-				style={{
-					display: 'none'
-				}}
-			>
-				{({ blob, url, loading, error }) =>
-					<div id="export-pdf">
-						aaa
+			{
+				loading &&
+				<>
+					<PDFDownloadLink
+						document={
+							<PdfTemplate
+								participant_number={pdf_participant_number}
+								participant_name={pdf_participant_name}
+								ipr_type={pdfIprTypeList.length > 0 && pdf_ipr_type > 0 ? pdfIprTypeList[pdf_ipr_type - 1].name : ''}
+								number={pdf_number}
+								schedule_date={pdf_schedule_date.getDate() + '.' + (pdf_schedule_date.getMonth() + 1) + '.' + pdf_schedule_date.getFullYear()}
+								ork_person={pdf_ork_person === 0 || pdf_ork_person === null || pdf_ork_person === undefined || orkPdfPersonList.length === 0 ? '' : getPdfOrkPerson(pdf_ork_person)}
+								moduleList={modulePdfList}
+								orkTeam={pdfOrkTeam}
+								onDocumentLoadSuccess={onPlanLoadSuccess}
+							/>
+						}
+						fileName="download.pdf"
+						style={{
+							display: 'none'
+						}}
+					>
+						{({ blob, url, loading, error }) =>
+							<div id="export-pdf">
+								aaa
+							</div>
+						}
+					</PDFDownloadLink>
+					<PDFDownloadLink
+						document={
+							<PdfTemplateSchedule
+								participant_number={pdf_participant_number}
+								participant_name={pdf_participant_name}
+								ipr_type={pdfIprTypeList.length > 0 && pdf_ipr_type > 0 ? pdfIprTypeList[pdf_ipr_type - 1].name : ''}
+								number={pdf_number}
+								schedule_date={pdf_schedule_date.getDate() + '.' + (pdf_schedule_date.getMonth() + 1) + '.' + pdf_schedule_date.getFullYear()}
+								ork_person={pdf_ork_person === 0 || pdf_ork_person === null || pdf_ork_person === undefined || orkPdfPersonList.length === 0 ? '' : getPdfOrkPerson(pdf_ork_person)}
+								moduleList={iprWeekData}
+								dayList={iprWeekDates}
+								onDocumentLoadSuccess={onScheduleLoadSuccess}
+							/>
+						}
+						fileName="download.pdf"
+						style={{
+							display: 'none'
+						}}
+					>
+						{({ blob, url, loading, error }) =>
+							<div id="week-pdf">
+								aaa
 					</div>
-				}
-			</PDFDownloadLink>
-			<PDFDownloadLink
-				document={
-					<PdfTemplateSchedule
-						participant_number={participant_number}
-						participant_name={participant_name}
-						ipr_type={iprTypeList.length > 0 && ipr_type > 0 ? iprTypeList[ipr_type - 1].name : ''}
-						number={number}
-						schedule_date={schedule_date.getDate() + '.' + (schedule_date.getMonth() + 1) + '.' + schedule_date.getFullYear()}
-						ork_person={ork_person === 0 || ork_person === null || ork_person === undefined || orkPersonList.length === 0 ? '' : getOrkPerson(ork_person)}
-						moduleList={iprWeekData}
-						dayList={iprWeekDates}
-						onDocumentLoadSuccess={onScheduleLoadSuccess}
-					/>
-				}
-				fileName="download.pdf"
-				style={{
-					display: 'none'
-				}}
-			>
-				{({ blob, url, loading, error }) =>
-					<div id="week-pdf">
-						aaa
-					</div>
-				}
-			</PDFDownloadLink>
+						}
+					</PDFDownloadLink>
+				</>
+			}
 			<div className={classes.public}>
 				<div className={classes.controlBlock}>
 					<Breadcrumb list={breadcrumbs} />

@@ -95,7 +95,7 @@ const PlanView = (props) => {
 	const renderService = (module, index_module) => {
 		let order = 1;
 		return module.plan.map((service, index) => (
-			<Grid container spacing={3} key={index}>
+			<Grid container spacing={3} key={`${index} ${index_module}`}>
 				<Grid item xs={1}>
 					{order++}.
 				</Grid>
@@ -115,6 +115,7 @@ const PlanView = (props) => {
 												<Autocomplete
 													disabled={service.disable_status}
 													className={classes.name_select_box}
+													key={`${index} ${index_module} plan`}
 													onChange={(event, value) => handleChangePlan(value, index, index_module)}
 													options={module.service_list}
 													getOptionLabel={(option) => module.service_list && option && option.name}
@@ -159,7 +160,7 @@ const PlanView = (props) => {
 							<Grid container spacing={2}>
 								<Grid item xs={2}>
 									<div className={classes.top_label}><label htmlFor="amount">Wymiar</label></div>
-									<input aria-label="a" className={classes.input_box} type="name" value={service.amount} name="name" id="amount" onChange={(e) => handleChangeAmount(e.target.value, index, index_module)} disabled={service.disable_status} />
+									<input aria-label="a" key={`${index} ${index_module} number`} className={classes.input_box} type="name" value={service.amount} name="name" id="amount" onChange={(e) => handleChangeAmount(e.target.value, index, index_module)} disabled={service.disable_status} />
 								</Grid>
 								<Grid item xs={10}>
 									<div className={classes.top_label} htmlFor="name">Jednostka</div>
@@ -173,8 +174,8 @@ const PlanView = (props) => {
 									<div className={classes.top_label}><label htmlFor="start_date">Data rozpoczęcia</label></div>
 									<KeyboardDatePicker
 										disableToolbar
+										key={`${index} ${index_module} start_date`}
 										disabled={service.disable_status}
-										id="start_date"
 										variant="inline"
 										format="dd.MM.yyyy"
 										aria-label="Data rozpoczęcia - Format wprowadzania daty DD.MM.RRRR"
@@ -190,8 +191,8 @@ const PlanView = (props) => {
 									<div className={classes.top_label}><label htmlFor="ork_person">Osoba realizująca</label></div>
 									<Autocomplete
 										disabled={service.disable_status}
-										id="ork_person"
 										className={classes.name_select_box}
+										key={`${index} ${index_module} ork_person`}
 										onChange={(event, value) => handleChangeOrkPerson(value, index, index_module)}
 										value={getOrkPerson(module, service.id_ork_person, index_module)}
 										options={orkTeam}
@@ -201,13 +202,13 @@ const PlanView = (props) => {
 								</Grid>
 								<Grid item md={2} xs={12}>
 									<div className={classes.top_label}><label htmlFor="room_number">Sala</label></div>
-									<input className={classes.input_box} type="name" value={service.room_number || ''} id="room_number" name="name" onChange={(e) => handleChangeRoomNumber(e.target.value, index, index_module)} disabled={service.disable_status} />
+									<input className={classes.input_box} type="name" key={`${index} ${index_module} room_number`} value={service.room_number || ''} id="room_number" name="name" onChange={(e) => handleChangeRoomNumber(e.target.value, index, index_module)} disabled={service.disable_status} />
 								</Grid>
 							</Grid>
 						</Grid>
 						<Grid item xs={12}>
 							<div className={classes.top_label}><label htmlFor="remark">Uwagi/suma wymiaru</label></div>
-							<input className={classes.input_box} type="name" value={service.remarks || ''} name="name" id="remark" onChange={(e) => handleChangeRemarks(e.target.value, index, index_module)} disabled={service.disable_status} />
+							<input className={classes.input_box} type="name" key={`${index} ${index_module} remark`} value={service.remarks || ''} name="name" id="remark" onChange={(e) => handleChangeRemarks(e.target.value, index, index_module)} disabled={service.disable_status} />
 						</Grid>
 					</Grid>
 				</Grid>
@@ -217,7 +218,7 @@ const PlanView = (props) => {
 							<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
 								<Button variant="outlined" color="secondary" className={classes.btnCreate} onClick={() => handleCreatePlan(index_module)}>
 									Dodaj kolejną procedurę
-						</Button>
+								</Button>
 							</div>
 						</Grid>
 						:
@@ -254,7 +255,7 @@ const PlanView = (props) => {
 										<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
 											<Button variant="outlined" color="secondary" className={classes.btnCreate} onClick={() => handleCreatePlan(index)}>
 												Dodaj kolejną procedurę
-								</Button>
+											</Button>
 										</div>
 									</Grid>
 									<div className={classes.divide_big} />

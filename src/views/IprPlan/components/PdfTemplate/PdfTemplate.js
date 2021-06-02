@@ -23,13 +23,7 @@ const styles = StyleSheet.create({
 		width: 800,
 	},
 	top: {
-		display: 'flex',
-		justifyContent: 'space-around',
-		flexDirection: 'row',
 		marginBottom: '10px'
-	},
-	image: {
-		width: '15%'
 	},
 	header: {
 		display: 'flex',
@@ -117,7 +111,7 @@ const PdfTemplate = (props) => {
 		for (let i = 0; i < orkTeam.length; i++) {
 			if (orkTeam[i] === undefined)
 				continue;
-			if (orkTeam[i].id == id_ork || orkTeam[i].id == id_ork.id) {
+			if (Number(orkTeam[i].id) === Number(id_ork) || Number(orkTeam[i].id) === Number(id_ork.id)) {
 				return orkTeam[i].name;
 			}
 		}
@@ -128,9 +122,7 @@ const PdfTemplate = (props) => {
 		<Document onRender={onDocumentLoadSuccess}>
 			<Page style={styles.page} wrap={true} orientation="landscape" size="A3">
 				<View style={styles.top}>
-					<Image src='/images/logos/footer_FE.png' style={styles.image} />
-					<Image src='/images/logos/footer_RP.png' style={styles.image} />
-					<Image src='/images/logos/footer_UE.png' style={styles.image} />
+					<Image src='/images/logos/1.png' style={styles.image} />
 				</View>
 				<View style={styles.header}>
 					<Text style={styles.border}>
@@ -188,100 +180,108 @@ const PdfTemplate = (props) => {
 					</View>
 				</View>
 			</Page>
-				{
-					moduleList.map((module, index_module) => (
-						<Page style={styles.page} wrap={true} orientation="landscape" size="A3">
-							<View>
-								{index_module === 0 &&
-									<View>
-										<View style={styles.top}>
-											<Image src='/images/logos/footer_FE.png' style={styles.image} />
-											<Image src='/images/logos/footer_RP.png' style={styles.image} />
-											<Image src='/images/logos/footer_UE.png' style={styles.image} />
-										</View>
-										<View style={styles.normal}>
-											<Text style={styles.div_1}>
-												Lp.
-											</Text>
-											<Text style={styles.div_1}>
-												Moduł
-											</Text>
-											<Text style={styles.div_2}>
-												Procedury/Usługi
-											</Text>
-											<Text style={styles.div_3}>
-												Wymiar
-											</Text>
-											<Text style={styles.div_3}>
-												Jednostka
-											</Text>
-											<Text style={styles.div_3}>
-												Osoba realizujaca
-											</Text>
-											<Text style={styles.div_3}>
-												Sala
-											</Text>
-											<Text style={styles.div_4}>
-												Uwagi
-											</Text>
-										</View>
-									</View>
-								}
-								{index_module > 0 &&
+			{
+				moduleList.map((module, index_module) => (
+					<Page style={styles.page} wrap={true} orientation="landscape" size="A3">
+						<View>
+							{index_module === 0 &&
+								<View>
 									<View style={styles.top}>
-										<Image src='/images/logos/footer_FE.png' style={styles.image} />
-										<Image src='/images/logos/footer_RP.png' style={styles.image} />
-										<Image src='/images/logos/footer_UE.png' style={styles.image} />
+										<Image src='/images/logos/1.png' style={styles.image} />
 									</View>
-								}
-								<View style={styles.content} wrap={false}>
-									<View style={styles.content_div_1}>
-										{
-											module.plan.map((service, index) => (
-												<Text style={styles.content_text_1}>
-													{index + 1}
-												</Text>
-											))
-										}
-									</View>
-									<View style={styles.content_div_2}>
-										<View style={{ border: '1px solid #000000', width: '100%', height: module.plan.length * 60 }}>
-											<Text style={{ transform: 'rotate(90deg)', width: 500, transformOrigin: '0% 100%', }}>
-												{module.name}
+									<View style={styles.normal}>
+										<Text style={styles.div_1}>
+											Lp.
 											</Text>
-										</View>
+										<Text style={styles.div_1}>
+											Moduł
+											</Text>
+										<Text style={styles.div_2}>
+											Procedury/Usługi
+											</Text>
+										<Text style={styles.div_3}>
+											Wymiar
+											</Text>
+										<Text style={styles.div_3}>
+											Jednostka
+											</Text>
+										<Text style={styles.div_3}>
+											Osoba realizujaca
+											</Text>
+										<Text style={styles.div_3}>
+											Sala
+											</Text>
+										<Text style={styles.div_4}>
+											Uwagi
+											</Text>
 									</View>
-									<View style={styles.content_div_3}>
-										{
-											module.plan.map((service, index) => (
-												<View style={{ width: '100%', display: 'flex', flexDirection: 'row' }} >
-													<Text style={{ width: '33%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+								</View>
+							}
+							{index_module > 0 &&
+								<View style={styles.top}>
+									<Image src='/images/logos/1.png' style={styles.image} />
+								</View>
+							}
+							<View style={styles.content} wrap={false}>
+								<View style={styles.content_div_1}>
+									{
+										module.plan.map((service, index) => (
+											<Text style={styles.content_text_1}>
+												{index + 1}
+											</Text>
+										))
+									}
+								</View>
+								<View style={styles.content_div_2}>
+									<View style={{ border: '1px solid #000000', width: '100%', height: module.plan.length * 60 }}>
+										<Text style={{ transform: 'rotate(90deg)', width: 500, transformOrigin: '0% 100%', }}>
+											{module.name}
+										</Text>
+									</View>
+								</View>
+								<View style={styles.content_div_3}>
+									{
+										module.plan.map((service, index) => (
+											<View style={{ width: '100%', display: 'flex', flexDirection: 'row' }} >
+												<View style={{ width: '33%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+													<Text>
 														{service.name}
 													</Text>
-													<Text style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+												</View>
+												<View style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+													<Text>
 														{service.amount}
 													</Text>
-													<Text style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+												</View>
+												<View style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+													<Text>
 														{service.unit}
 													</Text>
-													<Text style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+												</View>
+												<View style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+													<Text>
 														{getOrkPerson(module, service.id_ork_person, index_module)}
 													</Text>
-													<Text style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+												</View>
+												<View style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+													<Text>
 														{service.room_number}
 													</Text>
-													<Text style={{ width: '20%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+												</View>
+												<View style={{ width: '20%', fontSize: '8', border: '1px solid #000000', height: 60, padding: 7 }}>
+													<Text>
 														{service.remarks}
 													</Text>
 												</View>
-											))
-										}
-									</View>
+											</View>
+										))
+									}
 								</View>
 							</View>
-						</Page>
-					))
-				}
+						</View>
+					</Page>
+				))
+			}
 
 		</Document >
 	);

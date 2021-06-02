@@ -34,13 +34,10 @@ const styles = StyleSheet.create({
 		flexDirection: 'row'
 	},
 	top: {
-		display: 'flex',
-		justifyContent: 'space-around',
-		flexDirection: 'row',
 		marginBottom: '10px'
 	},
 	image: {
-		width: '15%'
+
 	},
 	border: {
 		width: '100%',
@@ -87,24 +84,24 @@ const styles = StyleSheet.create({
 		padding: 7,
 	},
 	div_2: {
-		width: '25%',
+		width: '24.8%',
 		border: '1px solid #000000',
 		padding: 7,
 	},
 	div_3: {
-		width: '10%',
+		width: '10.45%',
 		border: '1px solid #000000',
 		padding: 7,
 	},
 	div_4: {
-		width: '15%',
+		width: '14.4%',
 		border: '1px solid #000000',
 		padding: 7,
 	},
 	div_7: {
-		width: '15%',
-		border: '1px solid #000000',
-		padding: 7,
+		width: '20%',
+		height: 40,
+		padding: '7 1',
 	},
 	div_5: {
 		width: '30%',
@@ -133,7 +130,7 @@ const PdfTemplateSchedule = (props) => {
 		if (id_ork === null)
 			return '';
 		for (let i = 0; i < module.ork_team.length; i++) {
-			if (module.ork_team[i].id == id_ork || module.ork_team[i].id == id_ork.id) {
+			if (Number(module.ork_team[i].id) === Number(id_ork) || Number(module.ork_team[i].id) === Number(id_ork.id)) {
 				return module.ork_team[i].name;
 			}
 		}
@@ -160,9 +157,7 @@ const PdfTemplateSchedule = (props) => {
 			onRender={onDocumentLoadSuccess}>
 			<Page style={styles.page} wrap={true} orientation="landscape" size="A3">
 				<View style={styles.top}>
-					<Image src='/images/logos/footer_FE.png' style={styles.image} />
-					<Image src='/images/logos/footer_RP.png' style={styles.image} />
-					<Image src='/images/logos/footer_UE.png' style={styles.image} />
+					<Image src='/images/logos/1.png' style={styles.image} />
 				</View>
 				<View style={styles.header}>
 					<Text style={styles.border}>
@@ -228,9 +223,7 @@ const PdfTemplateSchedule = (props) => {
 								index_module === 0 &&
 								<View>
 									<View style={styles.top}>
-										<Image src='/images/logos/footer_FE.png' style={styles.image} />
-										<Image src='/images/logos/footer_RP.png' style={styles.image} />
-										<Image src='/images/logos/footer_UE.png' style={styles.image} />
+										<Image src='/images/logos/1.png' style={styles.image} />
 									</View>
 									<View style={styles.normal}>
 										<Text style={styles.div_1}>
@@ -259,14 +252,14 @@ const PdfTemplateSchedule = (props) => {
 												<Text style={styles.div_6}>
 													{dayList && getDay(dayList[3], 3)}
 												</Text>
-												<Text style={styles.div_6}>
+												<Text style={styles.div_7}>
 													{dayList && getDay(dayList[4], 4)}
 												</Text>
 											</View>
 										</View>
 										<Text style={styles.div_3}>
 											Łączny czas - godz
-									</Text>
+										</Text>
 										<Text style={styles.div_4}>
 											Imię, nazwisko i podpis realizującego
 									</Text>
@@ -275,9 +268,7 @@ const PdfTemplateSchedule = (props) => {
 							}
 							{index_module > 0 &&
 								<View style={styles.top}>
-									<Image src='/images/logos/footer_FE.png' style={styles.image} />
-									<Image src='/images/logos/footer_RP.png' style={styles.image} />
-									<Image src='/images/logos/footer_UE.png' style={styles.image} />
+									<Image src='/images/logos/1.png' style={styles.image} />
 								</View>
 							}
 							<View style={styles.content} wrap={false}>
@@ -301,46 +292,60 @@ const PdfTemplateSchedule = (props) => {
 									{
 										module.service_list.map((service, index) => (
 											<View style={{ width: '100%', display: 'flex', flexDirection: 'row' }} >
-												<Text style={{ width: '31%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
-													{service.name}
-												</Text>
-												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
-													{!service.schedule || service.schedule === undefined ? '' : service.schedule.total_amount}
-												</Text>
-												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
-													{
-														!moduleList[1][index_module].service_list[index].schedule
-															|| moduleList[1][index_module].service_list[index].schedule == undefined
-															? '' : moduleList[1][index_module].service_list[index].schedule.total_amount}
-												</Text>
-												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
-													{
-														!moduleList[2][index_module].service_list[index].schedule
-															|| moduleList[2][index_module].service_list[index].schedule == undefined
-															? '' : moduleList[2][index_module].service_list[index].schedule.total_amount}
-												</Text>
-												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
-													{
-														!moduleList[3][index_module].service_list[index].schedule
-															|| moduleList[3][index_module].service_list[index].schedule == undefined
-															? '' : moduleList[3][index_module].service_list[index].schedule.total_amount}
-												</Text>
-												<Text style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
-													{
-														!moduleList[4][index_module].service_list[index].schedule
-															|| moduleList[4][index_module].service_list[index].schedule == undefined
-															? '' : moduleList[4][index_module].service_list[index].schedule.total_amount}
-												</Text>
+												<View style={{ width: '31%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													<Text >
+														{service.name}
+													</Text>
+												</View>
+												<View style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													<Text>
+														{!service.schedule || service.schedule === undefined ? '' : service.schedule.total_amount}
+													</Text>
+												</View>
+												<View style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													<Text>
+														{
+															!moduleList[1][index_module].service_list[index].schedule
+																|| moduleList[1][index_module].service_list[index].schedule === undefined
+																? '' : moduleList[1][index_module].service_list[index].schedule.total_amount}
+													</Text>
+												</View>
+												<View style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													<Text>
+														{
+															!moduleList[2][index_module].service_list[index].schedule
+																|| moduleList[2][index_module].service_list[index].schedule === undefined
+																? '' : moduleList[2][index_module].service_list[index].schedule.total_amount}
+													</Text>
+												</View>
+												<View style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													<Text>
+														{
+															!moduleList[3][index_module].service_list[index].schedule
+																|| moduleList[3][index_module].service_list[index].schedule === undefined
+																? '' : moduleList[3][index_module].service_list[index].schedule.total_amount}
+													</Text>
+												</View>
+												<View style={{ width: '7.5%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													<Text>
+														{
+															!moduleList[4][index_module].service_list[index].schedule
+																|| moduleList[4][index_module].service_list[index].schedule === undefined
+																? '' : moduleList[4][index_module].service_list[index].schedule.total_amount}
+													</Text>
+												</View>
+												<View style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													<Text>
+														{
+															getTotalAmount(index_module, index)
+														}
+													</Text>
+												</View>
+												<View style={{ width: '18%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
+													<Text>
 
-												<Text style={{ width: '13%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
-													{
-														getTotalAmount(index_module, index)
-													}
-												</Text>
-
-												<Text style={{ width: '18%', fontSize: '8', border: '1px solid #000000', height: 50, padding: 7 }}>
-
-												</Text>
+													</Text>
+												</View>
 
 											</View>
 										))

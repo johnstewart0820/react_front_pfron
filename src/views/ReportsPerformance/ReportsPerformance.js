@@ -194,7 +194,7 @@ const ReportsPerformance = props => {
 		total_data.push(header);
 		data.map((candidate, index) => {
 			let module_list = candidate.module;
-
+			let count = 0;
 			module_list.map((module_item, index) => {
 				let service_lists = module_item.service_lists;
 				
@@ -206,22 +206,28 @@ const ReportsPerformance = props => {
 					let plan_total = Number(plan.trial) + Number(plan.basic);
 					let schedule_total = 0;
 
-					item.push(service.number);
-
-					item.push(index != 0 ? '' : candidate.participant_number);
-					item.push(service.name);
-					item.push(plan_total);
-
 					for (let i = 0; i < schedule.basic.length; i++) {
 						schedule_total += (Number(schedule.basic[i]) + Number(schedule.trial[i]));
-						item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
 					}
 
-					item.push(schedule_total);
-					item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
-					item.push('');
+					let sub = schedule_total - plan_total > 0 ? schedule_total - plan_total : 0;
+					
+					if (sub > 0) {
+						item.push(service.number);
 
-					total_data.push(item);
+						item.push(count != 0 ? '' : candidate.participant_number);
+						item.push(service.name);
+						item.push(plan_total);
+						for (let i = 0; i < schedule.basic.length; i++) {
+							item.push(Number(schedule.basic[i]) + Number(schedule.trial[i]))
+						}
+						item.push(schedule_total);
+						item.push(schedule_total - plan_total > 0 ? schedule_total - plan_total : 0)
+						item.push('');
+						total_data.push(item);
+						count ++;
+					}
+						
 				})
 			})
 
@@ -259,6 +265,8 @@ const ReportsPerformance = props => {
 			// first row
 			if (key == '!ref')
 				break;
+			let column = key.replace(new RegExp("[0-9]", "g"), "");
+			let row = key.replace(/[^0-9]/ig, '');
 			if (key.replace(/[^0-9]/ig, '') === '1') {
 				ws[key].s = {
 					alignment: {
@@ -288,7 +296,7 @@ const ReportsPerformance = props => {
 						},
 					},
 					fill: {
-						fgColor: { rgb: 'FFB8CCD4' } // Add background color
+						fgColor: { rgb: '94d451' } // Add background color
 					},
 				}
 			} else {
@@ -320,6 +328,15 @@ const ReportsPerformance = props => {
 						},
 					},
 
+				}
+			}
+
+			if(ws[`${column}1`].v == 'Plan IPR1+IPR2' || ws[`${column}1`].v == 'Nadwykonanie') {
+				ws[key].s = {
+					...ws[key].s,
+					fill: {
+						fgColor: { rgb: '94d451' } // Add background color
+					},
 				}
 			}
 		}

@@ -238,9 +238,11 @@ const ReportsFinancial = props => {
 		let module_index = 4;
 		let arr = [];
 		let total_price = 0;
+		let module_index_arr = [];
 		if (data.length > 0) {
 			let module = data[0].module;
 			for (let i = 0; i < module.length; i++) {
+				module_index_arr.push({ from: total_data.data.length + 1, to: total_data.data.length + module[i].service_lists.length });
 				let item = [];
 				item.push('');
 				item.push(romic_number[i] + '. ' + module[i].name);
@@ -345,6 +347,15 @@ const ReportsFinancial = props => {
 		ws['!merges'].push(merge);
 
 		arr.push(module_index);
+
+		for (let i = 2; i < sub_header.length; i++) {
+			if (i != sub_header.length - 6) {
+				for (let j = 0; j < module_index_arr.length; j++) {
+					ws[`${numToAlpha(i)}${module_index_arr[j].from}`].f = `SUM(${numToAlpha(i)}${module_index_arr[j].from + 1}:${numToAlpha(i)}${module_index_arr[j].to + 1})`;
+				}
+			}
+		}
+
 		for (const key in ws) {
 			// first row
 			if (key == '!ref')
@@ -352,15 +363,23 @@ const ReportsFinancial = props => {
 
 			let column = key.replace(new RegExp("[0-9]", "g"), "");
 			let row = key.replace(/[^0-9]/ig, '');
-			
+
 			if ((ws[column + '2'].v.startsWith("M")
 				|| ws[column + '2'].v.startsWith("Liczba Uczestnikó")
 				|| ws[column + '2'].v.startsWith("Liczba zrealizowanych jednostek w okresie")
 			) && row == total_data.data.length) {
-				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 1}, "<>nd", ${column}3:${column}${total_data.data.length - 1})`
+				let bonus = '';
+				for (let j = 0; j < module_index_arr.length; j++) {
+					bonus += `-${column}${module_index_arr[j].from}`;
+				}
+				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 1}, "<>nd", ${column}3:${column}${total_data.data.length - 1})${bonus}`
 			}
 			if (ws[column + '2'].v.startsWith("Cena brutto") && row == total_data.data.length - 1) {
-				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 2}, "<>nd", ${column}3:${column}${total_data.data.length - 2})`
+				let bonus = '';
+				for (let j = 0; j < module_index_arr.length; j++) {
+					bonus += `-${column}${module_index_arr[j].from}`;
+				}
+				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 2}, "<>nd", ${column}3:${column}${total_data.data.length - 2})${bonus}`
 			}
 
 			if (ws[column + '2'].v.startsWith('Liczba zrealizowanych jednostek w okresie')) {
@@ -368,7 +387,7 @@ const ReportsFinancial = props => {
 				let end = 2 + data.length - 1;
 				if (ws[`A${row}`].v != '' && row >= 4) {
 					if (ws[key].v === 'null')
-						ws[key].f = `SUM(${numToAlpha(start)}${row}:${numToAlpha(end)}${row})/${numToAlpha(alphaToNum(column) + 1)}${row}`;
+						ws[key].f = `IF(${numToAlpha(alphaToNum(column) + 1)}${row}=0, "nd", SUM(${numToAlpha(start)}${row}:${numToAlpha(end)}${row})/${numToAlpha(alphaToNum(column) + 1)}${row})`;
 					ws[`${numToAlpha(alphaToNum(column) - 1)}${row}`].f = `IF(${numToAlpha(alphaToNum(column) - 3)}${row}="nd", "nd", ${key}/${numToAlpha(alphaToNum(column) - 3)}${row})`
 					ws[`${numToAlpha(alphaToNum(column) + 2)}${row}`].f = `IF(${key}="nd", "nd", ${key}*${numToAlpha(alphaToNum(column) + 1)}${row})`
 					ws[`${numToAlpha(alphaToNum(column) + 3)}${row}`].f = `${numToAlpha(alphaToNum(column) + 2)}${row}`
@@ -389,6 +408,7 @@ const ReportsFinancial = props => {
 					},
 				}
 			}
+
 			if (key.replace(/[^0-9]/ig, '') === '2' || key.replace(/[^0-9]/ig, '') === '3') {
 				ws[key].s = {
 					...ws[key].s,
@@ -507,7 +527,7 @@ const ReportsFinancial = props => {
 										</Grid>
 										<Grid item md={2} xs={12} className={classes.center}>
 											lub
-									</Grid>
+										</Grid>
 										<Grid item md={5} xs={12}>
 											<div className={classes.top_label} ><label htmlFor="participants">Wybierz uczestnika</label></div>
 											<Autocomplete
@@ -555,7 +575,7 @@ const ReportsFinancial = props => {
 								<Grid item xs={12}>
 									<Button variant="outlined" color="secondary" className={classes.btnSave} onClick={handleGenerate} title="Generuj raport - Kliknij aby pobrać plik poniżej 1MB">
 										Generuj raport
-                	</Button>
+									</Button>
 								</Grid>
 							</Grid>
 						</Card>

@@ -313,7 +313,7 @@ const ReportsFinancial = props => {
 			let value = total_sum[i];
 			item_last.push(total_sum[i] === undefined || !total_sum[i] ? '' : Number(value));
 		}
-		total_data.data.push(item_last);
+		// total_data.data.push(item_last);
 		const ws = XLSX.utils.aoa_to_sheet(total_data.data);
 		var wscols = [
 			{
@@ -367,6 +367,7 @@ const ReportsFinancial = props => {
 			if ((ws[column + '2'].v.startsWith("M")
 				|| ws[column + '2'].v.startsWith("Liczba Uczestnikó")
 				|| ws[column + '2'].v.startsWith("Liczba zrealizowanych jednostek w okresie")
+				|| ws[column + '2'].v.startsWith("Cena brutto")
 			) && row == total_data.data.length) {
 				let bonus = '';
 				for (let j = 0; j < module_index_arr.length; j++) {
@@ -374,14 +375,6 @@ const ReportsFinancial = props => {
 				}
 				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 1}, "<>nd", ${column}3:${column}${total_data.data.length - 1})${bonus}`
 			}
-			if (ws[column + '2'].v.startsWith("Cena brutto") && row == total_data.data.length - 1) {
-				let bonus = '';
-				for (let j = 0; j < module_index_arr.length; j++) {
-					bonus += `-${column}${module_index_arr[j].from}`;
-				}
-				ws[key].f = `SUMIF(${column}3:${column}${total_data.data.length - 2}, "<>nd", ${column}3:${column}${total_data.data.length - 2})${bonus}`
-			}
-
 			if (ws[column + '2'].v.startsWith('Liczba zrealizowanych jednostek w okresie')) {
 				let start = 2;
 				let end = 2 + data.length - 1;
